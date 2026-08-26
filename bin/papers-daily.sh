@@ -24,6 +24,7 @@ if [ -f "${PROJECT_ROOT}/.env" ]; then
   set -a; . "${PROJECT_ROOT}/.env"; set +a
 fi
 NTFY_TOPIC="${PAPERS_NTFY_TOPIC:-}"
+PAGES_URL="${PAPERS_PAGES_URL:-https://pavani06.github.io/papers-journal/}"
 
 # Cron entrega PATH=/usr/bin:/bin. O projeto usa apenas stdlib, entao o python
 # do sistema basta — nao ha dependencia de nvm como no reflect-daily.
@@ -45,6 +46,27 @@ notificar() {
     -H "Title: ${titulo}" -H "Priority: ${prioridade}" -H "Tags: ${tag}" \
     -d "${corpo}" "${NTFY_TOPIC}" 2>/dev/null \
     || log "WARN" "ntfy falhou"
+}
+
+# Publicar e secundario: a edicao ja esta em disco quando isto roda. Falha aqui
+# avisa, mas nunca derruba o jornal do dia.
+publicar() {
+  local data="$1"
+  git -C "${PROJECT_ROOT}" remote get-url origin >/dev/null 2>&1 || return 0
+  git -C "${PROJECT_ROOT}" add edicoes docs deep 2>/dev/null || true
+  if git -C "${PROJECT_ROOT}" diff --cached --quiet 2>/dev/null; then
+    log "INFO" "Nada novo para publicar."
+    return 0
+  fi
+  if ! git -C "${PROJECT_ROOT}" commit -q -m "Edição de ${data}" 2>>"${LOG_FILE}"; then
+    log "WARN" "commit falhou; edicao permanece local"
+    return 0
+  fi
+  if GIT_TERMINAL_PROMPT=0 git -C "${PROJECT_ROOT}" push -q origin HEAD 2>>"${LOG_FILE}"; then
+    log "INFO" "Publicado: ${PAGES_URL}"
+  else
+    log "WARN" "push falhou; commit ficou local e sobe no proximo dia"
+  fi
 }
 
 LOCK_FILE="${DATA_DIR}/.papers-daily.lock"
@@ -89,6 +111,7 @@ if [ "${RC}" -eq 0 ]; then
     MANCHETE=$(grep -m1 '^## ' "${DEST}" | sed 's/^## //')
     N_DEST=$(sed -n 's/^destaques: //p' "${DEST}" | head -1)
     log "INFO" "DONE — ${TARGET_DATE}, ${N_DEST:-?} destaque(s)"
+    publicar "${TARGET_DATE}"
     notificar "Jornal de Papers — ${TARGET_DATE}" "default" "newspaper" \
       "${MANCHETE:-Jornal disponivel} (${N_DEST:-?} destaques)"
     exit 0
