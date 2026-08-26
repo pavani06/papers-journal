@@ -1,0 +1,16 @@
+# Veredito do modelo, usado por --render-only. Regeneravel e volumoso
+# (~10 MB/ano); nao pertence ao historico.
+.cache/
+
+# Log de execucao local
+papers.log
+*.log
+
+# Lock do cron
+.papers-daily.lock
+
+__pycache__/
+*.py[cod]
+
+# Segredos locais (topico ntfy)
+.env
