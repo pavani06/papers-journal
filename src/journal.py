@@ -164,9 +164,11 @@ Responda com um unico objeto JSON, sem markdown ao redor, com estas chaves:
       sistema dele. Se nao houver nada aproveitavel, escreva exatamente
       "Nada diretamente aproveitavel." e nao force uma ponte.
 
-  Inclua entre 0 e 5 destaques. Use o criterio "diretamente aplicavel" do
-  perfil. Dia fraco tem zero ou um destaque, e tudo bem. Nunca preencha por
-  preencher.
+  Inclua entre 0 e 6 destaques, aplicando as regras da secao "Como escolher os
+  destaques" do perfil: acionabilidade decide, piso de popularizacao admite,
+  benchmark vale pelo modo de falha que revela, e teses repetidas no mesmo dia
+  rendem um destaque so. Dia fraco tem zero ou um destaque, e tudo bem. Nunca
+  preencha por preencher.
 
 - "tangenciais": array de ids dos papers que valem uma linha de atencao sem
   merecer destaque, conforme a secao "Tangencial" do perfil. Pode ser vazio.

@@ -1,14 +1,14 @@
 ---
 tipo: perfil-de-interesse
-consumido-por: scripts/papers/journal.py
+consumido-por: src/journal.py
 atualizar: quando seu foco de trabalho mudar (esperado: 1-2x por ano)
 ---
 
 # Perfil de interesse
 
-Este arquivo diz ao gerador do jornal o que conta como relevante. Ele é lido
-inteiro a cada execução e injetado no prompt de triagem. Edite livremente: o
-formato é prosa, não há schema a respeitar.
+Este arquivo é lido inteiro a cada execução e colado no prompt de triagem. Não
+há schema nem parser: o que está escrito aqui é literalmente o que decide o
+jornal do dia. Edite em prosa.
 
 ## Quem lê o jornal
 
@@ -17,15 +17,39 @@ software real. Não é pesquisador de ML: não treina modelos, não roda
 experimentos de arquitetura neural, não publica papers. Consome pesquisa para
 melhorar um sistema em produção que ele mesmo mantém.
 
-O sistema em questão é um harness de agentes sobre modelos de terceiros, com
-orquestração de subagentes, skills versionadas como artefatos de texto,
-governança de dispatch e trilha de evidência. O trabalho diário é decidir como
-agentes devem planejar, delegar, verificar e registrar o que fizeram.
+O sistema é um harness de agentes sobre modelos de terceiros, com orquestração
+de subagentes, skills versionadas como artefatos de texto, governança de
+dispatch e trilha de evidência. O trabalho diário é decidir como agentes devem
+planejar, delegar, verificar e registrar o que fizeram.
 
-## Diretamente aplicável
+**É ferramental de um operador só.** Ninguém mais dispara execuções. Por isso
+não interessam multi-tenancy, isolamento entre usuários, quotas, SLA, custo por
+tenant ou degradação sob carga: o gargalo é a atenção de uma pessoa, não
+throughput.
 
-Estes temas mudam decisões de arquitetura do sistema dele. Um paper aqui merece
-destaque mesmo com poucos upvotes.
+## Como escolher os destaques
+
+O critério é **acionabilidade**, não pertencimento temático. A lista de temas
+abaixo define quem concorre; o que decide é se o paper muda alguma decisão de
+arquitetura, de gate, de prompt ou de verificação. Um paper impecável sobre um
+tema da lista que não muda nada é rodapé, não destaque.
+
+Três regras que refinam isso:
+
+**Piso de popularização.** Um paper de um dos temas com 50 ou mais upvotes entra
+como destaque mesmo sem ação clara. Acima desse patamar, virar referência comum
+da área já é motivo suficiente para você saber que existe.
+
+**Benchmarks valem pelo que revelam.** Benchmark que expõe um modo de falha é
+destaque, porque diz o que temer e o que testar no próprio sistema. Benchmark
+que apenas ranqueia modelos é rodapé. A diferença entre "descobrimos que agentes
+falham assim" e "o modelo X ficou à frente do Y".
+
+**Sem eco.** Quando dois papers do mesmo dia sustentam essencialmente a mesma
+tese, só o mais forte vira destaque; o outro desce para o rodapé com uma linha
+dizendo que ecoa o primeiro. Não vale gastar duas leituras na mesma ideia.
+
+## Temas que concorrem a destaque
 
 - **Harness e loop engineering**: como estruturar o laço de execução de um
   agente, quando parar, como reagir a falha, self-improvement de harness.
@@ -53,9 +77,10 @@ Vale uma linha no rodapé, sem destaque, a menos que traga um resultado
 surpreendente ou um método reaproveitável fora do domínio original.
 
 - RAG e recuperação, quando o foco for confiabilidade ou contaminação de fonte
-- Avaliação e benchmarks em geral, quando a metodologia for reaproveitável
-- Eficiência de inferência (quantização, atenção, serving), pelo impacto
-  indireto em custo e latência
+- Avaliação e benchmarks que ranqueiam sem revelar modo de falha
+- Eficiência de inferência (quantização, atenção, serving): não muda nada em
+  quem consome modelos por API, mas serve de radar sobre para onde vai o custo
+  por token, que mais cedo ou mais tarde chega via preço
 - Modelos de mundo e agentes incorporados, quando a lição for sobre planejamento
   de longo horizonte e não sobre robótica
 
@@ -76,6 +101,12 @@ Português do Brasil. Prosa direta, sem entusiasmo de release. Termos técnicos 
 inglês quando for o uso consagrado (harness, context window, benchmark). O leitor
 é sênior: não explique o que é um LLM, não defina RAG, não abra parágrafo com
 "neste trabalho os autores propõem".
+
+O jornal é público, mas escrito para um leitor específico. Fale com ele em
+segunda pessoa e cite o sistema dele sem cerimônia. Um texto que tenta servir a
+qualquer engenheiro acaba não servindo a ninguém; a especificidade é o que
+produz frases como "a ressalva é que isso exige um espaço de resposta
+sondável".
 
 O que ele quer de cada destaque: qual é a afirmação central, o que é novo em
 relação ao que já se fazia, e se há algo diretamente aproveitável no sistema
