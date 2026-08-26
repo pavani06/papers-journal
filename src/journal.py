@@ -43,6 +43,8 @@ DEFAULT_MODEL = "gpt-5.5"
 # Folga sobre os 160 chars que o render usa como fallback; o resto triplicaria o cache.
 CACHE_ABSTRACT_CHARS = 200
 
+MEMORIA_EDICOES = 10
+
 # Nao e erro: o Hugging Face nao publica em fins de semana e feriados.
 SEM_PUBLICACAO = 4
 
@@ -122,6 +124,20 @@ def fetch_papers(date: str) -> tuple[list[dict[str, Any]], int]:
     return papers, len(raw)
 
 
+def bloco_memoria(date: str) -> str:
+    anteriores = paths.vereditos_anteriores(date, MEMORIA_EDICOES)
+    if not anteriores:
+        return ("Nenhuma edicao anterior disponivel. Trate tudo como novo e nao "
+                "invente relacoes com o passado.")
+    linhas = []
+    for data, v in anteriores:
+        teses = [f"  - {d.get('tese') or d.get('aproveitavel', '')[:110]}"
+                 for d in v.get("destaques") or []]
+        if teses:
+            linhas.append(f"{data}:\n" + "\n".join(teses))
+    return "\n".join(linhas) if linhas else "Edicoes anteriores sem teses registradas."
+
+
 def build_prompt(papers: list[dict[str, Any]], interests: str, date: str) -> list[dict[str, str]]:
     catalogo = "\n\n".join(
         f"[{p['id']}] {p['title']}\n"
@@ -129,6 +145,7 @@ def build_prompt(papers: list[dict[str, Any]], interests: str, date: str) -> lis
         f"{p['abstract'][:1400]}"
         for p in papers
     )
+    memoria = bloco_memoria(date)
 
     system = (
         "Voce e o editor de um jornal diario de pesquisa em IA, escrito para um "
@@ -140,6 +157,13 @@ def build_prompt(papers: list[dict[str, Any]], interests: str, date: str) -> lis
     user = f"""# Perfil do leitor
 
 {interests}
+
+# O que ja foi coberto nas edicoes recentes
+
+Use isto para dar continuidade, nao para evitar assuntos. Tema recorrente e
+normal e esperado; o que nao se repete e a mesma tese.
+
+{memoria}
 
 # Papers publicados em {date} ({len(papers)} no total)
 
@@ -158,17 +182,41 @@ Responda com um unico objeto JSON, sem markdown ao redor, com estas chaves:
 
 - "destaques": array de objetos, cada um com:
     - "id": o id exato do paper, entre colchetes no catalogo acima
+    - "tese": UMA frase de 10 a 15 palavras com a afirmacao central do paper.
+      Esta frase alimenta a memoria das proximas edicoes, entao precisa ser
+      autossuficiente: quem a ler daqui a duas semanas, sem o paper na frente,
+      tem que entender o que foi afirmado.
     - "analise": 2 a 4 frases. Qual a afirmacao central e o que ha de novo em
       relacao ao que ja se fazia. Sem "os autores propoem".
     - "aproveitavel": 1 a 2 frases sobre o que o leitor pode tirar disso para o
       sistema dele. Se nao houver nada aproveitavel, escreva exatamente
       "Nada diretamente aproveitavel." e nao force uma ponte.
+    - "relacao": objeto com a relacao deste paper com as edicoes recentes:
+        - "tipo": "novo", "avanca" ou "contradiz"
+        - "ref_data": a data da edicao citada (AAAA-MM-DD), ou "" se tipo=novo
+        - "ref_tese": a tese citada, copiada da memoria, ou "" se tipo=novo
+        - "delta": o que exatamente este paper muda em relacao a tese citada.
+          Uma frase concreta comecando por um verbo: "estende para...",
+          "quantifica...", "mostra que o inverso vale quando...". Vazio se
+          tipo=novo.
+      "avanca" e "contradiz" so valem quando a tese citada e a MESMA afirmacao,
+      nao um tema vizinho, e quando existe delta articulavel. Se voce nao
+      conseguir escrever o delta em uma frase concreta, o tipo e "novo" — dois
+      papers sobre coordenacao de agentes nao se relacionam so por serem sobre
+      coordenacao. Na duvida entre "novo" e "avanca", escolha "novo".
+
+- "repetidos": array de objetos para papers que voce descartaria do destaque por
+  repetirem tese ja coberta, cada um com "id", "ref_data" e "ref_tese". Eles vao
+  para o rodape com a citacao visivel. So liste aqui quando conseguir citar a
+  tese anterior especifica; na duvida, trate como destaque normal. Um paper com
+  muitos upvotes que apenas repete tese conhecida entra aqui, nao no destaque.
 
   Inclua entre 0 e 6 destaques, aplicando as regras da secao "Como escolher os
   destaques" do perfil: acionabilidade decide, piso de popularizacao admite,
   benchmark vale pelo modo de falha que revela, e teses repetidas no mesmo dia
-  rendem um destaque so. Dia fraco tem zero ou um destaque, e tudo bem. Nunca
-  preencha por preencher.
+  rendem um destaque so. Um paper que contradiz tese ja coberta merece destaque
+  mesmo sem acionabilidade, e tem prioridade na disputa pelas vagas. Dia fraco
+  tem zero ou um destaque, e tudo bem. Nunca preencha por preencher.
 
 - "tangenciais": array de ids dos papers que valem uma linha de atencao sem
   merecer destaque, conforme a secao "Tangencial" do perfil. Pode ser vazio.
@@ -256,10 +304,21 @@ def normalize_verdict(verdict: dict[str, Any],
         log("WARN", f"{len(orfaos)} destaque(s) descartado(s) por id desconhecido: {orfaos}")
 
     dest_ids = {d["id"] for d in destaques}
+
+    repetidos = []
+    for r in verdict.get("repetidos") or []:
+        match = resolve_id(r.get("id"), by_id)
+        if not match or match in dest_ids:
+            continue
+        if not (r.get("ref_data") and r.get("ref_tese")):
+            log("WARN", f"repetido {match} sem citacao completa; tratado como tangencial")
+        repetidos.append({**r, "id": match})
+    rep_ids = {r["id"] for r in repetidos}
+
     tang_ids = []
     for i in verdict.get("tangenciais") or []:
         match = resolve_id(i, by_id)
-        if match and match not in dest_ids and match not in tang_ids:
+        if match and match not in dest_ids and match not in rep_ids and match not in tang_ids:
             tang_ids.append(match)
 
     resumos = {}
@@ -271,8 +330,19 @@ def normalize_verdict(verdict: dict[str, Any],
     if faltando:
         log("WARN", f"{faltando} paper(s) sem resumo em portugues; usando o do HF (ingles)")
 
-    return {**verdict, "destaques": destaques,
+    return {**verdict, "destaques": destaques, "repetidos": repetidos,
             "tangenciais": tang_ids, "resumos": resumos}
+
+
+def chapeu_md(dest: dict[str, Any]) -> list[str]:
+    rel = dest.get("relacao") or {}
+    tipo, ref = rel.get("tipo"), rel.get("ref_data")
+    if tipo not in ("avanca", "contradiz") or not ref:
+        return []
+    rotulo = "Contradiz" if tipo == "contradiz" else "Avança"
+    ano, mes, dia = ref.split("-")
+    detalhe = rel.get("delta") or rel.get("ref_tese", "")
+    return [f"**{rotulo} [{dia}/{mes}](../../{ano}/{mes}/{ref}.md)** — {detalhe}", ""]
 
 
 def render(date: str, papers: list[dict[str, Any]], verdict: dict[str, Any]) -> str:
@@ -280,17 +350,21 @@ def render(date: str, papers: list[dict[str, Any]], verdict: dict[str, Any]) -> 
     destaques = verdict["destaques"]
     dest_ids = {d["id"] for d in destaques}
     tang_ids = verdict["tangenciais"]
+    repetidos = verdict.get("repetidos") or []
+    rep_ids = {r["id"] for r in repetidos}
     resumos = verdict["resumos"]
-    resto = [p for p in papers if p["id"] not in dest_ids and p["id"] not in tang_ids]
+    resto = [p for p in papers if p["id"] not in dest_ids
+             and p["id"] not in tang_ids and p["id"] not in rep_ids]
 
-    def linha(p: dict[str, Any]) -> str:
+    def linha(p: dict[str, Any], nota: str = "") -> str:
         autores = ", ".join(p["authors"][:2])
         if len(p["authors"]) > 2:
             autores += f" +{len(p['authors']) - 2}"
         desc = resumos.get(p["id"]) or p["one_liner"] or p["abstract"][:160]
+        extra = f"  \n  *{nota}*" if nota else ""
         return (f"- **[{p['title']}](https://huggingface.co/papers/{p['id']})** "
                 f"({p['upvotes']} upvotes){f' — {autores}' if autores else ''}  \n"
-                f"  {desc}")
+                f"  {desc}{extra}")
 
     out = [
         "---",
@@ -317,6 +391,7 @@ def render(date: str, papers: list[dict[str, Any]], verdict: dict[str, Any]) -> 
             if len(p["authors"]) > 3:
                 autores += f" e mais {len(p['authors']) - 3}"
             out += [
+                *chapeu_md(d),
                 f"### [{p['title']}](https://huggingface.co/papers/{p['id']})",
                 "",
                 f"`{p['id']}` · {p['upvotes']} upvotes · {p['comments']} comentários"
@@ -327,12 +402,20 @@ def render(date: str, papers: list[dict[str, Any]], verdict: dict[str, Any]) -> 
                 f"**Para o nosso caso:** {str(d.get('aproveitavel', '')).strip()}",
                 "",
                 f"[abstract](https://arxiv.org/abs/{p['id']}) · "
-                f"aprofundar: `python3 ~/scripts/papers/deepdive.py {p['id']}`",
+                f"aprofundar: `python3 src/deepdive.py {p['id']}`",
                 "",
             ]
     else:
         out += ["## Destaques", "",
                 "Nenhum paper de hoje passou o critério de relevância direta.", ""]
+
+    if repetidos:
+        out += ["## Já coberto", ""]
+        for r in repetidos:
+            nota = (f"Ecoa a tese de {r['ref_data']}: {r['ref_tese']}"
+                    if r.get("ref_data") and r.get("ref_tese") else "Repete tese já coberta")
+            out += [linha(by_id[r["id"]], nota)]
+        out += [""]
 
     if tang_ids:
         out += ["## Tangenciais", ""]

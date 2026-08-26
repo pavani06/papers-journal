@@ -21,6 +21,7 @@ Layout sob PAPERS_DATA_DIR:
 
 from __future__ import annotations
 
+import json
 import os
 from pathlib import Path
 
@@ -66,3 +67,25 @@ def edicoes_publicadas() -> list[tuple[str, Path]]:
         return []
     achadas = [(p.stem, p) for p in DOCS.glob("*/*/*.html") if p.name != "index.html"]
     return sorted(achadas, key=lambda x: x[0], reverse=True)
+
+
+def vereditos_anteriores(date: str, limite: int) -> list[tuple[str, dict]]:
+    """Le ate `limite` vereditos de edicoes anteriores a `date`, da mais recente para tras.
+
+    Filtrar por data em vez de pegar os ultimos do disco importa ao regerar
+    edicoes antigas: uma edicao de 12/08 nao pode enxergar a memoria de 25/08.
+    """
+    base = DATA / ".cache"
+    if not base.is_dir():
+        return []
+    achados = []
+    for p in sorted(base.glob("*/*/*.json"), key=lambda x: x.stem, reverse=True):
+        if p.stem >= date:
+            continue
+        try:
+            achados.append((p.stem, json.loads(p.read_text(encoding="utf-8"))["verdict"]))
+        except (json.JSONDecodeError, KeyError, OSError):
+            continue
+        if len(achados) >= limite:
+            break
+    return achados

@@ -49,6 +49,36 @@ falham assim" e "o modelo X ficou à frente do Y".
 tese, só o mais forte vira destaque; o outro desce para o rodapé com uma linha
 dizendo que ecoa o primeiro. Não vale gastar duas leituras na mesma ideia.
 
+## Continuidade entre edições
+
+O jornal enxerga as teses das últimas dez edições. Isso existe para dar
+continuidade, não para evitar assuntos: **tema recorrente é normal e esperado**.
+Verificação de agentes aparece quase todo dia porque é o eixo principal do
+leitor, e isso não é defeito. O que não se repete é a mesma afirmação.
+
+Cada destaque declara sua relação com o já coberto:
+
+- **novo**: nada equivalente nas edições recentes. É o caso comum.
+- **avança**: aprofunda ou estende uma tese já coberta. Continua destaque, e a
+  análise diz o que mudou em relação ao que se sabia. Exige um delta concreto,
+  escrito em uma frase: o que este paper faz que a tese anterior não fazia. Dois
+  papers sobre coordenação de agentes não se relacionam apenas por serem sobre
+  coordenação — sem delta articulável, a relação é "novo".
+- **contradiz**: o resultado conflita com uma tese já coberta. Isso é o mais
+  valioso que o jornal pode entregar, porque pode invalidar algo que o leitor já
+  incorporou ao sistema. Contradição merece destaque mesmo sem nada aproveitável
+  e tem prioridade quando houver disputa por vaga.
+- **repete**: mesma tese, sem avanço. Vai para o rodapé, na seção "Já coberto".
+
+Rebaixar por repetição exige citar a tese anterior e a data. Sem citação
+específica, o paper concorre normalmente: a dúvida favorece o destaque, porque
+um falso positivo custa uma leitura a mais e um falso negativo custa um achado
+perdido em silêncio.
+
+Repetição vence o piso de popularização. Um paper muito votado que apenas repete
+tese conhecida vai para "Já coberto" com os upvotes visíveis: você fica sabendo
+que existe sem gastar um destaque com algo que já leu.
+
 ## Temas que concorrem a destaque
 
 - **Harness e loop engineering**: como estruturar o laço de execução de um

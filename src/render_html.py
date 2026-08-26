@@ -50,6 +50,9 @@ section{scroll-margin-top:112px}
 .chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
 .chamada p{font-size:16px;line-height:22px}
 .sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
 .rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
 .rodape a{color:#0669DE}
 """
@@ -100,6 +103,18 @@ def _meta(paper: dict) -> str:
     return f'<p class="meta">{" · ".join(partes)}</p>'
 
 
+def _chapeu(dest: dict) -> str:
+    rel = dest.get("relacao") or {}
+    tipo, ref = rel.get("tipo"), rel.get("ref_data")
+    if tipo not in ("avanca", "contradiz") or not ref:
+        return ""
+    rotulo = "Contradiz" if tipo == "contradiz" else "Avança"
+    ano, mes, dia = ref.split("-")
+    detalhe = rel.get("delta") or rel.get("ref_tese") or ""
+    return (f'<a class="chapeu" href="../../{ano}/{mes}/{ref}.html">{rotulo} {dia}/{mes}</a>'
+            + (f'<p class="chapeu-tese">{_E(detalhe)}</p>' if detalhe else ""))
+
+
 def _bloco_destaque(paper: dict, dest: dict) -> str:
     url = f"https://huggingface.co/papers/{paper['id']}"
     paragrafos = "".join(
@@ -107,6 +122,7 @@ def _bloco_destaque(paper: dict, dest: dict) -> str:
     )
     return (
         '<article class="destaque">'
+        f"{_chapeu(dest)}"
         f'<div class="linha">{_foto(paper.get("thumbnail") or "", "foto--card")}'
         f'<a class="titulo" href="{url}">{_E(paper["title"])}</a></div>'
         f'<div class="analise">{paragrafos}</div>'
@@ -116,14 +132,15 @@ def _bloco_destaque(paper: dict, dest: dict) -> str:
     )
 
 
-def _card(paper: dict, resumos: dict[str, str]) -> str:
+def _card(paper: dict, resumos: dict[str, str], eco: str = "") -> str:
     url = f"https://huggingface.co/papers/{paper['id']}"
     return (
         '<article class="card">'
         f'<div class="linha">{_foto(paper.get("thumbnail") or "", "foto--card")}'
         f'<a class="titulo" href="{url}">{_E(paper["title"])}</a></div>'
-        f'<div class="chamada"><p>{_E(_resumo(paper, resumos))}</p></div>'
-        "</article>"
+        f'<div class="chamada"><p>{_E(_resumo(paper, resumos))}'
+        + (f'<span class="eco">{_E(eco)}</span>' if eco else "")
+        + "</p></div></article>"
     )
 
 
@@ -132,6 +149,9 @@ def render_html(date: str, papers: list[dict], verdict: dict) -> str:
     by_id = {p["id"]: p for p in papers}
     destaques = [(by_id[d["id"]], d) for d in verdict.get("destaques", []) if d["id"] in by_id]
     usados = {d["id"] for d, _ in destaques}
+    repetidos = [r for r in verdict.get("repetidos", []) if r.get("id") in by_id
+                 and r["id"] not in usados]
+    usados.update(r["id"] for r in repetidos)
     tang_ids = [i for i in verdict.get("tangenciais", []) if i in by_id and i not in usados]
     usados.update(tang_ids)
     restantes = [p for p in papers if p["id"] not in usados]
@@ -166,6 +186,18 @@ def render_html(date: str, papers: list[dict], verdict: dict) -> str:
         f'<div class="wrap sec-vermelho"><section id="destaques">'
         f'<h2 class="kicker c-vermelho">Destaques</h2>{corpo_d}</section></div>'
     )
+
+    if repetidos:
+        cards_j = "".join(
+            _card(by_id[r["id"]], resumos,
+                  f"Ecoa a tese de {r['ref_data']}: {r['ref_tese']}"
+                  if r.get("ref_data") and r.get("ref_tese") else "Repete tese já coberta")
+            for r in repetidos)
+        partes.append(
+            f'<div class="faixa"></div><div class="wrap sec-vermelho">'
+            f'<section id="jacoberto"><h2 class="kicker c-vermelho">Já coberto</h2>'
+            f"{cards_j}</section></div>"
+        )
 
     if tang_ids:
         cards_t = "".join(_card(by_id[i], resumos) for i in tang_ids)
