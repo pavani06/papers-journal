@@ -28,6 +28,15 @@ confronto das teses com o estado atual dos repos.
 
 ### 2026/08
 
+Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-06|2026-08-06]]:
+
+- [[papers/deep/2026/08/2608.05466|Recursive Synthesis for Long-Horizon Terminal Tasks]]
+- [[papers/deep/2026/08/2608.05102|ABSeeker: Training Long-Horizon Search Agents via Answer-Backtracked Credit Assignment]]
+- [[papers/deep/2026/08/2608.05013|OneDayAgent: Towards a Long-Horizon Harness for Autonomous Agents]]
+- [[papers/deep/2026/08/2608.04574|When Memory Lies: An Empirical Study of Spatial Memory Staleness in VLM Agents]]
+- [[papers/deep/2026/08/2607.28048|SKILL-KD: Contrastive Skill Distillation for LLM Agents]]
+- [[papers/deep/2026/08/2608.03836|Resume Means Resume: A Machine-Checked Conformance Contract for Checkpoint, Interrupt, and Resume Semantics in Workflow Persistence Layers]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -41,4 +50,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 
 | Data | Edição | Notas criadas | Registro atualizado? |
 |---|---|---|---|
+| 2026-08-28 | [[papers/2026/08/2026-08-06|2026-08-06]] | 6 (todos os destaques) | Sim — refresh profundo de `papers-journal`, `llm-council` e `agent-skills`; demais entradas frescas ou sem scan reportado |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |

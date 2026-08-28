@@ -24,9 +24,9 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 
 - path: `/home/pavanpavan/papers-journal`
 - propósito: jornal diário dos Daily Papers do Hugging Face; busca, triagem por LLM contra `interests.md`, edição em markdown + HTML via cron.
-- arquitetura: Python stdlib + OpenAI API; `src/journal.py` (busca/triagem), `src/render_html.py` (portal), `src/deepdive.py` (leitura profunda sob demanda), `bin/papers-daily.sh` (wrapper de cron com lock/log/notificação); edições em `edicoes/AAAA/MM/`, site em `docs/`.
+- arquitetura: Python stdlib + OpenAI API; `src/journal.py` (busca/triagem/edição), `src/render_html.py` (portal), `src/index.py` (capa do arquivo), `src/deepdive.py` (leitura profunda sob demanda), `src/deep_html.py` (publica as notas do papers-deep em `docs/deep/AAAA/MM/` e reconcilia a seção `## Deep dives` no HTML das edições; idempotente), `src/paths.py` (único lugar que conhece o layout, com override por `PAPERS_HOME`/`PAPERS_DATA_DIR`), `bin/papers-daily.sh` (wrapper de cron com flock/log/notificação/fail-loud, guard de idempotência por existência de arquivo); edições em `edicoes/AAAA/MM/`, notas deep em `edicoes/deep/AAAA/MM/`, site em `docs/` e `docs/deep/AAAA/MM/`, cache de veredito em `.cache/`. Sem suite de testes e sem CI.
 - last-verified: 2026-08-28
-- verified-head: 4a135f4d3e9021e229538181a9b2e324cc5f45b6
+- verified-head: acbb719cafb56618dd2d2aba139218348de690aa
 
 ## agent-workloops
 
@@ -80,9 +80,9 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 
 - path: `/home/pavanpavan/agent-skills`
 - propósito: source of truth único das Agent Skills do ambiente (padrão agentskills.io: `SKILL.md` com frontmatter `name` + `description`), servindo OpenCode, Claude Code e Codex dos mesmos arquivos.
-- arquitetura: `skills/<nome>/SKILL.md` por skill; ciclo de issues (issue-start, issue-review, issue-finish, issue-executor-master) como skills principais.
+- arquitetura: `skills/<nome>/SKILL.md` por skill; ciclo de issues (issue-start, issue-review, issue-finish, issue-executor-master) como skills principais; harness próprio (`scripts/run_harness.py`) com três gates por skill (contract, modules, integration) rodando em CI, e gate sem arquivo de teste permanece `passes: false`. `task-wrapper.sh` estopado pelo operador em 2026-08-28: nenhuma fase do `issue-executor-master` o invoca.
 - last-verified: 2026-08-28
-- verified-head: ab87c55238bea6d97ff047cfbd8a7205ebc27829
+- verified-head: 6bf42e9bfa1653f130aa0356b07b3544f51f1472
 
 ## govevo-site
 
@@ -96,6 +96,6 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 
 - path: `/home/pavanpavan/llm-council`
 - propósito: conselho de LLMs de provedores diferentes respondem à mesma pergunta, avaliam-se às cegas, presidente sintetiza; CLI + servidor MCP. Derivado do llm-council do Karpathy com correções (cegamento real, agregação por Borda, falha nunca silenciosa).
-- arquitetura: stdlib pura para OpenAI, DeepSeek e z.ai; SDK `anthropic` como única dependência (venv próprio); conselho atual gpt-5.6-terra, deepseek-v4-pro, claude-opus-5, glm-5.3; presidente gpt-5.6-sol; `council ask --resume` retoma execução parcial por composição (estágios 1-2 herdados, consenso recomputado sem rede, guarda `config_drift` fail-closed; schema com `resumed_from`).
+- arquitetura: stdlib pura para OpenAI, DeepSeek e z.ai; SDK `anthropic` como única dependência (venv próprio); conselho atual gpt-5.6-terra, deepseek-v4-pro, claude-opus-5, glm-5.3; presidente gpt-5.6-sol; `council ask --resume` retoma execução parcial por composição (estágios 1-2 herdados, consenso recomputado por Borda sem rede, guardas fail-closed incluindo `config_drift`; parcial gravado por troca atômica em cada limite de estágio; schema com `resumed_from`); `council ask --rank-lite` torna o estágio 2 orçável, registrando `stage2_mode`; `council cost` faz ledger e pré-voo sem rede; `council/audit.py` classifica achados em estruturais e de prosa; suite offline `test_offline.py` com CI em `.github/workflows/tests.yml`; pré-registros e emendas em `docs/prereg/`. Emendas de schema são aditivas por regra. A superfície MCP (`mcp_server.py`) não expõe resume nem interrupção.
 - last-verified: 2026-08-28
-- verified-head: f0e6af5f3eee822d8a6a38b18ac0a121e0fe95d0
+- verified-head: a558dab1c557fc524251a6ebc41d9ba255858694

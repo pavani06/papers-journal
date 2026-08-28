@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — Recursive Synthesis for Long-Horizon Terminal Tasks</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/08/2026-08-06.html">papers.hf</a><span class="data-topo">Deep dive · quinta-feira, 6 de agosto de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/08/2026-08-06.html">&larr; Edição de 2026-08-06</a></p>
+<h1 class="manchete">Recursive Synthesis for Long-Horizon Terminal Tasks</h1>
+<p><strong>Sumário de ação</strong>: roubar o duplo portão de aceitação (validade-oráculo em sandbox fresco + validade-de-contrato entre enunciado e verificador) e aplicá-lo às suites que já temos. Em <code>llm-council</code>, o golden se auto-aprova quando o baseline não existe e um bloco grava em <code>/tmp</code> fixo — dois falsos verdes baratos de fechar. Em <code>papers-journal</code>, 1611 linhas de produção rodam em cron com zero teste, apesar de já existirem semente (<code>.cache/</code>) e seam de sandbox (<code>paths.py</code>). O fine-tuning do paper não nos interessa.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2608.05466">abstract</a> · <a href="https://arxiv.org/html/2608.05466">HTML</a> · 248 upvotes na edição de <a href="../../../2026/08/2026-08-06.html">2026-08-06</a></p></div>
+<h2>Afirmação central</h2>
+<p>Dá para sintetizar tarefas de terminal cada vez mais longas em rodadas recursivas — partindo de tarefas verificadas, estendendo a solução de referência, realinhando verificador e enunciado, validando em sandbox fresco e reciclando só as aceitas como sementes — sem que a consistência entre enunciado, ambiente, solução e verificador se degrade.</p>
+<h2>Mecânica passo a passo</h2>
+<p>O framework se chama RST (Recursive Synthetic Terminal Tasks). Bootstrap com 639 tarefas verificadas do TerminalWorld; a rodada 1 aceita 2.820 tarefas; quinze rodadas produzem 37.484 tarefas a cerca de US$ 0,05 por tarefa. Cada rodada tem quatro estágios.</p>
+<p><strong>Estágio 1 — pool de sementes com teto de diversidade.</strong> As tarefas aceitas da rodada anterior viram sementes da próxima. Tetos são aplicados por linhagem de pai, por categoria, por família de reescrita e por coorte de geração, para impedir que uma linhagem produtiva domine o pool. A distribuição de domínios praticamente não se move: entropia normalizada vai de 0,821 a 0,817 entre R1 e R15, e nenhuma semente do bootstrap contribui mais que 0,77% de qualquer rodada.</p>
+<p><strong>Estágio 2 — escolha do alvo e contrato da tarefa.</strong> O gerador inspeciona a semente com 40 operadores agrupados em 5 famílias: estado de configuração e controle; estado de dados, manifesto e schema; sistema de arquivos e binding de recursos; estado de build, cache e artefato; runtime, tooling e diagnóstico. Ele registra um <strong>plano de reescrita explícito</strong>: qual comportamento novo passa a ser exigido, o que muda na solução, quais são os resultados intermediários e finais, e qual informação o agente precisa poder descobrir sozinho. Dois motivos de rejeição do plano, antes de qualquer geração: mudança apenas cosmética, ou informação exigida colocada <strong>somente nos testes privados</strong>.</p>
+<p><strong>Estágio 3 — reescrita: primeiro cresce a solução, depois alinha o resto.</strong> A ordem é fixa e é o coração do método:</p>
+<ol><li>estender <code>solve.sh</code> com operações adicionais (inspeção de arquivo, derivação, invocação de ferramenta, gestão de estado);</li><li>ajustar o ambiente para suportar as operações novas (dependências, fixtures, permissões, paths);</li><li>atualizar o verificador para checar os artefatos resultantes, <strong>rejeitando atalhos e saídas hard-coded</strong>;</li><li>revisar a instrução pública para enunciar o novo objetivo e apontar a informação descobrível;</li><li>atualizar metadados de recurso e timeout.</li></ol>
+<p>O enunciado é o último a mudar porque ele segue o verificador, que por sua vez segue a solução. Inverter a ordem é o que produz tarefa cuja instrução promete uma coisa e cujo verificador cobra outra.</p>
+<p><strong>Estágio 4 — validação: filtros locais e oráculo em sandbox.</strong> Filtros estáticos descartam quase-duplicatas, arquivos faltando, metadados inválidos e exposição do verificador privado. O que sobrevive vai para um <strong>sandbox fresco</strong>, onde a solução de referência é executada e o verificador privado roda. Falhas reparáveis entram num reparo limitado e restrito a arquivos aprovados. A aceitação exige dois critérios independentes:</p>
+<ul><li><strong>validade-oráculo</strong>: a solução de referência passa no verificador privado em ambiente limpo;</li><li><strong>validade-de-contrato</strong>: todo requisito cobrado pelo verificador está enunciado na instrução pública ou é inferível a partir do workspace.</li></ul>
+<p>Só quem passa nos dois volta ao pool como semente.</p>
+<h2>Evidência e resultados</h2>
+<p><strong>A dificuldade cresce e a máquina não engasga.</strong> Mediana da solução de referência: 67 → 374 linhas (5,6×). Comandos executados: 40 → 244. Ferramentas de CLI distintas: 17 → 71. Operações de controle de fluxo: 6 → 45. Asserções do verificador: 17 → 57. O enunciado cresce muito mais devagar — 85 → 122 palavras (1,4×) —, o que é o desejado: a tarefa fica mais difícil sem virar um enunciado que entrega a solução.</p>
+<p><strong>Rendimento estável apesar da dificuldade.</strong> Tarefas aprovadas por 1.000 tentativas fica na faixa 498,2–572,2 ao longo das quinze rodadas (R1: 551,6; R15: 530,0), e a taxa de aprovação de candidatos entre 74,5% e 81,5%. Os autores afirmam explicitamente que "a recursão não mostra teto".</p>
+<p><strong>A dificuldade é real, medida por um modelo de fora.</strong> DeepSeek-V4-Pro em subconjuntos pareados: pass@4 de 90% em R1 para 2,5% em R15 (redução de 36×); crédito parcial médio 0,970 → 0,170; tentativas falhas acima de 75% de crédito parcial 86,4% → 1,2%; tarefas abaixo de 50% de crédito parcial 0% → 97,5%.</p>
+<p><strong>Qualidade das tarefas melhora junto.</strong> Proteção contra checagem escondida 38,2% → 63,5%; risco de instrução curta 41,6% → 7,5%; cobertura mediana de requisitos 0,42 → 0,57; tarefas fortemente ancoradas 14,3% → 38,0%.</p>
+<p><strong>Diversidade preservada.</strong> 36 dos 40 operadores continuam representados em R15; o operador mais frequente responde por apenas 8,0% das tarefas; 31,0% ficam fora do top-12. Entropia de família de reescrita 2,26–2,31 bits contra máximo de 2,32.</p>
+<p><strong>Contaminação.</strong> Zero sobreposição exata de 13 tokens com os benchmarks; Jaccard máximo de 5-gramas entre 0,0081 (R1) e 0,0051 (R15).</p>
+<p><strong>Treino.</strong> SFT sobre Qwen3.5 com 327.189 trajetórias por rejection sampling. Qwen3.5-27B: Terminal-Bench 2 de 41,20% para 47,94%; Terminal-Bench Hard 22,67% → 28,33%; Long-Horizon Terminal Bench 18,10% → 22,44%. Qwen3.5-122B-A10B: 43,82% → 49,44%, 20,00% → 30,00%, 18,85% → 23,63%. Com RL agêntico, o 27B chega a 49,44% / 32,00% / 22,07% (ganhos relativos de 20,0% / 41,2% / 21,9%), com recompensa média do verificador subindo de ~0,11 para acima de 0,14 e turnos médios por trajetória de 19–20 para mais de 30.</p>
+<h2>Limitações e riscos</h2>
+<p>Declaradas: cauda de tarefas muito parecidas dentro da mesma rodada (similaridade p95 de 0,703 em R15, contra mediana de 0,464), o que motiva deduplicação dirigida em escalas maiores; folga grande ainda para o topo — DeepSeek-V4-Pro segue à frente nos três benchmarks (51,68% / 36,00% / 30,00%); dependência integral de execução em sandbox e de verificadores; e o custo de US$ 0,05 por tarefa pressupõe acesso a um modelo gerador capaz.</p>
+<p>Suspeitas da leitura, não do paper:</p>
+<ul><li><strong>O verificador é gerado pelo mesmo processo que gera a solução.</strong> A validade-oráculo prova coerência interna do par (solução, verificador), não que a tarefa faça sentido. Um verificador frouxo aceita uma solução frouxa e a dupla entra no pool.</li><li><strong>A validade-de-contrato é checada por LLM.</strong> É o único gate contra "verificador cobra o que o enunciado não diz", e ele não tem oráculo próprio.</li><li><strong>Cobertura mediana de requisitos de 0,57 em R15</strong> significa que quase metade dos requisitos ainda não está claramente coberta pelo enunciado — melhorou, mas não é um contrato fechado.</li><li><strong>A dificuldade medida é dificuldade para um modelo específico.</strong> Pass@4 de 2,5% pode significar tarefa difícil ou tarefa mal-especificada; o paper não separa as duas causas.</li></ul>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Duplo portão, não portão único.</strong> Um caso só entra na suite quando (a) a solução de referência passa no verificador em ambiente limpo, e (b) todo requisito que o verificador cobra está enunciado ou é descobrível. Suite que só tem (a) acumula casos que passam por motivo errado; suite que só tem (b) acumula documentação.</li><li><strong>Ordem de reescrita: solução → ambiente → verificador → enunciado.</strong> Quando se estende um caso de regressão, o verificador segue a solução e o enunciado segue o verificador. Editar o enunciado primeiro é o mecanismo pelo qual instrução e checagem divergem.</li><li><strong>Sandbox fresco é o oráculo; diretório compartilhado é o falso verde.</strong> Todo caso valida em ambiente descartável. Fixture persistente entre execuções é a forma padrão de um teste passar por resíduo em vez de por mérito.</li><li><strong>Verificador que se auto-aprova não é verificador.</strong> O paper rejeita plano cuja informação exigida vive só no teste privado, e rejeita solução hard-coded. A versão local do mesmo defeito: baseline golden que se grava sozinho quando não existe, e reporta sucesso. Ausência de evidência vira aprovação.</li><li><strong>Medir a saúde do corpus, não só verde/vermelho.</strong> Cobertura de requisitos, risco de instrução curta, proteção contra checagem escondida, similaridade do vizinho mais próximo. Sem essas métricas não se distingue uma suite que cresceu de uma suite que se repetiu.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar. O aporte que interessa não é o ganho de fine-tuning — que é modesto e depende de escala de compute que não temos — e sim a formalização do que separa um caso de teste bom de um caso de teste que passa. O duplo portão e a ordem de reescrita são regras curtas, mecânicas, e aplicáveis a qualquer suite de regressão sem uma linha de ML. A parte de RL e SFT é ignorável para nós.</p>
+<h2>Confronto com repos</h2>
+<h3>llm-council</h3>
+<p><strong>1. Teses aplicáveis</strong> — 1, 3, 4 e 5, contra a suite offline real.</p>
+<p>A suite é um <code>main()</code> único: <code>test_offline.py:52</code> abre a função e ela só fecha em <code>test_offline.py:2619</code>, cobrindo 33 blocos numerados impressos com <code>print(&quot;N) ...&quot;)</code>. São 415 linhas contendo <code>check(</code>. O <code>check</code> em <code>test_offline.py:22-25</code> imprime, acumula em <code>FALHAS</code> e <strong>segue</strong> — não aborta.</p>
+<p>Os blocos não são independentes. <code>VISTOS = []</code> é global (<code>test_offline.py:35</code>), alimentado dentro do stub <code>fake_chat</code> (<code>test_offline.py:40</code>) e lido pelos blocos 3 e 5 (<code>test_offline.py:73</code> e <code>test_offline.py:86</code>). O monkeypatch de provedor é global e feito uma vez (<code>test_offline.py:53-54</code>). A numeração impressa já está fora de ordem no arquivo — o bloco 18 está em <code>test_offline.py:507</code>, antes do bloco 16 em <code>test_offline.py:619</code> —, sinal de crescimento por anexação, não por registro de casos.</p>
+<p>Tese 3 (sandbox fresco) é seguida quase em toda parte e violada em um ponto: o bloco 6 grava em caminho fixo e persistente, <code>save_run(rec, Path(&quot;/tmp/council-test-runs&quot;))</code> em <code>test_offline.py:93</code>, enquanto os demais blocos usam <code>tempfile.TemporaryDirectory()</code> (<code>test_offline.py:293-294</code>, <code>:359</code>, <code>:648</code>, <code>:1135</code>). É o único <code>/tmp</code> fixo do arquivo.</p>
+<p>Tese 4 é o achado mais sério. O bloco golden compara byte a byte quando o baseline existe (<code>test_offline.py:495-501</code>), mas quando não existe ele <strong>grava o render atual como baseline e reporta sucesso</strong>: <code>gdir.mkdir(exist_ok=True)</code> / <code>alvo.write_bytes(...)</code> / <code>check(True, ...)</code> em <code>test_offline.py:503-505</code>. Apagar <code>golden/</code> faz a seção 15 passar sem comparar nada — e o golden é gate declarado em <code>AGENTS.md:22</code> ("provados pelo golden (seção 15 do teste) após cada tarefa") e em <code>AGENTS.md:88</code>. O CI roda exatamente essa suite e nada mais (<code>.github/workflows/tests.yml:13-14</code>), então o falso verde é o verde do CI.</p>
+<p>Tese 5 (drift enunciado↔verificador, na versão doméstica): <code>README.md:328</code> declara "393 checagens"; o arquivo hoje tem 415 linhas com <code>check(</code>. Número escrito à mão que envelheceu.</p>
+<p><strong>2. Oportunidade de melhoria</strong></p>
+<ul><li>Golden fail-closed: baseline ausente vira <code>check(False, ...)</code>, e a gravação de baseline passa a exigir uma flag explícita (<code>--bootstrap-golden</code>).</li><li>Bloco 6 em <code>TemporaryDirectory()</code>, como os outros 12 pontos do arquivo já fazem.</li><li>Contagem de checagens do README derivada da própria execução (a suite já imprime tudo) em vez de constante manual.</li><li>(Opcional, caro) registro de casos com id estável em vez de numeração impressa, tornando os blocos independentes e o <code>VISTOS</code> local.</li></ul>
+<p><strong>3. Como aplicar</strong></p>
+<p>Nesta ordem, em uma única issue pequena para os três primeiros: (a) golden fail-closed — é a correção de maior retorno e mexe em 3 linhas; (b) <code>/tmp</code> fixo → tmpdir; (c) contagem derivada. O item (d) fica fora: é refatoração de 2.623 linhas com dependência implícita de ordem, e não há dor que o justifique hoje.</p>
+<p><strong>4. Prós e contras</strong></p>
+<p>(a)-(c) não têm custo de migração e não mexem em <code>council/</code>, só na suite e no README. Risco de (a): quem clonar o repo sem <code>golden/</code> versionado passa a ver falha em vez de bootstrap silencioso — mas <code>golden/</code> está versionado (3 arquivos, 103 linhas), então o bootstrap só dispara quando alguém apagou o baseline, que é exatamente o caso em que se quer falhar. Risco de (d), se um dia for feito: quebrar a ordem implícita entre blocos que compartilham <code>VISTOS</code> e produzir falhas fantasmas; por isso fica de fora.</p>
+<p><strong>5. Veredito</strong> — <strong>aplicar com ressalvas</strong>. Os itens (a), (b) e (c) agora, em uma issue. O item (d) não: a suite é feia mas está funcionando, e o paper não oferece argumento para pagar esse refactor. O achado (a) é independente do paper e vale sozinho.</p>
+<h3>papers-journal</h3>
+<p><strong>1. Teses aplicáveis</strong> — 1, 3 e 5, por ausência total do que elas pressupõem.</p>
+<p>São 1.611 linhas de produção — <code>src/deep_html.py</code> (317), <code>src/deepdive.py</code> (201), <code>src/index.py</code> (103), <code>src/journal.py</code> (517), <code>src/paths.py</code> (107), <code>src/render_html.py</code> (230), <code>bin/papers-daily.sh</code> (136) — e <strong>nenhum arquivo de teste</strong>; não existe <code>.github/</code> no repo, portanto não há CI.</p>
+<p>O único gate é o wrapper de cron: <code>bin/papers-daily.sh:12</code> (<code>set -euo pipefail</code>), lock em <code>:72-76</code>, classificação de erro em <code>:127</code>, propagação do código de saída em <code>:136</code>. Ele é fail-loud, mas fail-loud <strong>depois</strong> de rodar em produção, não antes.</p>
+<p>Os dois insumos que a tese 1 pede já existem e são gratuitos. Semente com saída de referência: <code>src/journal.py:502</code> grava o veredito do modelo em cache e <code>src/journal.py:455-462</code> o relê sob <code>--render-only</code>, que <code>src/journal.py:459</code> exige explicitamente (<code>--render-only exige {cache}, que nao existe</code>). Cada dia publicado é um par (entrada, veredito de referência) já verificado por publicação. Seam de sandbox fresco: <code>src/paths.py:30-31</code> deriva todo o layout de <code>PAPERS_HOME</code> e <code>PAPERS_DATA_DIR</code>, o que permite apontar o programa inteiro para um diretório temporário sem tocar em dado real.</p>
+<p>Há ainda um contrato declarado e não verificado: <code>README.md:44-46</code> afirma que <code>src/deep_html.py</code> "é idempotente: pode ser re-rodado a qualquer momento para regenerar ou reconciliar", com a reconciliação em <code>src/deep_html.py:246</code> (<code>_reconcilia_edicao</code>) e o driver em <code>src/deep_html.py:263</code>. Idempotência é asserção mecanicamente verificável — rodar duas vezes e comparar bytes — e hoje ninguém a verifica.</p>
+<p><strong>2. Oportunidade de melhoria</strong></p>
+<p>Uma suite offline mínima, no molde do <code>test_offline.py</code> do llm-council (stdlib, sem rede, um arquivo), com quatro casos colhidos das edições já publicadas:</p>
+<ul><li><strong>render determinístico</strong>: dado um <code>.cache</code> congelado, <code>journal.py --render-only</code> produz markdown byte a byte igual à edição publicada;</li><li><strong>idempotência do deep_html</strong>: <code>deep_html.py</code> rodado duas vezes sobre o mesmo estado produz o mesmo byte;</li><li><strong>normalização do veredito</strong>: <code>normalize_verdict</code> (<code>src/journal.py:284</code>) e <code>resolve_id</code> (<code>src/journal.py:271</code>) contra vereditos reais, incluindo os malformados que já apareceram;</li><li><strong>contrato de paths</strong>: com <code>PAPERS_DATA_DIR</code> apontando para tmpdir, nenhuma escrita cai fora dele.</li></ul>
+<p>Todos rodam sem chave de API. Um <code>.github/workflows</code> de 14 linhas basta, copiando <code>.github/workflows/tests.yml:1-14</code> do llm-council.</p>
+<p><strong>3. Como aplicar</strong></p>
+<p>(1) Congelar de 2 a 3 fixtures em <code>tests/fixtures/</code> — um <code>.cache/*.json</code> real e a edição correspondente já publicada; note que <code>.gitignore:3</code> exclui <code>.cache/</code>, então a fixture precisa ser copiada para fora dessa árvore, não referenciada in loco. (2) Escrever <code>test_offline.py</code> com os quatro casos, cada um em <code>TemporaryDirectory()</code> com <code>PAPERS_DATA_DIR</code> apontado para lá. (3) Só então o workflow de CI. A ordem importa: CI sem suite é enfeite.</p>
+<p><strong>4. Prós e contras</strong></p>
+<p>Custo baixo e sem migração: nenhuma linha de <code>src/</code> muda, porque o seam de <code>paths.py:30-31</code> já existe. Contras reais: as fixtures congelam saída de LLM, então mudar <code>interests.md</code> ou o modelo (<code>src/journal.py:41</code>, <code>DEFAULT_MODEL = &quot;gpt-5.5&quot;</code>) quebra o caso de render — o que é feature, não bug, desde que a atualização da fixture seja um ato deliberado, à moda do golden. Segundo contra: golden byte a byte sobre HTML/markdown é frágil a mudança de template, e vai gerar atrito toda vez que se mexer no visual. Mitigação: manter o golden no markdown (estável) e, no HTML, checar invariantes estruturais em vez de bytes.</p>
+<p><strong>5. Veredito</strong> — <strong>aplicar agora</strong>. É o repo onde o retorno é maior: código de produção que roda em cron diário, sem nenhum gate mecânico, com semente e seam já prontos. O paper não é a razão de fazer, mas dá a forma: dois portões (o render bate com o publicado; o que a suite cobra é o que o README promete) e sandbox fresco por caso.</p>
+<h3>agent-workloops</h3>
+<p><strong>1. Teses aplicáveis</strong> — 2 e 3, e uma lacuna que a tese 2 expõe.</p>
+<p>O repo já enuncia a tese 3 melhor do que o paper: <code>playbooks/workloop.md:182-188</code> define três verificadores independentes, com "Suite + golden" pegando "regressão mecânica, quebra de invariante" (<code>:186</code>) e o CI pegando explicitamente "o que a sessão esqueceu de rodar, ou rodou em <strong>ambiente sujo</strong>" (<code>:187</code>). O oráculo em ambiente limpo aparece como bootstrap de sessão fria em <code>playbooks/workloop.md:156-169</code>, com a regra "Teste-a de propósito, em uma sessão limpa, pelo menos uma vez por fase" (<code>:169</code>).</p>
+<p>O contrato enunciado↔verificador do paper também já tem nome aqui: <strong>constraint de fase</strong>, definida em <code>playbooks/workloop.md:36</code> e detalhada em <code>:63-67</code> — "violou uma, a issue é reprovada, mesmo com suite verde", com o critério de que "uma constraint boa é verificável mecanicamente". E a evidência endereçada de <code>:225-229</code> é a mesma disciplina de <code>file:line</code> que este confronto segue.</p>
+<p>A lacuna é a tese 2. As issues nascem de quebra top-down do plano (<code>playbooks/workloop.md:77-81</code>: "nenhuma issue nasce sem blockers declarados e sem critério de verificação"), nunca de um caso já verificado. E o que a issue aprovada deixa para trás é um <strong>handoff em prosa</strong>, de no máximo 35 linhas, dentro do PR (<code>playbooks/workloop.md:210-223</code>), lido pela issue seguinte e depois morto. Não existe passo que promova a issue verificada a caso de regressão durável. O playbook verifica cada unidade e não colhe nenhuma.</p>
+<p><strong>2. Oportunidade de melhoria</strong></p>
+<p>Uma seção <strong>3.5 Colheita</strong> na Camada 3: toda issue de código aprovada deposita, junto do handoff, um caso na suite do repo alvo — enunciado do que a issue passou a garantir, estado de ambiente necessário, procedimento de referência e asserções. E o gate de fase (<code>playbooks/workloop.md:293</code>) passa a exigir a suite completa rodando em ambiente limpo, não apenas a sessão fria de bootstrap. Em <code>templates/handoff.md</code> (56 linhas), acrescentar uma sexta seção "caso colhido", com o endereço do teste adicionado — coerente com a regra de evidência endereçada de <code>:225-229</code>.</p>
+<p><strong>3. Como aplicar</strong></p>
+<p>Edição de documento apenas, em duas partes: primeiro a seção 3.5 no playbook, depois o campo no template. Nenhum código. Restringir explicitamente a issues de código — issue de doc ou de artefato fora do repo (<code>playbooks/workloop.md:291</code>) não colhe caso.</p>
+<p><strong>4. Prós e contras</strong></p>
+<p>Pró: fecha o buraco entre "cada issue foi verificada" e "o conjunto continua verificado", que é exatamente o que o paper resolve. O repo já tem a linguagem toda; falta um passo. Contra: sobe o custo por unidade de trabalho, e o próprio playbook adverte para não usar o processo quando "o custo do processo (diretiva, review, handoff por unidade) excede o custo da unidade em si" (<code>playbooks/workloop.md:17-18</code>). Risco de virar burocracia se aplicado fora de issue de código. Contra menor: o repo é kit de processo, não código; a mudança só vale quando os repos que instanciam o workloop tiverem suite — o que reforça a ordem: primeiro a suite de <code>papers-journal</code>, depois esta seção.</p>
+<p><strong>5. Veredito</strong> — <strong>aplicar com ressalvas</strong>. A seção 3.5 é barata e corrige uma lacuna real, mas depois de <code>papers-journal</code>: documentar colheita de casos antes de existir onde colhê-los é escrever processo sem execução, que é justamente o que <code>README.md:6-7</code> do repo proíbe ("Nada é hipótese de processo: se está documentado, rodou").</p>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/08/2026-08-06.html">edição de 2026-08-06</a></footer>
+</body>
+</html>
