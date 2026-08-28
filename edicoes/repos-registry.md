@@ -98,4 +98,4 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 - propósito: conselho de LLMs de provedores diferentes respondem à mesma pergunta, avaliam-se às cegas, presidente sintetiza; CLI + servidor MCP. Derivado do llm-council do Karpathy com correções (cegamento real, agregação por Borda, falha nunca silenciosa).
 - arquitetura: stdlib pura para OpenAI, DeepSeek e z.ai; SDK `anthropic` como única dependência (venv próprio); conselho atual gpt-5.6-terra, deepseek-v4-pro, claude-opus-5, glm-5.3; presidente gpt-5.6-sol.
 - last-verified: 2026-08-28
-- verified-head: 1518d4c193b5c9edf2313d77695e2842af03fcc9
+- verified-head: 3ddb236dfd16fade0b839fe03ebe54f58b530fd9
