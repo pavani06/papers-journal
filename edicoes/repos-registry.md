@@ -90,7 +90,7 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 - propósito: site estático do GovEvo ("Governando o que passa a valer").
 - arquitetura: `index.html` + `assets/` (css, js, favicon); sem build, sem dependências.
 - last-verified: 2026-08-28
-- verified-head: fffd0711d05baa9155ece5f53eaab9922ce1dd12
+- verified-head: 69bfe10f5f1cae32fc3519b894e407c6c230a9fa
 
 ## llm-council
 
