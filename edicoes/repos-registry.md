@@ -26,7 +26,7 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 - propósito: jornal diário dos Daily Papers do Hugging Face; busca, triagem por LLM contra `interests.md`, edição em markdown + HTML via cron.
 - arquitetura: Python stdlib + OpenAI API; `src/journal.py` (busca/triagem), `src/render_html.py` (portal), `src/deepdive.py` (leitura profunda sob demanda), `bin/papers-daily.sh` (wrapper de cron com lock/log/notificação); edições em `edicoes/AAAA/MM/`, site em `docs/`.
 - last-verified: 2026-08-28
-- verified-head: 7c6bea168365cca94712135998684eaf3091be76
+- verified-head: 4d465210928710779340110ef0bf828e64f1a549
 
 ## agent-workloops
 
