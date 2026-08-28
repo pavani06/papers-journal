@@ -31,6 +31,7 @@ Uma execução consome cerca de 8k tokens de entrada e 2,5k de saída.
 | `interests.md` | Perfil que decide o que é relevante. **Edite este arquivo.** |
 | `edicoes/AAAA/MM/` | Edições em markdown |
 | `edicoes/deep/AAAA/MM/` | Deep dives do pipeline papers-deep, agrupados por edição |
+| `edicoes/repos-registry.md` | Catálogo dos repos confrontados pelo papers-deep; cada entrada carrega `last-verified` e `verified-head` |
 | `docs/` | Site publicável: `index.html` mais as edições em HTML |
 | `deep/` | Leituras profundas por paper, escritas por `src/deepdive.py` |
 | `.cache/AAAA/MM/` | Veredito do modelo (ignorado pelo git) |
