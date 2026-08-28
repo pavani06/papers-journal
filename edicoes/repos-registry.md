@@ -56,9 +56,9 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 
 - path: `/home/pavanpavan/sisyphus-runtime`
 - propósito: vault Obsidian do runtime do Sisyphus; system-of-record do ecossistema: fatos duráveis (`facts/`), estado corrente (`state/`), handoffs (`sessions/`), jornal de papers (`papers/`), telemetria.
-- arquitetura: markdown com frontmatter padronizado, wikilinks e MOCs; `obsidian-eval` para consulta sem app; espelha edições do papers-journal.
+- arquitetura: markdown com frontmatter padronizado, wikilinks e MOCs; `obsidian-eval` para consulta sem app; `papers/` é symlink para `/home/pavanpavan/papers-journal/edicoes` — mesmo arquivo físico, não cópia (constraint: `facts/_global/constraints.md:67`); commits de sessão (`sessions/`, `state/`, `oracle-reviews/`) são rotina esperada e tendem a classificar drift `externo` inofensivo.
 - last-verified: 2026-08-28
-- verified-head: 10a3a4de25fe1c53826ab8bd9f15142249ab0f6f
+- verified-head: 9e46136c1c1a02a6101dab200aad08d1247339c8
 
 ## ciot-authpay-repo
 
