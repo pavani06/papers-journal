@@ -60,11 +60,6 @@ def deepdive(paper_id: str) -> Path:
     return DEEP / f"{paper_id}.md"
 
 
-def deep_nota(paper_id: str, date: str) -> Path:
-    """Nota de deep dive do pipeline papers-deep, agrupada pela edicao do dia."""
-    return DEEP_EDICOES / date[:4] / date[5:7] / f"{paper_id}.md"
-
-
 def deep_html(paper_id: str, date: str) -> Path:
     """Pagina publicada do deep dive, derivada da nota, sob docs/deep/."""
     return DOCS_DEEP / date[:4] / date[5:7] / f"{paper_id}.html"

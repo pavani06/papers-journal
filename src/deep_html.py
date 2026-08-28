@@ -101,7 +101,9 @@ def _inline(texto: str) -> str:
     texto = _CODE.sub(_guarda, texto)
     texto = _E(texto, quote=False)
     texto = _LINK.sub(
-        lambda m: f'<a href="{_E(m.group(2), quote=True)}">{m.group(1)}</a>', texto
+        lambda m: (f'<a href="{_E(html.unescape(m.group(2)), quote=True)}">'
+                   f"{m.group(1)}</a>"),
+        texto,
     )
     texto = _EDICAO_WIKILINK.sub(
         lambda m: (f'<a href="../../../{m.group(1)}/{m.group(2)}/{m.group(3)}.html">'
@@ -147,12 +149,24 @@ def _blocos(corpo: str) -> list[Bloco]:
         elif _ITEM.match(linha):
             ordenado = linha[0].isdigit()
             itens: list[str] = []
-            while i < len(linhas) and (m := _ITEM.match(linhas[i])):
-                itens.append(linhas[i][m.end():].strip())
-                i += 1
-                while i < len(linhas) and linhas[i].startswith((" ", "\t")):
-                    itens[-1] += " " + linhas[i].strip()
+            while True:
+                while i < len(linhas) and (m := _ITEM.match(linhas[i])):
+                    if linhas[i][0].isdigit() != ordenado:
+                        break
+                    itens.append(linhas[i][m.end():].strip())
                     i += 1
+                    while i < len(linhas) and linhas[i].startswith((" ", "\t")):
+                        itens[-1] += " " + linhas[i].strip()
+                        i += 1
+                # itens separados por linha em branco continuam a mesma lista
+                j = i
+                while j < len(linhas) and not linhas[j].strip():
+                    j += 1
+                if (j < len(linhas) and _ITEM.match(linhas[j])
+                        and linhas[j][0].isdigit() == ordenado):
+                    i = j
+                else:
+                    break
             saida.append(("lista", (ordenado, itens)))
         else:
             paragrafo = [linha.strip()]
@@ -207,7 +221,7 @@ def _pagina_deep(meta: dict, corpo: str, date: str, edicao_rel: str) -> str:
         f'<p class="crumb"><a href="{edicao_rel}">&larr; Edição de {_E(date)}</a></p>\n'
         f'<h1 class="manchete">{_E(titulo)}</h1>\n'
         f"{corpo}\n</div>\n"
-        f"{_RODAPE_FAIXA}Deep dive do pipeline /papers-deep · "
+        f"{_RODAPE_FAIXA}Deep dive do pipeline papers-deep · "
         f'<a href="{edicao_rel}">edição de {_E(date)}</a></footer>\n'
         "</body>\n</html>\n"
     )
@@ -217,7 +231,7 @@ def _secao_edicao(refs: list[tuple[str, str]], date: str) -> str:
     itens = "".join(
         f'<article class="card"><a class="titulo" '
         f'href="../../deep/{date[:4]}/{date[5:7]}/{_E(paper_id)}.html">{_E(titulo)}</a>'
-        f'<div class="chamada"><p>Deep dive do pipeline /papers-deep: destilação '
+        f'<div class="chamada"><p>Deep dive do pipeline papers-deep: destilação '
         f"do paper com confronto contra o estado atual dos nossos repos.</p>"
         f"</div></article>"
         for paper_id, titulo in refs
@@ -240,7 +254,7 @@ def _reconcilia_edicao(texto: str, secao: str | None) -> str:
     fim = texto.index(_RODAPE_FAIXA)
     texto = texto[:fim] + secao + texto[fim:]
     if _NAV_ANCORA not in texto:
-        texto = texto.replace("</nav>", _NAV_ANCORA + "</nav>")
+        texto = texto.replace("</nav>", _NAV_ANCORA + "</nav>", 1)
     return texto
 
 
@@ -281,9 +295,12 @@ def main() -> int:
             edicao.write_text(_reconcilia_edicao(texto, None), encoding="utf-8")
 
     if paths.DOCS_DEEP.is_dir():
-        fontes = {n.stem for n in notas}
+        fontes = {
+            str(n.relative_to(paths.DEEP_EDICOES).with_suffix(".md")) for n in notas
+        }
         for pagina in sorted(paths.DOCS_DEEP.glob("*/*/*.html")):
-            if pagina.stem not in fontes:
+            derivada = pagina.relative_to(paths.DOCS_DEEP).with_suffix(".md")
+            if str(derivada) not in fontes:
                 pagina.unlink()
                 print(f"removida pagina sem nota de origem: {pagina}", file=sys.stderr)
     return 0
