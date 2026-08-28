@@ -42,7 +42,7 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 - propósito: produzir o processo seletivo do épico #1 (Desafio KODA Re-engajamento); o repo gera a rubrica, não o sistema — construir o sistema aqui contamina o teste.
 - arquitetura: `AGENTS.md` com regras anti-contaminação, `decisoes/`, `docs/`; repositório de especificação e avaliação.
 - last-verified: 2026-08-28
-- verified-head: deadbeef0000000000000000000000000000000000
+- verified-head: 1e534d9a4b45a654c01795fd8287deac040e90d3
 
 ## hop-ecosystem-atlas
 
