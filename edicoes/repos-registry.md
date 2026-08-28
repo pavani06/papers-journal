@@ -49,7 +49,7 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 - path: `/home/pavanpavan/hop-ecosystem-atlas`
 - propósito: atlas de ecossistema da repo `pavani06/HoP` (hop-control-tower) gerado por análise estática read-only: arquitetura C4, catálogo de serviços, métricas, findings de segurança, dívida técnica.
 - arquitetura: artefato de documentação viva (75 arquivos gerados + README e guia); snapshot de 2026-08-24, cobertura 415 arquivos JS / 113.826 LOC.
-- last-verified: 2026-08-01
+- last-verified: 2026-08-28
 - verified-head: 8d8396a3a70a1cd5d783f1e6e8142487f4cc14b8
 
 ## sisyphus-runtime
