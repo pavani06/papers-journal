@@ -12,7 +12,9 @@ Variaveis de ambiente:
 Layout sob PAPERS_DATA_DIR:
   interests.md               perfil de interesse, editado a mao
   edicoes/YYYY/MM/*.md       jornal em markdown
+  edicoes/deep/YYYY/MM/*.md  deep dives do pipeline papers-deep, por edicao
   docs/YYYY/MM/*.html        jornal em html, raiz publicavel do site
+  docs/deep/YYYY/MM/*.html   deep dives publicados, derivados das notas
   docs/index.html            indice das edicoes
   deep/*.md                  leituras profundas por paper
   .cache/YYYY/MM/*.json      veredito do modelo, para re-render sem custo
@@ -33,6 +35,8 @@ LOG = DATA / "papers.log"
 DOCS = DATA / "docs"
 INDEX = DOCS / "index.html"
 DEEP = DATA / "deep"
+DEEP_EDICOES = DATA / "edicoes" / "deep"
+DOCS_DEEP = DOCS / "deep"
 
 
 def _particionado(base: Path, date: str, suffix: str) -> Path:
@@ -54,6 +58,23 @@ def cache(date: str) -> Path:
 
 def deepdive(paper_id: str) -> Path:
     return DEEP / f"{paper_id}.md"
+
+
+def deep_nota(paper_id: str, date: str) -> Path:
+    """Nota de deep dive do pipeline papers-deep, agrupada pela edicao do dia."""
+    return DEEP_EDICOES / date[:4] / date[5:7] / f"{paper_id}.md"
+
+
+def deep_html(paper_id: str, date: str) -> Path:
+    """Pagina publicada do deep dive, derivada da nota, sob docs/deep/."""
+    return DOCS_DEEP / date[:4] / date[5:7] / f"{paper_id}.html"
+
+
+def deep_notas() -> list[Path]:
+    """Lista todas as notas de deep dive do pipeline papers-deep."""
+    if not DEEP_EDICOES.is_dir():
+        return []
+    return sorted(DEEP_EDICOES.glob("*/*/*.md"))
 
 
 def ensure_parent(path: Path) -> Path:

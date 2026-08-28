@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — Prefix Sliding for efficient test-time scaling</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/08/2026-08-27.html">papers.hf</a><span class="data-topo">Deep dive · quinta-feira, 27 de agosto de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/08/2026-08-27.html">&larr; Edição de 2026-08-27</a></p>
+<h1 class="manchete">Prefix Sliding for efficient test-time scaling</h1>
+<p><strong>Sumário de ação</strong>: O paper valida com evidência forte o padrão que nosso ecossistema já pratica de facto (prefixo estável + janela recente + ledger promovido): manter como hipótese nomeada e reforçar a regra de promoção explícita em <code>agent-workloops</code> e no ciclo handoff/facts do runtime. Nenhuma mudança de código se justifica; agentes via API não controlam KV-cache.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2608.26070">abstract</a> · <a href="https://arxiv.org/html/2608.26070">HTML</a> · 3 upvotes na edição de <a href="../../../2026/08/2026-08-27.html">2026-08-27</a></p></div>
+<h2>Afirmação central</h2>
+<p>Durante raciocínio longo, a maioria dos tokens intermediários perde importância rapidamente, então reter apenas o prefixo (instruções, ferramentas) e uma janela deslizante dos últimos tokens mantém performance com custo constante por token, batendo sumarização e last-k no regime avaliado.</p>
+<h2>Mecânica passo a passo</h2>
+<ol><li><strong>Observação de atenção</strong>: em traces de raciocínio do Qwen3-1.7B, a atenção média (post-softmax) concentra-se nos primeiros ~4 tokens (attention sinks), no prompt e no delimitador <code>&lt;think&gt;</code>; cai ao longo do miolo e sobe forte no fim, junto ao token sendo gerado (Fig 2 do paper).</li><li><strong>Método</strong>: manter em memória apenas <code>prefixo ∪ janela deslizante</code> de tamanho W (512 a 16384 nos experimentos). O miolo do raciocínio é descartado à medida que a janela avança. Exemplo do paper: prefixo de 100 tokens + janela de 4096 mantém no máximo 4196 tokens, independentemente de o modelo já ter gerado milhões de tokens.</li><li><strong>Position embeddings</strong>: duas opções, Reset PE (reaplicar posições) e Continue PE (reusar cache com posições já aplicadas); a diferença de performance foi insignificante (Appendix D), então usam Continue PE por eficiência.</li><li><strong>Sem treinamento</strong>: aplicável a modelos pré-treinados com full attention via kernel FlashAttention custom para Hopper com filtragem em dois níveis: intra-tile masking (tiles parcialmente sobrepostos à região permitida) e inter-tile skipping (iterar só blocos do prefixo e da janela).</li><li><strong>Com treinamento (RL/GRPO)</strong>: rollouts além de 100k tokens sem truncar gerações. Backpropagation truncada: como o receptive field efetivo da janela é ~1.5×W, passa-se ao trainer ~4×W tokens finais; loss mask zera os primeiros 3×W e o gradiente é computado só na última janela W. KL entre generator e trainer cai a patamares baixos com multiplicador 4× (Fig 8).</li><li><strong>Avaliação</strong>: GPQA, MATH500, AIME25, avg@64, temperatura 0.6, top-p 0.95, budget forcing; métrica principal é tempo médio de thinking por amostra em segundos (o que o usuário experiencia).</li></ol>
+<h2>Evidência e resultados</h2>
+<ul><li>Qwen3-1.7B base; 3× mais rápido que full attention sem treinamento mantendo performance (Fig 1); o ganho vem de gerar mais tokens no mesmo tempo, não de tokens melhores.</li><li>O kernel atinge velocidade próxima ao sliding window puro; full attention desacelera indefinidamente com o comprimento (Fig 6).</li><li>Com orçamento de memória igualado (8192), Prefix Sliding supera full attention (Fig 7).</li><li>RL com Prefix Sliding permite traces &gt;100k tokens com rewards maiores; validado também em 7B com janela 8192 e multiplicador 4 (Appendix E).</li><li>Ablação central (Fig 9, AIME25, geração máx 262144, janela 4096, k=256, sumário máx 256): Prefix Sliding &gt; sumarização e last-k &gt; sliding window puro. Last-k e summary são bounded mas têm custo em serra (pico a cada chunk), reprocessam tokens (processados duas vezes) e adicionam hiperparâmetros; sliding window puro esquece a tarefa ao perder o prefixo.</li><li>Forte em: raciocínio matemático single-turn, regime de trace longo, comparação honesta contra as duas alternativas práticas (last k, summary) que são o que agentes reais usam.</li></ul>
+<h2>Limitações e riscos</h2>
+<p>Declaradas pelo paper:</p>
+<ul><li>Comparações restritas a métodos que funcionam out-of-the-box em transformers pré-treinados com custo bounded por token; exclui arquiteturas alternativas e métodos subquadráticos.</li><li>Perda de informação real: no LiveCodeBench, janela de pelo menos 16384 é necessária para igualar full attention, porque o modelo começa uma implementação, pensa milhares de tokens em comentários e o começo do código sai da janela (Fig 11).</li><li>Gerações curtas quase não ganham (fase de warm-up): no HealthBench (~2086 tokens médios, janela 2048) equivale a full attention (Fig 12).</li><li>O paper declara ainda seções de limitação "System outputs and multi-turn" e "Scale"; o conteúdo detalhado dessas duas ficou fora do fetch (truncado) e não será parafraseado aqui.</li></ul>
+<p>Suspeitadas pela leitura:</p>
+<ul><li>Evidência concentrada em um modelo principal de 1.7B e domínio matemático; a janela adequada é sensível ao domínio (4096 para matemática, 16384 para código), o que enfraquece a prescrição de um W universal.</li><li>O resultado "bate sumarização" vale para sumário de 256 tokens escrito pelo próprio modelo; sumarização mais rica ou seletiva não foi testada nesse regime.</li><li>Para agentes via API (nosso caso), não há controle de atenção: a transferência é analógica (curadoria de histórico no prompt), não mecânica.</li></ul>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Trace bruto é descartável; ledger não</strong>: separar o registro completo da sessão (descartável, consulta sob demanda) das conclusões que viraram evidência, decisão ou restrição (duráveis). A sessão produtiva carrega prefixo estável + estado atual + últimos passos.</li><li><strong>Promoção explícita vence sumarização automática</strong>: o paper mostra que comprimir o miolo em sumário perde para manter prefixo + janela. O análogo: nada de histórico antigo entra no contexto da próxima sessão por auto-compactação implícita; entra por promoção deliberada a artefato (handoff, fact, constraint).</li><li><strong>O tamanho da janela é uma propriedade do domínio</strong>: 4096 serve para matemática, 16384 para código, porque define até onde o trabalho útil se estende. No harness, o recorte do que conta como "recente" deve ser declarado por tipo de trabalho, não universal.</li><li><strong>Custo bounded por passo é requisito de horizonte longo</strong>: métodos em serra (deletar tudo e reprocessar) desperdiçam compute e quebram GPU utilization. O análogo operacional: evitar reconstruir/recapitular o histórico inteiro a cada passo do loop.</li><li><strong>O prefixo é âncora e nunca sai</strong>: instruções, ferramentas e contratos ficam imunes a descarte (também funcionam como attention sink). Derivado nosso: AGENTS.md, constraints de fase e regras de dispatch são prefixo, não janela.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e seguir como hipótese forte. Autores de primeira linha, método simples, ablação honesta contra as alternativas que agentes reais usam (last k, summary/compaction), e um resultado contraintuitivo bem sustentado no regime avaliado. A limitação de escala (1.7B, matemática) e a sensibilidade da janela ao domínio pedem cautela ao extrapolar; para quem opera agentes via API, o valor não é mecânico (não controlamos KV-cache), é o princípio de curadoria: que histórico merece sobreviver é decisão de desenho, e a resposta padrão deveria ser "quase nada, salvo promoção explícita".</p>
+<h2>Confronto com repos</h2>
+<h3>agent-workloops</h3>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 1 (trace vs ledger) e 2 (promoção explícita) já são praticadas de facto: "todo o estado vive em artefatos persistidos, nunca na memória da sessão" (<code>playbooks/workloop.md:8-10</code>); o handoff obrigatório de no máximo 35 linhas com seções estruturadas é exatamente um gate de promoção (<code>playbooks/workloop.md:212-214</code>), e a regra "a próxima issue lê o handoff ANTES do plano" faz o ledger prevalecer sobre o plano pretendido (<code>playbooks/workloop.md:218-219</code>); o template chega a afirmar "Handoff longo não é lido, e handoff não lido não é memória" (<code>templates/handoff.md:40</code>), um limite de janela editorial. A seção mais valiosa do handoff é "Decisões tomadas em voo" (<code>templates/handoff.md:20-22</code>), ou seja, promoção de decisões, não de rascunho.</li><li><strong>Oportunidade de melhoria</strong> — Nomear o princípio: o playbook implicitamente descarta o miolo (a sessão que executa a issue é descartável; só o handoff, o tracker e o PR sobrevivem, <code>playbooks/workloop.md:176</code>), mas nunca formula a regra "scratchpad antigo é descartável salvo quando virou evidência, decisão ou restrição" nem o corolário do paper (sumarização automática do miolo perde para prefixo + janela). Uma linha no vocabulário ou nas constraints do <code>templates/AGENTS.template.md</code> fixaria isso.</li><li><strong>Como aplicar</strong> — Edição de processo, não de código: acrescentar ao vocabulário do playbook (<code>playbooks/workloop.md:20-38</code>) a distinção trace/ledger e a regra de promoção explícita; opcionalmente uma constraint sugerida no template de AGENTS. Escopo pequeno, uma edição de markdown.</li><li><strong>Prós e contras</strong> — Pró: custo mínimo, repo é de processo, alinha o framework com evidência empírica publicada, melhora o bootstrap frio (<code>playbooks/workloop.md:156-169</code>) ao tornar explícito por que a sessão de zero contexto funciona. Contra: risco de inflar o playbook com teoria; a formulação deve ficar em uma entrada de vocabulário, não em seção nova.</li><li><strong>Veredito</strong> — Aplicar agora, na forma de edição mínima de documentação (vocabulário + uma constraint sugerida). É o repo onde a tese do paper mais diretamente valida decisões existentes.</li></ol>
+<h3>scripts</h3>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 1 (separar trace bruto de ledger): o pacote já separa os dois fisicamente. <code>sisyphus/trajectory.py:1-15</code> grava a trajetória completa da sessão (classificação de intent, grafo de delegações, tokens, outcome) como write-only ao fim da sessão, fora do caminho de contexto de qualquer sessão futura; <code>sisyphus/cli.py:87-89</code> persiste isso em <code>sisyphus-runtime/traces/&lt;session_id&gt;</code>; e <code>sisyphus/handoff-path.sh:7-8,92</code> gera o nome determinístico do handoff, o artefato promovido que vive em <code>sessions/</code>. A divisão trace (descartável, telemétrico) vs handoff (ledger) já é a arquitetura do paper.</li><li><strong>Oportunidade de melhoria</strong> — O lado do descarte não tem política: o CLI expõe <code>cache-clear</code>/<code>cache-stats</code> para o exploration cache (<code>sisyphus/cli.py:215-234</code>) mas não há comando ou política de expiração para <code>traces/</code> (diretório com apenas 3 entradas hoje, listagem em <code>sisyphus-runtime/traces/</code>), nem mecanismo de promoção trace para facts. Se o volume crescer, traces viram passivo sem ciclo de vida.</li><li><strong>Como aplicar</strong> — Não aplicar código agora (mudança seria feature nova e não foi pedida). Registrar a dívida: quando traces/ crescer, definir retenção (ex. expiração por idade) mantendo o handoff e os facts imunes, e considerar um subcomando de promoção trace para fact.</li><li><strong>Prós e contras</strong> — Pró: arquitetura já separa os planos, mudança futura é local. Contra: a analogia com o paper é indireta (lá é memória de atenção no inference, aqui é retenção em disco); agir agora seria especulativo dado o volume atual de 3 traces.</li><li><strong>Veredito</strong> — Aplicar com ressalvas: nenhuma mudança imediata; o paper apenas nomeia o invariante que a separação <code>trajectory.py</code>/<code>handoff-path.sh</code> já implementa e sinaliza a dívida de retenção.</li></ol>
+<h3>sisyphus-runtime</h3>
+<ol><li><strong>Teses aplicáveis</strong> — O vault já instancia o padrão prefixo/janela/ledger do paper: <code>state/current/working-memory.md:7-8</code> mantém o estado corrente em ~2 linhas de denso resumo e aponta para o handoff completo (<code>sessions/_global/2026-08-27-185001-sisyphus-handoff.md</code>, 139 linhas), ou seja, janela curta com ponteiro para o ledger; o ledger durável do ecossistema vive em <code>facts/_global/</code> (princípios, dispatch-rules, incidentes, listados no diretório), que funciona como prefixo imune a descarte; <code>state/current/</code> (objective, open-decisions, repo, working-memory) é a janela. As dispatch-rules injetadas no contexto de toda sessão (por exemplo <code>facts/_global/dispatch-rule-*.md</code>) são literalmente o prefixo estável do paper.</li><li><strong>Oportunidade de melhoria</strong> — Explicitar a regra de promoção como invariante do vault: conclusão antiga entra em <code>facts/</code> somente por promoção deliberada (o caminho já existe: handoff de sessão, depois promoção a fact/princípio), nunca por acúmulo de estado corrente. Hoje o padrão é praticado mas não está escrito como regra em nenhum <code>facts/_global/principles.md</code> consultado nesta nota (arquivo existente no diretório, conteúdo não lido nesta sessão).</li><li><strong>Como aplicar</strong> — Via mecanismo já existente de promoção (reflection/princípios), quando o operador julgar: registrar "trace descartável, ledger por promoção explícita, prefixo imune" como princípio. Não criar artefato agora; esta nota já carrega a evidência.</li><li><strong>Prós e contras</strong> — Pró: custo zero, valida design existente com literatura externa. Contra: registrar princípio fora do mecanismo canônico de promoção viraria exatamente o auto-acúmulo que a tese condena.</li><li><strong>Veredito</strong> — Aplicar com ressalvas: o vault já opera conforme a tese; a ação cabível é promoção futura a princípio pelo canal próprio, não escrita direta.</li></ol>
+<p>---</p>
+<p>Registro do confronto: HEADs verificados em 2026-08-28, todos iguais a <code>verified-head</code> (agent-workloops <code>2f3c64c</code>, scripts <code>91acbcb6</code>, sisyphus-runtime <code>10a3a4de</code>); nenhum refresh do registry disparado.</p>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline /papers-deep · <a href="../../../2026/08/2026-08-27.html">edição de 2026-08-27</a></footer>
+</body>
+</html>
