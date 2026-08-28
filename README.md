@@ -26,6 +26,7 @@ Uma execução consome cerca de 8k tokens de entrada e 2,5k de saída.
 | `src/render_html.py` | Renderiza o HTML, no estilo de portal de notícias |
 | `src/index.py` | Gera `docs/index.html`, a capa do arquivo |
 | `src/deepdive.py` | Leitura profunda de um paper, sob demanda |
+| `src/deep_html.py` | Publica os deep dives do papers-deep em HTML e reconcilia a seção nas edições |
 | `src/paths.py` | Único lugar que conhece o layout de diretórios |
 | `bin/papers-daily.sh` | Wrapper de cron: lock, log, notificação, fail-loud |
 | `interests.md` | Perfil que decide o que é relevante. **Edite este arquivo.** |
@@ -33,12 +34,16 @@ Uma execução consome cerca de 8k tokens de entrada e 2,5k de saída.
 | `edicoes/deep/AAAA/MM/` | Deep dives do pipeline papers-deep, agrupados por edição |
 | `edicoes/repos-registry.md` | Catálogo dos repos confrontados pelo papers-deep; cada entrada carrega `last-verified` e `verified-head` |
 | `docs/` | Site publicável: `index.html` mais as edições em HTML |
+| `docs/deep/AAAA/MM/` | Deep dives publicados, derivados das notas em `edicoes/deep/` |
 | `deep/` | Leituras profundas por paper, escritas por `src/deepdive.py` |
 | `.cache/AAAA/MM/` | Veredito do modelo (ignorado pelo git) |
 
 A seção `## Deep dives` de uma edição não nasce do `journal.py`: o pipeline
-papers-deep anexa-a ao markdown depois do render. Ela existe só no markdown,
-com wikilinks do vault; o site (`docs/`) não publica deep dives.
+papers-deep anexa-a ao markdown depois do render. No site, cada deep dive vira
+uma página self-contained em `docs/deep/AAAA/MM/` e a edição ganha a mesma
+seção no fim, com links para elas. Ambos saem de `python3 src/deep_html.py`,
+que lê as notas como fonte única e é idempotente: pode ser re-rodado a
+qualquer momento para regenerar ou reconciliar.
 
 ## Uso
 
@@ -48,13 +53,16 @@ bin/papers-daily.sh 2026-08-24      # uma data específica
 python3 src/journal.py --dry-run    # imprime sem gravar nada
 python3 src/journal.py --date 2026-08-24 --render-only   # re-render sem chamar o LLM
 python3 src/deepdive.py 2608.16425  # leitura profunda de um paper
+python3 src/deep_html.py            # publica deep dives em HTML e reconcilia as edições
 python3 src/index.py                # regenera só o índice
 ```
 
 `--render-only` lê o veredito já em cache, o que permite mexer no template sem
 pagar nenhuma chamada de modelo. Cuidado: ele reescreve o markdown da edição
 inteiro a partir do cache, e seção anexada depois do render, como a
-`## Deep dives` do papers-deep, é descartada. Preserve-a antes de re-renderizar.
+`## Deep dives` do papers-deep, é descartada — no markdown e no HTML da edição.
+Preserve-a antes de re-renderizar; `python3 src/deep_html.py` restaura o HTML
+a partir das notas.
 
 ## Configuração
 

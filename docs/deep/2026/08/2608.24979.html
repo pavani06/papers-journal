@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — FrontierChallenge: Evaluating Scientific Workflow Completion</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/08/2026-08-27.html">papers.hf</a><span class="data-topo">Deep dive · quinta-feira, 27 de agosto de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/08/2026-08-27.html">&larr; Edição de 2026-08-27</a></p>
+<h1 class="manchete">FrontierChallenge: Evaluating Scientific Workflow Completion</h1>
+<p><strong>Sumário de ação</strong>: O paper quantifica em escala (970 trajetórias) algo que o ecossistema já pratica por desenho: completion declarado pelo agente não é evidência. Aplicação residual pequena em <code>agent-workloops</code> (separar progresso parcial de aceite nos relatórios de segmento/épico); <code>agent-skills</code> e <code>scripts</code> já implementam as teses centrais e não mudam.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2608.24979">abstract</a> · <a href="https://arxiv.org/html/2608.24979">HTML</a> · 138 upvotes na edição de <a href="../../../2026/08/2026-08-27.html">2026-08-27</a></p></div>
+<h2>Afirmação central</h2>
+<p>Nem score parcial alto nem linguagem confiante de conclusão na mensagem final indicam que um agente entregou o pacote completo de entregáveis exigido pelo contrato da tarefa; só um grader externo que verifica o artefato bundle decide.</p>
+<h2>Mecânica passo a passo</h2>
+<p>HTML completo disponível (v1); nota baseada no texto integral.</p>
+<ol><li><strong>Tarefa como contrato</strong>: cada tarefa é um pacote autocontido com cinco elementos alinhados: descrição do objetivo, inputs fixos, software/ambiente, output contract (lista de entregáveis: relatório, tabelas, figuras, código executável, produtos de simulação mutuamente consistentes) e procedimento de avaliação. A unidade de avaliação é o bundle submetido, não a resposta final.</li><li><strong>Curadoria</strong>: 300 workflows coletados de prática profissional real, filtrados por quatro princípios (representatividade, complexidade ponta a ponta, diversidade, verificabilidade); 97 liberadas (74 Hard, 23 Medium), 203 retidas como held-out interno.</li><li><strong>Grader por tarefa</strong>: cada tarefa carrega rubrica passo a passo e Grader executável que checa arquivos exigidos, valores numéricos, formatos, figuras, execução de código e consistência cross-artifact. Critérios semânticos delegados a um Judge (GPT-5.6 Sol, 3 passes, média).</li><li><strong>Duas métricas separadas</strong>: Pass Rate = fração de tarefas com score &gt;= 99.9 (full-completion indicator; o limiar só absorve ruído numérico da média de 3 Judges); Avg. Score = média do score parcial. Pass Rate é a métrica primária; score alto sem pass não conta como passe.</li><li><strong>Execução</strong>: 12 modelos frontier em 3 scaffolds (Codex, Claude Code, Frontier Agent); mesmos objetivos e inputs visíveis; análise de falência em três vistas: assinaturas de quebra de contrato, linguagem de completion na mensagem final, erros brutos de ferramenta.</li></ol>
+<h2>Evidência e resultados</h2>
+<ul><li><strong>Gap parcial vs completo</strong>: melhor configuração (GPT-5.6 Sol/Codex) completou 20/97 = 20.6% de Pass Rate com Avg. Score 87.9; oito configurações acima de 80 de score, nenhuma acima de 20.6% de passe.</li><li><strong>Casos extremos</strong>: analytical chemistry com Avg. Score 87.6 e Pass Rate máximo de 4%; electrochemistry/environment com 94.9 e 0%. O score parcial não prediz entrega.</li><li><strong>Estatística-chave</strong>: 75.5% das trajetórias não aprovadas do Claude Code (641 de 849) terminaram com linguagem léxica de conclusão; só 1.5% indicavam trabalho em andamento. Completion language apareceu até em 90.1% das runs aprovadas, ou seja, é um sinal sem valor discriminante.</li><li><strong>Erro não é preditor</strong>: ao menos um tool error em 80.7% das runs reprovadas e 94.2% das aprovadas; erro isolado não identifica breach.</li><li><strong>Domínios</strong>: quantum chemistry e molecular dynamics têm os melhores Pass Rates (60% e 38%); materials characterization (score 88.1, passe &lt;= 9%) mostra o gap. Perfis por domínio divergem do ranking agregado.</li><li><strong>Custo</strong>: uso reportado de 2.2M a 13.7M tokens de input por tarefa; tempo médio de 21.8 a 112.8 minutos com caudas longas (p90 de até 272 min).</li></ul>
+<h2>Limitações e riscos</h2>
+<ul><li>Declaradas: resultados restritos ao set liberado, às configurações avaliadas, ao escopo de trajetórias do Claude Code (schema comum de eventos), contabilidade de tokens por provedor (tokenizer/caching não comparáveis) e single runs (sem variância entre repetições).</li><li>Os seis domínios são fatias descritivas, não amostras probabilísticas; diferenças inter-domínio não ranqueiam dificuldade intrínseca das disciplinas.</li><li>Suspeitado pela leitura: Judge é GPT-5.6 Sol, que também é modelo avaliado (auto-julgamento no critério semântico); a média de 3 passes mitiga mas não elimina viés. O limiar 99.9 é sensível a rubricas onde o próprio Judge é fonte de variância.</li><li>Held-out de 203 tarefas não auditável externamente; a alegação de generalização do pool descansa na confiança no time.</li></ul>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Completion é estado computado, não declarado</strong>: final message é fonte ruim de verdade operacional; aceite final deve vir de um checklist externo de entregáveis (grader executável contra o output contract), nunca da autodeclaração do agente.</li><li><strong>Score parcial e aceite final são métricas separadas</strong>: uma pode subir (87.9) enquanto a outra fica perto de zero (0-4%); reportar progresso parcial sem o corte binário de pacote completo induz leitura otimista errada.</li><li><strong>O contrato de entregáveis é por tarefa e explícito</strong>: o bundle completo (código + tabelas + figuras + relatório mutuamente consistentes) é a unidade de aceite; subitens verdes não somam para passe sem o pacote inteiro.</li><li><strong>Presença de erro não é sinal de falha</strong> (94.2% das trajetórias aprovadas tiveram tool error): gates devem avaliar estado final verificável, não ruído intermediário da trajetória.</li><li><strong>Diagnóstico de falência por assinatura de breach</strong>, não por agregado: onde o contrato quebrou (artefato faltante vs diagnóstico determinístico) varia por tipo de tarefa e orienta onde reforçar o gate.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar. O paper não traz técnica nova de scaffolding; traz validação empírica quantitativa, em escala que nenhum caso interno alcança (12 modelos, 3 scaffolds, 97 tarefas, 970 trajetórias), de um princípio que este ecossistema adota por desenho: evidência endereçada sobre asserção. O número 75.5% é o argumento de fecho contra qualquer gate de conclusão baseado no relato do próprio agente. Seguir o benchmark em si não interessa; usar os números como calibração para os nossos gates, sim.</p>
+<h2>Confronto com repos</h2>
+<p>Frescor checado em 2026-08-28: os três repos com HEAD idêntico ao <code>verified-head</code> do registro e <code>last-verified</code> de hoje; nenhum refresh disparado, nenhuma entrada do registro alterada.</p>
+<h3>agent-workloops</h3>
+<ol><li><strong>Teses aplicáveis</strong> — A tese 1 (completion computado) já é espinha dorsal: o ciclo exige "suite verde, golden verde, CI verde. Sem isso não há PR" (<code>playbooks/workloop.md:108</code>); o artefato fora do repo explicitamente nega conclusão solo do agente, "não existe como o agente 'concluir' sozinho" (<code>playbooks/workloop.md:296-297</code>); o épico "só fecha com todas as caixas marcadas E nenhuma issue da faixa aberta. Se alguma ficou aberta na hora do fechamento, a execução para e reporta" (<code>templates/epico.md:49-50</code>); e "Fechamento de fase com pendências" é falha catalogada com prevenção por checklist (<code>playbooks/workloop.md:312</code>). A tese 2 (score parcial separado) é a que toca incompleto: o relatório por issue do lote registra MERGED, PR, checks exit 0, rodadas de review (<code>templates/runbook-loop.md:96-97</code>) e o de segmento adiciona fronteira resultante e sinais (<code>templates/runbook-loop.md:99-100</code>); as paradas obrigam a registrar "o que parou, por quê, o que falta" (<code>playbooks/workloop.md:144-145</code>). Existe registro de estado parcial, mas não existe convenção que proíba ler progresso parcial como quase-conclusão.</li><li><strong>Oportunidade de melhoria</strong> — Uma linha no playbook (seção 3.4 ou no §8 do template de runbook) fixando a distinção: relatório de segmento nunca apresenta contagem de subitens verdes como proximidade de fechamento; a estatística do paper (Avg. Score 87.6 com Pass Rate 4% em analytical chemistry) é a justificativa: a primeira métrica pode subir indefinidamente enquanto a segunda permanece zero.</li><li><strong>Como aplicar</strong> — Reforço editorial: 2 a 3 linhas no <code>playbooks/workloop.md</code> (seção 3.4, Evidência endereçada, que já diz "'Passou' sem endereço não é evidência, é asserção" em <code>playbooks/workloop.md:228</code>) e eco no §8 de <code>templates/runbook-loop.md</code>. Sem mudança estrutural, sem novo artefato.</li><li><strong>Prós e contras</strong> — Pró: fecha a lacuna entre "registrou estado parcial" e "não confunda parcial com quase-fechado", com custo de redação mínimo. Contra: risco de inflar um playbook que se orgulha de enxuteza; a regra nova precisa não duplicar o que o checklist de fechamento já força.</li><li><strong>Veredito</strong> — Aplicar com ressalvas: mudança editorial pequena, sem urgência; o desenho atual já cobre o essencial pela via do checklist binário de fechamento.</li></ol>
+<h3>agent-skills</h3>
+<ol><li><strong>Teses aplicáveis</strong> — A tese 1 já está implementada de ponta a ponta no ciclo de issues: <code>issue-review</code> roda validação real no worktree ("If a validation step fails, stop", <code>skills/issue-review/SKILL.md:118</code>) e captura o output do CI verbatim como evidência exigida pelo finish ("This is the CI evidence <code>issue-finish</code> requires", <code>skills/issue-review/SKILL.md:163</code>), com proibição de apresentar merge com checks vermelhos (<code>skills/issue-review/SKILL.md:272</code>); <code>issue-finish</code> confirma que o PR "actually landed" antes de fechar a issue ("the issue close and worktree/branch cleanup must wait for the real merge", <code>skills/issue-finish/SKILL.md:144</code>), não confia em <code>Closes #N</code> ("Do not assume <code>Closes #N</code> in the PR body closed the issue... Check the real state", <code>skills/issue-finish/SKILL.md:148-159</code>) e reporta só o que completou de verdade ("Report only what actually completed. If cleanup was partial, report the remaining manual steps instead of marking them done", <code>skills/issue-finish/SKILL.md:218</code>). A tese 2 também tem análogo: <code>uncertainty_score</code> e <code>concerns[]</code> são logados e explicitamente não-bloqueantes ("O fluxo nunca bloqueia por <code>uncertainty_score</code> alto ou <code>concerns</code>", <code>skills/issue-executor-master/SKILL.md:197-198</code>), ou seja, score informativo separado do gate binário, exatamente a separação Avg. Score/Pass Rate.</li><li><strong>Oportunidade de melhoria</strong> — Nenhuma estrutural. O ponto mais próximo de um gap é filosófico: o anti-padrão 3 proíbe checklist fixo de validação porque "a fonte da verdade é o brief aprovado a partir da issue" (<code>skills/issue-executor-master/SKILL.md:237</code>); o paper mostraria que, dentro do brief aprovado, os critérios de aceite convêm ser rubrica passo a passo verificável (output contract), não prosa. Mas isso já é a prática do <code>artifact-evidence-review</code> na Fase 4 (<code>skills/issue-executor-master/SKILL.md:161</code>).</li><li><strong>Como aplicar</strong> — Nada a aplicar; registrar este paper como evidência externa que valida o desenho das verificações de estado real (MERGED, CLOSED, checks) sobre declaração.</li><li><strong>Prós e contras</strong> — Qualquer mudança aqui seria refactor sem ganho: as verificações de estado real do issue-finish são o caso-limite da tese 1 (nem a mensagem de sucesso do próprio gh é aceita sem re-checar o estado).</li><li><strong>Veredito</strong> — Não aplicar: teses 1 e 2 já implementadas; o custo de tocar supera o benefício zero.</li></ol>
+<h3>scripts</h3>
+<ol><li><strong>Teses aplicáveis</strong> — O <code>dispatch/preflight.sh</code> é literalmente um grader executável no sentido do paper: cada linha EXPECT compara literal esperado contra observado e computa FAIL por divergência (<code>scripts/dispatch/preflight.sh:160-172</code>), EXPECT_EMPTY falha em saída não-vazia (<code>scripts/dispatch/preflight.sh:174-181</code>), o veredito final é binário com contagem de divergências acumulada por subitem (<code>fails</code>, <code>scripts/dispatch/preflight.sh:196-201</code>), e o verbo PIN verifica proveniência computando md5 do arquivo contra o spec, com exit 4 em divergência antes de qualquer execução (<code>scripts/dispatch/preflight.sh:78-96</code>). A gramática é validada fail-closed antes de executar qualquer coisa (<code>scripts/dispatch/preflight.sh:41-69</code>). Isso cobre a tese 1 (veredito computado) e a tese 2 (contagem parcial visível junto do corte binário).</li><li><strong>Oportunidade de melhoria</strong> — Nenhuma de estrutura. O formato de saída já imprime PASS/FAIL por linha e o total de divergências no veredito, o que é o análogo funcional de Avg. Score + Pass Rate na escala de um spec.</li><li><strong>Como aplicar</strong> — Nada.</li><li><strong>Prós e contras</strong> — Adicionar qualquer camada de score ao preflight seria complexidade especulativa contra a regra de simplicidade radical; o artefato tem side-effects declarados zero (<code>scripts/dispatch/preflight.sh:9</code>) e convém manter.</li><li><strong>Veredito</strong> — Não aplicar: o preflight já é a encarnação local da tese central do paper; o benchmark apenas confirma o desenho.</li></ol>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/08/2026-08-27.html">edição de 2026-08-27</a></footer>
+</body>
+</html>
