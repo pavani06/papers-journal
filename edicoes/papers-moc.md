@@ -73,6 +73,15 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-12|2026-08
 - [[papers/deep/2026/08/2608.07645|Mendel Gödel Machine: Recursive Self-Improving Coding Agents via Comparative Evolution]]
 - [[papers/deep/2026/08/2608.10299|Co-Evolution in Agentic Systems: Toward Self-Directed Evolution Beyond Human Design]]
 
+Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-13|2026-08-13]]:
+
+- [[papers/deep/2026/08/2608.11924|Spark-to-Paper: End-to-End Research Paper Generation as a Composable Skill]]
+- [[papers/deep/2026/08/2608.00677|OpenART: Scaling Agent Red Teaming via Open-Ended Environment Evolution]]
+- [[papers/deep/2026/08/2608.12307|AI4AI at Test-Time: Strong-to-Weak Capability Transfer via Harnesses]]
+- [[papers/deep/2026/08/2608.08160|Can LLM Agents Stick to the Script? A Benchmark for Long-Horizon Consistency in Interactive Narratives]]
+- [[papers/deep/2026/08/2608.06270|The Illusion of Visual Tool-Use: A Causal Audit of Thinking with Images]]
+- [[papers/deep/2026/08/2608.10450|Persistent Recursive Worlds Enable Autonomous Software Evolution]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -91,4 +100,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | 2026-08-28 | [[papers/2026/08/2026-08-10|2026-08-10]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-11|2026-08-11]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado e `koda-desafio` com refresh profundo (rubrica, guard e mascarar) |
 | 2026-08-28 | [[papers/2026/08/2026-08-12|2026-08-12]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
+| 2026-08-28 | [[papers/2026/08/2026-08-13|2026-08-13]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
