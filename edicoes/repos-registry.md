@@ -26,7 +26,7 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 - propósito: jornal diário dos Daily Papers do Hugging Face; busca, triagem por LLM contra `interests.md`, edição em markdown + HTML via cron.
 - arquitetura: Python stdlib + OpenAI API; `src/journal.py` (busca/triagem/edição), `src/render_html.py` (portal), `src/index.py` (capa do arquivo), `src/deepdive.py` (leitura profunda sob demanda), `src/deep_html.py` (publica as notas do papers-deep em `docs/deep/AAAA/MM/` e reconcilia a seção `## Deep dives` no HTML das edições, com o card de cada nota exibindo o seu "Sumário de ação"; idempotente), `src/paths.py` (único lugar que conhece o layout, com override por `PAPERS_HOME`/`PAPERS_DATA_DIR`), `bin/papers-daily.sh` (wrapper de cron com flock/log/notificação/fail-loud, guard de idempotência por existência de arquivo); edições em `edicoes/AAAA/MM/`, notas deep em `edicoes/deep/AAAA/MM/`, site em `docs/` e `docs/deep/AAAA/MM/`, cache de veredito em `.cache/`. Sem suite de testes e sem CI. `src/deepdive.py` grava em `deep/` na raiz (`deep/2608.16425.md`), caminho que o conversor não varre (`src/paths.py`: `deep_notas()` só lê `edicoes/deep/`), então sua saída nunca é publicada.
 - last-verified: 2026-08-28
-- verified-head: 407c6735a70de987c79a1661027bb558335c501b
+- verified-head: d72fb24fd6d827c011ea48526098dd0fbc1f66f1
 
 ## agent-workloops
 
@@ -40,9 +40,9 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 
 - path: `/home/pavanpavan/koda-desafio`
 - propósito: produzir o processo seletivo do épico #1 (Desafio KODA Re-engajamento); o repo gera a rubrica, não o sistema — construir o sistema aqui contamina o teste.
-- arquitetura: `AGENTS.md` com regras anti-contaminação, `decisoes/`, `docs/`; repositório de especificação e avaliação.
+- arquitetura: `AGENTS.md` com regras anti-contaminação, `decisoes/`, `docs/`; deixou de ser só especificação — ganhou `rubrica/` (rubrica fechada), `guard/` (scripts de auditoria com fixtures positivas e negativas) e `tools/mascarar.py` com suíte própria.
 - last-verified: 2026-08-28
-- verified-head: 1e534d9a4b45a654c01795fd8287deac040e90d3
+- verified-head: e8464a23ae0b6bbc48f0eba8fc8d7148185714d1
 
 ## hop-ecosystem-atlas
 

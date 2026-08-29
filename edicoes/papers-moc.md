@@ -55,6 +55,15 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-10|2026-08
 - [[papers/deep/2026/08/2608.05703|StreamArena: Toward Continuous, Interactive, and Long-Horizon Agentic Streaming Video Understanding]]
 - [[papers/deep/2026/08/2608.05219|When Privileged Guidance Misaligns: State-Matched Routing and Contextualized Self-Distillation for Multi-Turn Agents]]
 
+Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-11|2026-08-11]]:
+
+- [[papers/deep/2026/08/2608.09819|Macaron-V1: Towards Open Continual Learning with Self-Improvement and Mixture-of-LoRA]]
+- [[papers/deep/2026/08/2608.09802|SWE-Bench ProMax: Benchmarking Agents on Large-Scale Multilingual Code Refactoring]]
+- [[papers/deep/2026/08/2608.09867|Stealing Reasoning Traces from Proprietary LLM APIs]]
+- [[papers/deep/2026/08/2608.08311|Ouroboros: A Self-Developing Frontier Coding Agent with Reviewed Core Evolution]]
+- [[papers/deep/2026/08/2608.07169|Agent Memory Distillation: Empowering Small LLM Agents with Hierarchical Teacher Memory]]
+- [[papers/deep/2026/08/2608.08722|Gaming Without an Attacker: Benchmark Fingerprinting in LLM-Driven Search Under Selection Pressure]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -71,4 +80,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | 2026-08-28 | [[papers/2026/08/2026-08-06|2026-08-06]] | 6 (todos os destaques) | Sim — refresh profundo de `papers-journal`, `llm-council` e `agent-skills`; demais entradas frescas ou sem scan reportado |
 | 2026-08-28 | [[papers/2026/08/2026-08-07|2026-08-07]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline mais o commit do operador em `src/deep_html.py`); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-10|2026-08-10]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
+| 2026-08-28 | [[papers/2026/08/2026-08-11|2026-08-11]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado e `koda-desafio` com refresh profundo (rubrica, guard e mascarar) |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
