@@ -37,6 +37,15 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-06|2026-08
 - [[papers/deep/2026/08/2607.28048|SKILL-KD: Contrastive Skill Distillation for LLM Agents]]
 - [[papers/deep/2026/08/2608.03836|Resume Means Resume: A Machine-Checked Conformance Contract for Checkpoint, Interrupt, and Resume Semantics in Workflow Persistence Layers]]
 
+Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-07|2026-08-07]]:
+
+- [[papers/deep/2026/08/2607.28609|OSReward: Instituting Standardized Evaluation for Cross-Platform Computer-Use Reward Models]]
+- [[papers/deep/2026/08/2608.06301|HarnessOpt-Bench: Evaluating LLMs at Harness Optimization]]
+- [[papers/deep/2026/08/2608.05784|Activity Frames: Deterministic Screen-Activity Compilation for Agent Memory and Replay]]
+- [[papers/deep/2026/08/2608.03451|DataSpace: Benchmarking Data Agents for Verifiable Analytics over Heterogeneous Workspaces]]
+- [[papers/deep/2026/08/2608.06352|CalibForge: Adversarial Solver Calibration for Scaling Learnable Terminal Tasks]]
+- [[papers/deep/2026/08/2608.05987|AgentOPSD: Recursive Self-Distillation for Agentic Reinforcement Learning]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -51,4 +60,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | Data | Edição | Notas criadas | Registro atualizado? |
 |---|---|---|---|
 | 2026-08-28 | [[papers/2026/08/2026-08-06|2026-08-06]] | 6 (todos os destaques) | Sim — refresh profundo de `papers-journal`, `llm-council` e `agent-skills`; demais entradas frescas ou sem scan reportado |
+| 2026-08-28 | [[papers/2026/08/2026-08-07|2026-08-07]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline mais o commit do operador em `src/deep_html.py`); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
