@@ -35,6 +35,7 @@ _ITALIC = re.compile(r"(?<!\*)\*([^*\n]+)\*(?!\*)")
 _CODE = re.compile(r"`([^`]+)`")
 _DATA = re.compile(r"\d{4}-\d{2}-\d{2}")
 _ITEM = re.compile(r"^(?:\d+\.|-) ")
+_SUMARIO = re.compile(r"\*\*Sumário de ação\*\*:\s*(.+?)(?=\n\n|\Z)", re.DOTALL)
 
 Bloco = tuple[str, "str | list[str] | tuple[bool, list[str]]"]
 
@@ -227,14 +228,13 @@ def _pagina_deep(meta: dict, corpo: str, date: str, edicao_rel: str) -> str:
     )
 
 
-def _secao_edicao(refs: list[tuple[str, str]], date: str) -> str:
+def _secao_edicao(refs: list[tuple[str, str, str]], date: str) -> str:
     itens = "".join(
         f'<article class="card"><a class="titulo" '
         f'href="../../deep/{date[:4]}/{date[5:7]}/{_E(paper_id)}.html">{_E(titulo)}</a>'
-        f'<div class="chamada"><p>Deep dive do pipeline papers-deep: destilação '
-        f"do paper com confronto contra o estado atual dos nossos repos.</p>"
-        f"</div></article>"
-        for paper_id, titulo in refs
+        f'<div class="chamada"><p>{_inline(sumario)}</p></div>'
+        f"</article>"
+        for paper_id, titulo, sumario in refs
     )
     return (
         f'{MARCA}<div class="faixa"></div><div class="wrap sec-vermelho">'
@@ -262,7 +262,7 @@ def _reconcilia_edicao(texto: str, secao: str | None) -> str:
 
 def main() -> int:
     notas = paths.deep_notas()
-    por_edicao: dict[str, list[tuple[str, str]]] = {}
+    por_edicao: dict[str, list[tuple[str, str, str]]] = {}
     for nota in notas:
         meta, corpo = _parse_frontmatter(nota.read_text(encoding="utf-8"))
         date = str(meta.get("date") or "")
@@ -270,12 +270,19 @@ def main() -> int:
             raise SystemExit(f"{nota}: frontmatter 'date' ausente ou invalido")
         paper_id = str(meta.get("arxiv") or nota.stem)
         titulo = str(meta.get("title") or paper_id)
+        sumario = _SUMARIO.search(corpo)
+        chamada = (
+            sumario.group(1).strip().replace("\n", " ")
+            if sumario
+            else "Deep dive do pipeline papers-deep: destilação do paper "
+            "com confronto contra o estado atual dos nossos repos."
+        )
         edicao_rel = f"../../../{date[:4]}/{date[5:7]}/{date}.html"
         pagina = _pagina_deep(meta, _render_corpo(_blocos(corpo)), date, edicao_rel)
         destino = paths.deep_html(paper_id, date)
         paths.ensure_parent(destino)
         destino.write_text(pagina, encoding="utf-8")
-        por_edicao.setdefault(date, []).append((paper_id, titulo))
+        por_edicao.setdefault(date, []).append((paper_id, titulo, chamada))
 
     for date, refs in sorted(por_edicao.items()):
         edicao = paths.edicao_html(date)
