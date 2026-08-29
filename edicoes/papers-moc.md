@@ -152,6 +152,15 @@ Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-25|2026-08
 - [[papers/deep/2026/08/2608.23200|LongWoF-Bench: Evaluating EvoMap Genes for Verifiable Long-Workflow Tasks]]
 - [[papers/deep/2026/08/2608.22510|ClawProBench: Trace-Aware Evaluation of AI Agents with Runtime Coverage and Frozen Workplace-Style Holdouts]]
 
+Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-26|2026-08-26]]:
+
+- [[papers/deep/2026/08/2608.23041|AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces]]
+- [[papers/deep/2026/08/2608.24569|When "Must" Becomes "Maybe": Constraint Weakening in LLM Agent Workflows]]
+- [[papers/deep/2026/08/2608.23670|Automata from Agent Traces: Failure and Next-Step Prediction]]
+- [[papers/deep/2026/08/2608.23740|AgentRoom: Concurrent Multi-Agent Coding in a CRDT-Backed Shared Workspace]]
+- [[papers/deep/2026/08/2608.21500|SecOPD: Mitigating Adaptive Prompt Injections by On-Policy Distillation]]
+- [[papers/deep/2026/08/2608.24189|MemUse: Moving Memory Evaluation from Direct QA to Natural Integration in Long-Term Human-AI Conversation]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -179,4 +188,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | 2026-08-29 | [[papers/2026/08/2026-08-21|2026-08-21]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (inclui o commit do cron da edição de 28/08) e resumo acrescido do convite ao `deepdive.py`; `sisyphus-runtime` com árvore suja, reportado sem escrita |
 | 2026-08-29 | [[papers/2026/08/2026-08-24|2026-08-24]] | 5 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-25|2026-08-25]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
+| 2026-08-29 | [[papers/2026/08/2026-08-26|2026-08-26]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado; resumo acrescido do escape de título no conversor e do rebobinar do log em `papers-daily.sh` |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
