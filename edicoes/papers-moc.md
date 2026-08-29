@@ -46,6 +46,15 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-07|2026-08
 - [[papers/deep/2026/08/2608.06352|CalibForge: Adversarial Solver Calibration for Scaling Learnable Terminal Tasks]]
 - [[papers/deep/2026/08/2608.05987|AgentOPSD: Recursive Self-Distillation for Agentic Reinforcement Learning]]
 
+Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-10|2026-08-10]]:
+
+- [[papers/deep/2026/08/2608.06113|DCAS: Decoupling CLI Agent Scaffolding to Internalize Planning across Scaffolds]]
+- [[papers/deep/2026/08/2608.04569|Relevant but Incomplete: Referential Dangling as a Paradigm-Level Failure Mode in Hard Prompt Compression]]
+- [[papers/deep/2026/08/2606.00152|PrivacyPeek: Auditing What LLM-Based Agents Acquire, Not Just What They Say]]
+- [[papers/deep/2026/08/2608.06714|The Optimizer Is the Agent: Reasoning-Driven Search across Prompts, Programs, and ML Workflows]]
+- [[papers/deep/2026/08/2608.05703|StreamArena: Toward Continuous, Interactive, and Long-Horizon Agentic Streaming Video Understanding]]
+- [[papers/deep/2026/08/2608.05219|When Privileged Guidance Misaligns: State-Matched Routing and Contextualized Self-Distillation for Multi-Turn Agents]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -61,4 +70,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 |---|---|---|---|
 | 2026-08-28 | [[papers/2026/08/2026-08-06|2026-08-06]] | 6 (todos os destaques) | Sim — refresh profundo de `papers-journal`, `llm-council` e `agent-skills`; demais entradas frescas ou sem scan reportado |
 | 2026-08-28 | [[papers/2026/08/2026-08-07|2026-08-07]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline mais o commit do operador em `src/deep_html.py`); demais entradas frescas |
+| 2026-08-28 | [[papers/2026/08/2026-08-10|2026-08-10]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
