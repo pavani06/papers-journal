@@ -126,6 +126,15 @@ Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-20|2026-08
 - [[papers/deep/2026/08/2608.19197|SPADE: Self-Play in Adaptive Synthetic Executable Environments]]
 - [[papers/deep/2026/08/2608.13558|OmniScientist: An Omni-Modal Omni-Discipline AI Scientist]]
 
+Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-21|2026-08-21]]:
+
+- [[papers/deep/2026/08/2608.19880|EnvHarness: Awakening Static Worlds for Agent Learning]]
+- [[papers/deep/2026/08/2608.18580|FACET: Preserving Source Intent and Executable State in Terminal Task Synthesis]]
+- [[papers/deep/2026/08/2608.19799|SWE-bench Science: Can Coding Agents Resolve Engineering Tasks in Science?]]
+- [[papers/deep/2026/08/2608.20202|MemTrapBench: Benchmarking Cognitive Traps in LLM Memory Use]]
+- [[papers/deep/2026/08/2608.19861|PolicyGuide: From Guarding One Action to Guiding the Whole Workflow for Policy-Compliant LLM Agents]]
+- [[papers/deep/2026/08/2608.13547|QuoteBench: How Matched Scores Can Hide Command-Path Failures]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -150,4 +159,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | 2026-08-29 | [[papers/2026/08/2026-08-18|2026-08-18]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (escrita não atômica e ausência de `max_tokens` acrescentadas ao resumo); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-19|2026-08-19]] | 6 (todos os destaques; um sem confronto aplicável) | Sim — `papers-journal` com refresh profundo (`href` sem allowlist de esquema no conversor); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-20|2026-08-20]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (fronteira do prompt do deepdive e `--render-only` inalcançável); demais entradas frescas |
+| 2026-08-29 | [[papers/2026/08/2026-08-21|2026-08-21]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (inclui o commit do cron da edição de 28/08) e resumo acrescido do convite ao `deepdive.py`; `sisyphus-runtime` com árvore suja, reportado sem escrita |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
