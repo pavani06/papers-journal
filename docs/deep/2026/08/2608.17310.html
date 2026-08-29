@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — Agentic ESOpt: Fine-Tuning Long-Horizon LLM Agents with Minimal GPU Requirements</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/08/2026-08-19.html">papers.hf</a><span class="data-topo">Deep dive · quarta-feira, 19 de agosto de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/08/2026-08-19.html">&larr; Edição de 2026-08-19</a></p>
+<h1 class="manchete">Agentic ESOpt: Fine-Tuning Long-Horizon LLM Agents with Minimal GPU Requirements</h1>
+<p><strong>Sumário de ação</strong>: Não aplicar. O método exige acesso aos pesos e um cluster de H100 para amostrar população de perturbações — o ecossistema do operador consome modelo só por HTTP (<code>papers-journal/src/journal.py:243</code>, <code>llm-council/council/providers.py:151</code>), e nenhum repo tem loop de busca onde a mecânica morda. O que fica é munição conceitual: atribuição no nível da trajetória bate policy-gradient quando o horizonte cresce, e o ganho depende de manter ruído residual em vez de convergir a zero.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2608.17310">abstract</a> · <a href="https://arxiv.org/html/2608.17310">HTML</a> · 105 upvotes na edição de <a href="../../../2026/08/2026-08-19.html">2026-08-19</a></p></div>
+<h2>Afirmação central</h2>
+<p>Para agentes de horizonte longo, evolution strategies são preferíveis a RL agentic porque atribuem o retorno terminal a uma variação coerente de política inteira, sem precisar decompor recompensa passo a passo, e o fazem com memória de GPU de inferência.</p>
+<h2>Mecânica passo a passo</h2>
+<p>O Agentic ESOpt substitui o backward pass por amostragem de ruído no espaço de parâmetros. A cada iteração <code>t</code>:</p>
+<ol><li><strong>Amostragem da população.</strong> Sorteia <code>G</code> perturbações gaussianas <code>ε_i</code> em torno dos parâmetros correntes <code>θ_t</code>, formando <code>G</code> variantes <code>θ_t + σ_t ε_i</code>. <code>G</code> é pequeno e depende da tarefa: 32 em Sudoku, 16 em Math/DocVQA, 8 em WebArena.</li><li><strong>Rollout agentic.</strong> Cada variante roda o agente inteiro no ambiente e recebe <strong>uma</strong> recompensa escalar terminal <code>R_i</code> pela trajetória completa. Não existe crítico, não existe vantagem por turno, não existe log-prob acumulado.</li><li><strong>Update ponderado por recompensa.</strong> Normaliza <code>R</code> por z-score dentro da população e soma:</li></ol>
+<p><code>θ_{t+1} = θ_t + (α/G) Σ_i R̂_i · ε_i</code>, com <code>R̂_i = (R_i − μ_R)/(s_R + ε)</code></p>
+<p>Isso é o estimador ES de <code>∇_θ J_σ(θ,c) = (1/σ) E_ε[J(θ+σε,c)·ε]</code> (Eq. 4 do paper), o gradiente do objetivo suavizado por gaussiana, não do objetivo original.</p>
+<ol><li><strong>Truque de memória.</strong> Nenhuma cópia dos <code>G</code> conjuntos de pesos é materializada: o paper guarda <strong>só a seed do ruído</strong> de cada perturbação e aplica adição/subtração in-place sobre o modelo único em memória. É o que faz o custo cair de 58,88 GB (GRPO) para 8,41 GB (ESOpt) no Qwen3.5-4B — pico de inferência, não de treino.</li><li><strong>Decaimento cosseno de σ.</strong> O raio da perturbação segue <code>σ_t = σ_T + (σ_0 − σ_T)·[1+cos(πt/T)]/2</code>. Em treino <code>σ_T</code> fica <strong>acima de zero</strong> de propósito (exploração + regularização); em test-time o schedule decai a zero para eliminar o viés do objetivo suavizado. Valores em Sudoku: <code>σ_0 = 0.1</code>, <code>σ_T = 0.01</code>.</li><li><strong>Coevolução parâmetro–contexto.</strong> Como o update é black-box (só precisa de <code>R</code>), ele compõe com uma regra externa de busca no espaço de prompt, alternando <code>θ_{t+1} = U_ES(θ_t; c_t, D_t)</code> e <code>c_{t+1} = U_c(c_t; D_t)</code> sobre as mesmas trajetórias <code>D_t</code>. Duas instanciações: <strong>Trace2Skill</strong> (destila skills das trajetórias de treino, compartilhando o update de parâmetro sem etapa ES condicionada a skill) e <strong>EoH</strong> para desenho automático de heurística, onde o ESOpt preserva os operadores originais e <strong>acopla o update de parâmetro apenas aos operadores de mutação <code>m1</code> e <code>m2</code></strong>.</li></ol>
+<p>O argumento formal é o Lema 1: com <code>J</code> suficientemente suave, <code>J_σ(θ,c) = J(θ,c) + (σ²/2)·Tr(∇²J) + O(σ⁴)</code> — o termo do traço penaliza ótimos afiados, ou seja, σ não é só exploração, é regularizador explícito.</p>
+<h2>Evidência e resultados</h2>
+<p>O teste que sustenta a tese é a <strong>inversão de ordem por horizonte</strong> no Sudoku multi-turno (Qwen3.5-4B, 4×H100):</p>
+<p>| <code>H*</code> | melhor RL | ESOpt | leitura | | --- | --- | --- | --- | | 5 | PPO 90,63 | 89,58 ± 2,95 | RL ganha, empate técnico | | 10 | GRPO-B 67,71 ± 1,47 | 62,50 ± 2,55 | RL ainda ganha | | 15 | GRPO-B 40,63 ± 2,55 | <strong>53,13 ± 2,55</strong> | ESOpt vira +12,5pp; PPO colapsa a 0% |</p>
+<p>Custo no mesmo <code>H*=15</code>: GRPO 19,0 h / 10,9 EFLOPs contra ESOpt 9,4 h / 9,4 EFLOPs, com 8,41 GB contra 58,88 GB de memória. O ponto não é só a vitória: é que a vitória só aparece quando o horizonte cresce, que é exatamente o que a análise de variância prevê — a variância do gradiente de policy-gradient escala com <code>H</code> porque o mesmo escalar tem de distinguir entre <code>H</code> passos, enquanto a variância do estimador ES não soma sobre o horizonte.</p>
+<p>Nos outros eixos:</p>
+<ul><li><strong>Math/DocVQA</strong> (Qwen3.5-4B, até 50 turnos): DAPO 63,0 → 76,8; AIME 2026 55,8 → 70,8; DocVQA 40,3 → 52,5. Agentic GRPO no meio (68,8 / 58,3 / 48,0). Ganhos de dois dígitos sobre o baseline.</li><li><strong>WebArena-Lite</strong> (Qwen3.5-27B, 165 tarefas): No Skill 29,47 → 36,16 (+6,69), o número do abstract. Com Trace2Skill, 33,94 → 36,36 (+2,42).</li><li><strong>Heuristic design</strong> (LLaMA-3.1-8B, EoH, T=1000 avaliações): melhora <strong>28 de 36</strong> comparações método–orçamento em 12 conjuntos de teste. Mas as margens são finas — TSP N=20 vai de 4,2481 para 4,2170 contra ótimo 3,8199.</li></ul>
+<p>Ablações relevantes (<code>H*=15</code>): ES vanilla com σ fixo dá 42,71 ± 3,90; <strong>sem <code>σ_T</code> residual (σ decaindo a zero) despenca para 28,13 ± 2,55</strong>; com o decaimento cosseno completo, 53,13. O regularizador é responsável por quase metade do resultado.</p>
+<h2>Limitações e riscos</h2>
+<p>Declaradas pelo paper: novos hiperparâmetros (<code>σ_0</code>, <code>σ_T</code>, <code>G</code>); custo em cenários de avaliação cara (AHD exige muitos forward passes por geração); aprendizado contínuo em aberto.</p>
+<p>Suspeitas pela leitura, que pesam mais:</p>
+<ul><li><strong>Populações minúsculas.</strong> <code>G=8</code> em WebArena e <code>G=32</code> em Sudoku são amostras ridículas para estimar direção em espaço de bilhões de parâmetros. O método provavelmente não está fazendo descida de gradiente — está fazendo busca local muito restrita perto de um backbone já competente.</li><li><strong>A própria Figura 4 confirma isso e enfraquece a generalidade.</strong> Subir <code>G</code> de 8 para 16 leva o modelo 4B de 5,10% para 35,42% (+595%), mas o 9B ganha só 24,1%. O paper interpreta como "backbone melhor ⇒ vizinhança mais competente"; a leitura inversa é que o ganho depende criticamente de um <code>G</code> bem casado com o modelo, e não há lei de escala oferecida.</li><li><strong>Comparação de custo escolhe o eixo favorável.</strong> Memória e wall-clock caem, mas o número de rollouts de ambiente sobe: cada passo de update custa <code>G</code> execuções completas do agente. Onde o gargalo é o ambiente (web real, ferramenta lenta, API paga), o "minimal GPU" desloca o custo, não o elimina.</li><li><strong>Ganho absoluto modesto onde mais importa.</strong> O headline de WebArena-Lite é +6,69pp partindo de 29,47% — em Map o método vai de 8,33 para 14,29, e em Reddit <strong>piora</strong> (50,79 → 49,21). São 165 tarefas, sem intervalo de confiança por domínio.</li><li><strong>Ordem invertida só foi demonstrada em Sudoku sintético</strong>, onde o horizonte é controlável por construção. A extrapolação para horizonte longo real é analógica.</li></ul>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Atribuição no nível da trajetória escapa do credit assignment fino.</strong> Quando o sinal disponível é um escalar terminal e o processo tem muitos passos, pedir que esse escalar discrimine <em>qual</em> passo foi bom é o que estoura variância. Avaliar a variante inteira contra o resultado inteiro é uma alternativa legítima, não um atalho preguiçoso.</li><li><strong>Interface black-box é o que compra composabilidade.</strong> O único motivo de o ESOpt poder coevoluir com busca em espaço de prompt é que ele exige apenas <code>R</code>. Qualquer otimizador que precise de estrutura interna (log-probs, gradientes, decomposição por passo) perde essa propriedade — vale como critério de projeto para qualquer laço de melhoria automática.</li><li><strong>Convergir o ruído a zero é pior que manter ruído residual.</strong> A ablação <code>σ_T → 0</code> (28,13 contra 53,13) diz que o ótimo do treino não é o ótimo do objetivo; o Lema 1 explica por quê (o termo <code>(σ²/2)Tr(∇²J)</code> penaliza ótimo afiado). Regra geral: em busca sob avaliação ruidosa, endurecer o critério até o fim overfita ao conjunto de avaliação.</li><li><strong>A pressão conceitual vale mais que o método.</strong> A tese útil é negativa: não é verdade que todo self-improvement agentic tenha de virar policy-gradient com crítico e vantagem por turno. Existe uma família inteira de otimizadores que só precisa saber pontuar o resultado final — e ela ganha justamente onde o horizonte é longo.</li><li><strong>Vantagem condicionada ao regime, não absoluta.</strong> Em <code>H*=5</code> o RL ganha; a inversão só aparece em <code>H*=15</code>. Toda alegação de superioridade do paper é uma alegação sobre um regime. Ler qualquer benchmark agentic sem perguntar "em que comprimento de horizonte" é ler pela metade.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale ler, não vale seguir. O experimento de inversão por horizonte é honesto e bem construído: o paper mostra o próprio método perdendo em horizonte curto, o que dá credibilidade à vitória em horizonte longo. A engenharia (seed em vez de cópias de peso, decaimento cosseno com piso) é limpa e a ablação de σ é o achado mais interessante do trabalho. Mas o objeto é fine-tuning de peso completo com cluster de H100 e populações de 8 a 32 rollouts por passo — irrelevante operacionalmente para quem consome modelo por API. Fica como referência de leitura: o argumento contra o dogma do credit assignment fino, e a lição de que ruído residual em busca ruidosa é regularização, não desleixo.</p>
+<h2>Confronto com repos</h2>
+<p><strong>Nenhum confronto aplicável.</strong> O paper otimiza pesos por amostragem de população; a tese só morde código que tenha (a) acesso a parâmetros ou (b) um laço de busca que amostre candidatos, pontue e realimente. Nenhum repo do registro tem qualquer um dos dois. Descarte candidato a candidato, sobre o código lido:</p>
+<ul><li><strong><code>papers-journal</code></strong> — o mais próximo por consumir LLM, mas a chamada é um POST único a <code>https://api.openai.com/v1/chat/completions</code> (<code>src/journal.py:39</code>, <code>:243</code>), sem população, sem pontuação e sem realimentação; o mesmo em <code>src/deepdive.py:32</code>, <code>:87</code>, onde <code>call_llm</code> monta <code>{&quot;model&quot;, &quot;messages&quot;}</code> e devolve a primeira resposta. Não há peso a perturbar nem laço a regularizar. A única superfície de "ajuste" é <code>--model</code> (<code>src/deepdive.py:107</code>), escolha manual de modelo, não busca.</li><li><strong><code>llm-council</code></strong> — tem pontuação de candidatos (Borda em <code>council/ranking.py:120</code>) e por isso é o único que aparenta ter fitness. Mas o pipeline é estritamente de passagem única: <code>stage1</code> consulta os membros em paralelo (<code>council/engine.py:234-238</code>), <code>stage2</code> ranqueia às cegas, o presidente sintetiza e a run termina. Não existe geração seguinte: o consenso é a saída, não entrada de um próximo passo. Os parâmetros de amostragem são fixos por configuração (<code>council/providers.py:145-155</code> aplica <code>temperature</code>/<code>max_tokens</code> recebidos, com default <code>0.3</code>), nunca ajustados por resultado. Aplicar coevolução aqui exigiria inventar um laço que o repo não tem — e a regra do repo é emenda aditiva sob pré-registro, não redesenho especulativo.</li><li><strong><code>agent-skills</code></strong> — o harness (<code>scripts/run_harness.py</code>) roda três gates por skill com veredito binário em CI. É um portão de aceitação, não uma função de fitness: nada consome o resultado para propor variante seguinte.</li><li><strong><code>scripts</code></strong>, <strong><code>koda-desafio</code></strong> — Python de utilidade (CLI, telemetria, <code>tools/mascarar.py</code>); nenhuma superfície de otimização. As únicas ocorrências de "evolution" no grep são o nome de um documento de arquitetura de telemetria, coincidência lexical.</li><li><strong><code>agent-workloops</code></strong>, <strong><code>sisyphus-runtime</code></strong>, <strong><code>hop-ecosystem-atlas</code></strong>, <strong><code>govevo-site</code></strong>, <strong><code>ciot-authpay-repo</code></strong> — sem código de runtime otimizável (markdown de processo, vault, atlas de documentação, site estático, acervo). Zero arquivos <code>.py</code>.</li></ul>
+<p>Forçar um confronto aqui produziria recomendação inventada. O desfecho correto é registrar a tese como leitura e seguir.</p>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/08/2026-08-19.html">edição de 2026-08-19</a></footer>
+</body>
+</html>

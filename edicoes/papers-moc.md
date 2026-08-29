@@ -108,6 +108,15 @@ Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-18|2026-08
 - [[papers/deep/2026/08/2608.16003|Prior Audit-Repair Context Shifts LLM Verifier Thresholds Toward Leniency]]
 - [[papers/deep/2026/08/2608.13900|Agentic Transaction: Towards ACID-Compliant Agent Systems]]
 
+Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-19|2026-08-19]]:
+
+- [[papers/deep/2026/08/2608.14036|Demystifying Agent Skills: Why They Work-Until They Don't]]
+- [[papers/deep/2026/08/2608.17310|Agentic ESOpt: Fine-Tuning Long-Horizon LLM Agents with Minimal GPU Requirements]]
+- [[papers/deep/2026/08/2608.17271|ASI-Bench: At the Dawn of Artificial Superintelligence]]
+- [[papers/deep/2026/08/2608.15008|Harness the Memory: A Holistic Evaluation of Memory Substrates in Memory Agents]]
+- [[papers/deep/2026/08/2608.17597|HarnessRisk: A Lifecycle-Oriented Benchmark for Agent Harness Safety]]
+- [[papers/deep/2026/08/2608.16002|From Sequence to Structure: Relational Uncertainty Propagation for LLM Agents]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -130,4 +139,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | 2026-08-29 | [[papers/2026/08/2026-08-14|2026-08-14]] | 5 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-17|2026-08-17]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (validação de `relacao` e truncagem de `deepdive.py` acrescentadas ao resumo); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-18|2026-08-18]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (escrita não atômica e ausência de `max_tokens` acrescentadas ao resumo); demais entradas frescas |
+| 2026-08-29 | [[papers/2026/08/2026-08-19|2026-08-19]] | 6 (todos os destaques; um sem confronto aplicável) | Sim — `papers-journal` com refresh profundo (`href` sem allowlist de esquema no conversor); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
