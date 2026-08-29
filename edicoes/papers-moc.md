@@ -64,6 +64,15 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-11|2026-08
 - [[papers/deep/2026/08/2608.07169|Agent Memory Distillation: Empowering Small LLM Agents with Hierarchical Teacher Memory]]
 - [[papers/deep/2026/08/2608.08722|Gaming Without an Attacker: Benchmark Fingerprinting in LLM-Driven Search Under Selection Pressure]]
 
+Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-12|2026-08-12]]:
+
+- [[papers/deep/2026/08/2608.11079|SkillZip: Evaluation-Free Skill Compression for Self-Evolving Agents by Discovering Reusable Structure]]
+- [[papers/deep/2026/08/2608.08389|Not Worth Another Token: Marginal Value Estimation for Efficient Deep Research Agents]]
+- [[papers/deep/2026/08/2608.10692|SPIEval: Evaluating Large Language Models as Mobile Assistants over Scattered Personal Information]]
+- [[papers/deep/2026/08/2608.10875|VibeLifeBench: Can Your Life Agent Be Proactive and Persistent in a Living World?]]
+- [[papers/deep/2026/08/2608.07645|Mendel Gödel Machine: Recursive Self-Improving Coding Agents via Comparative Evolution]]
+- [[papers/deep/2026/08/2608.10299|Co-Evolution in Agentic Systems: Toward Self-Directed Evolution Beyond Human Design]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -81,4 +90,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | 2026-08-28 | [[papers/2026/08/2026-08-07|2026-08-07]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline mais o commit do operador em `src/deep_html.py`); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-10|2026-08-10]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-11|2026-08-11]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado e `koda-desafio` com refresh profundo (rubrica, guard e mascarar) |
+| 2026-08-28 | [[papers/2026/08/2026-08-12|2026-08-12]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |

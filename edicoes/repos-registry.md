@@ -26,7 +26,7 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 - propósito: jornal diário dos Daily Papers do Hugging Face; busca, triagem por LLM contra `interests.md`, edição em markdown + HTML via cron.
 - arquitetura: Python stdlib + OpenAI API; `src/journal.py` (busca/triagem/edição), `src/render_html.py` (portal), `src/index.py` (capa do arquivo), `src/deepdive.py` (leitura profunda sob demanda), `src/deep_html.py` (publica as notas do papers-deep em `docs/deep/AAAA/MM/` e reconcilia a seção `## Deep dives` no HTML das edições, com o card de cada nota exibindo o seu "Sumário de ação"; idempotente), `src/paths.py` (único lugar que conhece o layout, com override por `PAPERS_HOME`/`PAPERS_DATA_DIR`), `bin/papers-daily.sh` (wrapper de cron com flock/log/notificação/fail-loud, guard de idempotência por existência de arquivo); edições em `edicoes/AAAA/MM/`, notas deep em `edicoes/deep/AAAA/MM/`, site em `docs/` e `docs/deep/AAAA/MM/`, cache de veredito em `.cache/`. Sem suite de testes e sem CI. `src/deepdive.py` grava em `deep/` na raiz (`deep/2608.16425.md`), caminho que o conversor não varre (`src/paths.py`: `deep_notas()` só lê `edicoes/deep/`), então sua saída nunca é publicada.
 - last-verified: 2026-08-28
-- verified-head: d72fb24fd6d827c011ea48526098dd0fbc1f66f1
+- verified-head: 06f715ed4dec77b0f5ea9f4ea199d9b534f81115
 
 ## agent-workloops
 
