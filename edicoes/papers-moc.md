@@ -82,6 +82,14 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-13|2026-08
 - [[papers/deep/2026/08/2608.06270|The Illusion of Visual Tool-Use: A Causal Audit of Thinking with Images]]
 - [[papers/deep/2026/08/2608.10450|Persistent Recursive Worlds Enable Autonomous Software Evolution]]
 
+Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-14|2026-08-14]]:
+
+- [[papers/deep/2026/08/2608.07545|DarwinX: Evolving Agent Harnesses Through Natural Selection]]
+- [[papers/deep/2026/08/2608.06867|LLMRouter: Unified Infrastructure for Developing, Evaluating, and Deploying LLM Routers]]
+- [[papers/deep/2026/08/2608.12440|Specification-first convergence with an AI coding agent]]
+- [[papers/deep/2026/08/2608.12990|LycheeMemory V2: Efficient Long-Term Memory for LLM Agents via Semantic Segment-Level Consolidation]]
+- [[papers/deep/2026/08/2607.29211|Knowing When to Quit: Diagnosing and Training LLMs to Abort Futile Reasoning]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -101,4 +109,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | 2026-08-28 | [[papers/2026/08/2026-08-11|2026-08-11]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado e `koda-desafio` com refresh profundo (rubrica, guard e mascarar) |
 | 2026-08-28 | [[papers/2026/08/2026-08-12|2026-08-12]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-13|2026-08-13]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
+| 2026-08-29 | [[papers/2026/08/2026-08-14|2026-08-14]] | 5 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
