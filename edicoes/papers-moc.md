@@ -99,6 +99,15 @@ Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-17|2026-08
 - [[papers/deep/2026/08/2608.03744|Agents Catching Agents: Shortcut Cascades and Benchmark Gaming in Clinical Multi-Agent Systems]]
 - [[papers/deep/2026/08/2608.12571|Is this Citation on Point?]]
 
+Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-18|2026-08-18]]:
+
+- [[papers/deep/2026/08/2608.15089|StateM: Reaching 95.3% Raw Accuracy, or a $15 Frontier Run, on Terminal-Bench 2.1 via Harness Scaling]]
+- [[papers/deep/2026/08/2608.16859|HarnessEval-W: Agentifying the Evaluation of Visual Worlds]]
+- [[papers/deep/2026/08/2608.16391|Ventor-QTest: Threat-Model-Driven Verification of Vendor-Hosted LLM APIs]]
+- [[papers/deep/2026/08/2608.16033|R^3-Bench: LLMs Struggle with Resource-Rational Reasoning under Shared Budgets]]
+- [[papers/deep/2026/08/2608.16003|Prior Audit-Repair Context Shifts LLM Verifier Thresholds Toward Leniency]]
+- [[papers/deep/2026/08/2608.13900|Agentic Transaction: Towards ACID-Compliant Agent Systems]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -120,4 +129,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | 2026-08-28 | [[papers/2026/08/2026-08-13|2026-08-13]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-14|2026-08-14]] | 5 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-17|2026-08-17]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (validação de `relacao` e truncagem de `deepdive.py` acrescentadas ao resumo); demais entradas frescas |
+| 2026-08-29 | [[papers/2026/08/2026-08-18|2026-08-18]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (escrita não atômica e ausência de `max_tokens` acrescentadas ao resumo); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
