@@ -135,6 +135,14 @@ Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-21|2026-08
 - [[papers/deep/2026/08/2608.19861|PolicyGuide: From Guarding One Action to Guiding the Whole Workflow for Policy-Compliant LLM Agents]]
 - [[papers/deep/2026/08/2608.13547|QuoteBench: How Matched Scores Can Hide Command-Path Failures]]
 
+Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-24|2026-08-24]]:
+
+- [[papers/deep/2026/08/2608.21156|Graph Engineering in the Era of LLM Agents: From Individual Intelligence to System Intelligence]]
+- [[papers/deep/2026/08/2608.16425|ParaTempo: Efficient Parallel Reasoning via Temporal Confidence]]
+- [[papers/deep/2026/08/2608.12781|Beyond Correctness: Benchmarking and Aligning Response Behaviors in Hybrid-Thinking MLLMs]]
+- [[papers/deep/2026/08/2608.20634|AgentMercury: Your Agent Can Synthesize Verifiable Environments for Business Scenarios at scale]]
+- [[papers/deep/2026/08/2608.20438|Peer-Voted LLM-Agent Stress Tests Find Feed-Induced Lexical Convergence but No Reliable Matched-Exposure Advantage for Distributed Sources]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -160,4 +168,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | 2026-08-29 | [[papers/2026/08/2026-08-19|2026-08-19]] | 6 (todos os destaques; um sem confronto aplicável) | Sim — `papers-journal` com refresh profundo (`href` sem allowlist de esquema no conversor); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-20|2026-08-20]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (fronteira do prompt do deepdive e `--render-only` inalcançável); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-21|2026-08-21]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (inclui o commit do cron da edição de 28/08) e resumo acrescido do convite ao `deepdive.py`; `sisyphus-runtime` com árvore suja, reportado sem escrita |
+| 2026-08-29 | [[papers/2026/08/2026-08-24|2026-08-24]] | 5 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
