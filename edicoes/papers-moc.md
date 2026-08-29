@@ -117,6 +117,15 @@ Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-19|2026-08
 - [[papers/deep/2026/08/2608.17597|HarnessRisk: A Lifecycle-Oriented Benchmark for Agent Harness Safety]]
 - [[papers/deep/2026/08/2608.16002|From Sequence to Structure: Relational Uncertainty Propagation for LLM Agents]]
 
+Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-20|2026-08-20]]:
+
+- [[papers/deep/2026/08/2608.18565|SemaPLC: A Project-Grounded, Verification-Gated Agent Harness for PLC Code Generation]]
+- [[papers/deep/2026/08/2608.16590|Zetta ζ: An Efficient Closed-Loop Embodied Harness for Self-Evolving Physical Intelligence]]
+- [[papers/deep/2026/08/2608.18852|SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents]]
+- [[papers/deep/2026/08/2608.15888|Bounded Agents: Delegation Security for Multi-Agent AI Systems]]
+- [[papers/deep/2026/08/2608.19197|SPADE: Self-Play in Adaptive Synthetic Executable Environments]]
+- [[papers/deep/2026/08/2608.13558|OmniScientist: An Omni-Modal Omni-Discipline AI Scientist]]
+
 Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08-27]]:
 
 - [[papers/deep/2026/08/2608.26005|VoiceMem: Streaming Dual-Brain Memory for Real-Time Interaction]]
@@ -140,4 +149,5 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | 2026-08-29 | [[papers/2026/08/2026-08-17|2026-08-17]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (validação de `relacao` e truncagem de `deepdive.py` acrescentadas ao resumo); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-18|2026-08-18]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (escrita não atômica e ausência de `max_tokens` acrescentadas ao resumo); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-19|2026-08-19]] | 6 (todos os destaques; um sem confronto aplicável) | Sim — `papers-journal` com refresh profundo (`href` sem allowlist de esquema no conversor); demais entradas frescas |
+| 2026-08-29 | [[papers/2026/08/2026-08-20|2026-08-20]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (fronteira do prompt do deepdive e `--render-only` inalcançável); demais entradas frescas |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
