@@ -59,6 +59,18 @@ _ARTIGO_CSS = """
 
 # ---------------------------------------------------------------- frontmatter
 
+def _escalar(valor: str) -> str:
+    """Tira as aspas externas e desfaz o escape de aspas dentro delas.
+
+    Sem isto, `title: "When \\"Must\\" ..."` chega ao <title>, ao <h1> e ao
+    card com as barras literais.
+    """
+    valor = valor.strip()
+    if len(valor) >= 2 and valor[0] == valor[-1] == '"':
+        valor = valor[1:-1].replace('\\"', '"').replace("\\\\", "\\")
+    return valor
+
+
 def _parse_frontmatter(texto: str) -> tuple[dict, str]:
     """Split and parse the simple YAML frontmatter used by the pipeline notes."""
     if not texto.startswith("---\n"):
@@ -72,7 +84,7 @@ def _parse_frontmatter(texto: str) -> tuple[dict, str]:
         if linha.startswith("  - "):
             if chave is None:
                 raise ValueError(f"item de lista sem chave: {linha!r}")
-            meta[chave].append(linha[4:].strip().strip('"'))
+            meta[chave].append(_escalar(linha[4:]))
         elif linha.startswith((" ", "\t")):
             raise ValueError(f"linha de frontmatter nao suportada: {linha!r}")
         else:
@@ -88,11 +100,23 @@ def _parse_frontmatter(texto: str) -> tuple[dict, str]:
             elif valor == "":
                 meta[chave] = []
             else:
-                meta[chave] = valor.strip('"')
+                meta[chave] = _escalar(valor)
     return meta, texto[fim + 4:].lstrip("\n")
 
 
 # --------------------------------------------------------------------- inline
+
+_ESQUEMA = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.\-]*:")
+_ESQUEMA_OK = ("http://", "https://", "mailto:")
+
+
+def _href_ok(url: str) -> bool:
+    """So vira <a> o que e http(s), mailto ou caminho sem esquema. As notas sao
+    escritas por modelo a partir de texto de terceiro: esquema arbitrario nao
+    deve virar href vivo na pagina publicada."""
+    u = html.unescape(url).strip().lower()
+    return u.startswith(_ESQUEMA_OK) or not _ESQUEMA.match(u)
+
 
 def _inline(texto: str, prefixo: str = "../../../") -> str:
     """Markdown inline (subset das notas) -> HTML. Preserva code spans.
@@ -110,7 +134,8 @@ def _inline(texto: str, prefixo: str = "../../../") -> str:
     texto = _E(texto, quote=False)
     texto = _LINK.sub(
         lambda m: (f'<a href="{_E(html.unescape(m.group(2)), quote=True)}">'
-                   f"{m.group(1)}</a>"),
+                   f"{m.group(1)}</a>")
+        if _href_ok(m.group(2)) else m.group(1),
         texto,
     )
     texto = _EDICAO_WIKILINK.sub(
