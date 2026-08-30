@@ -42,27 +42,78 @@ def repos_do_registro() -> dict[str, Path]:
     return out
 
 
-def normaliza(citacoes: list[str], raiz: Path | None) -> list[str]:
-    """Absoluto -> relativo ao repo; basename solto -> caminho longo, quando
-    houver exatamente um candidato E o arquivo nao existir na raiz do repo."""
-    rel = []
+def relativa(cit: str) -> str:
+    """Caminho absoluto vira relativo ao repo que o contem."""
+    arq, _, linha = cit.rpartition(":")
+    if arq.startswith(HOME):
+        resto = arq[len(HOME):]
+        arq = resto.split("/", 1)[1] if "/" in resto else resto
+    return f"{arq}:{linha}"
+
+
+IGNORA = {".git", ".worktrees", "worktrees", "__pycache__", ".venv"}
+IGNORA_PADRAO = (".backup-", ".bak")   # copias datadas poluem os candidatos
+
+
+def indexa(raiz: Path | None) -> list[str]:
+    """Todos os arquivos do repo, relativos a raiz. Autoritativo para resolver
+    caminho parcial (a nota cita `references/x.md`, o arquivo esta em
+    `skills/issue-executor-master/references/x.md`)."""
+    if raiz is None or not raiz.is_dir():
+        return []
+    saida = []
+    for p in raiz.rglob("*"):
+        if not p.is_file():
+            continue
+        partes = p.relative_to(raiz).parts
+        if IGNORA & set(partes):
+            continue
+        if any(s in parte for parte in partes for s in IGNORA_PADRAO):
+            continue
+        saida.append(p.relative_to(raiz).as_posix())
+    return saida
+
+
+def normaliza(citacoes: list[str], indice: list[str], raiz: Path | None,
+              repo: str = "") -> list[str]:
+    """Caminho parcial ou basename solto -> caminho real, quando o repo tem
+    exatamente um arquivo terminando naquele sufixo. Caminho que ja resolve
+    fica intacto, entao README.md da raiz nunca vira examples/README.md."""
+    locais = [c.rpartition(":")[0] for c in citacoes if "/" in c.rpartition(":")[0]]
+    saida = []
     for c in citacoes:
         arq, _, linha = c.rpartition(":")
-        if arq.startswith(HOME):
-            resto = arq[len(HOME):]
-            arq = resto.split("/", 1)[1] if "/" in resto else resto
-        rel.append(f"{arq}:{linha}")
-
-    longos = {c.rpartition(":")[0] for c in rel if "/" in c.rpartition(":")[0]}
-    saida = []
-    for c in rel:
-        arq, _, linha = c.rpartition(":")
-        if "/" not in arq:
-            cand = [L for L in longos if L.endswith("/" + arq)]
-            if len(cand) == 1 and not (raiz and (raiz / arq).is_file()):
-                arq = cand[0]
+        if not (raiz and (raiz / arq).is_file()):
+            # a nota as vezes prefixa com o nome do proprio repo
+            if repo and arq.startswith(repo + "/") and raiz \
+                    and (raiz / arq[len(repo) + 1:]).is_file():
+                arq = arq[len(repo) + 1:]
+            else:
+                for fonte in (indice, locais):
+                    cand = [p for p in fonte if p.endswith("/" + arq)]
+                    if len(cand) == 1:
+                        arq = cand[0]
+                        break
         saida.append(f"{arq}:{linha}")
     return sorted(set(saida))
+
+
+def resolve(cit: str, raiz: Path | None) -> bool:
+    """A citacao aponta para arquivo existente, com a linha dentro dele?"""
+    if raiz is None:
+        return False
+    arq, _, faixa = cit.rpartition(":")
+    alvo = raiz / arq
+    if not alvo.is_file():
+        return False
+    fim = faixa.split("-")[-1]
+    if not fim.isdigit():
+        return False
+    try:
+        n = len(alvo.read_text(encoding="utf-8", errors="replace").splitlines())
+    except OSError:
+        return False
+    return int(fim) <= n
 
 
 def main() -> None:
@@ -90,26 +141,44 @@ def main() -> None:
                 continue
             v = VEREDITO.search(bloco)
             ver = " ".join(v.group(1).split())[:400] if v else "(sem veredito)"
-            cits = normaliza([f"{a}:{l}" for a, l in CITACAO.findall(bloco)],
-                             conhecidos.get(nome))
+            cits = [relativa(f"{a}:{l}") for a, l in CITACAO.findall(bloco)]
             por_repo[nome].append((nota.stem, titulo, ver, cits))
 
+    # 2a passada: resolve caminho contra o sistema de arquivos de cada repo
+    indices = {repo: indexa(conhecidos.get(repo)) for repo in por_repo}
+
     SAIDA.mkdir(parents=True, exist_ok=True)
-    print(f"{'repo':20} {'confrontos':>10} {'citações':>9} {'arquivos':>9}")
+    print(f"{'repo':20} {'confrontos':>10} {'no repo':>8} {'outro':>6} {'sem alvo':>9}")
     for repo, itens in sorted(por_repo.items(), key=lambda kv: -len(kv[1])):
         linhas = [f"# Confrontos do papers-deep — {repo}", "",
                   f"{len(itens)} confrontos, derivados das notas em `{NOTAS.relative_to(RAIZ)}`.",
                   "A nota de origem tem o raciocínio completo; as citações são pista a",
                   "verificar contra o código atual, nunca fato.", ""]
-        arquivos = set()
+        raiz = conhecidos.get(repo)
+        indice = indices[repo]
+        n_aqui = n_outro = n_sem = 0
         for stem, titulo, ver, cits in itens:
             linhas += [f"## {stem} — {titulo}", "", f"**Veredito:** {ver}", ""]
-            if cits:
-                linhas += ["Evidência: " + ", ".join(f"`{c}`" for c in cits), ""]
-            arquivos.update(c.rpartition(":")[0] for c in cits)
+            aqui, outro, sem = [], [], []
+            for c in normaliza(cits, indice, raiz, repo):
+                if resolve(c, raiz):
+                    aqui.append(c)
+                    continue
+                donos = [r for r, rz in conhecidos.items()
+                         if r != repo and resolve(c, rz)]
+                (outro.append(f"{donos[0]}/{c}") if len(donos) == 1
+                 else sem.append(c))
+            if aqui:
+                linhas += ["Evidência: " + ", ".join(f"`{c}`" for c in aqui), ""]
+            if outro:
+                linhas += ["Evidência em outro repo: "
+                           + ", ".join(f"`{c}`" for c in outro), ""]
+            if sem:
+                linhas += ["Citações não resolvidas (nome ambíguo ou linha fora do "
+                           "arquivo): " + ", ".join(f"`{c}`" for c in sem), ""]
+            n_aqui += len(aqui); n_outro += len(outro); n_sem += len(sem)
         (SAIDA / f"{repo}.md").write_text("\n".join(linhas), encoding="utf-8")
-        n_cit = sum(len(c) for *_, c in itens)
-        print(f"{repo:20} {len(itens):>10} {n_cit:>9} {len(arquivos):>9}")
+        print(f"{repo:20} {len(itens):>10} {n_aqui:>8} {n_outro:>6} {n_sem:>9}")
 
     print(f"\nnotas sem confronto aplicável: {len(vazias)}"
           + (f" ({', '.join(vazias)})" if vazias else ""))
