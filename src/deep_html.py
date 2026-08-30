@@ -28,6 +28,9 @@ _RODAPE_FAIXA = '<div class="faixa"></div><footer class="wrap rodape">'
 _EDICAO_WIKILINK = re.compile(
     r"\[\[papers/(\d{4})/(\d{2})/(\d{4}-\d{2}-\d{2})(?:\|([^\]]+))?\]\]"
 )
+_DEEP_WIKILINK = re.compile(
+    r"\[\[papers/deep/(\d{4})/(\d{2})/(\d{4}\.\d+)(?:\|([^\]]+))?\]\]"
+)
 _WIKILINK = re.compile(r"\[\[[^\]]+\]\]")
 _LINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
 _BOLD = re.compile(r"\*\*(.+?)\*\*")
@@ -91,8 +94,12 @@ def _parse_frontmatter(texto: str) -> tuple[dict, str]:
 
 # --------------------------------------------------------------------- inline
 
-def _inline(texto: str) -> str:
-    """Markdown inline (subset das notas) -> HTML. Preserva code spans."""
+def _inline(texto: str, prefixo: str = "../../../") -> str:
+    """Markdown inline (subset das notas) -> HTML. Preserva code spans.
+
+    `prefixo` e o caminho relativo ate `docs/` a partir da pagina que recebe o
+    HTML: `../../../` de uma pagina deep, `../../` de uma pagina de edicao.
+    """
     codigos: list[str] = []
 
     def _guarda(m: re.Match) -> str:
@@ -107,7 +114,12 @@ def _inline(texto: str) -> str:
         texto,
     )
     texto = _EDICAO_WIKILINK.sub(
-        lambda m: (f'<a href="../../../{m.group(1)}/{m.group(2)}/{m.group(3)}.html">'
+        lambda m: (f'<a href="{prefixo}{m.group(1)}/{m.group(2)}/{m.group(3)}.html">'
+                   f"{_E(m.group(4) or m.group(3))}</a>"),
+        texto,
+    )
+    texto = _DEEP_WIKILINK.sub(
+        lambda m: (f'<a href="{prefixo}deep/{m.group(1)}/{m.group(2)}/{m.group(3)}.html">'
                    f"{_E(m.group(4) or m.group(3))}</a>"),
         texto,
     )
@@ -232,7 +244,7 @@ def _secao_edicao(refs: list[tuple[str, str, str]], date: str) -> str:
     itens = "".join(
         f'<article class="card"><a class="titulo" '
         f'href="../../deep/{date[:4]}/{date[5:7]}/{_E(paper_id)}.html">{_E(titulo)}</a>'
-        f'<div class="chamada"><p>{_inline(sumario)}</p></div>'
+        f'<div class="chamada"><p>{_inline(sumario, "../../")}</p></div>'
         f"</article>"
         for paper_id, titulo, sumario in refs
     )
