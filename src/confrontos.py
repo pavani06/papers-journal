@@ -6,7 +6,9 @@ As notas sao a fonte da verdade; este script so deriva. Para cada bloco
 coleta a nota de origem, o veredito e as citacoes `file:line`.
 
 Uso: python3 src/confrontos.py [dir-das-notas] [dir-de-saida]
-Read-only sobre as notas; escreve so no dir-de-saida.
+Read-only sobre as notas; escreve so no dir-de-saida. O default de saida fica
+fora deste repo, junto dos utilitarios do orquestrador em scripts/papers-deep/,
+para a derivacao nao morar dentro do objeto inspecionado.
 """
 from __future__ import annotations
 
@@ -17,7 +19,8 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 NOTAS = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ / "edicoes/deep/2026/08"
-SAIDA = Path(sys.argv[2]) if len(sys.argv) > 2 else RAIZ / "edicoes/confrontos"
+SAIDA = (Path(sys.argv[2]) if len(sys.argv) > 2
+         else Path.home() / "scripts/papers-deep/confrontos")
 REGISTRO = RAIZ / "edicoes/repos-registry.md"
 HOME = str(Path.home()) + "/"
 
