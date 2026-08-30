@@ -80,7 +80,7 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 
 - path: `/home/pavanpavan/agent-skills`
 - propósito: source of truth único das Agent Skills do ambiente (padrão agentskills.io: `SKILL.md` com frontmatter `name` + `description`), servindo OpenCode, Claude Code e Codex dos mesmos arquivos.
-- arquitetura: `skills/<nome>/SKILL.md` por skill; ciclo de issues (issue-start, issue-review, issue-finish, issue-executor-master) como skills principais; harness próprio (`scripts/run_harness.py`) com três gates por skill (contract, modules, integration) rodando em CI, e gate sem arquivo de teste permanece `passes: false`. `task-wrapper.sh` estopado pelo operador em 2026-08-28: nenhuma fase do `issue-executor-master` o invoca.
+- arquitetura: `skills/<nome>/SKILL.md` por skill, mais `commands/` para comandos opencode versionados aqui sem cair na descoberta por `iterdir()` do harness (hoje `commands/papers-deep.md`, servido por symlink de `~/.config/opencode/command/`); ciclo de issues (issue-start, issue-review, issue-finish, issue-executor-master) como skills principais; harness próprio (`scripts/run_harness.py`) com três gates por skill (contract, modules, integration) rodando em CI, e gate sem arquivo de teste permanece `passes: false`. `task-wrapper.sh` estopado pelo operador em 2026-08-28: nenhuma fase do `issue-executor-master` o invoca.
 - last-verified: 2026-08-28
 - verified-head: 6bf42e9bfa1653f130aa0356b07b3544f51f1472
 
