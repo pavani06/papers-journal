@@ -170,6 +170,15 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 - [[papers/deep/2026/08/2608.24358|The Handoff Tax: Continuing Non-Native Trajectories in LLM Agents]]
 - [[papers/deep/2026/08/2608.26070|Prefix Sliding for efficient test-time scaling]]
 
+Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-28|2026-08-28]]:
+
+- [[papers/deep/2026/08/2608.27260|What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents]]
+- [[papers/deep/2026/08/2608.15763|Training Agents to Evolve with Their Harness: TaoLive Digital Avatar Agent Technical Report]]
+- [[papers/deep/2026/08/2608.26530|PILOT in the Loop: Live Self-Improvement for Long-Horizon Agents]]
+- [[papers/deep/2026/08/2608.27454|WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution]]
+- [[papers/deep/2026/08/2608.25500|CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval]]
+- [[papers/deep/2026/08/2608.19269|What Does an Evaluation License? A Commit-Bound Census of Claim-Relative Inference in Inspect Evals]]
+
 ## Execuções
 
 | Data | Edição | Notas criadas | Registro atualizado? |
@@ -190,3 +199,4 @@ Execução de 2026-08-28 sobre a edição de [[papers/2026/08/2026-08-27|2026-08
 | 2026-08-29 | [[papers/2026/08/2026-08-25|2026-08-25]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado (drift do próprio pipeline); demais entradas frescas |
 | 2026-08-29 | [[papers/2026/08/2026-08-26|2026-08-26]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado; resumo acrescido do escape de título no conversor e do rebobinar do log em `papers-daily.sh` |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
+| 2026-08-29 | [[papers/2026/08/2026-08-28|2026-08-28]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (resolução de wikilinks no conversor acrescentada ao resumo; linhas de escrita não atômica e de `_parse_frontmatter` reposicionadas); demais entradas frescas |
