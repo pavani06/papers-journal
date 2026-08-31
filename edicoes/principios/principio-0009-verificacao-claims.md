@@ -1,7 +1,7 @@
 ---
 id: principio-0009
 title: "Verificação de claims — existência ≠ suporte; refutação dirigida; veto não-compensatório"
-status: candidato
+status: adotado
 camada: a
 sinais:
   - "recorrencia: 6 papers independentes (2608.06270, 2608.11994, 2608.12571, 2608.13558, 2608.19269, 2608.23564)"
@@ -30,7 +30,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-08-30
 ---
 
 # Verificação de claims — existência ≠ suporte
