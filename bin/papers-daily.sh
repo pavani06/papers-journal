@@ -127,8 +127,17 @@ case "${RC}" in
   *) REASON="erro inesperado (exit ${RC})" ;;
 esac
 
-log "ERROR" "FALHOU em ${TARGET_DATE}: ${REASON}"
+# O excerto do stderr vem ANTES do veredito, nao depois. Ele ja foi anexado
+# inteiro em :99, e reanexa-lo depois do FALHOU fazia o log voltar no tempo
+# apos o estado terminal — e so no caminho de falha, entao um log de falha
+# tinha uma ordem que o de sucesso nao tem.
+#
+# O excerto FICA: ele existe para poupar quem le de procurar a causa no meio do
+# dump inteiro, e isso e util. O defeito era a ordem, nao a existencia dele.
+# Rotulado, para as linhas repetidas nao parecerem saida nova do processo.
+log "ERROR" "ultimas linhas do stderr de ${TARGET_DATE}:"
 tail -5 "${STDERR_FILE}" >> "${LOG_FILE}"
+log "ERROR" "FALHOU em ${TARGET_DATE}: ${REASON}"
 
 notificar "Jornal de Papers FALHOU" "high" "warning" \
   "${TARGET_DATE}: ${REASON}. Log: ${LOG_FILE}"
