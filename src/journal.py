@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
 import os
 import re
@@ -608,6 +609,35 @@ def reconciliar_deep_html() -> None:
                     f"{resultado.stderr.strip()[:200]}")
 
 
+def montar_cache(papers: list[dict[str, Any]], verdict: dict[str, Any],
+                 interests: str, model: str, date: str) -> dict[str, Any]:
+    """Monta o payload do cache com selo de producao (quem, quando, com que insumo).
+
+    O cache alimenta --render-only e a memoria das proximas edicoes. Sem o
+    selo, trocar modelo ou prompt no meio da serie e indetectavel depois do
+    fato e nenhum erro de triagem e atribuivel ao produtor. O molde e o selo
+    de produtor do llm-council (council/provenance.py:107-119), na versao que
+    este repo consegue selar: modelo efetivo, horario e digests dos insumos.
+    """
+    enxuto = [{**p, "abstract": (p.get("abstract") or "")[:CACHE_ABSTRACT_CHARS]}
+              for p in papers]
+    conteudo = {"papers": enxuto, "verdict": verdict}
+    payload = {
+        **conteudo,
+        "producao": {
+            "modelo": model,
+            "criado_em": dt.datetime.now().isoformat(timespec="seconds"),
+            "interests_sha256": hashlib.sha256(
+                interests.encode("utf-8")).hexdigest(),
+            "prompt_sha256": hashlib.sha256(
+                json.dumps(build_prompt(papers, interests, date),
+                           ensure_ascii=False).encode("utf-8")).hexdigest(),
+        },
+    }
+    payload["digest"] = paths.digest_conteudo(conteudo)
+    return payload
+
+
 def gravar_edicao(date: str, papers: list[dict[str, Any]],
                   verdict: dict[str, Any]) -> None:
     """Renderiza e grava a edicao (.md, .html, indice).
@@ -664,11 +694,10 @@ def gerar_edicao(date: str, papers: list[dict[str, Any]], interests: str,
     #
     # O que se salva gravando cedo e a chamada ao modelo, que e a parte cara
     # em dinheiro e em tempo. Render e barato e reproduzivel a partir daqui.
-    enxuto = [{**p, "abstract": (p.get("abstract") or "")[:CACHE_ABSTRACT_CHARS]}
-              for p in papers]
     paths.escrever(
         paths.cache(date),
-        json.dumps({"papers": enxuto, "verdict": verdict}, ensure_ascii=False))
+        json.dumps(montar_cache(papers, verdict, interests, model, date),
+                   ensure_ascii=False))
     log("INFO", f"veredito em cache: {paths.cache(date)}")
 
     gravar_edicao(date, papers, verdict)
@@ -772,7 +801,18 @@ def main() -> int:
     if args.render_only:
         if not cache.is_file():
             raise Fatal(1, f"--render-only exige {cache}, que nao existe")
-        snapshot = json.loads(cache.read_text(encoding="utf-8"))
+        try:
+            snapshot = json.loads(cache.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            raise Fatal(3, f"cache ilegivel (JSON invalido): {cache}") from exc
+        digest = snapshot.get("digest")
+        if digest:
+            conferido = paths.digest_conteudo(
+                {"papers": snapshot["papers"], "verdict": snapshot["verdict"]})
+            if conferido != digest:
+                raise Fatal(3, f"cache corrompido: digest nao confere em {cache}")
+        else:
+            log("WARN", f"cache sem digest (pre-upgrade): {cache}")
         papers, verdict = snapshot["papers"], snapshot["verdict"]
         log("INFO", f"re-render a partir do cache: {len(papers)} papers, "
                     f"{len(verdict['destaques'])} destaques")

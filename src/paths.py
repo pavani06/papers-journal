@@ -23,8 +23,10 @@ Layout sob PAPERS_DATA_DIR:
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
+import sys
 from pathlib import Path
 
 HOME = Path(os.environ.get("PAPERS_HOME") or Path(__file__).resolve().parent.parent)
@@ -111,6 +113,18 @@ def edicoes_publicadas() -> list[tuple[str, Path]]:
     return sorted(achadas, key=lambda x: x[0], reverse=True)
 
 
+def digest_conteudo(conteudo: dict) -> str:
+    """sha256 estavel (sort_keys) do conteudo serializado — para selar o cache.
+
+    Determinismo importa: o digest e conferido na releitura (--render-only e
+    memoria de edicoes), entao a serializacao tem que ser estavel entre
+    execucoes, independente da ordem das chaves.
+    """
+    return hashlib.sha256(
+        json.dumps(conteudo, ensure_ascii=False, sort_keys=True).encode("utf-8")
+    ).hexdigest()
+
+
 def vereditos_anteriores(date: str, limite: int) -> list[tuple[str, dict]]:
     """Le ate `limite` vereditos de edicoes anteriores a `date`, da mais recente para tras.
 
@@ -125,7 +139,14 @@ def vereditos_anteriores(date: str, limite: int) -> list[tuple[str, dict]]:
         if p.stem >= date:
             continue
         try:
-            achados.append((p.stem, json.loads(p.read_text(encoding="utf-8"))["verdict"]))
+            dados = json.loads(p.read_text(encoding="utf-8"))
+            digest = dados.get("digest")
+            if digest:
+                conferido = digest_conteudo(
+                    {"papers": dados["papers"], "verdict": dados["verdict"]})
+                if conferido != digest:
+                    continue  # adulterado/corrompido: nao entra como memoria
+            achados.append((p.stem, dados["verdict"]))
         except (json.JSONDecodeError, KeyError, OSError):
             continue
         if len(achados) >= limite:
