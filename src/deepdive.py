@@ -23,7 +23,7 @@ import urllib.error
 import urllib.request
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import Any
+from typing import Any, NamedTuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import paths  # noqa: E402
@@ -56,7 +56,32 @@ class TextExtractor(HTMLParser):
         return re.sub(r"\n{3,}", "\n\n", "\n".join(self.chunks))
 
 
-def fetch_fulltext(paper_id: str) -> tuple[str, bool]:
+class Fonte(NamedTuple):
+    """O que de fato foi lido, e quanto.
+
+    `tipo` distingue os tres casos que o campo antigo fundia em dois: o texto
+    veio inteiro, veio cortado em MAX_CHARS, ou nao veio e sobrou o abstract.
+    `lidos` e `total` tornam o corte auditavel — sem eles, "truncado" diz que
+    falta alguma coisa mas nao quanto.
+    """
+    texto: str
+    tipo: str   # "completo" | "truncado" | "abstract"
+    lidos: int
+    total: int
+
+    @property
+    def tem_texto(self) -> bool:
+        return self.tipo != "abstract"
+
+    def rotulo(self) -> str:
+        if self.tipo == "abstract":
+            return "apenas abstract"
+        if self.tipo == "truncado":
+            return f"texto truncado ({self.lidos} de {self.total} chars, limite {MAX_CHARS})"
+        return f"texto completo ({self.total} chars)"
+
+
+def fetch_fulltext(paper_id: str) -> Fonte:
     for url in (f"https://arxiv.org/html/{paper_id}v2",
                 f"https://arxiv.org/html/{paper_id}v1",
                 f"https://arxiv.org/html/{paper_id}"):
@@ -72,9 +97,16 @@ def fetch_fulltext(paper_id: str) -> tuple[str, bool]:
         parser.feed(html)
         text = parser.text()
         if len(text) > 4000:
+            # O corte e devolvido como fato, nao escondido atras de um flag de
+            # sucesso: era isso que fazia o frontmatter afirmar "texto completo"
+            # sobre um paper cortado em MAX_CHARS.
+            if len(text) > MAX_CHARS:
+                log("INFO", f"texto obtido de {url}, TRUNCADO em {MAX_CHARS} "
+                            f"de {len(text)} chars")
+                return Fonte(text[:MAX_CHARS], "truncado", MAX_CHARS, len(text))
             log("INFO", f"texto completo obtido de {url} ({len(text)} chars)")
-            return text[:MAX_CHARS], True
-    return "", False
+            return Fonte(text, "completo", len(text), len(text))
+    return Fonte("", "abstract", 0, 0)
 
 
 def fetch_meta(paper_id: str) -> dict[str, Any]:
@@ -117,8 +149,9 @@ def main() -> int:
     meta = fetch_meta(paper_id)
     title = meta.get("title", "").strip()
 
-    body, full = fetch_fulltext(paper_id)
-    if not full:
+    fonte = fetch_fulltext(paper_id)
+    body = fonte.texto
+    if not fonte.tem_texto:
         log("WARN", "texto completo indisponivel no arXiv HTML; usando abstract")
         body = meta.get("summary", "")
 
@@ -133,7 +166,7 @@ def main() -> int:
 
 # Paper: {title}
 
-{"Texto completo abaixo." if full else "ATENCAO: apenas o abstract esta disponivel. Seja explicito sobre o que nao da para afirmar sem o texto completo."}
+{"Texto completo abaixo." if fonte.tipo == "completo" else f"ATENCAO: o texto abaixo esta TRUNCADO — {fonte.lidos} de {fonte.total} chars, o final do paper esta faltando. Nao afirme nada sobre secoes que podem estar no trecho cortado." if fonte.tipo == "truncado" else "ATENCAO: apenas o abstract esta disponivel. Seja explicito sobre o que nao da para afirmar sem o texto completo."}
 
 {body}
 
@@ -162,11 +195,18 @@ Duas ou tres frases: vale investir tempo nisso agora, deixar no radar, ou ignora
     analysis = call_llm([{"role": "system", "content": system},
                          {"role": "user", "content": user}], args.model, key)
 
+    aviso_leitura = (
+        "texto completo" if fonte.tipo == "completo"
+        else f"ATENÇÃO: análise baseada em texto TRUNCADO — "
+             f"{fonte.lidos} de {fonte.total} chars, o final do paper ficou de fora"
+        if fonte.tipo == "truncado"
+        else "ATENÇÃO: análise baseada apenas no abstract"
+    )
     header = "\n".join([
         "---",
         f"paper: {paper_id}",
         "tipo: deepdive",
-        f"fonte: {'texto completo' if full else 'apenas abstract'}",
+        f"fonte: {fonte.rotulo()}",
         f"lido_em: {dt.date.today().isoformat()}",
         "tags: [papers, deepdive]",
         "---",
@@ -175,7 +215,7 @@ Duas ou tres frases: vale investir tempo nisso agora, deixar no radar, ou ignora
         "",
         f"[HF](https://huggingface.co/papers/{paper_id}) · "
         f"[arXiv](https://arxiv.org/abs/{paper_id}) · "
-        f"{'texto completo' if full else 'ATENÇÃO: análise baseada apenas no abstract'}",
+        + aviso_leitura,
         "",
     ])
     content = header + analysis.strip() + "\n"
@@ -184,8 +224,7 @@ Duas ou tres frases: vale investir tempo nisso agora, deixar no radar, ou ignora
         print(content)
         return 0
 
-    dest = paths.ensure_parent(paths.deepdive(paper_id))
-    dest.write_text(content, encoding="utf-8")
+    dest = paths.escrever(paths.deepdive(paper_id), content)
     log("INFO", f"analise escrita: {dest}")
     print(dest)
     return 0
