@@ -24,6 +24,7 @@ import argparse
 import datetime as dt
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -334,13 +335,66 @@ def normalize_verdict(verdict: dict[str, Any],
             "tangenciais": tang_ids, "resumos": resumos}
 
 
-def chapeu_md(dest: dict[str, Any]) -> list[str]:
+_REF_DATA = re.compile(r"\d{4}-\d{2}-\d{2}")
+
+
+def _relacao_rejeitada(date: str, paper: str, ref: Any, motivo: str) -> None:
+    """Registra em stderr uma `relacao` que nao virou chapeu.
+
+    Degradacao silenciosa e o defeito irmao do que este gate conserta: sem o
+    aviso, uma quebra sistematica no campo ficaria invisivel e a edicao sairia
+    publicada sem ninguem saber que faltou algo. O cron ja anexa stderr ao log
+    (bin/papers-daily.sh:99), entao o aviso cai onde alguem olha.
+    """
+    print(
+        f"[relacao rejeitada] edicao={date} paper={paper} ref={ref!r}: {motivo}",
+        file=sys.stderr,
+    )
+
+
+def chapeu_md(dest: dict[str, Any], date: str = "?") -> list[str]:
+    """Monta o chapeu de relacao, ou nada — nunca uma afirmacao nao verificada.
+
+    O objeto `relacao` vem do modelo e, ate aqui, atravessava sem verificacao
+    nenhuma enquanto os ids de paper eram validados contra o catalogo trinta
+    linhas acima. O chapeu publica "Avanca [dia/mes](...)" como fato, com o link
+    montado por split e concatenacao.
+
+    Degrada em vez de matar o dia, e a medicao sustenta a escolha: nas 17 edicoes
+    publicadas, 42 dos 100 destaques publicam chapeu e NENHUM reprovaria aqui. O
+    gate guarda risco latente, nao corrupcao existente, e matar uma edicao boa
+    por um ornamento nao verificado seria desproporcional. Degradar tambem ja e a
+    politica deste campo: `tipo: novo` — 58 dos 100 — nunca virou chapeu.
+
+    E o que ele troca nao e mentira por silencio, e sim CRASH por silencio
+    registrado: `ref.split("-")` levantava ValueError nao capturado (chamado
+    inline em render(), sem try), entao ref_data malformada derrubava a execucao
+    inteira em vez de publicar algo errado.
+
+    `tipo: novo` sai calado, porque e veredito legitimo e nao falha. Todo o resto
+    e anomalia e vai para o log.
+    """
     rel = dest.get("relacao") or {}
     tipo, ref = rel.get("tipo"), rel.get("ref_data")
-    if tipo not in ("avanca", "contradiz") or not ref:
+    paper = str(dest.get("id", "?"))
+
+    if tipo == "novo":
         return []
+    if tipo not in ("avanca", "contradiz"):
+        _relacao_rejeitada(date, paper, ref, f"tipo desconhecido: {tipo!r}")
+        return []
+    if not ref:
+        _relacao_rejeitada(date, paper, ref, "sem ref_data")
+        return []
+    if not _REF_DATA.fullmatch(str(ref)):
+        _relacao_rejeitada(date, paper, ref, "ref_data fora do formato AAAA-MM-DD")
+        return []
+    if not paths.edicao_md(str(ref)).is_file():
+        _relacao_rejeitada(date, paper, ref, "edicao referida nao existe em disco")
+        return []
+
     rotulo = "Contradiz" if tipo == "contradiz" else "Avança"
-    ano, mes, dia = ref.split("-")
+    ano, mes, dia = str(ref).split("-")
     detalhe = rel.get("delta") or rel.get("ref_tese", "")
     return [f"**{rotulo} [{dia}/{mes}](../../{ano}/{mes}/{ref}.md)** — {detalhe}", ""]
 
@@ -391,7 +445,7 @@ def render(date: str, papers: list[dict[str, Any]], verdict: dict[str, Any]) -> 
             if len(p["authors"]) > 3:
                 autores += f" e mais {len(p['authors']) - 3}"
             out += [
-                *chapeu_md(d),
+                *chapeu_md(d, date),
                 f"### [{p['title']}](https://huggingface.co/papers/{p['id']})",
                 "",
                 f"`{p['id']}` · {p['upvotes']} upvotes · {p['comments']} comentários"
