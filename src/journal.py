@@ -533,6 +533,22 @@ def main() -> int:
         log("INFO", f"{len(verdict['destaques'])} destaques, "
                     f"{len(verdict['tangenciais'])} tangenciais")
 
+        # Cache gravado AQUI, assim que o veredito passa pela validacao, e nao
+        # no fim da execucao. --render-only existe para recuperar de uma falha
+        # depois do modelo, mas exigia o cache (:512) que so era escrito depois
+        # de renderizar: o modo de recuperacao nao tinha de onde partir
+        # exatamente na falha que ele recupera.
+        #
+        # O que se salva gravando cedo e a chamada ao modelo, que e a parte cara
+        # em dinheiro e em tempo. Render e barato e reproduzivel a partir daqui.
+        if not args.dry_run:
+            enxuto = [{**p, "abstract": (p.get("abstract") or "")[:CACHE_ABSTRACT_CHARS]}
+                      for p in papers]
+            paths.escrever(
+                cache,
+                json.dumps({"papers": enxuto, "verdict": verdict}, ensure_ascii=False))
+            log("INFO", f"veredito em cache: {cache}")
+
     markdown = render(date, papers, verdict)
 
     if args.dry_run:
@@ -548,13 +564,6 @@ def main() -> int:
 
     escrever_indice()
     log("INFO", f"indice atualizado: {paths.INDEX}")
-
-    if not args.render_only:
-        enxuto = [{**p, "abstract": (p.get("abstract") or "")[:CACHE_ABSTRACT_CHARS]}
-                  for p in papers]
-        paths.escrever(
-            cache,
-            json.dumps({"papers": enxuto, "verdict": verdict}, ensure_ascii=False))
 
     print(dest)
     return 0
