@@ -1,5 +1,7 @@
 """Memoria de edicoes anteriores: filtro por data, tolerancia a cache invalido."""
 
+import contextlib
+import io
 import json
 import sys
 import tempfile
