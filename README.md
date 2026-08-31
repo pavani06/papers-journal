@@ -148,14 +148,17 @@ casos por código de saída.
 | 0 | Edição escrita ou janela reconciliada, com ou sem mudanças |
 | 1 | Configuração: chave ausente, `interests.md` sumiu |
 | 2 | Rede ou API; na reconciliação, ao menos um dia da janela falhou (os demais foram processados) |
-| 3 | Sanidade: feed vazio, schema mudou, resposta degenerada do modelo |
+| 3 | Sanidade: schema mudou, resposta degenerada do modelo — a API devolveu itens que a triagem não aproveita |
 | 4 | Sem publicação no dia ou janela inteira vazia (fim de semana) |
 
 Os códigos 1-3 disparam notificação de prioridade alta. O 4 não é falha e não
 notifica. Na reconciliação, o ntfy também só toca quando houve regeneração ou
 backfill, com o resumo dos dias afetados; dia sem mudança é silêncio total. A
-asserção de sanidade existe para o caso em que a API responde 200 com lista
-vazia, que de outro modo passaria por "dia tranquilo" indefinidamente.
+asserção de sanidade (3) cobre o caso de a API responder com itens que a
+triagem não consegue usar. Feed vazio de verdade não é sanidade: vira o
+código 4 na geração (dia sem papers) e, na reconciliação, WARN sem ação
+quando a edição já existe — uma edição nunca é apagada nem regenerada por
+resposta vazia.
 
 ## Dependências
 

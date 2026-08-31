@@ -122,6 +122,19 @@ if [ "$#" -eq 0 ]; then
       "Jornal atualizado: ${RESUMO}"
     exit 0
   fi
+
+  # Falha com trabalho feito: dias regenerados/backfillados antes do erro já
+  # atualizaram o snapshot em disco. Sair sem publicar os esconderia da
+  # próxima passada (o diff sairia "inalterado") — publica o que deu certo
+  # e SÓ ENTÃO cai no caminho de falha comum, que notifica alto e devolve
+  # o código de erro citando o dia problemático.
+  if grep -qE '^RECONCILE [0-9-]+ (regenerado|backfill) ' "${OUT_FILE}"; then
+    RESUMO=$(awk '$3=="regenerado"||$3=="backfill"{printf "%s(%s) ", $2, $3}' "${OUT_FILE}")
+    log "INFO" "DONE — reconciliação (com falhas na janela): ${RESUMO}"
+    publicar "reconciliação: ${RESUMO}"
+    notificar "Jornal de Papers — atualizado" "default" "newspaper" \
+      "Jornal atualizado: ${RESUMO}"
+  fi
 else
   # Passada 1 (22:00 e manual): geração do dia explícito. O antigo guard
   # "existe -> nada a fazer" virou a regra uniforme: o journal.py compara o
