@@ -23,6 +23,7 @@ Layout sob PAPERS_DATA_DIR:
 
 from __future__ import annotations
 
+import datetime as dt
 import hashlib
 import json
 import os
@@ -135,6 +136,7 @@ def vereditos_anteriores(date: str, limite: int) -> list[tuple[str, dict]]:
     if not base.is_dir():
         return []
     achados = []
+    ilegiveis = 0
     for p in sorted(base.glob("*/*/*.json"), key=lambda x: x.stem, reverse=True):
         if p.stem >= date:
             continue
@@ -145,10 +147,18 @@ def vereditos_anteriores(date: str, limite: int) -> list[tuple[str, dict]]:
                 conferido = digest_conteudo(
                     {"papers": dados["papers"], "verdict": dados["verdict"]})
                 if conferido != digest:
+                    ilegiveis += 1
                     continue  # adulterado/corrompido: nao entra como memoria
             achados.append((p.stem, dados["verdict"]))
         except (json.JSONDecodeError, KeyError, OSError):
+            ilegiveis += 1
             continue
         if len(achados) >= limite:
             break
+    if ilegiveis:
+        # Blind spot (molde NOT_FOUND do agent-skills): "nao havia" e "nao
+        # consegui ler" sao estados diferentes — o segundo precisa aparecer.
+        print(f"[{dt.datetime.now().isoformat(timespec='seconds')}] [WARN] "
+              f"memoria: {len(achados)} lida(s), {ilegiveis} ilegiveis em {base}",
+              file=sys.stderr)
     return achados

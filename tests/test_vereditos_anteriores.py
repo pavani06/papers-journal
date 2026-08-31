@@ -41,6 +41,23 @@ class TestVereditosAnteriores(unittest.TestCase):
         out = paths.vereditos_anteriores("2026-08-11", 10)
         self.assertEqual([d for d, _ in out], ["2026-08-10"])
 
+    def test_cache_corrompido_emite_warn_de_blind_spot(self):
+        _grava_cache("2026-08-10", '{"papers": [], "verdict": {"manchete": "m"}}')
+        _grava_cache("2026-08-09", "isso nao e json")
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err):
+            paths.vereditos_anteriores("2026-08-11", 10)
+        self.assertIn("[WARN]", err.getvalue())
+        self.assertIn("ilegiveis", err.getvalue())
+        self.assertIn("1", err.getvalue())
+
+    def test_sem_ilegiveis_nao_emite_warn(self):
+        _grava_cache("2026-08-10", '{"papers": [], "verdict": {"manchete": "m"}}')
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err):
+            paths.vereditos_anteriores("2026-08-11", 10)
+        self.assertEqual(err.getvalue(), "")
+
     def test_cache_sem_verdict_e_pulado(self):
         _grava_cache("2026-08-10", '{"papers": []}')
         out = paths.vereditos_anteriores("2026-08-11", 10)
