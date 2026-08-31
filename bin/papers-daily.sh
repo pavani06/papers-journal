@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
-# papers-daily.sh — Gera o jornal diario de papers do Hugging Face.
-# Disparado por cron (07:00 BRT). Tambem invocavel manualmente:
-#   bash ~/papers-journal/bin/papers-daily.sh [YYYY-MM-DD]
+# papers-daily.sh — Jornal de papers do Hugging Face em duas passadas.
 #
-# Processa o dia anterior, ja fechado. A ausencia do jornal e o proprio alarme:
-# quando o script falha, nenhum arquivo aparece e o ntfy avisa.
+# Passada 1 — geração, cron 22:00 BRT (também manual):
+#   bash ~/papers-journal/bin/papers-daily.sh "$(date +%F)"
+#   Gera a edição do dia com snapshot de IDs+upvotes no front-matter.
+#   Edição já existente só é regenerada em mudança material (diff de IDs ou
+#   delta absoluto >= 5 upvotes desde a última versão publicada); sem mudança,
+#   silêncio.
+# Passada 2 — reconciliação, cron 07:00 BRT (sem argumento):
+#   bash ~/papers-journal/bin/papers-daily.sh
+#   Diferencia a janela D-1..D-3 contra a última versão publicada: regenera o
+#   que mudou materialmente, faz backfill do que falta e silencia no dia comum.
 #
 # Exit codes vindos de journal.py:
-#   0 jornal escrito | 1 config | 2 rede/API | 3 assercao de sanidade
-#   4 sem publicacao no dia (fim de semana) — nao e falha, nao notifica
+#   0 jornal escrito/reconciliado | 1 config | 2 rede/API | 3 asserção de sanidade
+#   4 sem publicação no dia ou janela vazia (fim de semana) — não é falha, não notifica
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)"
@@ -76,45 +82,89 @@ if ! flock -n 200; then
   exit 0
 fi
 
-TARGET_DATE="${1:-$(date -d 'yesterday' +%Y-%m-%d)}"
-YEAR="${TARGET_DATE:0:4}"
-MONTH="${TARGET_DATE:5:2}"
-DEST="${DATA_DIR}/edicoes/${YEAR}/${MONTH}/${TARGET_DATE}.md"
-
-if [ -f "${DEST}" ]; then
-  log "INFO" "Jornal de ${TARGET_DATE} ja existe. Nada a fazer."
-  exit 0
-fi
-
-log "INFO" "=== Gerando jornal de ${TARGET_DATE} ==="
+STDERR_FILE=""
+OUT_FILE=""
+cleanup() { rm -f "${STDERR_FILE}" "${OUT_FILE}"; }
+trap cleanup EXIT
 
 STDERR_FILE=$(mktemp) || { log "ERROR" "mktemp falhou"; exit 2; }
-trap 'rm -f "$STDERR_FILE"' EXIT
+OUT_FILE=$(mktemp) || { log "ERROR" "mktemp falhou"; exit 2; }
 
-set +e
-"${PYTHON_BIN}" "${JOURNAL_BIN}" --date "${TARGET_DATE}" 2>"${STDERR_FILE}"
-RC=$?
-set -e
+if [ "$#" -eq 0 ]; then
+  # Passada 2 (07:00): reconciliação da janela D-1..D-3. Stdout do journal.py
+  # carrega as linhas RECONCILE; com regeneração/backfill, publica e notifica
+  # UMA vez com o resumo dos dias; sem mudança, silêncio.
+  ALVO="reconciliação"
+  log "INFO" "=== Reconciliando janela D-1..D-3 ==="
 
-cat "${STDERR_FILE}" >> "${LOG_FILE}"
+  set +e
+  "${PYTHON_BIN}" "${JOURNAL_BIN}" --reconcile >"${OUT_FILE}" 2>"${STDERR_FILE}"
+  RC=$?
+  set -e
 
-if [ "${RC}" -eq 4 ]; then
-  log "INFO" "Sem publicacao em ${TARGET_DATE} (fim de semana ou feriado). Sem edicao."
-  exit 0
-fi
+  cat "${STDERR_FILE}" >> "${LOG_FILE}"
 
-if [ "${RC}" -eq 0 ]; then
-  if [ ! -f "${DEST}" ]; then
-    log "ERROR" "journal.py retornou 0 mas ${DEST} nao existe"
-    RC=3
-  else
-    MANCHETE=$(grep -m1 '^## ' "${DEST}" | sed 's/^## //')
-    N_DEST=$(sed -n 's/^destaques: //p' "${DEST}" | head -1)
-    log "INFO" "DONE — ${TARGET_DATE}, ${N_DEST:-?} destaque(s)"
-    publicar "${TARGET_DATE}"
-    notificar "Jornal de Papers — ${TARGET_DATE}" "default" "newspaper" \
-      "${MANCHETE:-Jornal disponivel} (${N_DEST:-?} destaques)"
+  if [ "${RC}" -eq 4 ]; then
+    log "INFO" "Sem publicação na janela (fim de semana prolongado). Sem edição."
     exit 0
+  fi
+
+  if [ "${RC}" -eq 0 ]; then
+    MUDANCAS=$(grep -Ec '^RECONCILE [0-9-]+ (regenerado|backfill) ' "${OUT_FILE}" || true)
+    if [ "${MUDANCAS}" -eq 0 ]; then
+      log "INFO" "Nada mudado na janela."
+      exit 0
+    fi
+    RESUMO=$(awk '$3=="regenerado"||$3=="backfill"{printf "%s(%s) ", $2, $3}' "${OUT_FILE}")
+    log "INFO" "DONE — reconciliação: ${RESUMO}"
+    publicar "reconciliação: ${RESUMO}"
+    notificar "Jornal de Papers — atualizado" "default" "newspaper" \
+      "Jornal atualizado: ${RESUMO}"
+    exit 0
+  fi
+else
+  # Passada 1 (22:00 e manual): geração do dia explícito. O antigo guard
+  # "existe -> nada a fazer" virou a regra uniforme: o journal.py compara o
+  # snapshot da edição existente e só regenera em mudança material; o
+  # inalterado sai em silêncio, sem publicar nem notificar.
+  TARGET_DATE="$1"
+  ALVO="${TARGET_DATE}"
+  YEAR="${TARGET_DATE:0:4}"
+  MONTH="${TARGET_DATE:5:2}"
+  DEST="${DATA_DIR}/edicoes/${YEAR}/${MONTH}/${TARGET_DATE}.md"
+
+  log "INFO" "=== Gerando jornal de ${TARGET_DATE} ==="
+
+  set +e
+  "${PYTHON_BIN}" "${JOURNAL_BIN}" --date "${TARGET_DATE}" >"${OUT_FILE}" 2>"${STDERR_FILE}"
+  RC=$?
+  set -e
+
+  cat "${STDERR_FILE}" >> "${LOG_FILE}"
+
+  if [ "${RC}" -eq 4 ]; then
+    log "INFO" "Sem publicacao em ${TARGET_DATE} (fim de semana ou feriado). Sem edicao."
+    exit 0
+  fi
+
+  if [ "${RC}" -eq 0 ]; then
+    ACAO=$(awk '$1=="JORNAL"{print $3}' "${OUT_FILE}" | head -1)
+    if [ "${ACAO}" = "inalterado" ]; then
+      log "INFO" "Jornal de ${TARGET_DATE} inalterado. Nada a fazer."
+      exit 0
+    fi
+    if [ ! -f "${DEST}" ]; then
+      log "ERROR" "journal.py retornou 0 mas ${DEST} nao existe"
+      RC=3
+    else
+      MANCHETE=$(grep -m1 '^## ' "${DEST}" | sed 's/^## //')
+      N_DEST=$(sed -n 's/^destaques: //p' "${DEST}" | head -1)
+      log "INFO" "DONE — ${TARGET_DATE}, ${N_DEST:-?} destaque(s)"
+      publicar "${TARGET_DATE}"
+      notificar "Jornal de Papers — ${TARGET_DATE}" "default" "newspaper" \
+        "${MANCHETE:-Jornal disponivel} (${N_DEST:-?} destaques)"
+      exit 0
+    fi
   fi
 fi
 
@@ -128,18 +178,18 @@ case "${RC}" in
 esac
 
 # O excerto do stderr vem ANTES do veredito, nao depois. Ele ja foi anexado
-# inteiro em :99, e reanexa-lo depois do FALHOU fazia o log voltar no tempo
+# inteiro acima, e reanexa-lo depois do FALHOU fazia o log voltar no tempo
 # apos o estado terminal — e so no caminho de falha, entao um log de falha
 # tinha uma ordem que o de sucesso nao tem.
 #
 # O excerto FICA: ele existe para poupar quem le de procurar a causa no meio do
 # dump inteiro, e isso e util. O defeito era a ordem, nao a existencia dele.
 # Rotulado, para as linhas repetidas nao parecerem saida nova do processo.
-log "ERROR" "ultimas linhas do stderr de ${TARGET_DATE}:"
+log "ERROR" "ultimas linhas do stderr de ${ALVO}:"
 tail -5 "${STDERR_FILE}" >> "${LOG_FILE}"
-log "ERROR" "FALHOU em ${TARGET_DATE}: ${REASON}"
+log "ERROR" "FALHOU em ${ALVO}: ${REASON}"
 
 notificar "Jornal de Papers FALHOU" "high" "warning" \
-  "${TARGET_DATE}: ${REASON}. Log: ${LOG_FILE}"
+  "${ALVO}: ${REASON}. Log: ${LOG_FILE}"
 
 exit "${RC}"

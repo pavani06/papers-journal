@@ -6,16 +6,25 @@ prosa dos destaques, e renderiza o markdown final. A listagem completa e
 montada pelo proprio script, nao pelo modelo, para que nenhum paper suma por
 esquecimento.
 
+Rotina em duas passadas (issue #14): a geracao (22:00) grava um snapshot de
+IDs+upvotes no front-matter; a reconciliacao (07:00, --reconcile) confronta a
+janela D-1..D-3 contra esse snapshot e regenera so o que mudou materialmente.
+
 Exit codes:
-  0  jornal escrito
+  0  jornal escrito / janela reconciliada (com ou sem mudancas)
   1  erro de configuracao ou uso
-  2  falha de rede / API
+  2  falha de rede / API (no --reconcile: ao menos um dia falhou,
+     apos processar os demais)
   3  assercao de sanidade falhou (feed vazio, resposta degenerada)
+  4  sem publicacao no dia (geracao) / janela inteira sem papers e
+     sem edicoes (reconcile) — nao e falha
 
 Uso:
   python3 journal.py                      # dia anterior
   python3 journal.py --date 2026-08-24
   python3 journal.py --date 2026-08-24 --dry-run
+  python3 journal.py --reconcile          # janela D-1..D-3 (--window N)
+  python3 journal.py --reconcile --dry-run
 """
 
 from __future__ import annotations
@@ -25,6 +34,7 @@ import datetime as dt
 import json
 import os
 import re
+import subprocess
 import sys
 import urllib.error
 import urllib.request
@@ -48,6 +58,11 @@ MEMORIA_EDICOES = 10
 
 # Nao e erro: o Hugging Face nao publica em fins de semana e feriados.
 SEM_PUBLICACAO = 4
+
+# Unicos gatilhos de regeneracao (decisao 1 da issue #14): diff de IDs OU
+# delta ABSOLUTO de upvotes >= este limite desde a ultima versao publicada.
+# Delta menor e comentarios nao disparam nada.
+LIMITE_DELTA_UPVOTES = 5
 
 
 class Fatal(Exception):
@@ -420,11 +435,17 @@ def render(date: str, papers: list[dict[str, Any]], verdict: dict[str, Any]) -> 
                 f"({p['upvotes']} upvotes){f' — {autores}' if autores else ''}  \n"
                 f"  {desc}{extra}")
 
+    # `papers:` migrau de escalar (contagem) para lista `  - <id> <upvotes>`
+    # (issue #14): e o snapshot contra o qual o --reconcile compara a API. A
+    # contagem segue disponivel no rodape "Fonte: ... N papers processados".
+    # Nenhum consumidor lia a chave escalar (papers-daily.sh grepa
+    # `destaques:`; render_html recebe papers por parametro, nao do .md).
     out = [
         "---",
         f"date: {date}",
         "tipo: jornal-papers",
-        f"papers: {len(papers)}",
+        "papers:",
+        *[f"  - {p['id']} {p['upvotes']}" for p in papers],
         f"destaques: {len(destaques)}",
         "tags: [papers, hugging-face, daily]",
         "---",
@@ -491,6 +512,234 @@ def render(date: str, papers: list[dict[str, Any]], verdict: dict[str, Any]) -> 
     return "\n".join(out)
 
 
+_LINHA_SNAPSHOT = re.compile(r"^  - (\S+) (\d+)$", re.MULTILINE)
+
+
+def ler_snapshot(date: str) -> dict[str, int] | None:
+    """Le o snapshot id -> upvotes da edicao publicada; None sem edicao.
+
+    Fonte primaria: o bloco `papers:` do front-matter (gravado pelo render).
+    Edicoes anteriores a migracao carregam `papers: <int>` escalar, sem lista
+    legivel: o .cache do dia — que sempre gravou id/upvotes — serve de fonte;
+    sem cache, devolve {} (edicao existe, mas nao ha com o que comparar).
+    """
+    md = paths.edicao_md(date)
+    if not md.is_file():
+        return None
+    front = md.read_text(encoding="utf-8").split("\n---", 1)[0]
+    if re.search(r"^papers: \d+$", front, re.MULTILINE):
+        cache = paths.cache(date)
+        if cache.is_file():
+            try:
+                cached = json.loads(cache.read_text(encoding="utf-8"))
+                return {p["id"]: int(p.get("upvotes") or 0) for p in cached["papers"]}
+            except (json.JSONDecodeError, KeyError, TypeError, ValueError):
+                log("WARN", f"cache de {date} ilegivel; edicao sem snapshot usavel")
+        return {}
+    return {pid: int(up) for pid, up in _LINHA_SNAPSHOT.findall(front)}
+
+
+def avalia_dia(snapshot: dict[str, int] | None,
+               lista_api: list[dict[str, Any]]) -> tuple[str, str]:
+    """Decide o que fazer com um dia. Pura, sem IO — testavel com fixtures.
+
+    snapshot: mapeamento id -> upvotes da ultima versao publicada (None se a
+    edicao nao existe; {} se existe mas o snapshot nao e legivel).
+    lista_api: papers do dia segundo a API, com `id` e `upvotes`.
+    Devolve (acao, motivo) com acao em {regenerar, backfill, inalterado, vazio}.
+
+    Gatilhos de regenerar, e so eles (decisao 1 da issue #14): conjunto de
+    IDs mudou (entrou OU saiu) ou delta absoluto >= LIMITE_DELTA_UPVOTES
+    desde a ultima versao publicada. API vazia com edicao existente nunca
+    apaga nem regenera (decisao 6): WARN e nenhuma acao.
+    """
+    if not lista_api:
+        if snapshot is None:
+            return ("vazio", "sem papers na API e sem edicao")
+        return ("inalterado", "api vazia; edicao preservada")
+    if snapshot is None:
+        return ("backfill", f"{len(lista_api)} papers na API e sem edicao")
+    if not snapshot:
+        return ("inalterado", "edicao sem snapshot legivel; nada a comparar")
+
+    ids_api = {p["id"] for p in lista_api}
+    entraram = ids_api - set(snapshot)
+    sairam = set(snapshot) - ids_api
+    if entraram or sairam:
+        partes = []
+        if entraram:
+            partes.append(f"{len(entraram)} paper(s) novo(s)")
+        if sairam:
+            partes.append(f"{len(sairam)} paper(s) removido(s)")
+        return ("regenerar", " e ".join(partes))
+
+    delta, pid = max(
+        ((abs(p["upvotes"] - snapshot[p["id"]]), p["id"]) for p in lista_api),
+        key=lambda par: par[0],
+    )
+    if delta >= LIMITE_DELTA_UPVOTES:
+        return ("regenerar", f"delta de {delta} upvotes em {pid}")
+    return ("inalterado", f"sem mudanca material (delta maximo {delta})")
+
+
+def extrair_cauda_deep_dives(texto_md: str) -> str:
+    """Cauda `## Deep dives` do .md: do cabecalho da secao ate o EOF.
+
+    A secao nao nasce do render: o pipeline papers-deep anexa-a depois
+    (ex.: edicoes/2026/08/2026-08-28.md:127-136, apos a linha "Fonte:").
+    Sem a secao, devolve "".
+    """
+    m = re.search(r"(?m)^## Deep dives[ \t]*$", texto_md)
+    return texto_md[m.start():] if m else ""
+
+
+def reconciliar_deep_html() -> None:
+    """Roda deep_html.py para reinjetar a secao de deep dives no HTML.
+
+    Falha aqui degrada com WARN, nao derruba: o .md novo ja esta em disco com
+    a cauda preservada, e o conversor e idempotente — pode ser re-rodado a
+    qualquer momento para convergir.
+    """
+    resultado = subprocess.run(
+        [sys.executable, str(Path(__file__).resolve().parent / "deep_html.py")],
+        capture_output=True, text=True)
+    if resultado.returncode != 0:
+        log("WARN", f"deep_html.py falhou (rc={resultado.returncode}): "
+                    f"{resultado.stderr.strip()[:200]}")
+
+
+def gravar_edicao(date: str, papers: list[dict[str, Any]],
+                  verdict: dict[str, Any]) -> None:
+    """Renderiza e grava a edicao (.md, .html, indice).
+
+    Na regeneracao, a cauda `## Deep dives` do .md antigo e extraida e
+    reanexada ao novo markdown; deep_html.py reconcilia entao o HTML.
+    """
+    md_path = paths.edicao_md(date)
+    cauda = (extrair_cauda_deep_dives(md_path.read_text(encoding="utf-8"))
+             if md_path.is_file() else "")
+    markdown = render(date, papers, verdict)
+    if cauda:
+        markdown = markdown.rstrip("\n") + "\n\n" + cauda
+        log("INFO", f"cauda '## Deep dives' preservada em {date}")
+
+    dest = paths.escrever(md_path, markdown)
+    log("INFO", f"jornal escrito: {dest}")
+
+    dest_html = paths.escrever(paths.edicao_html(date),
+                               render_html(date, papers, verdict))
+    log("INFO", f"edicao html escrita: {dest_html}")
+
+    escrever_indice()
+    log("INFO", f"indice atualizado: {paths.INDEX}")
+
+    if cauda:
+        reconciliar_deep_html()
+
+
+def gerar_edicao(date: str, papers: list[dict[str, Any]], interests: str,
+                 model: str, dry_run: bool = False) -> None:
+    """Pipeline completo de um dia: LLM, cache e gravacao.
+
+    Com dry_run, roda o modelo e imprime o markdown sem gravar nada
+    (nem cache, nem edicao). Regeneracao sempre inteira, nunca emenda
+    (decisao 3): o LLM reavalia destaques com o catalogo completo.
+    """
+    key = load_api_key()
+    log("INFO", f"gerando jornal com {model}")
+    verdict = normalize_verdict(call_llm(build_prompt(papers, interests, date),
+                                         model, key), papers)
+    log("INFO", f"{len(verdict['destaques'])} destaques, "
+                f"{len(verdict['tangenciais'])} tangenciais")
+
+    if dry_run:
+        print(render(date, papers, verdict))
+        return
+
+    # Cache gravado AQUI, assim que o veredito passa pela validacao, e nao
+    # no fim da execucao. --render-only existe para recuperar de uma falha
+    # depois do modelo, mas exigia o cache que so era escrito depois
+    # de renderizar: o modo de recuperacao nao tinha de onde partir
+    # exatamente na falha que ele recupera.
+    #
+    # O que se salva gravando cedo e a chamada ao modelo, que e a parte cara
+    # em dinheiro e em tempo. Render e barato e reproduzivel a partir daqui.
+    enxuto = [{**p, "abstract": (p.get("abstract") or "")[:CACHE_ABSTRACT_CHARS]}
+              for p in papers]
+    paths.escrever(
+        paths.cache(date),
+        json.dumps({"papers": enxuto, "verdict": verdict}, ensure_ascii=False))
+    log("INFO", f"veredito em cache: {paths.cache(date)}")
+
+    gravar_edicao(date, papers, verdict)
+
+
+def reconciliar(window: int, dry_run: bool, model: str) -> int:
+    """Segunda passada (07:00): confronta a janela D-1..D-window contra o publicado.
+
+    Uma chamada a API por dia; decisao por avalia_dia; dias com acao seguem
+    o pipeline normal de geracao. Stdout carrega as linhas
+    `RECONCILE <date> <regenerado|backfill|inalterado|vazio> <motivo>` para o
+    wrapper; logs ficam em stderr. Erro de API num dia nao derruba a janela
+    (decisao 9): processa os demais e devolve 2 citando o dia.
+    """
+    if window < 1:
+        raise Fatal(1, f"--window invalido: {window}")
+    if not paths.INTERESTS.is_file():
+        raise Fatal(1, f"perfil de interesse ausente: {paths.INTERESTS}")
+    interests = paths.INTERESTS.read_text(encoding="utf-8")
+
+    hoje = dt.date.today()
+    dias = [(hoje - dt.timedelta(days=i)).isoformat() for i in range(1, window + 1)]
+    falhas: list[str] = []
+    janela_vazia = True
+
+    for dia in dias:
+        try:
+            log("INFO", f"reconcile {dia}: buscando papers")
+            papers, brutos = fetch_papers(dia)
+            log("INFO", f"{dia}: {len(papers)} papers ({brutos} brutos)")
+            if brutos and not papers:
+                raise Fatal(3, f"API devolveu {brutos} itens mas nenhum utilizavel "
+                               f"em {dia}: schema provavelmente mudou")
+
+            snapshot = ler_snapshot(dia)
+            if papers or snapshot is not None:
+                janela_vazia = False
+            if not papers and snapshot is not None:
+                log("WARN", f"{dia}: API sem papers para dia com edicao; "
+                            "edicao preservada sem acao")
+
+            acao, motivo = avalia_dia(snapshot, papers)
+            if acao in ("inalterado", "vazio"):
+                log("INFO", f"reconcile {dia}: {acao} ({motivo})")
+                print(f"RECONCILE {dia} {acao} {motivo}", flush=True)
+                continue
+
+            rotulo = "regenerado" if acao == "regenerar" else "backfill"
+            if dry_run:
+                log("INFO", f"reconcile {dia}: {acao} ({motivo}); dry-run, nao gera")
+                print(f"RECONCILE {dia} {rotulo} {motivo}", flush=True)
+                continue
+
+            log("INFO", f"reconcile {dia}: {acao} ({motivo})")
+            gerar_edicao(dia, papers, interests, model)
+            print(f"RECONCILE {dia} {rotulo} {motivo}", flush=True)
+        except Fatal as err:
+            if err.code != 2:
+                raise
+            log("ERROR", f"reconcile {dia}: {err}")
+            falhas.append(dia)
+
+    if falhas:
+        raise Fatal(2, f"reconcile: falha de API em {', '.join(falhas)} "
+                       "(demais dias processados)")
+    if janela_vazia:
+        log("INFO", "janela inteira sem papers e sem edicoes")
+        return 4
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Jornal diario de papers do Hugging Face")
     ap.add_argument("--date", help="YYYY-MM-DD (padrao: ontem)")
@@ -498,7 +747,15 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true", help="imprime sem gravar")
     ap.add_argument("--render-only", action="store_true",
                     help="re-renderiza a partir do .verdict.json, sem chamar o LLM")
+    ap.add_argument("--reconcile", action="store_true",
+                    help="reconcilia a janela D-1..D-3 por diff de IDs e "
+                         "delta de upvotes (ignora --date)")
+    ap.add_argument("--window", type=int, default=3,
+                    help="tamanho da janela de reconciliacao (default: 3)")
     args = ap.parse_args()
+
+    if args.reconcile:
+        return reconciliar(args.window, args.dry_run, args.model)
 
     date = args.date or (dt.date.today() - dt.timedelta(days=1)).isoformat()
     try:
@@ -519,57 +776,39 @@ def main() -> int:
         papers, verdict = snapshot["papers"], snapshot["verdict"]
         log("INFO", f"re-render a partir do cache: {len(papers)} papers, "
                     f"{len(verdict['destaques'])} destaques")
-    else:
-        log("INFO", f"buscando papers de {date}")
-        papers, brutos = fetch_papers(date)
-        log("INFO", f"{len(papers)} papers recebidos ({brutos} brutos)")
-        if brutos == 0:
-            raise Fatal(SEM_PUBLICACAO, f"nenhum paper publicado em {date} "
-                                        "(tipicamente fim de semana)")
-        if not papers:
-            raise Fatal(3, f"API devolveu {brutos} itens mas nenhum utilizavel em {date}: "
-                           "schema provavelmente mudou")
-
-        key = load_api_key()
-        log("INFO", f"gerando jornal com {args.model}")
-        verdict = normalize_verdict(call_llm(build_prompt(papers, interests, date),
-                                             args.model, key), papers)
-        log("INFO", f"{len(verdict['destaques'])} destaques, "
-                    f"{len(verdict['tangenciais'])} tangenciais")
-
-        # Cache gravado AQUI, assim que o veredito passa pela validacao, e nao
-        # no fim da execucao. --render-only existe para recuperar de uma falha
-        # depois do modelo, mas exigia o cache (:512) que so era escrito depois
-        # de renderizar: o modo de recuperacao nao tinha de onde partir
-        # exatamente na falha que ele recupera.
-        #
-        # O que se salva gravando cedo e a chamada ao modelo, que e a parte cara
-        # em dinheiro e em tempo. Render e barato e reproduzivel a partir daqui.
-        if not args.dry_run:
-            enxuto = [{**p, "abstract": (p.get("abstract") or "")[:CACHE_ABSTRACT_CHARS]}
-                      for p in papers]
-            paths.escrever(
-                cache,
-                json.dumps({"papers": enxuto, "verdict": verdict}, ensure_ascii=False))
-            log("INFO", f"veredito em cache: {cache}")
-
-    markdown = render(date, papers, verdict)
-
-    if args.dry_run:
-        print(markdown)
+        if args.dry_run:
+            print(render(date, papers, verdict))
+            return 0
+        gravar_edicao(date, papers, verdict)
+        print(paths.edicao_md(date))
         return 0
 
-    dest = paths.escrever(paths.edicao_md(date), markdown)
-    log("INFO", f"jornal escrito: {dest}")
+    log("INFO", f"buscando papers de {date}")
+    papers, brutos = fetch_papers(date)
+    log("INFO", f"{len(papers)} papers recebidos ({brutos} brutos)")
+    existe = paths.edicao_md(date).is_file()
+    if brutos == 0 and not existe:
+        raise Fatal(SEM_PUBLICACAO, f"nenhum paper publicado em {date} "
+                                    "(tipicamente fim de semana)")
+    if brutos and not papers:
+        raise Fatal(3, f"API devolveu {brutos} itens mas nenhum utilizavel em {date}: "
+                       "schema provavelmente mudou")
 
-    dest_html = paths.escrever(paths.edicao_html(date),
-                               render_html(date, papers, verdict))
-    log("INFO", f"edicao html escrita: {dest_html}")
+    if existe:
+        acao, motivo = avalia_dia(ler_snapshot(date), papers)
+        if acao != "regenerar":
+            if not papers:
+                log("WARN", f"API sem papers para {date} com edicao existente; "
+                            "edicao preservada sem acao")
+            log("INFO", f"{date} {acao}: {motivo}")
+            print(f"JORNAL {date} inalterado {motivo}")
+            return 0
+        log("INFO", f"{date}: mudanca material ({motivo}); regenerando")
 
-    escrever_indice()
-    log("INFO", f"indice atualizado: {paths.INDEX}")
-
-    print(dest)
+    gerar_edicao(date, papers, interests, args.model, dry_run=args.dry_run)
+    if not args.dry_run:
+        print(f"JORNAL {date} {'regenerado' if existe else 'gerado'}")
+        print(paths.edicao_md(date))
     return 0
 
 
