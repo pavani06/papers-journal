@@ -455,8 +455,12 @@ def render(date: str, papers: list[dict[str, Any]], verdict: dict[str, Any]) -> 
                 "",
                 f"**Para o nosso caso:** {str(d.get('aproveitavel', '')).strip()}",
                 "",
-                f"[abstract](https://arxiv.org/abs/{p['id']}) · "
-                f"aprofundar: `python3 src/deepdive.py {p['id']}`",
+                # O convite para deepdive.py saiu daqui: a saida dele nunca foi
+                # publicada (grava em deep/ na raiz, e o conversor so varre
+                # edicoes/deep/), e o pipeline papers-deep ja cobre 100% dos
+                # destaques. Publicar um caminho que nao leva a lugar nenhum,
+                # justamente onde a cobertura ja e completa, e o defeito.
+                f"[abstract](https://arxiv.org/abs/{p['id']})",
                 "",
             ]
     else:
