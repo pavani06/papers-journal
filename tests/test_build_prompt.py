@@ -49,6 +49,16 @@ class TestBuildPrompt(unittest.TestCase):
         self.assertIn("# Perfil do leitor", user)
         self.assertIn("teste", user)
 
+    def test_cerca_de_dado_nao_confiavel_presente(self):
+        user = build_prompt(PAPERS, INTERESTS, "2026-08-11")[1]["content"]
+        self.assertIn("<<<CONTEUDO_NAO_CONFIAVEL>>>", user)
+        self.assertIn("<<<FIM_CONTEUDO_NAO_CONFIAVEL>>>", user)
+        inicio_catalogo = user.rfind("<<<CONTEUDO_NAO_CONFIAVEL>>>")
+        fim_catalogo = user.rfind("<<<FIM_CONTEUDO_NAO_CONFIAVEL>>>")
+        self.assertGreater(user.find("[2608.10001] Paper Um"), inicio_catalogo)
+        self.assertLess(user.find("[2608.10001] Paper Um"), fim_catalogo)
+        self.assertGreater(user.find("# Sua tarefa"), fim_catalogo)
+
 
 if __name__ == "__main__":
     unittest.main()
