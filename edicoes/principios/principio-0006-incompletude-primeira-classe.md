@@ -1,7 +1,7 @@
 ---
 id: principio-0006
 title: "Incompletude é estado de primeira classe — truncagem declarada e campo estruturado atravessando fronteiras"
-status: candidato
+status: adotado
 camada: c
 sinais:
   - "recorrencia: 8 papers independentes (2608.04569, 2608.05013, 2608.08160, 2608.08389, 2608.11079, 2608.24358, 2608.24569, 2608.26070)"
@@ -27,7 +27,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-08-30
 ---
 
 # Incompletude é estado de primeira classe

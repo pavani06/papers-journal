@@ -1,7 +1,7 @@
 ---
 id: principio-0004
 title: "Proveniência sela o artefato, não o log — produtor, config e ponteiro de evidência viajam dentro do registro"
-status: candidato
+status: adotado
 camada: c
 sinais:
   - "recorrencia: 14 papers independentes (2607.28048, 2608.05784, 2608.12571, 2608.12990, 2608.16859, 2608.23200, 2608.23283, 2608.03451, 2608.06867, 2608.09819, 2608.15242, 2608.16391, 2608.17271, 2608.22510)"
@@ -31,7 +31,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-08-30
 ---
 
 # Proveniência sela o artefato, não o log

@@ -1,7 +1,7 @@
 ---
 id: principio-0003
 title: "Estado herdado se valida contra o observável antes do uso — fail-closed com erro nomeado"
-status: candidato
+status: adotado
 camada: c
 sinais:
   - "recorrencia: 5 papers independentes (2608.04574, 2608.05219, 2608.05703, 2608.10875, 2608.21156)"
@@ -23,7 +23,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-08-30
 ---
 
 # Estado herdado se valida contra o observável antes do uso

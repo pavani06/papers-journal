@@ -1,7 +1,7 @@
 ---
 id: principio-0001
 title: "Controle determinístico fora do modelo — instrução em prompt não é controle"
-status: candidato
+status: adotado
 camada: a
 sinais:
   - "recorrencia: 21 papers independentes (2606.00152, 2607.29211, 2608.08160, 2608.11924, 2608.12307, 2608.15888, 2608.17597, 2608.19861, 2608.23740, 2608.24569, 2608.12440, 2608.13558, 2608.13900, 2608.16590, 2608.18580, 2608.20634, 2608.27260, 2608.13547, 2608.19741, 2608.21156, 2608.24979)"
@@ -35,7 +35,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-08-30
 ---
 
 # Controle determinístico fora do modelo
