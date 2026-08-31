@@ -95,7 +95,7 @@ def construir_indice() -> str:
 
 def escrever_indice() -> Path:
     destino = paths.ensure_parent(paths.INDEX)
-    destino.write_text(construir_indice(), encoding="utf-8")
+    paths.escrever(destino, construir_indice())
     return destino
 
 

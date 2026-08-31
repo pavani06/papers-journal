@@ -17,6 +17,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import paths  # noqa: E402
+
 RAIZ = Path(__file__).resolve().parent.parent
 NOTAS = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ / "edicoes/deep/2026/08"
 SAIDA = (Path(sys.argv[2]) if len(sys.argv) > 2
@@ -177,7 +180,7 @@ def main() -> None:
                 linhas += ["Citações não resolvidas (nome ambíguo ou linha fora do "
                            "arquivo): " + ", ".join(f"`{c}`" for c in sem), ""]
             n_aqui += len(aqui); n_outro += len(outro); n_sem += len(sem)
-        (SAIDA / f"{repo}.md").write_text("\n".join(linhas), encoding="utf-8")
+        paths.escrever(SAIDA / f"{repo}.md", "\n".join(linhas))
         print(f"{repo:20} {len(itens):>10} {n_aqui:>8} {n_outro:>6} {n_sem:>9}")
 
     print(f"\nnotas sem confronto aplicável: {len(vazias)}"

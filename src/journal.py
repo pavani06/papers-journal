@@ -485,12 +485,11 @@ def main() -> int:
         print(markdown)
         return 0
 
-    dest = paths.ensure_parent(paths.edicao_md(date))
-    dest.write_text(markdown, encoding="utf-8")
+    dest = paths.escrever(paths.edicao_md(date), markdown)
     log("INFO", f"jornal escrito: {dest}")
 
-    dest_html = paths.ensure_parent(paths.edicao_html(date))
-    dest_html.write_text(render_html(date, papers, verdict), encoding="utf-8")
+    dest_html = paths.escrever(paths.edicao_html(date),
+                               render_html(date, papers, verdict))
     log("INFO", f"edicao html escrita: {dest_html}")
 
     escrever_indice()
@@ -499,9 +498,9 @@ def main() -> int:
     if not args.render_only:
         enxuto = [{**p, "abstract": (p.get("abstract") or "")[:CACHE_ABSTRACT_CHARS]}
                   for p in papers]
-        paths.ensure_parent(cache).write_text(
-            json.dumps({"papers": enxuto, "verdict": verdict}, ensure_ascii=False),
-            encoding="utf-8")
+        paths.escrever(
+            cache,
+            json.dumps({"papers": enxuto, "verdict": verdict}, ensure_ascii=False))
 
     print(dest)
     return 0

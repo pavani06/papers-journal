@@ -316,9 +316,7 @@ def main() -> int:
         )
         edicao_rel = f"../../../{date[:4]}/{date[5:7]}/{date}.html"
         pagina = _pagina_deep(meta, _render_corpo(_blocos(corpo)), date, edicao_rel)
-        destino = paths.deep_html(paper_id, date)
-        paths.ensure_parent(destino)
-        destino.write_text(pagina, encoding="utf-8")
+        destino = paths.escrever(paths.deep_html(paper_id, date), pagina)
         por_edicao.setdefault(date, []).append((paper_id, titulo, chamada))
 
     for date, refs in sorted(por_edicao.items()):
@@ -327,16 +325,15 @@ def main() -> int:
             print(f"aviso: edicao {edicao} inexistente; secao nao injetada",
                   file=sys.stderr)
             continue
-        edicao.write_text(
+        paths.escrever(
+            edicao,
             _reconcilia_edicao(edicao.read_text(encoding="utf-8"),
-                               _secao_edicao(sorted(refs), date)),
-            encoding="utf-8",
-        )
+                               _secao_edicao(sorted(refs), date)))
 
     for _, edicao in paths.edicoes_publicadas():
         texto = edicao.read_text(encoding="utf-8")
         if MARCA in texto and edicao.stem not in por_edicao:
-            edicao.write_text(_reconcilia_edicao(texto, None), encoding="utf-8")
+            paths.escrever(edicao, _reconcilia_edicao(texto, None))
 
     if paths.DOCS_DEEP.is_dir():
         fontes = {

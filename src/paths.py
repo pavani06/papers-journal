@@ -72,6 +72,32 @@ def deep_notas() -> list[Path]:
     return sorted(DEEP_EDICOES.glob("*/*/*.md"))
 
 
+def escrever(path: Path, texto: str) -> Path:
+    """Escreve `texto` em `path` atomicamente, criando o diretorio se preciso.
+
+    Grava num temporario no MESMO diretorio e faz os.replace, que e atomico
+    dentro do mesmo filesystem. Temporario no mesmo diretorio nao e detalhe:
+    /tmp costuma ser outro filesystem, e ai o replace vira copia e perde a
+    atomicidade justamente onde ela importa.
+
+    O motivo nao e higiene. O guard de idempotencia do cron
+    (bin/papers-daily.sh:84) e a verificacao pos-execucao (:107) testam
+    EXISTENCIA do arquivo. Com escrita direta, uma interrupcao no meio deixa
+    arquivo parcial e o guard marca o dia como feito. Com replace, o destino
+    ou tem o conteudo anterior ou tem o novo inteiro — nunca um pedaco — e o
+    guard passa a estar correto sem precisar mudar.
+    """
+    ensure_parent(path)
+    tmp = path.with_name(f".{path.name}.tmp")
+    try:
+        tmp.write_text(texto, encoding="utf-8")
+        os.replace(tmp, path)
+    except BaseException:
+        tmp.unlink(missing_ok=True)
+        raise
+    return path
+
+
 def ensure_parent(path: Path) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     return path
