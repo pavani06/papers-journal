@@ -99,3 +99,35 @@ de afirmar qualquer coisa. O registro é pista a verificar, nunca fato.
 - arquitetura: stdlib pura para OpenAI, DeepSeek e z.ai; SDK `anthropic` como única dependência (venv próprio); conselho atual gpt-5.6-terra, deepseek-v4-pro, claude-opus-5, glm-5.3; presidente gpt-5.6-sol; `council ask --resume` retoma execução parcial por composição (estágios 1-2 herdados, consenso recomputado por Borda sem rede, guardas fail-closed incluindo `config_drift`; parcial gravado por troca atômica em cada limite de estágio; schema com `resumed_from`); `council ask --rank-lite` torna o estágio 2 orçável, registrando `stage2_mode`; `council cost` faz ledger e pré-voo sem rede; `council/audit.py` classifica achados em estruturais e de prosa; suite offline `test_offline.py` com CI em `.github/workflows/tests.yml`; pré-registros e emendas em `docs/prereg/`. Emendas de schema são aditivas por regra. A superfície MCP (`mcp_server.py`) não expõe resume nem interrupção.
 - last-verified: 2026-08-28
 - verified-head: a558dab1c557fc524251a6ebc41d9ba255858694
+
+## long-running-agents
+
+- path: `/home/pavanpavan/long-running-agents`
+- propósito: vault Obsidian de conhecimento sobre agentes long-running: padrões canônicos extraídos de fontes analisadas, currículo de 12 semanas aplicado ao KODA, análises de artigos com pipeline próprio; fonte conceitual do ecossistema (convenções Obsidian e taxonomia daqui foram adaptadas pelo mhc-knowledge-base).
+- arquitetura: markdown Obsidian com frontmatter e wikilinks validados (`npx tsx scripts/validate-obsidian.ts`, gate de CI); `docs/canonical/` com ~180 padrões, `docs/analysis/` gerado pelo pipeline analyze-and-improve (analysis, mental-model, patterns, classification por fonte), `docs/system-of-record.md` com precedência documental e os domínios que governam a taxonomia de tags, `docs/cross-vault-taxonomy.md` mapeando equivalências com os outros vaults, `curriculum/` (níveis 1-4 + core concepts + case studies), `harness/` (guia e templates do analyze-and-improve), portal web estático em `web/`; sem código de runtime além dos scripts de validação frontmatter.
+- last-verified: 2026-09-01
+- verified-head: 3e6e124de0aae1b939a931f1d82815d73b689330
+
+## chatbot-ai
+
+- path: `/home/pavanpavan/chatbot-ai`
+- propósito: umbrella repo da frota `chatshop-io`: mapa (`repos.yaml`) e controle remoto (`justfile`) dos sub-repos; não é monorepo — clones vivem em `repos/<grupo>/<nome>`, git-ignored e independentes, com worktrees ativos do mhc-backend no topo.
+- arquitetura: `repos.yaml` regenerado por `scripts/gen-manifest.py` (gh + scan local), `justfile` com clone/pull/status/exec pela frota (repos sem acesso são pulados, não erro), ambiente declarado em `devenv.nix` carregado por direnv com segredos machine-local (`.env`), `.agent-roles/` com rulesets por papel e `AGENTS.local.md` por máquina, vault de docs do projeto em `chatbot-ai-docs/`, DB OpenCode isolada por projeto (`.opencode-db/` via `OPENCODE_DB`).
+- last-verified: 2026-09-01
+- verified-head: 46270972ac1d44238f2ebf6ef1352c769cdeef67
+
+## mhc-knowledge-base
+
+- path: `/home/pavanpavan/mhc-knowledge-base`
+- propósito: knowledge base IDSD para o ecossistema KODA: governança humana em Markdown (intents, expectations, decisions) compilada em contratos de decisão executáveis consumidos pelo mhc-backend como dependência npm pinada por SHA imutável.
+- arquitetura: monorepo pnpm de duas camadas: `domains/` (Markdown Obsidian com taxonomia controlada `domain/*`, `artifact/*`, `capability/*`, `runtime/*`, `concern/*` referenciada em `system-of-record.md`) e `packages/` (`@mhc/decision-runtime`, `@mhc/koda-decision-kb`); `pnpm validate` confere frontmatter, referências, órfãos, versionamento e testes, `pnpm kb:generate` gera contract manifest + skeletons com gate `kb:validate` em CI; piloto: fatia vertical `checkout.preCreateOrder`; status pre-bootstrap, rastreado por GitHub Issues.
+- last-verified: 2026-09-01
+- verified-head: 0c450c5b315def264981bd993fccaa4b447143c3
+
+## obsidian-eval
+
+- path: `/home/pavanpavan/obsidian-eval`
+- propósito: CLI que transforma vaults Obsidian em runtime de conhecimento consultável sem o app: scan, grafo, queries, escrita e cross-vault wikilinks; runtime de fato do ecossistema de vaults (long-running-agents, mhc-knowledge-base, raw-knowledge, sisyphus-runtime), inclusive do warmup de memória das sessões.
+- arquitetura: TypeScript publicado como `@pavani/obsidian-eval`; parse de frontmatter YAML e resolução de wikilinks constroem grafo direcionado em memória; DSL de query por pattern matching sem `eval()`/`Function()` (`filter`, `findByTag`, `orphans`, `brokenLinks`, `inbound`/`outbound`); binário de gate (`obsidian-eval-gate.js`) para validações que bloqueiam; testes vitest.
+- last-verified: 2026-09-01
+- verified-head: 2eeb774c98af1f4b7b195ba7ae147fd223c73e5e
