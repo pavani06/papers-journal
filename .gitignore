@@ -14,3 +14,6 @@ __pycache__/
 
 # Segredos locais (topico ntfy)
 .env
+
+# Grafo de conhecimento da skill /understand (artefato local)
+.understand-anything/
