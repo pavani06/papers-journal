@@ -87,13 +87,19 @@ que existe sem gastar um destaque com algo que já leu.
   entre agente primário e subagentes, roteamento, quando um agente deve chamar
   outro em vez de fazer.
 - **Context engineering**: gestão de janela, compactação, o que manter e o que
-  descartar, memória entre sessões, handoff de contexto, orçamento de tokens.
+  descartar, handoff de contexto, orçamento de tokens, memória entre sessões,
+  arquitetura de estado persistente e seleção de memória.
 - **Planejamento por agentes**: transformar pedido vago em plano executável,
-  granularidade de passo, quando perguntar em vez de assumir, gates de
-  aprovação.
+  granularidade de passo, quando perguntar em vez de assumir.
+- **Governança e gates humanos**: aprovação antes de ações irreversíveis,
+  autoridade do operador sobre canais de decisão, revisão humana em workflow
+  automatizado, sycophancy e revisão adversarial, calibrar quando o humano
+  precisa estar no laço.
 - **Verificação e confiabilidade**: como saber que um agente realmente fez o que
   disse, evidência versus asserção, avaliação de confiabilidade em execuções
-  repetidas, detecção de falha silenciosa, reprodutibilidade de execução.
+  repetidas, detecção de falha silenciosa, reprodutibilidade de execução,
+  metodologia de eval: desenho de rubricas, tiers de avaliação, gates de eval e
+  correlação entre eval e produção.
 - **Prompt e skill engineering**: prompts como artefatos versionados,
   composição, sobreposição entre instruções, degradação com o tamanho.
 - **Agentes de código**: benchmarks de engenharia de software real, uso de
