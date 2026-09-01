@@ -179,6 +179,17 @@ Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-28|2026-08
 - [[papers/deep/2026/08/2608.25500|CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval]]
 - [[papers/deep/2026/08/2608.19269|What Does an Evaluation License? A Commit-Bound Census of Claim-Relative Inference in Inspect Evals]]
 
+Execução de 2026-08-31 sobre a edição de [[papers/2026/08/2026-08-31|2026-08-31]]:
+
+- [[papers/deep/2026/08/2608.28281|LoopArena: Benchmarking Models as Runtime Controllers for Loop Engineering]]
+- [[papers/deep/2026/08/2608.18524|DART-SD: Diamond-topology Aware Retrieval and Tuning for Self-Distillation of Multi-Turn Tool-Calling Agents]]
+- [[papers/deep/2026/08/2608.28122|Agentic Artifact Creation: Systems, Evaluation, Principles, and Opportunities]]
+- [[papers/deep/2026/08/2608.28476|ContextPilot: Teaching Agents for Proactive Context Management via Fine-grained RL]]
+- [[papers/deep/2026/08/2608.24804|StarHarness: Evolving Harnesses with Stratified Search for Enterprise Environments]]
+- [[papers/deep/2026/08/2608.28363|EvoUndo: Recoverability-Constrained Self-Evolution for LLM Agent Harnesses]]
+- [[papers/deep/2026/08/2608.24777|StepGuard: Learning Step-Level Guardrails with Scalable Supervision and Safety-Utility Balancing]]
+- [[papers/deep/2026/08/2608.27906|Rubric-to-Code Credit Assignment for Reinforcement Learning]]
+
 ## Execuções
 
 | Data | Edição | Notas criadas | Registro atualizado? |
@@ -200,3 +211,4 @@ Execução de 2026-08-29 sobre a edição de [[papers/2026/08/2026-08-28|2026-08
 | 2026-08-29 | [[papers/2026/08/2026-08-26|2026-08-26]] | 6 (todos os destaques) | Sim — `papers-journal` reconciliado; resumo acrescido do escape de título no conversor e do rebobinar do log em `papers-daily.sh` |
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
 | 2026-08-29 | [[papers/2026/08/2026-08-28|2026-08-28]] | 6 (todos os destaques) | Sim — `papers-journal` com refresh profundo (resolução de wikilinks no conversor acrescentada ao resumo; linhas de escrita não atômica e de `_parse_frontmatter` reposicionadas); demais entradas frescas |
+| 2026-08-31 | [[papers/2026/08/2026-08-31|2026-08-31]] | 8 (a edição foi reconciliada no meio da execução: 6 destaques da primeira leitura, mais 2 que entraram depois; StepGuard e RCCA saíram dos destaques mas as notas ficaram) | Sim — refresh profundo de `papers-journal` (proveniência do deepdive, gate da relação, escrita atômica e suite/CI corrigidos no resumo), `scripts` (`papers-deep/` novo, `project-runtime` esvaziado), `agent-skills` (skills vendorizadas, harness endurecido, `papers-synth.md` não servido por symlink) e `sisyphus-runtime` (promoção de princípios sem holdout); `papers-journal` ainda reconciliado por drift próprio para `2c597e9` |
