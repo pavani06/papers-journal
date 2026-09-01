@@ -57,14 +57,39 @@ notificar() {
 # Publicar e secundario: a edicao ja esta em disco quando isto roda. Falha aqui
 # avisa, mas nunca derruba o jornal do dia.
 publicar() {
-  local data="$1"
+  local rotulo="$1"; shift
   git -C "${PROJECT_ROOT}" remote get-url origin >/dev/null 2>&1 || return 0
-  git -C "${PROJECT_ROOT}" add edicoes docs deep 2>/dev/null || true
+
+  # Os artefatos nascem sob DATA_DIR, mas o git opera em PROJECT_ROOT, e
+  # PAPERS_DATA_DIR pode divergir (:22, src/paths.py:34). Com os dados fora do
+  # repo, o staging antigo ("add edicoes docs deep") stageava nada — ou stageava
+  # outra coisa — em silencio. Fail-closed e reportado.
+  local data_real root_real dentro=0
+  data_real="$(cd "${DATA_DIR}" 2>/dev/null && pwd -P || true)"
+  root_real="$(cd "${PROJECT_ROOT}" 2>/dev/null && pwd -P || true)"
+  if [ -n "${data_real}" ] && [ -n "${root_real}" ]; then
+    case "${data_real}/" in "${root_real}/"*) dentro=1 ;; esac
+  fi
+  if [ "${dentro}" -eq 0 ]; then
+    log "WARN" "dados fora do worktree; publicacao desativada"
+    return 0
+  fi
+
+  # O cron stagea SO o que ele mesmo produz. deep/, docs/deep/, registro e MOC
+  # tem outro produtor e ficam fora por construcao — ver src/paths.py:publicaveis.
+  # Lista vazia nao e erro: cai no "Nada novo para publicar" logo abaixo.
+  local -a alvos=()
+  mapfile -t alvos < <("${PYTHON_BIN}" "${PROJECT_ROOT}/src/paths.py" \
+    --publicaveis "$@" 2>>"${LOG_FILE}" || true)
+  if [ "${#alvos[@]}" -gt 0 ]; then
+    git -C "${PROJECT_ROOT}" add -- "${alvos[@]}" 2>/dev/null || true
+  fi
+
   if git -C "${PROJECT_ROOT}" diff --cached --quiet 2>/dev/null; then
     log "INFO" "Nada novo para publicar."
     return 0
   fi
-  if ! git -C "${PROJECT_ROOT}" commit -q -m "Edição de ${data}" 2>>"${LOG_FILE}"; then
+  if ! git -C "${PROJECT_ROOT}" commit -q -m "Edição de ${rotulo}" 2>>"${LOG_FILE}"; then
     log "WARN" "commit falhou; edicao permanece local"
     return 0
   fi
@@ -116,8 +141,9 @@ if [ "$#" -eq 0 ]; then
       exit 0
     fi
     RESUMO=$(awk '$3=="regenerado"||$3=="backfill"{printf "%s(%s) ", $2, $3}' "${OUT_FILE}")
+    mapfile -t DATAS < <(awk '$3=="regenerado"||$3=="backfill"{print $2}' "${OUT_FILE}")
     log "INFO" "DONE — reconciliação: ${RESUMO}"
-    publicar "reconciliação: ${RESUMO}"
+    publicar "reconciliação: ${RESUMO}" "${DATAS[@]}"
     notificar "Jornal de Papers — atualizado" "default" "newspaper" \
       "Jornal atualizado: ${RESUMO}"
     exit 0
@@ -130,8 +156,9 @@ if [ "$#" -eq 0 ]; then
   # o código de erro citando o dia problemático.
   if grep -qE '^RECONCILE [0-9-]+ (regenerado|backfill) ' "${OUT_FILE}"; then
     RESUMO=$(awk '$3=="regenerado"||$3=="backfill"{printf "%s(%s) ", $2, $3}' "${OUT_FILE}")
+    mapfile -t DATAS < <(awk '$3=="regenerado"||$3=="backfill"{print $2}' "${OUT_FILE}")
     log "INFO" "DONE — reconciliação (com falhas na janela): ${RESUMO}"
-    publicar "reconciliação: ${RESUMO}"
+    publicar "reconciliação: ${RESUMO}" "${DATAS[@]}"
     notificar "Jornal de Papers — atualizado" "default" "newspaper" \
       "Jornal atualizado: ${RESUMO}"
   fi
@@ -173,7 +200,7 @@ else
       MANCHETE=$(grep -m1 '^## ' "${DEST}" | sed 's/^## //')
       N_DEST=$(sed -n 's/^destaques: //p' "${DEST}" | head -1)
       log "INFO" "DONE — ${TARGET_DATE}, ${N_DEST:-?} destaque(s)"
-      publicar "${TARGET_DATE}"
+      publicar "${TARGET_DATE}" "${TARGET_DATE}"
       notificar "Jornal de Papers — ${TARGET_DATE}" "default" "newspaper" \
         "${MANCHETE:-Jornal disponivel} (${N_DEST:-?} destaques)"
       exit 0

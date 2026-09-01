@@ -75,6 +75,31 @@ def deep_notas() -> list[Path]:
     return sorted(DEEP_EDICOES.glob("*/*/*.md"))
 
 
+def publicaveis(dates: list[str]) -> list[Path]:
+    """Paths que o cron pode stagear: edicao md+html das datas dadas, mais o indice.
+
+    Conjunto FECHADO por construcao. Fora dele, deliberadamente: DEEP (:40),
+    DEEP_EDICOES (:41), DOCS_DEEP (:42), repos-registry.md, papers-moc.md e
+    edicoes/principios/. A razao nao e higiene de diff: esses paths tem OUTRO
+    produtor (o pipeline papers-deep, que roda em sessao de agente), e o cron
+    nao tem como saber se estao em estado terminal. Foi exatamente por stagea-los
+    que 2c597e9 commitou, junto com a edicao, seis notas deep que um agente
+    estava escrevendo naquele instante.
+
+    Devolve caminhos ABSOLUTOS (edicao_md/edicao_html/INDEX derivam de DATA,
+    :34-39) e filtra os que nao existem em disco. Converter para caminho de repo
+    e problema de quem chama.
+    """
+    achados: list[Path] = []
+    for date in dates:
+        achados.extend(
+            p for p in (edicao_md(date), edicao_html(date)) if p.is_file()
+        )
+    if INDEX.is_file():
+        achados.append(INDEX)
+    return achados
+
+
 def escrever(path: Path, texto: str) -> Path:
     """Escreve `texto` em `path` atomicamente, criando o diretorio se preciso.
 
@@ -162,3 +187,15 @@ def vereditos_anteriores(date: str, limite: int) -> list[tuple[str, dict]]:
               f"memoria: {len(achados)} lida(s), {ilegiveis} ilegiveis em {base}",
               file=sys.stderr)
     return achados
+
+
+if __name__ == "__main__":
+    # Exposto a shell para bin/papers-daily.sh calcular o que stagear sem
+    # conhecer o layout. Sem argparse de proposito: o resto do repo e stdlib
+    # linear e uma flag so nao paga a dependencia.
+    if len(sys.argv) >= 2 and sys.argv[1] == "--publicaveis":
+        for _p in publicaveis(sys.argv[2:]):
+            print(_p)
+    else:
+        print(f"uso: {sys.argv[0]} --publicaveis [AAAA-MM-DD ...]", file=sys.stderr)
+        sys.exit(2)
