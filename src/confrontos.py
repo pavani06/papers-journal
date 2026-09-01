@@ -6,9 +6,16 @@ As notas sao a fonte da verdade; este script so deriva. Para cada bloco
 coleta a nota de origem, o veredito e as citacoes `file:line`.
 
 Uso: python3 src/confrontos.py [dir-das-notas] [dir-de-saida]
+     python3 src/confrontos.py --gate <dir-das-notas>
 Read-only sobre as notas; escreve so no dir-de-saida. O default de saida fica
 fora deste repo, junto dos utilitarios do orquestrador em scripts/papers-deep/,
 para a derivacao nao morar dentro do objeto inspecionado.
+
+Modo --gate: executor do gate mecanico de citacoes do fechamento
+(commands/papers-deep.md, "Gate mecanico de citacoes"). Resolve cada citacao
+RAW contra a raiz do repo nomeado no bloco: caminho relativo a raiz, arquivo
+existe, faixa cabe. Sem reparo por heuristica, sem escrita em lugar nenhum;
+sai nao-zero nomeando qualquer citacao nao resolvida.
 """
 from __future__ import annotations
 
@@ -191,5 +198,46 @@ def main() -> None:
             print(f"  {stem}: {nome!r}")
 
 
+def gate(argv: list[str]) -> int:
+    """Executor estrito do gate mecanico: resolve RAW, nao grava, falha alto."""
+    if not argv:
+        print("uso: confrontos.py --gate <dir-das-notas> (diretorio obrigatorio)",
+              file=sys.stderr)
+        return 2
+    notas_dir = Path(argv[0])
+    if not notas_dir.is_dir():
+        print(f"gate: diretorio de notas inexistente: {notas_dir}", file=sys.stderr)
+        return 2
+    conhecidos = repos_do_registro()
+    notas = sorted(notas_dir.glob("*.md"))
+    total = resolvidas = 0
+    pendentes: list[tuple[str, str, str]] = []
+    for nota in notas:
+        txt = nota.read_text(encoding="utf-8")
+        m = re.search(r"^## Confronto com repos\s*$(.*)", txt, re.M | re.S)
+        if not m or "nenhum confronto aplicável" in m.group(1).lower():
+            continue
+        for bloco in re.split(r"^### ", m.group(1), flags=re.M)[1:]:
+            c = CABECA.match(bloco.strip())
+            nome = c.group(1) if c else "(bloco sem repo do registro)"
+            raiz = conhecidos.get(c.group(1)) if c else None
+            citacoes = sorted(set(f"{a}:{l}" for a, l in CITACAO.findall(bloco)))
+            for cita in citacoes:
+                total += 1
+                arq, _, faixa = cita.rpartition(":")
+                if (raiz is not None and arq and not Path(arq).is_absolute()
+                        and faixa.split("-")[-1].isdigit() and resolve(cita, raiz)):
+                    resolvidas += 1
+                else:
+                    pendentes.append((nota.name, nome, cita))
+    print(f"gate: {len(notas)} notas, {total} citacoes, "
+          f"{resolvidas} resolvidas, {len(pendentes)} nao resolvidas")
+    for nota, repo, cita in pendentes:
+        print(f"  nao resolvida: {nota} [{repo}] {cita}")
+    return 1 if pendentes else 0
+
+
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "--gate":
+        sys.exit(gate(sys.argv[2:]))
     main()
