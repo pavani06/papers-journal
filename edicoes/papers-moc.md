@@ -192,6 +192,17 @@ Execução de 2026-08-31 sobre a edição de [[papers/2026/08/2026-08-31|2026-08
 - [[papers/deep/2026/08/2608.24777|StepGuard: Learning Step-Level Guardrails with Scalable Supervision and Safety-Utility Balancing]]
 - [[papers/deep/2026/08/2608.27906|Rubric-to-Code Credit Assignment for Reinforcement Learning]]
 
+### 2026/09
+
+Execução de 2026-09-02 sobre a edição de [[papers/2026/09/2026-09-01|2026-09-01]]:
+
+- [[papers/deep/2026/09/2608.30530|WebWorld: The Browser as a World Model for Self-Improving Web Code]]
+- [[papers/deep/2026/09/2608.29464|Chain-of-Thought Faithfulness of Reasoning Models Varies with Where and How Preference Cues Are Delivered]]
+- [[papers/deep/2026/09/2608.29387|EvoGenUI-Bench: Evaluating LLMs as Multi-Turn Generative UI Assistants]]
+- [[papers/deep/2026/09/2608.31076|Learning to Evaluate Before Improving: Automatic Rubric Induction for Automatic Research Agents]] (destaque no snapshot inicial, deslocado depois)
+- [[papers/deep/2026/09/2608.28833|Evaluating the Hidden Costs of Personalization in Large Language Models]] (destaque no snapshot inicial, deslocado depois)
+- [[papers/deep/2026/09/2608.31022|MNIST-PRO: MNIST is Back as a Partially Observable World for AI Agents]] (destaque no snapshot inicial, deslocado depois)
+
 ## Execuções
 
 | Data | Edição | Notas criadas | Registro atualizado? |
@@ -214,3 +225,4 @@ Execução de 2026-08-31 sobre a edição de [[papers/2026/08/2026-08-31|2026-08
 | 2026-08-28 | [[papers/2026/08/2026-08-27|2026-08-27]] | 6 (todas as destaques) | Não — todos os repos confrontados estavam frescos (HEAD == `verified-head`, `last-verified` do dia) |
 | 2026-08-29 | [[papers/2026/08/2026-08-28|2026-08-28]] | 7 (6 destaques + 1 de snapshot anterior; CritICL destilado no fechamento de 2026-09-01) | Sim — `papers-journal` e `agent-skills` com refresh profundo em 2026-09-01 (substituição de cláusula); na execução anterior, resolução de wikilinks no conversor acrescida ao resumo |
 | 2026-08-31 | [[papers/2026/08/2026-08-31|2026-08-31]] | 9 (a edição foi reconciliada no meio da execução: 6 destaques da primeira leitura, mais 2 que entraram depois; StepGuard e RCCA saíram dos destaques mas as notas ficaram; o 6º destaque da versão final, Lost in Compression, ficou para a execução de continuidade de 2026-09-01, com verificação adversarial) | Sim — refresh profundo de `papers-journal` (proveniência do deepdive, gate da relação, escrita atômica e suite/CI corrigidos no resumo), `scripts` (`papers-deep/` novo, `project-runtime` esvaziado), `agent-skills` (skills vendorizadas, harness endurecido, `papers-synth.md` não servido por symlink) e `sisyphus-runtime` (promoção de princípios sem holdout); `papers-journal` ainda reconciliado por drift próprio para `2c597e9`, e na continuidade de 2026-09-01 para `7065040` (dois commits editoriais, resumo acrescido) |
+| 2026-09-02 | [[papers/2026/09/2026-09-01\|2026-09-01]] | 6 (todos os destaques do snapshot; 3 deslocados pela reconciliação do cron de 07:00 com notas mantidas e rotuladas) | Sim — refresh profundo de `papers-journal`, `agent-skills`, `sisyphus-runtime` e `long-running-agents`; `agent-workloops`, `koda-desafio` e demais confrontados frescos |

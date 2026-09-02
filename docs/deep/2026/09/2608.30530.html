@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — WebWorld: The Browser as a World Model for Self-Improving Web Code</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/09/2026-09-01.html">papers.hf</a><span class="data-topo">Deep dive · terça-feira, 1 de setembro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/09/2026-09-01.html">&larr; Edição de 2026-09-01</a></p>
+<h1 class="manchete">WebWorld: The Browser as a World Model for Self-Improving Web Code</h1>
+<p><strong>Sumário de ação</strong>: A tese central é real e comprovada por ablação limpa: separar propositor de verificador e só admitir transições certificadas (progresso no alvo + preservação do já verificado). Aplicar a catraca admissional no agent-skills (skills sem harness hoje passam em silêncio) e tornar o gate de citações do papers-journal admissional sobre nota nova; nada a aplicar dos números de leaderboard.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2608.30530">abstract</a> · <a href="https://arxiv.org/html/2608.30530">HTML</a> · 5 upvotes capturados no snapshot da edição em 2026-09-02T06:47:28-03:00 · edição de <a href="../../../2026/09/2026-09-01.html">2026-09-01</a> · avança 20/08 (menção textual: nota da edição anterior não existe)</p></div>
+<h2>Afirmação central</h2>
+<p>O loop de autoaperfeiçoamento de código web só funciona quando o propositor (VLM) não é o juiz: o browser, tratado como world model determinístico e executável do código web, deve emitir um certificado de aceitação que só admite uma transição quando há progresso verificável no alvo e preservação de toda capacidade previamente certificada.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code> (HTML completo baixado por curl, 298,6 kB; texto extraído e lido do título ao rodapé de geração LatexML, incluindo todos os apêndices A-G e o fim do documento verificado)</p>
+<ol><li><strong>Observação por execução</strong>: a cada rodada, o runtime renderiza o artefato em browser real, aplica um catálogo de 14 probes determinísticos (click, drag, keyboard, form fill, hover etc., Apêndice G) e grava observação com screenshots, DOM, console, resultados dos probes e traço de ações.</li><li><strong>Crítica estruturada</strong>: o VLM lê a observação (não o código-fonte) e emite crítica tipada: família do problema, evidência que a sustenta, região afetada, condição de sucesso pós-reparo, comportamento a preservar e a skill de reparo sugerida. "Deixe mais polido" não é crítica válida.</li><li><strong>Contrato de interação</strong>: o planner compila a crítica num contrato com tripleto de compromissos: predicado-alvo tipado sobre o estado da página, sequência concreta de ações de browser (seletores estáveis) que o verificador re-executa, e conjunto de preservação herdado das rodadas certificadas anteriores (𝒫t). Contratos incertificáveis por princípio (percepção pura, predicado sem consequência observável) são rejeitados antes do reparo. O contrato também fixa escopo de impacto: edição que vaza para região não relacionada falha o próprio contrato.</li><li><strong>Reparo roteado</strong>: 20 skills de reparo tipadas (15 lanes VLM + 5 lanes determinísticas para consertos mecânicos) propõem um candidato com diff limitado ao escopo do contrato; filtro pré-execução descarta candidatos que não podem mover o contrato (edição puramente visual fora da região-alvo, duplicados, patches que intersectam o preserve set).</li><li><strong>Certificado de aceitação</strong>: o browser re-executa o candidato sob o contrato. Admissão só com progresso no alvo E preservação de todo p∈𝒫t. O certificado registra objetivo, resumo do diff, nível de prova vencedor (em ordem: same-trace replay &gt; capability gain &gt; target-issue progress &gt; evidência visual localizada &gt; reparo estrutural estático) e o pacote de evidência executada que torna a decisão reproduzível offline. Recusas são tipadas (progresso parcial, visual-only, preserve-risk, replay velho).</li><li><strong>Catraca de qualidade</strong>: distinção entre IterStep (qualquer passo seguro de exploração, inclui recusas) e QualityStep (transição com certificado). Só QualityStep vira baseline e entra na memória monotônica 𝒫t+1 = 𝒫t ∪ verified(et) e no export SFT. Patch posterior que quebra controle previamente certificado é rejeitado na rodada seguinte — nada quebra silenciosamente.</li><li><strong>Export SFT</strong>: o dado de treino é a transição (pedido, observação, crítica, contrato, artefato resultante, certificado), não o HTML final. Corpus: ~60K candidatos admitidos ao re-execução, 24.350 recusados com rejeição tipada, 42.860 certificados, subamostra aleatória uniforme (seed 42) de 32.800 para parear o orçamento Raw.</li></ol>
+<h2>Evidência e resultados</h2>
+<p>Condições: SFT pareado por receita — mesma família Qwen3.5 (4B/9B/27B), otimizador, template e runner fixos, 32.800 exemplos por rota, 3 épocas, célula única com seed 42 (Apêndice C). HTMLBench-400: 400 prompts, score 0-100 somando 5 dimensões, funcionalidade é componente dominante medida como passagem ponderada sobre 6.000 testes de browser determinísticos; MiniAppBench-Val é transferência out-of-distribution.</p>
+<ul><li><strong>Ganho principal</strong>: WebWorld-27B 52,7 vs Raw-27B 47,4 no HTMLBench-400 (+5,3 pontos, +9,7 pp de TC pass) e 85,5 vs 70,6 no MiniAppBench-Val (+14,9), sob receita idêntica. O gap cresce com escala: +3,4 (4B), +4,8 (9B), +5,3 (27B).</li><li><strong>Ablação de mecanismo (9B, equal-size, mesma receita)</strong>: porta-cheia +4,8; score gate +3,6; VLM-only +3,5; NoPreserve +1,5; NoCertificate +0,4 — e o TC pass de NoCertificate fica 3,1 pp ABAIXO do Raw (31,0 vs 34,1): sem o oráculo, a supervisão não é neutra, é ruído que danifica a dimensão comportamental.</li><li><strong>Diagnóstico de profundidade</strong>: 5K exemplos com profundidade certificada ≥5 chegam a 0,5 ponto do corpus completo de 32.800 (48,8 vs 49,3) — cada exemplo profundo carrega mais capacidade verificada, como a memória monotônica prevê.</li><li><strong>O que os números NÃO significam</strong>: "nível Kimi-K2.6/GPT-5.4" (52,7 vs 49,8/49,2) é contexto de benchmark, não comparação controlada — arquiteturas, dados e tamanhos diferem; o próprio paper diz isso explicitamente. Single-seed: nenhuma variância reportada. Rendering/Visual/Code movem &lt;1 ponto sem sinal consistente: o gate não otimiza polimento visual e o ganho se concentra exatamente nas dimensões (TC, funcionalidade) que o certificado constrange. O custo é real e assumido (Apêndice E.3): verificação por re-execução consome mais que filtro barato ou one-shot.</li></ul>
+<h2>Limitações e riscos</h2>
+<p>Declaradas pelo paper: escopo restrito a artefatos HTML single-file (multi-arquivo/framework traz replay de dependências e scaffolding); defeitos genuinamente perceptuais (estética, identidade de marca, nuance de acessibilidade) não têm certificado executável e caem de volta no proxy VLM com seu ruído; o verificador reduz falso-positivos mas não torna a crítica VLM infalível — crítica errada desperdiça orçamento de reparo; aplicações dinâmicas seguem precisando de replay determinístico.</p>
+<p>Suspeitadas pela leitura: acoplamento gate↔métrica — o certificado constrange interação/funcionalidade e a funcionalidade do benchmark é medida por testes de browser do mesmo tipo; o audit de vazamento (Apêndice A.1, cinco condições de disjunção verificadas) mitiga contaminação de construção, e o runner HTMLCure é held-out, mas a afinidade entre o que o gate admite e o que a métrica mede não é independente por construção. O nome "self-improving" pode exceder: melhoria supervisionada offline de dados SFT, não melhoria contínua do modelo no runtime — o título é fiel ao enquadramento (browser como world model), mas o leitor apressado pode ler autoaperfeiçoamento contínuo onde há pipeline de dados.</p>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Catraca admissional</strong>: cada skill/artefato editado carrega o conjunto de capacidades previamente certificadas (preserve set); a edição que quebra capacidade certificada deve ser recusada na admissão — não detectada depois, quando o artefato quebrado já virou baseline.</li><li><strong>Propositor não é juiz</strong>: o agente que propõe a edição nunca certifica a própria edição; o verificador é determinístico, externo ao propositor e reproduzível offline (pytest, gate mecânico de citações, runner de harness).</li><li><strong>Transição certificada como unidade de exportação</strong>: exportar para memória/skill a transição (estado anterior, contrato, estado posterior, evidência), não o artefato final — com o certificado ligando diff a evidência executável.</li><li><strong>Níveis de prova ordenados e registrados</strong>: admissão por hierarquia de evidência (replay exato &gt; capacidade nova &gt; progresso do alvo &gt; visual local &gt; estático), gravando o nível vencedor — torna cada aceitação auditável em vez de subjetiva.</li><li><strong>Rejeição tipada é insumo, não lixo</strong>: recusa com motivo (progresso parcial, visual-only, preserve-risk) alimenta o próximo ciclo como diagnóstico sem contaminar o pool exportável.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e seguir. A contribuição não é o número agregado (pareado, mas single-seed e em benchmark aparentado ao gate) e sim a ablação de mecanismo: remover o certificado colapsa o ganho a +0,4 e empurra o TC pass para baixo do baseline — evidência direta de que supervisão não verificada é ativa, não apenas inútil. O desenho (contrato, certificado, catraca) é independente de domínio web e mapeia 1:1 para harness de agentes com gates mecânicos.</p>
+<h2>Confronto com repos</h2>
+<h3>agent-skills</h3>
+<p>Confronto feito em HEAD <code>df85f65fd0b68a6a9c69c84f09c75258c2c26b58</code> (<code>2026-09-02</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — T1 (catraca admissional) e T2 (propositor não é juiz). O esqueleto já existe: o runner é fail-closed para gate sem teste (<code>scripts/run_harness.py:9-10</code>, <code>:102-115</code> — permanece passes=false, executed=false), a CI reprova drift de <code>test-results.json</code> em pull request (<code>.github/workflows/harness.yml:29-31</code>) — que é exatamente preservação de capacidades certificadas contra edição regressiva — e o bot grava o resultado real na main (<code>.github/workflows/harness.yml:33-44</code>). O buraco da catraca: skill sem <code>harness/tests</code> é ignorada e devolve sucesso (<code>scripts/run_harness.py:69-70</code> retorna True com 0 gates); <code>skills/handoff</code> e <code>skills/implement</code> nem têm o diretório <code>harness/</code> (verificado no disco) — entrada por baixo da verificação, silêncio verde onde o paper exigiria não-verificado explícito.</li><li><strong>Oportunidade de melhoria</strong> — fechar o silêncio: skill sem harness deve contar como não-verificada no agregado e no exit code, não como aprovada; e enriquecer <code>test-results.json</code> com proveniência da certificação (qual commit verificou cada gate), o análogo do bloco provenance do certificado do paper, para que a edição que regrediu seja nomeável e não apenas detectável como drift.</li><li><strong>Como aplicar</strong> — primeiro o estado não-verificado explícito em <code>scripts/run_harness.py</code> (mudança local, sem tocar skills), depois a convenção de PR citando os gates preservados. A skill nova (<code>skills/implement/</code>) entra na primeira frente.</li><li><strong>Prós e contras</strong> — custo baixo: o runner e a CI já existem, é mudança de semântica de silêncio. Risco: exigir harness para skill de processo puro pode virar teste de fachada; o paper distingue capacidade certificável de propriedade perceptual — para o que não tem certificado possível, o honesto é o rótulo de não-verificado (como o fallback ao proxy VLM declarado), não verde fingido.</li><li><strong>Veredito</strong> — aplicar com ressalvas: a catraca por drift já opera para skills com harness; o ganho real é eliminar o silêncio das skills sem harness e registrar proveniência, mantendo o fail-closed atual.</li></ol>
+<h3>papers-journal</h3>
+<p>Confronto feito em HEAD <code>1280c7e4068b3a6b47223012d451147ea9a4a6aa</code> (<code>2026-09-02</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — T2 já implementada: <code>src/confrontos.py:201-237</code> é o verificador determinístico que o subagente destilador (propositor) não engana — resolve cada citação RAW contra a raiz do repo, sem heurística, e sai não-zero nomeando as não resolvidas (<code>:233-237</code>). T4 em miniatura: <code>src/deepdive.py:59-84</code> tipa a fonte da leitura (completo/truncado/abstract com lidos/total) e o corte volta como fato (<code>:104-107</code>) — nível de prova da leitura, não flag de sucesso. O gap contra o paper é duplo: (a) <code>src/confrontos.py:111-126</code> confere existência do arquivo e faixa de linhas, não o conteúdo — o oráculo valida a forma da citação, não o predicado (o análogo exato de visual plausível versus comportamento executável); (b) o gate é de fechamento sobre o acervo inteiro, não admissional — o commit 771ecd6 registra no título 924 citações não resolvidas em 77 notas pré-esquema, dívida que faz o gate falhar sempre e dilui o sinal para a nota nova.</li><li><strong>Oportunidade de melhoria</strong> — gate admissional: rodar <code>--gate</code> sobre a nota/do diretório do mês antes de a edição ser publicada, com o acervo pré-esquema quarentenado por exclusão explícita e nomeada (nunca silenciosa), devolvendo ao gate o poder de aprovar/reprovar a transição corrente — a catraca do paper aplicada ao pipeline que destila o próprio paper.</li><li><strong>Como aplicar</strong> — primeiro separar a dívida antiga (lista de exclusão versionada), depois plugar o gate existente no momento da admissão; nenhuma lógica nova precisa ser escrita, <code>src/confrontos.py:201-237</code> já é o executor.</li><li><strong>Prós e contras</strong> — custo baixo (reuso do gate); risco de fricção: o subagente passa a iterar até as citações resolverem antes de gravar, o que é o comportamento desejado mas consome rodadas; risco da quarentena mal feita esconder regressão — por isso exclusão nomeada por nota, revisável.</li><li><strong>Veredito</strong> — aplicar com ressalvas: o verificador determinístico é o ponto forte do repo e a tese central do paper já vive aqui; os ganhos são torná-lo admissional e não deixar a checagem só-forma ser lida como prova de conteúdo.</li></ol>
+<h2>Verificação adversarial</h2>
+<p>Emenda do orquestrador em 2026-09-02, a partir de verificador independente (Passo 2.5): leitura adversarial do paper em <code>https://arxiv.org/html/2608.30530</code> com cobertura <code>html-complete</code>, nível <code>adversarial</code>; a seção de confronto não fez parte do material do verificador.</p>
+<ul><li>Eixos 1-4: sem divergência material. Todos os números conferem nas condições do paper (Tables 1-4, §3.2-3.3, Apêndices C/D/E.3); teses traçam a §2.5, eq. 7 e §2.4; calibragem correta (contexto de benchmark vs comparação controlada é dito textualmente no paper; single-seed; custo E.3).</li><li>Correções aplicadas (micro-omissões, não erros): a crítica tipada inclui também "a suggested repair skill" (§2.3); a tupla de export da eq. 7 inclui o pedido.</li></ul>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/09/2026-09-01.html">edição de 2026-09-01</a></footer>
+</body>
+</html>

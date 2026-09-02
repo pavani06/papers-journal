@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — MNIST-PRO: MNIST is Back as a Partially Observable World for AI Agents</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/09/2026-09-01.html">papers.hf</a><span class="data-topo">Deep dive · terça-feira, 1 de setembro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/09/2026-09-01.html">&larr; Edição de 2026-09-01</a></p>
+<h1 class="manchete">MNIST-PRO: MNIST is Back as a Partially Observable World for AI Agents</h1>
+<p><strong>Sumário de ação</strong>: Vale destilar pelo diagnóstico, não pelo domínio visual: os três gargalos medidos (integrar evidência fragmentada, parar cedo sem critério, reter crença inicial errada) mapeiam direto nos loops de investigação do ecossistema. Aplicar com ressalvas em agent-skills (cobertura declarada na exploração de repo; confronto explícito das premissas do brief) e em sisyphus-runtime (protocolo de revogação para princípios promovidos por recorrência).</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2608.31022">abstract</a> · <a href="https://arxiv.org/html/2608.31022">HTML</a> · 7 upvotes capturados no snapshot da edição em 2026-09-02T06:47:28-03:00 · edição de <a href="../../../2026/09/2026-09-01.html">2026-09-01</a> Destaque no snapshot inicial desta execução (manifest 2026-09-02T06:47:28-03:00); deslocado da seção Destaques pela reconciliação do cron de 2026-09-02T07:00 (commit 3b554c6). Resultado válido do snapshot.</p></div>
+<h2>Afirmação central</h2>
+<p>Adquirir evidência não basta: sob parcial observabilidade, o gargalo dos agentes está em construir, representar e interpretar o estado perceptual acumulado, e em decidir quando esse estado é confiável o bastante para agir.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code> (HTML integral baixado por curl após truncamento do webfetch; fim do documento verificado, incluindo references e apêndice de figuras).</p>
+<ol><li>Ambiente: imagens MNIST 28×28 invertidas, ampliadas para 224×224 e binarizadas; o agente só vê uma janela (default 64×64) que move em passos de 32 px (up/down/left/right) ou emite uma predição terminal. POMDP formalizado com estado (canvas estático + coordenada da janela), observação mascarada e orçamento de passos suficiente para varrer o canvas inteiro: 36 passos no Level 1 (um dígito), 78 no Level 2 (dois dígitos concatenados, em que a ordem também pontua).</li><li>Loop agéntico exigido: a cada passo o agente atualiza estado perceptual z_t a partir de (z_{t-1}, observação, posição); a predição é fatorada em leitura do estado (R_theta) e decisão (D_theta), separando construção de estado de interpretação de estado.</li><li>Taxonomia de memória, o coração metodológico: interna (histórico visual bruto com lookback H=∞; estado textual com H=1; metric grid map com H=1, ancoragem de coordenada na origem e integração de caminho in-contexto), externa (canvas consolidado programaticamente: online a cada passo, ou offline ao fim da exploração, com replay da mesma trajetória), e persistente (harness agêntico com shell/MCP, arquivos, código, memória cross-episódio e feedback de correção).</li><li>Diagnóstico por troca controlada: replay de trajetória com canvas offline isola aquisição de evidência (trajetória congelada, só muda a representação); troca de preditor sobre o mesmo canvas isola interpretação (mesmo artefato, consumidor diferente).</li></ol>
+<h2>Evidência e resultados</h2>
+<p>10 modelos (8 proprietários, 2 open source), 100 episódios por nível, APIs em configuração default, glimpse 64×64.</p>
+<ul><li>Controle fully observable: 83% a 99% de acurácia. Sob parcial observabilidade nativa, o melhor (Gemini-3.7-Flash) faz 75,0% no L1 e 47,0% no L2; GPT-5.6-Sol, Qwen-3.8-27B e GLM-4.6V decidem em 2,8 a 5,7 passos no L1 e fazem 0,0% no L2.</li><li>Auditoria de 1.600 trajetórias L2 (configs Textual State e Metric Grid Map): 323 predições de um só dígito, 238 delas sem nunca tocar o segundo dígito, consumindo em média 15 dos 78 passos disponíveis (parada precoce); estado textual que descreve "explorar região nova" enquanto a ação revisita o já visto (revisit rate de 45,1% cai para 13,6% com grid map no Gemini-3.7-Flash); crença inicial errada retida (específico do Gemini-3.7-Flash): de 39 casos com dois dígitos representados, 17 tinham identidade errada armazenada e 15 a mantiveram na predição final.</li><li>Cobertura não é sucesso: com cobertura mínima ≤25% a acurácia de sequência exata é 1,0%; com &gt;75% ainda é só 26,0%. Curar a parada precoce não resolve interpretação, e o critério de parada tem que medir cobertura informativa (os dois dígitos), não área vista.</li><li>Canvas offline (trajetória congelada, baselines = condição Textual State H=1): Claude-5-Opus sobe de 41,0% para 76,0% (L1) e de 13,0% para 67,0% (L2); Claude-5-Fable de 38,0% para 81,0% e de 18,0% para 69,0%. Ganho com aquisição congelada localiza o erro depois da aquisição, na organização/interpretação.</li><li>Troca de preditor no mesmo canvas: canvas de GPT-5.6-Sol (xhigh) re-predito por Gemini-3.7-Flash vai de 66,5% para 84,3% no L1 (+17,8 pp): interpretação é gargalo separado com a mesma evidência.</li><li>Harness MCP: Gemini-3.7-Flash chega a 88,0% (L1) e 63,0% (L2), escrevendo os próprios <code>stitch.py</code>/<code>render_mnist.py</code> para consolidar o canvas; custa 2,8× (L1) e 2,0× (L2) mais passos que o Memory Canvas (vs setup nativo seriam ~1,9× e ~1,4×). Resultado análogo do Claude-5-Opus em apenas 26 episódios pareados de L1 (80,8% vs 46,2%).</li><li>Nulo informativo: memória persistente e feedback não melhoram a média (75,5% → 73,5% → 74,5%); GPT-5.6-Terra armazenou o procedimento de canvas mas o executou em ~2% dos episódios. Gravar procedimento sem caminho de invocação é peso morto.</li></ul>
+<h2>Limitações e riscos</h2>
+<ul><li>Declaradas pelo paper: miscalibração de confiança induzida por pós-treino não isolada (RLHF citado só como hipótese); parte do ganho do harness pode ser steering do system prompt; o contraste com ScrambleToolBench (busca exaustiva em domínio sem priors) é hipótese sobre priors de domínio, não teste.</li><li>Suspeitadas na leitura: 100 episódios por célula sem teste de significância; deltas como 75,5 vs 74,5 não suportam leitura forte, o próprio paper diz "does not materially improve". O resultado de harness do Claude-5-Opus é 26 episódios. Domínio único, 2D, sem ruído de execução: isolar percepção é o objetivo, mas extrapolar para GUI/robótica é projeção, não medida.</li><li>O que os números não significam: 88% não é "agentes resolvem MNIST-PRO"; é um modelo, uma configuração de harness, com orçamento de sensoriamento ~2-3× maior que o Memory Canvas (~1,4-1,9× que o nativo). No L2 a sequência exata para em 63%, e 32 de 92 episódios com ≥75% de cobertura dos dois dígitos ainda erraram: sobrou gargalo de interpretação mesmo com evidência completa.</li></ul>
+<h2>Teses transferíveis</h2>
+<ol><li>Parada deve ser decisão justificada contra um critério de cobertura declarado, e o critério precisa medir cobertura informativa (cada região load-bearing foi observada?), não volume agregado: os agentes paravam a 15/78 do orçamento com um dígito inteiro invisível; mas cobertura bruta &gt;75% ainda rendia só 26%, então o critério também não pode parar no "visto".</li><li>Hipótese inicial é revogável por protocolo: registrar a crença incumbente e exigir confronto explícito com evidência posterior contraditória (15/17 retiveram a identidade errada); verificação que só acumula confirmações reproduz o modo de falha.</li><li>Mesma evidência + representação melhor = uso melhor: consolidar o acumulado num artefato externo organizado (canvas) venceu histórico bruto, e o momento da consolidação importa, consolidar ao fim da exploração venceu consolidar a cada passo.</li><li>Visto ≠ usado: aquisição, integração e interpretação são gargalos distintos; trocar o consumidor mantendo o artefato (preditor swap) é o experimento que separa os três.</li><li>Memória persistente sem caminho de invocação é peso morto: procedimento armazenado executou em ~2% dos episódios; write path sem read/trigger acoplado não transfere valor — mas falta de invocação não esgota a explicação do nulo: no Gemini-3.7-Flash o procedimento foi invocado em 100% dos episódios e a acurácia não subiu.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e seguir como referência de método: o desenho experimental (controle de lookback, replay de trajetória, troca de preditor) é o modelo certo de como isolar gargalos de agente, e os três modos de falha são transferíveis para qualquer loop de investigação, não só visual. O domínio MNIST não nos interessa; a disciplina de parada, revogação e consolidação sim. O título não promete mais do que a evidência dá: o "PRO" é o benchmark, não uma claim de solve.</p>
+<h2>Confronto com repos</h2>
+<h3>agent-skills</h3>
+<p>Confronto feito em HEAD <code>df85f65fd0b68a6a9c69c84f09c75258c2c26b58</code> (<code>2026-09-02</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 1: o comando papers-deep já governa a parada de leitura com quatro classes de cobertura declaradas na primeira linha da seção de mecânica e fallback curl quando truncado (<code>commands/papers-deep.md:84-85</code>, tabela das classes em <code>commands/papers-deep.md:197-206</code>); o paper dá lastro empírico a essa convenção: parar cedo é o modo de falha default, não exceção. Tese 2: o ciclo de issues nomeia expectativas como hipóteses até aprovação do brief (<code>skills/issue-executor-master/SKILL.md:144</code>) e o papers-deep marca tese refundada como <code>refutada</code> (<code>commands/papers-deep.md:232</code>), mas nenhuma das duas cadeias exige confronto da hipótese incumbente com evidência contraditória encontrada depois. Tese 3: a disciplina I3, um baseline, checagens dirigidas durante a execução e um único scan completo no fim (<code>skills/implement/SKILL.md:23</code>), ressoa com o achado de que consolidar ao fim vence consolidar a cada passo.</li><li><strong>Oportunidade de melhoria</strong> — estender a cobertura declarada da leitura do paper para a exploração do repo no confronto: o passo 5 pede "leitura direcionada" sem declarar quais arquivos e entry points foram vistos (<code>commands/papers-deep.md:65</code>), o que torna <code>NOT_FOUND</code> não auditável contra critério de cobertura; e acrescentar à Fase 3 do issue-executor um check de "premissas do brief revisitadas", hoje o anti-padrão 7 só separa diagnóstico de recomendação (<code>skills/issue-executor-master/SKILL.md:241</code>).</li><li><strong>Como aplicar</strong> — primeiro a linha de cobertura de exploração no papers-deep (uma linha por repo no relatório do subagente, custo mínimo); depois o check de revogação de premissas no issue-executor, na reference de fases 3-5.</li><li><strong>Prós e contras</strong> — pró: custo baixo e fecha lacuna medida pelo paper (parada sem critério, crença irrevisada). Contra: mais cerimonial por confronto, e a cobertura declarada degrada em checkbox se o gate mecânico não a validar.</li><li><strong>Veredito</strong> — aplicar com ressalvas: a extensão de cobertura no papers-deep é aplicar agora; o check de premissas no issue-executor muda contrato de fase e depende de aprovação nomeada do operador.</li></ol>
+<h3>sisyphus-runtime</h3>
+<p>Confronto feito em HEAD <code>10b176c927d6d63e368ccf43773f4b87ab03bdec</code> (<code>2026-09-02</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 2: princípios duráveis são promovidos por recorrência textual com limiar de 3 ocorrências (<code>facts/_global/promote-patterns-validation.md:27-39</code>) e carregam apenas contagem de evidência (<code>facts/_global/principles.md:16-30</code>); fatos são append-only com uma única exceção documentada, correção retroativa de tokens de evidência (<code>index.md:45</code>). O ledger de recomendações tem ciclo completo com status <code>rejected</code> (<code>index.md:51</code>; mudança de status é evento novo, <code>index.md:61</code>), mas o princípio promovido não tem caminho de revogação análogo: procurei e nenhuma entrada em <code>facts/_global/principles.md:16-30</code> carrega campo de refutação, e o protocolo de <code>index.md:77-86</code> cobre só promoção de handles, uma direção. É o modo de falha do paper institucionalizado: crença promovida por repetição, sem protocolo para derrubar com evidência contrária. Tese 5: a promoção de outcome é gesto explícito do operador (<code>index.md:79</code>) e o read path existe, a lane de warmup lista handles; o acoplamento promotion/warmup é a parte a preservar, porque o paper mediu que gravar sem invocar é peso morto.</li><li><strong>Oportunidade de melhoria</strong> — protocolo de revogação para princípios: campo <code>status: active|challenged|refuted</code> em entradas <code>kind: principle</code>, com evento no loop-ledger e evidência nomeada da contradição, espelhando o <code>rejected</code> que recomendações já têm.</li><li><strong>Como aplicar</strong> — emenda ao protocolo de princípios na seção Principios de <code>index.md</code> e validação no <code>append-fact</code>, que já é fail-closed para evidence (<code>index.md:46</code>); retroatividade só por decisão do operador, respeitando o append-only de <code>index.md:45</code>.</li><li><strong>Prós e contras</strong> — pró: fecha a assimetria recomendação/princípio reusando mecânica existente (ledger, append-fact). Contra: risco de churn de princípios se o gatilho de <code>challenged</code> não exigir evidência nomeada; mais um estado para manter.</li><li><strong>Veredito</strong> — aplicar com ressalvas: mudança de ciclo de vida de fato durável é decisão do operador; a proposta reusa infraestrutura existente e o paper entrega o caso medido (15/17 crenças erradas retidas) que justifica o custo.</li></ol>
+<h2>Verificação adversarial</h2>
+<p>Emenda do orquestrador em 2026-09-02, a partir de verificador independente (Passo 2.5): leitura adversarial do paper em <code>https://arxiv.org/html/2608.31022</code> com cobertura <code>html-complete</code>, nível <code>adversarial</code>; a seção de confronto não fez parte do material do verificador.</p>
+<ul><li>Eixo 1: mecânica confere com §2.1-2.4 e §3.1 (inversão/upscale/binarização, janela 64×64 δ=32, orçamentos 36/78, taxonomia de memória, replay e troca de preditor). Afirmação central espelha o abstract.</li><li>Eixo 2: números todos corretos, mas quatro condições omitidas foram adicionadas — 39/17/15 de crença retida é específico do Gemini-3.7-Flash (§3.4.1); o custo 2,8×/2,0× é relativo ao Memory Canvas, não ao setup nativo (~1,9×/1,4× vs nativo); os baselines 41/13 e 38/18 dos Claudes no canvas offline são a condição Textual State H=1 (Tabela 3); a auditoria de 1.600 trajetórias cobre só configs Textual/Grid.</li><li>Eixo 3: tese 5 ganhou o contraponto do braço Gemini (procedimento invocado em 100% dos episódios sem ganho de acurácia) — falta de invocação não esgota a explicação do nulo. Teses 1-4 decorrem da evidência.</li><li>Eixo 4: calibragem correta na substância (RLHF como hipótese não isolada, steering de system prompt, ScrambleToolBench como hipótese, 26 episódios pareados, "does not materially improve", 32/92 com cobertura ≥75%); o "~3×" foi reancorado ao baseline Memory Canvas.</li></ul>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/09/2026-09-01.html">edição de 2026-09-01</a></footer>
+</body>
+</html>
