@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — EarlyEval: Cheaper Agent Evaluation via Early Outcome Prediction</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/09/2026-09-03.html">papers.hf</a><span class="data-topo">Deep dive · quinta-feira, 3 de setembro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/09/2026-09-03.html">&larr; Edição de 2026-09-03</a></p>
+<h1 class="manchete">EarlyEval: Cheaper Agent Evaluation via Early Outcome Prediction</h1>
+<p><strong>Sumário de ação</strong>: A tese aplicável aqui não é treinar classificador, é a disciplina de gates temporais: sinal comportamental de stall/falha interrompe cedo com faixa de incerteza, desfecho final exige amostra completa. Aplicar como heurísticas pobres em <code>agent-workloops</code> (condições de parada por sinal) e como canonical doc de avaliação temporal em <code>long-running-agents</code>; em <code>scripts</code>, apenas manter o outcome label obrigatório na trajetória.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2609.02783">abstract</a> · <a href="https://arxiv.org/html/2609.02783">HTML</a> · 113 upvotes capturados no snapshot da edição em 2026-09-04T09:18:24-03:00 · edição de <a href="../../../2026/09/2026-09-03.html">2026-09-03</a> · avança 26/08 (menção textual)</p></div>
+<h2>Afirmação central</h2>
+<p>O desfecho final de um agente numa tarefa de benchmark costuma ser previsível a partir de sinais comportamentais, textuais e (quando há) de sobreposição com a solução de referência bem antes do fim da execução, permitindo parar runs antecipadamente com economia grande de passos/tokens e distorção pequena e quantificada no resolve rate.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code> — HTML integralmente lido: webfetch entregou Abstract até o meio de §IV-C; o HTML completo (324 kB) foi baixado via <code>curl</code> e o texto extraído localmente cobrindo §IV-C até o fim (References [1]–[44], Data Availability e footer LaTeXML verificados).</p>
+<ol><li><strong>Coleta do pool histórico</strong>: trajetórias completas de M agentes no benchmark alvo, rotuladas com o desfecho binário do benchmark (leaderboards públicos e runs liberadas com os benchmarks). Trajetórias com menos de 10 passos são descartadas.</li><li><strong>Expansão em prefixos</strong>: cada trajetória τ de comprimento T gera prefixos τ:k para k=0..T, cada um herdando o rótulo final y. Cada prefixo é ponderado por 1/(T+1), para que trajetórias longas não dominem a loss.</li><li><strong>Features por prefixo</strong> (três famílias): <strong>comportamentais</strong> (~115: contadores de atividade por categoria, propriedades do último passo, timing de marcos como primeira edição/primeiro teste, padrões de trabalho — repetição de ações, streaks sem edição, submeter sem testar, editar após submeter — e status de erros/testes); <strong>textuais</strong> (TF-IDF→SVD do prompt da tarefa, do histórico de ações e do feedback do ambiente, blocos independentes, ~320 dims no total); <strong>de referência</strong> (descritores do gold patch + sobreposição Jaccard de arquivos/APIs/testes entre prefixo e gold). Benchmarks sem gold patch (TerminalBench, Toolathlon) omitem a terceira família.</li><li><strong>Treino</strong>: dois ensembles LightGBM sobre as mesmas features — preditor de sucesso h+ (alvo y=1) e de falha h− (alvo invertido) — permitindo que evidência positiva e negativa acumulem de forma independente e criando uma região explícita de não-confiança (ambos baixos → continuar). Split por tarefa impede vazamento (todo prefixo de uma trajetória fica do mesmo lado); validação reserva 15% para early stopping e calibração.</li><li><strong>Calibração</strong>: Platt scaling (logística 1-D sobre o score bruto) por preditor e por fold; transformação monotônica que preserva ranking/AUC e só torna os limiares comparáveis entre preditores e folds.</li><li><strong>Inferência online</strong>: a cada passo, extrair φ(τ:k), computar p+ e p−; no primeiro passo com p+ ≥ s ou p− ≥ f, interceptar a execução e registrar o desfecho previsto; empate simultâneo resolve pelo cruzamento cronologicamente anterior; abaixo dos limiares, continuar. s e f são o knob explícito do trade-off acuracia–economia.</li><li><strong>Regime de uso</strong>: re-avaliação iterativa de agentes em evolução contra benchmark estável com histórico acumulado; preditores são agent-agnósticos (leave-one-agent-out) e refresh custa quase nada conforme runs acumulam. Escore canônico/citável continua exigindo execução completa.</li></ol>
+<h2>Evidência e resultados</h2>
+<p>Condições: &gt;21.000 trajetórias rotuladas (SWE-bench Verified 7.805/16 agentes sob scaffold único mini-SWE-agent; TerminalBench 6.757/37 configurações; Toolathlon 7.116/22 LLMs), protocolo leave-one-agent-out (o preditor nunca viu o agente avaliado), com dois controles extras de vazamento no TerminalBench (sem mesmo modelo / sem mesmo scaffold no treino). Ponto de operação recomendado = menor limiar com desvio dual |ΔPass@1| ≲ 2 pp. Nesses pontos:</p>
+<ul><li>SWE-bench Verified (limiar 0,95): −26,0% passos, −32,7% tokens de entrada, −28,7% de saída, |ΔPass@1| 1,1 pp, ρ=0,991 e 81% de ranks exatos entre 16 agentes; cobertura 34,8%, acurácia 95,0%.</li><li>Toolathlon (0,90): −23,0% passos, −44,1% entrada, −29,4% saída, 0,9 pp, ρ=0,994.</li><li>TerminalBench sem-mesmo-modelo (0,90): −25,4% passos, 2,1 pp, ρ=0,959; sem-mesmo-scaffold (0,85): −17,7% passos (média dos 37: −12,7%), 2,0 pp, ρ=0,994.</li></ul>
+<p>O que os números <strong>não</strong> significam: a acurácia vale só sobre as runs efetivamente interrompidas (no SWE-bench a 0,95, ~35% das runs; o resto roda até o fim); não é ganho de resolve rate, é redução de custo com distorção limitada — a distorção por agente é quase toda negativa nos agentes exibidos (tabela IV), mas o agregado SWE-bench fica em +0,8 pp, e o subcrédito sistemático aparece nos agregados de TerminalBench (−2,0/−0,9) e Toolathlon (−0,9), onde só o preditor de falha opera; a comparação entre pontos é agregada por fold, não pareada por tarefa. Baixar o limiar para 0,75 no SWE-bench eleva a economia para −63,4% de passos, mas a distorção vai a 4,1 pp — o knob é real e monotônico.</p>
+<p>Assimetria central: o preditor de sucesso só é confiável no SWE-bench (precisão 88,3–93,9%); fora dele degrada (61,4–69,0% no TerminalBench sem-mesmo-scaffold; cobertura ≈0 no Toolathlon). O preditor de falha é robusto em tudo (89,4–99,4% nos pontos de operação). Os rankings de TerminalBench e Toolathlon foram computados só com o preditor de falha — o mecanismo "dual" na prática é do SWE-bench; elsewhere é um detector de falha.</p>
+<p>Ablação (SWE-bench): remover a família comportamental é o que mais dói (cobertura 34,8→23,4%, economia 26,0→16,4%); remover a família de referência é marginal (→24,7%), o que explica a operação sem gold patch; nenhum grupo isolado passa de 1,3 pp de efeito — sinal redundantly distribuído. RQ4: LightGBM domina a fronteira; a regressão logística TF-IDF com "distorção 0,3 pp" é artefato de passividade (dispara em 2,4% das runs); juiz Qwen LoRA compete em fidelidade mas economiza metade e paga forward pass por passo.</p>
+<p>Correção ao texto da edição: "o valor não é ranquear modelos" subestima o paper — a preservação de ranking é parte central e medida do valor (RQ2, ρ 0,959–0,994 sob controle de vazamento), é o que torna a avaliação interrompida utilizável.</p>
+<h2>Limitações e riscos</h2>
+<p>Declaradas: exige pool de trajetórias completas rotuladas no benchmark alvo (primeira avaliação de benchmark novo sem histórico não tem sinal); não substitui execução completa para escore canônico (desvio sistemático ~1–2 pp); scaffold não visto degrada a previsão de sucesso mais que modelo não visto (o scaffold dita o ritmo estrutural da trajetória).</p>
+<p>Suspeitadas da leitura: rankings do SWE-bench/Toolathlon são sob scaffold único (16 e 22 LLMs, um scaffold cada) — generalização entre famílias de scaffold só é testada no TerminalBench; limiares calibrados em validação histórica não têm garantia sob shift de geração de agentes; resultados são point estimates por fold, sem intervalos de confiança; early stop pode mascarar agentes "comeback" tardios (o que parece stall pode ser exploração longa); contaminação típica de corpora derivados de SWE-bench não é discutida.</p>
+<h2>Teses transferíveis</h2>
+<ol><li>Trajetória rotulada com desfecho é o substrato: todo registro de execução de agente sem outcome label é amostra perdida para gates futuros de parada antecipada.</li><li>Falha é mais previsível que sucesso: sinais de stall (repetição contra erro inalterado, streak sem edição, submeter sem testar, gasto sem progresso) atravessam benchmarks; detectores de sucesso não. Construir primeiro as heurísticas de falha.</li><li>Gate temporal calibrado carrega incerteza: limiares duais criam região explícita de "continuar quando ambíguo"; early stop nunca é veredito final sem faixa de desvio declarada e amostras completas de auditoria.</li><li>Eficiência de avaliação tem eixo temporal: cortar custo dentro de cada tarefa (parada antecipada) é ortogonal a cortar número de tarefas (destilação de benchmark); os dois se compõem.</li><li>Passividade se disfarça de fidelidade: julgar gate/classificador exige reportar cobertura junto com acurácia — quem quase nunca dispara quase nunca erra.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e seguir. Evidência sólida sob leave-one-agent-out com controle de vazamento real, trade-off explícito e honesto sobre o que o número não significa, e analogia de features computável (stall comportamental antes de qualquer ML). No nosso ecossistema, aplica-se como disciplina de gates e registro de desfecho — não como classificador treinado: não temos pool próprio em escala de benchmark, e o paper mostra que a parte carregada de premissas é justamente generalizar além do pool.</p>
+<h2>Confronto com repos</h2>
+<h3>scripts</h3>
+<p>Confronto feito em HEAD <code>12b19e1de8a23aa425b07120dfd8cd53211c9c0a</code> (<code>2026-09-04</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 1 (outcome label = substrato): <code>sisyphus/trajectory.py:43-57</code> grava a trajetória de sessão com desfecho final obrigatório (<code>outcome: &quot;success&quot; | &quot;partial&quot; | &quot;failed&quot; | &quot;cancelled&quot;</code>, <code>sisyphus/trajectory.py:54</code>) e verificação por delegação (<code>sisyphus/trajectory.py:30-36</code>), write-only no fim da sessão (<code>sisyphus/trajectory.py:4</code>, gravação em <code>sisyphus/trajectory.py:63-82</code>) — exatamente o regime de histórico rotulado que o paper exige. Tese 5 (cobertura junto com acurácia): <code>telemetry/classify-session-phases.ts:88-92</code> já é uma versão pobre de inferência de desfecho (sessão stale sem fase → <code>completed</code> se produziu trabalho, senão <code>abandoned</code>), heurística documentada e limitada a sessões antigas (<code>telemetry/classify-session-phases.ts:8-12</code>) com dry-run antes de aplicar.</li><li><strong>Oportunidade de melhoria</strong> — Nenhuma mudança de código: a tese confirma que o outcome label é o dado a preservar. O gap deliberate (sem features comportamentais de passo-a-passo; só grafo de delegações) é compatível com o design write-only minimalista; capturar steps violaria a simplicidade radical sem consumidor atual.</li><li><strong>Como aplicar</strong> — Convenção: manter <code>outcome</code> não-opcional em toda trajetória; qualquer heurística futura de desfecho segue o padrão de <code>telemetry/classify-session-phases.ts</code> (documentada, seca, escopo limitado) reportando cobertura junto da acurácia.</li><li><strong>Prós e contras</strong> — Pró: custo zero agora, substrato preservado. Contra: se um dia houver gate treinado, será preciso step-level — decisão a reabrir só com consumidor real.</li><li><strong>Veredito</strong> — Aplicar com ressalvas: convenção de rótulo obrigatório e heurísticas documentadas; nada de código novo.</li></ol>
+<h3>agent-workloops</h3>
+<p>Confronto feito em HEAD <code>2f3c64c2f401a31ea2116bd4bf5b4966c3348725</code> (<code>2026-09-04</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 2 (falha previsível por stall) e tese 3 (gate com incerteza, nunca veredito). As condições de parada imediata do modo lote são todas evento-discretas — divergência, review FAIL após 2 rodadas, suite vermelha, scope creep, infra, fim de segmento, pré-risco (<code>playbooks/workloop.md:133-142</code>) — nenhuma detecta sinal comportamental mid-issue. Budget existe só em granularidade de issue (<code>playbooks/workloop.md:128-129</code>); "Parada" é definida em nível de loop (<code>playbooks/workloop.md:35</code>). O sinal motivador do paper — repetir a mesma ação contra erro inalterado — não aparece como condição nomeada.</li><li><strong>Oportunidade de melhoria</strong> — Acrescentar 1–2 condições de parada por sinal em §2.2 (ex.: repetição de ação contra erro inalterado após N tentativas; gasto sem progresso verificável desde a última confirmação), como heurística pobre, sem classificador.</li><li><strong>Como aplicar</strong> — Edição só de documento em <code>playbooks/workloop.md</code> §2.2 e <code>templates/runbook-loop.md</code>, uma edição única; a trilha de auditoria que a tese 3 exige já existe (relatório linha por issue <code>playbooks/workloop.md:130-131</code>; review adversarial como verificador caro <code>playbooks/workloop.md:186-188</code>).</li><li><strong>Prós e contras</strong> — Pró: captura o modo de falha que o paper mostra ser o mais previsível, a custo de documento. Contra: o lado confiável do paper é falha, não sucesso — parar run que se recuperaria é o erro caro; por isso o sinal deve elevar ao operador, não matar a run.</li><li><strong>Veredito</strong> — Aplicar com ressalvas: sinal eleva ao operador com estado comentado no tracker; nunca veredito final sem amostra completa.</li></ol>
+<h3>long-running-agents</h3>
+<p>Confronto feito em HEAD <code>034586110161efc6ba31e6e86181974ee659b555</code> (<code>2026-09-04</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 4 (eixo temporal da eficiência de avaliação) e tese 5 (cobertura vs acurácia). O doc canônico organiza as camadas "by what they evaluate, not by when they run" (<code>docs/canonical/3-layer-evaluation-architecture.md:28</code>) — EarlyEval é exatamente o eixo "when" ausente: os mesmos mecanismos da Layer 3 (redundância, loops, eficiência de caminho, custo por query, <code>docs/canonical/3-layer-evaluation-architecture.md:67-71</code>) computados post-hoc sobre traces completos (<code>docs/canonical/3-layer-evaluation-architecture.md:61-75</code>), aplicados mid-run como gates calibrados. O doc admite que a lógica de avaliação da Layer 3 é NOT_FOUND (<code>docs/canonical/3-layer-evaluation-architecture.md:108</code>) e que a instrumentação de trace existe como bloco (<code>docs/canonical/3-layer-evaluation-architecture.md:97</code>, confirmado em <code>docs/canonical/trace-instrumentation.md</code> e no companion <code>docs/canonical/behavioral-eval-path-analysis.md</code>).</li><li><strong>Oportunidade de melhoria</strong> — Novo canonical doc "early outcome prediction" (gates temporais de avaliação): mecanismos comportamentais da Layer 3 usados durante a execução com limiares duais calibrados e região explícita de continuar; carrega a premissa de aplicabilidade (benchmark estável + histórico rotulado) e a regra de não-uso para escore canônico.</li><li><strong>Como aplicar</strong> — Pelo pipeline analyze-and-improve existente (analysis → mental-model → canonical), tags do domínio <code>evals</code>, <code>relates-to</code> para behavioral-eval-path-analysis e trace-instrumentation, validação com <code>scripts/validate-obsidian.ts</code>.</li><li><strong>Prós e contras</strong> — Pró: preenche gap nomeado do cluster de avaliação com padrão respaldado por evidência. Contra: risco de generalizar para regimes de primeira execução e para previsão de sucesso — o doc deve embutir a assimetria falha&gt;sucesso e a disciplina de cobertura.</li><li><strong>Veredito</strong> — Aplicar: como canonical doc com as ressalvas de aplicabilidade embutidas no próprio corpo.</li></ol>
+<h2>Verificação adversarial</h2>
+<p>Verificação independente em 2026-09-04, leitura adversarial do paper pela escada HTML integral (<code>metodo_verificacao: adversarial</code>, cobertura observada pelo verificador: <code>html-complete</code>). Achado e correção aplicada como emenda (sem reescrita silenciosa):</p>
+<ul><li><strong>Eixo 2 — ressalva</strong>: "distorção sistematicamente negativa" não vale no agregado do SWE-bench (All 16: +0,8 pp, supercrédito líquido na Tabela IV); o subcrédito sistemático aparece nos agregados de TerminalBench (−2,0/−0,9) e Toolathlon (−0,9) e nos agentes individuais exibidos (12/12 negativos). <strong>Correção aplicada</strong>: frase segmentada por benchmark, com o agregado +0,8 pp nomeado.</li></ul>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/09/2026-09-03.html">edição de 2026-09-03</a></footer>
+</body>
+</html>

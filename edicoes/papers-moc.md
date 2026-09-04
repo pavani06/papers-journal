@@ -212,6 +212,15 @@ Execução de 2026-09-02 sobre a edição de [[papers/2026/09/2026-09-02|2026-09
 - [[papers/deep/2026/09/2609.01836|Agent Memory Is a Surface for Endogenous Authorization Laundering]]
 - [[papers/deep/2026/09/2608.27831|RealSWE: A Compositional Evaluation of Coding Agents under Realistic User Requests]]
 
+Execução de 2026-09-04 sobre a edição de [[papers/2026/09/2026-09-03|2026-09-03]]:
+
+- [[papers/deep/2026/09/2609.02749|Repo-To-Skill: Distilling GitHub Repositories Into AI4AI Skills]]
+- [[papers/deep/2026/09/2609.01437|HarnessDev: Can LLMs Create and Evolve Their Own Agent Harness?]]
+- [[papers/deep/2026/09/2608.31111|Aspire: Can Models Self-Evolve from Vague Goals?]]
+- [[papers/deep/2026/09/2609.02783|EarlyEval: Cheaper Agent Evaluation via Early Outcome Prediction]]
+- [[papers/deep/2026/09/2609.01865|ExecRetrieval: Measuring the Functional-Correctness Gap in Code-Embedding Retrieval]]
+- [[papers/deep/2026/09/2608.30322|Ignorance or Incompetence? Constructing Knowledge-Gated, Verifiable Tasks for LLM Agents]]
+
 ## Execuções
 
 | Data | Edição | Notas criadas | Registro atualizado? |
@@ -236,3 +245,4 @@ Execução de 2026-09-02 sobre a edição de [[papers/2026/09/2026-09-02|2026-09
 | 2026-08-31 | [[papers/2026/08/2026-08-31|2026-08-31]] | 9 (a edição foi reconciliada no meio da execução: 6 destaques da primeira leitura, mais 2 que entraram depois; StepGuard e RCCA saíram dos destaques mas as notas ficaram; o 6º destaque da versão final, Lost in Compression, ficou para a execução de continuidade de 2026-09-01, com verificação adversarial) | Sim — refresh profundo de `papers-journal` (proveniência do deepdive, gate da relação, escrita atômica e suite/CI corrigidos no resumo), `scripts` (`papers-deep/` novo, `project-runtime` esvaziado), `agent-skills` (skills vendorizadas, harness endurecido, `papers-synth.md` não servido por symlink) e `sisyphus-runtime` (promoção de princípios sem holdout); `papers-journal` ainda reconciliado por drift próprio para `2c597e9`, e na continuidade de 2026-09-01 para `7065040` (dois commits editoriais, resumo acrescido) |
 | 2026-09-02 | [[papers/2026/09/2026-09-01\|2026-09-01]] | 6 (todos os destaques do snapshot; 3 deslocados pela reconciliação do cron de 07:00 com notas mantidas e rotuladas) | Sim — refresh profundo de `papers-journal`, `agent-skills`, `sisyphus-runtime` e `long-running-agents`; `agent-workloops`, `koda-desafio` e demais confrontados frescos |
 | 2026-09-02 | [[papers/2026/09/2026-09-02\|2026-09-02]] | 6 (todos os destaques do snapshot; edição sem mudança pós-snapshot, zero deslocados) | Sim — refresh profundo de `papers-journal`, `llm-council` e `mhc-knowledge-base`; `sisyphus-runtime`, `scripts` e `long-running-agents` sem escrita por conflito nominal de `scanned_head` (HEADs em movimento durante a execução); demais entradas frescas ou reporte |
+| 2026-09-04 | [[papers/2026/09/2026-09-03\|2026-09-03]] | 6 (todos os destaques do snapshot; edição sem mudança pós-snapshot, zero deslocados) | Sim — refresh profundo de `papers-journal`, `sisyphus-runtime`, `scripts` e `long-running-agents`; `agent-skills`, `agent-workloops` e `koda-desafio` frescos (HEADs conferem) |
