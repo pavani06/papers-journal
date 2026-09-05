@@ -221,6 +221,14 @@ Execução de 2026-09-04 sobre a edição de [[papers/2026/09/2026-09-03|2026-09
 - [[papers/deep/2026/09/2609.01865|ExecRetrieval: Measuring the Functional-Correctness Gap in Code-Embedding Retrieval]]
 - [[papers/deep/2026/09/2608.30322|Ignorance or Incompetence? Constructing Knowledge-Gated, Verifiable Tasks for LLM Agents]]
 
+Execução de 2026-09-05 sobre a edição de [[papers/2026/09/2026-09-04|2026-09-04]]:
+
+- [[papers/deep/2026/09/2609.04199|Compile by Training: Turning Natural-Language Specifications into Local Neural Functions]]
+- [[papers/deep/2026/09/2609.04148|Terminal-Universe: Turning Agent Trajectories into Scalable Terminal Environments]]
+- [[papers/deep/2026/09/2609.03430|Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning]]
+- [[papers/deep/2026/09/2609.01507|LatentPress: Context Compression Beyond Text and Vision]]
+- [[papers/deep/2026/09/2608.30391|Using Grounded Theory for Agent Behavior Analysis at Scale]]
+
 ## Execuções
 
 | Data | Edição | Notas criadas | Registro atualizado? |
@@ -246,3 +254,4 @@ Execução de 2026-09-04 sobre a edição de [[papers/2026/09/2026-09-03|2026-09
 | 2026-09-02 | [[papers/2026/09/2026-09-01\|2026-09-01]] | 6 (todos os destaques do snapshot; 3 deslocados pela reconciliação do cron de 07:00 com notas mantidas e rotuladas) | Sim — refresh profundo de `papers-journal`, `agent-skills`, `sisyphus-runtime` e `long-running-agents`; `agent-workloops`, `koda-desafio` e demais confrontados frescos |
 | 2026-09-02 | [[papers/2026/09/2026-09-02\|2026-09-02]] | 6 (todos os destaques do snapshot; edição sem mudança pós-snapshot, zero deslocados) | Sim — refresh profundo de `papers-journal`, `llm-council` e `mhc-knowledge-base`; `sisyphus-runtime`, `scripts` e `long-running-agents` sem escrita por conflito nominal de `scanned_head` (HEADs em movimento durante a execução); demais entradas frescas ou reporte |
 | 2026-09-04 | [[papers/2026/09/2026-09-03\|2026-09-03]] | 6 (todos os destaques do snapshot; edição sem mudança pós-snapshot, zero deslocados) | Sim — refresh profundo de `papers-journal`, `sisyphus-runtime`, `scripts` e `long-running-agents`; `agent-skills`, `agent-workloops` e `koda-desafio` frescos (HEADs conferem) |
+| 2026-09-05 | [[papers/2026/09/2026-09-04\|2026-09-04]] | 5 (+1 já destilado na edição de 2026-09-02, RealSWE; edição sem mudança pós-snapshot, zero deslocados) | Sim — refresh profundo de `papers-journal`, `agent-workloops` e `koda-desafio`; `sisyphus-runtime` e `scripts` sem escrita (árvore suja; sisyphus-runtime ainda com conflito nominal de `scanned_head`: HEAD avançou de `3904ff5` para `a7130e8f` durante a execução); `hop-ecosystem-atlas`, `ciot-authpay-repo`, `chatbot-ai`, `obsidian-eval` e `govevo-site` em reporte sem refresh reportado |

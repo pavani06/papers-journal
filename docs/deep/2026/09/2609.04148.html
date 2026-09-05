@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — Terminal-Universe: Turning Agent Trajectories into Scalable Terminal Environments</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/09/2026-09-04.html">papers.hf</a><span class="data-topo">Deep dive · sexta-feira, 4 de setembro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/09/2026-09-04.html">&larr; Edição de 2026-09-04</a></p>
+<h1 class="manchete">Terminal-Universe: Turning Agent Trajectories into Scalable Terminal Environments</h1>
+<p><strong>Sumário de ação</strong>: Registrar eventos de arquivo nos traces do harness (<code>sisyphus/trajectory.py</code>) para habilitar reconstrução parcial de workspace, e tornar a evidência de handoff no workloop reexecutável. O ganho central do paper não é imitação de trajetória — é re-consulta em ambiente recuperado.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2609.04148">abstract</a> · <a href="https://arxiv.org/html/2609.04148">HTML</a> · 223 upvotes capturados no snapshot da edição em 2026-09-05T07:51:29-03:00 · edição de <a href="../../../2026/09/2026-09-04.html">2026-09-04</a> · avança 27/08 (menção textual)</p></div>
+<h2>Afirmação central</h2>
+<p>O histórico de execuções de ferramentas gravado numa trajetória de agente expõe estrutura e conteúdo do ambiente onde ela rodou, o que permite reconstruir esse ambiente (replay determinístico + completion agêntica) e re-consultá-lo com novas tarefas verificáveis — e ambientes, não transcrições, são o recurso que escala pós-treino.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code></p>
+<ol><li><strong>Seleção de sementes</strong>: trajetórias públicas de agentes terminais/SWE (359.593 no total: LFM2-Terminal, SWE-smith, SWE-rebench, CoderForge etc.) com workspace final de ≥5 arquivos e ≥100 linhas; fontes derivadas de Terminal-Bench excluídas por contaminação.</li><li><strong>Replay determinístico (Stage 1)</strong>: processa read/write/edit em ordem cronológica; para cada path acessado, guarda o conteúdo da <strong>versão mais antiga observada</strong> (antes da primeira mudança do agente). Arquivos criados pelo agente ficam de fora; as edições do agente são registradas separadamente para verificação futura. Resultado: workspace parcial Ê₀ (média de 2,9 arquivos no pool terminal — só o que a trajetória tocou).</li><li><strong>Completion agêntica (Stage 2)</strong>: um agente recebe Ê₀ + a tarefa recuperada e cria arquivos ausentes, completa arquivos parciais e restaura dependências — <strong>tornando a tarefa solucionável sem resolvê-la</strong> (contrato explícito: não implementar, não revelar onde resolver). Média sobe para 22,4 arquivos no pool terminal.</li><li><strong>Filtro de suficiência (Stage 3)</strong>: juiz agêntico com shell read-only rotula cada workspace suficiente/insuficiente para a tarefa recuperada. Pós-completion: 93,5% do pool terminal, 77,1% do SWE. Sobrevivem 37,3k ambientes.</li><li><strong>Re-consulta em quatro variantes</strong>: Intent Recovery (reconstrói a tarefa original: primeira solicitação substantiva do usuário, consolidada com clarificações posteriores); Single-WS (gera 5 tarefas candidatas por workspace, escolhe 1); Cross-WS (profile + TF-IDF + juiz LLM encontram dependência direcional entre workspaces; tarefa migra capacidade do reference read-only para o target writable, com ≥3 fatos escondidos que o solver deve descobrir sozinho); Multi-Round (user agent estende a sessão em até 6 rodadas — extension/revision/conflict — com requirement tracker e verificador privado por rodada).</li><li><strong>Verificação</strong>: cada tarefa Single-WS/Cross-WS ganha suíte pytest autorada por agente no container, com red-check obrigatório (≥1 teste falha no workspace não resolvido; testes de preservação passam). Rollout do teacher (Qwen3.7-Max, temp 1.0, 256k contexto, ≤500 turnos, 4h); mantém-se somente trajetória que passa todos os testes. Multi-Round é filtrado por rodada: corta sufixo de falhas, exige ≥2 rodadas verificadas, preserva falhas intermediárias recuperadas (69,6% das 3.079 sessões retidas contêm falha reparada).</li><li><strong>Corpus final</strong>: 32,0k demonstrações SFT (~1,42B tokens): 25,4k Single-WS + 3,5k Cross-WS + 3,1k Multi-Round.</li></ol>
+<h2>Evidência e resultados</h2>
+<p>Condições: Qwen3.5-27B, SFT 2 épocas, lr 7e-6, batch 256; Terminal-Bench como média pass@1 de 6 runs independentes (temp 1.0, timeout 4h, Terminus2-XML); EvoCode-Bench v2 com 4 runs.</p>
+<ul><li><strong>TB 2.1: 46,2 → 58,1 (+11,9)</strong> sobre o próprio base model, e 47,8 → 58,2 (+10,4) sob Claude Code. TB 2.0: 41,6 → 52,8. EvoCode v2 MT@4: 6,3 → 20,1 (+13,8); Case score 67,8 → 76,1.</li><li><strong>A ablação que sustenta o destaque</strong>: SFT sobre as trajetórias cruas degradou o modelo (média TB 2.1 de 47,0 para 36,7); Intent Recovery nas mesmas 35,8k tarefas, em ambientes reconstruídos e re-resolvidas pelo teacher, atinge 52,1 — <strong>sem</strong> filtro de verifier nesse comparativo. Log congelado foi supervisão pior que nenhuma; o ganho vem de re-resolver em ambiente.</li><li>Completion agêntica vale +4,2 (48,7 → 52,9) a volume pareado, com variância menor (±1,4 vs ±3,5); replay puro ainda dá +2,5 sobre a base.</li><li>Verifier filtering: efeito pequeno em Single-WS (56,0 → 56,4 com menos dados), relevante em Cross-WS (53,2 → 55,4 com menos da metade dos dados).</li><li>Orçamento fixo: dobrar <strong>ambientes</strong> (53,2 → 56,0) supera dobrar queries (53,8) ou soluções (53,9) por ambiente — ambiente novo traz supervisão nova.</li><li>Transferência SWE→terminal: só Intent Recovery sobre workspaces SWE (10,3k) melhora TB 2.1 de 47,0 para 50,0, nos dois scaffolds.</li></ul>
+<p>O que os números <strong>não</strong> significam: +11,9 é contra o próprio base model, não contra SOTA — o teacher Qwen3.7-Max faz 74,5 no mesmo scaffold; a Tabela 3 mistura famílias de modelo (32B vs 27B), scaffolds e configurações heterogêneas, com vários baselines reproduzidos pelos autores (App. G), então o ranking entre métodos de síntese é indicativo, não pareado. MT@4 vem de 26 tarefas/227 rodadas com crediting any-run e fail-stop — base quase no piso (6,3) e incerteza larga. O +13,8 não mede qualidade de código, mede sequência de rodadas consecutivas passadas.</p>
+<h2>Limitações e riscos</h2>
+<p>Declaradas: containers ubuntu:24.04 genéricos (fidelidade reduzida para dependências especiais/compilação complexa); distribuição de domínios limitada pelas trajetórias fonte; <strong>teacher único gera tarefas, soluções e verifiers</strong> — lacunas dele limitam cobertura e erros dele podem passar pelos testes dele (auto-confirmação).</p>
+<p>Suspeitadas na leitura: "environment" no título é aproximação Ê, não o ambiente original E — a completion inventa contexto (inspeção manual de apenas 30 amostras: 8 tinham arquivos substanciais desnecessários à tarefa; nenhuma continha solução, mas 30 é amostra pequena para afirmar taxa). Suficiência é julgada por agente LLM, não por execução. Reconstruções deduplicadas por "trajetória que expõe mais workspace" introduz seleção pró-riqueza.</p>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Trace com granularidade de reconstrução</strong>: registrar eventos de arquivo (path, operação, conteúdo observado) nos traces do harness é o pré-requisito para transformar sessão em ambiente; grafo de decisões sozinho não reconstrói nada.</li><li><strong>Estado pré-agente é recuperável por versão-mais-antiga-observada</strong>: reter o conteúdo anterior à primeira edição (e as edições separadamente) separa problema de solução sem precisar do repo original.</li><li><strong>Execução vira fixture de regressão</strong>: sessão bem-sucedida ou falha, combinada com eventos de arquivo, deixa de ser log morto e vira workspace reexecutável para re-teste e novas tarefas — log narrativo sem re-execução é supervisão ativamente pior (36,7 vs 52,1).</li><li><strong>Quem gera não autoriza a prova</strong>: a limitação declarada do paper (teacher único = task+solução+verifier) é o contra-exemplo do princípio de revisor independente que o workloop já pratica.</li><li><strong>Orçamento em ambientes novos, não em repetição sobre o mesmo</strong>: diversidade de contexto executável supera profundidade de documentação no mesmo contexto (56,0 vs 53,8/53,9).</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e seguir. O método é claro, as ablações respondem às perguntas certas (reconstruir vs imitar, completion vs replay só, filtro vs sem filtro, onde gastar orçamento) e o resultado central — re-resolver em ambiente recuperado supera imitar a trajetória original, que por si degradou o modelo — é a evidência mais forte a favor da tese "ambientes, não transcrições". Ressalvas: números principais são contra base próprio com baselines heterogêneos; a reconstrução é aproximação completada por LLM, não recuperação fiel; verificação monoteacher. O nome "Turning Trajectories into Environments" é justo, mas o ambiente entregue é Ê completado, não E.</p>
+<h2>Confronto com repos</h2>
+<h3>scripts</h3>
+<p>Confronto feito em HEAD <code>a482e70330b14e245e1e8444ded2dc54e56b3289</code> (<code>2026-09-05</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 1 (granularidade de reconstrução) e 3 (fixture de regressão). O <code>sisyphus/trajectory.py</code> grava exatamente o "log morto" narrativo que o paper contrasta com ambiente: docstring declara escopo de nível sessão — intenção, grafo de delegações, tokens, resultado, somente escrita no fim (<code>sisyphus/trajectory.py:2-4</code>). <code>DelegationRecord</code> carrega categoria, contagem de agentes, <code>prompt_hash</code>, tokens, latência e verificação — nenhum path, nenhum conteúdo, nenhum evento de ferramenta (<code>sisyphus/trajectory.py:26-36</code>). <code>SisyphusTrajectory</code> adiciona <code>user_input</code> e <code>final_text</code> como única evidência textual, mais outcome e timestamp — nada do workspace (<code>sisyphus/trajectory.py:39-57</code>). A persistência é um único <code>trajectory.json</code> por sessão (<code>sisyphus/trajectory.py:63-82</code>). Com esse esquema, reconstrução parcial de estado é impossível: não há o que replayar.</li><li><strong>Oportunidade de melhoria</strong> — estender o esquema com <code>file_events[]</code> opcional (path, operação, conteúdo observado, timestamp), capturando o que as ferramentas de edição já tocam. A meta mínima do Estágio 1 do paper (inventário + conteúdo pré-primeira-edição) já produz workspace parcial reutilizável — 40,2% do pool terminal era suficiente já pós-replay, sem completion.</li><li><strong>Como aplicar</strong> — incremental: (a) campo opcional aditivo no dataclass, sem quebrar consumidores existentes do JSON; (b) popular a partir do transcript que o harness já mantém; (c) paths+hashes primeiro, conteúdo de arquivo sob opt-in, nunca <code>.env</code>/segredos; (d) piloto nas sessões papers-deep, que já produzem artefato verificável (a própria nota).</li><li><strong>Prós e contras</strong> — prós: dado já existe no transcript, extração é barata; habilita fixture de regressão de sessões e auditoria mecânica. contras: risco de volume e de vazar conteúdo sensível no trace (mitigado por paths+hashes); sem consumidor de re-execução hoje, o valor é latente.</li><li><strong>Veredito</strong> — aplicar com ressalvas: o Estágio 1 (inventário de arquivos + versão pré-edição) é barato e alinha com a tese central do paper; estágios de completion e verificação ficam fora até existir quem re-execute.</li></ol>
+<h3>agent-workloops</h3>
+<p>Confronto feito em HEAD <code>2f3c64c2f401a31ea2116bd4bf5b4966c3348725</code> (<code>2026-09-05</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 3 (execução vira fixture) e 4 (quem gera não autoriza a prova). O playbook já garante "todo o estado vive em artefatos persistidos, nunca na memória da sessão" (<code>playbooks/workloop.md:8-10</code>), mas os artefatos são contratos narrativos: o handoff é "a memória que uma issue deixa para a próxima, viajando dentro do PR" (<code>playbooks/workloop.md:31</code>), formatado como ≤35 linhas em cinco seções de prosa (<code>playbooks/workloop.md:212-214</code>). A retomada pós-crash reconstrói estado por leitura interpretativa do tracker — claim, PR, handoff, label — não por replay (<code>playbooks/workloop.md:173-176</code>). A "evidência endereçada" exige sha, PR e contagem de checks — auditável, mas não reexecutável (<code>playbooks/workloop.md:227-229</code>). O golden é a exceção: prova byte a byte de comportamento preservado (<code>playbooks/workloop.md:37</code>), porém fotografado deliberadamente, não derivado da execução. A tese 4 o playbook já satisfaz: revisor independente do executor que reprova por evidência (<code>playbooks/workloop.md:26</code>) — o paper confirma o desenho ao declarar teacher único como limitação.</li><li><strong>Oportunidade de melhoria</strong> — elevar a convenção de handoff de narrativa endereçada para evidência reexecutável: exigir no handoff de issue de código o comando exato que reproduz a verificação localmente (suite/golden/CI já existem; falta a receita de re-execução viajar com o PR). O paper dá o argumento: evidência que não re-executa é transcrição, e transcrição é supervisão pior que nenhuma.</li><li><strong>Como aplicar</strong> — emenda de convenção na seção 3.3 do playbook (handoff ganha uma sexta linha: "como re-executar a verificação") e na 3.4 (endereço passa a incluir comando, não só sha/PR). Repo de processo: mudança é textual, sem código.</li><li><strong>Prós e contras</strong> — prós: custo mínimo, coerente com "bootstrap frio" (sessão zero contexto re-executa em vez de reinterpretar). contras: burocratiza handoffs de issues triviais — aplicar só a issues de código com suite própria.</li><li><strong>Veredito</strong> — aplicar agora: mudança de convenção barata que fecha a lacuna entre "auditável" e "reexecutável", exatamente o eixo que o paper demonstra valer.</li></ol>
+<h2>Verificação adversarial</h2>
+<p>Verificação independente em 2026-09-05 (verificador separado, escada <code>html</code>, fim do documento verificado via curl; ~30 alegações numéricas conferidas contra Tabelas 3-14, 19-20 e Apêndices A-G). Veredito: <code>pass-com-ressalvas</code>. Nenhum achado de severidade <code>correcao</code>; nenhum veredito de confronto fica stale.</p>
+<ul><li><strong>Eixo 1 (ressalva)</strong> — A regra de dedup "trajetória que expõe mais workspace" é documentada no Apêndice A especificamente para corpora SWE ("deduplicate within each source by repository, base commit, and problem statement"); a nota, em "Limitações e riscos", generaliza para "Reconstruções deduplicadas" sem qualificar o escopo.</li><li><strong>Eixo 3 (ressalva)</strong> — Tese transferível 3 formula "log narrativo sem re-execução é supervisão ativamente pior (36,7 vs 52,1)"; o par numérico da Tabela 4 compara SFT sobre source trajectories (tool traces completas) contra Intent Recovery re-resolvida. O paper não mede "log narrativo" sem eventos de ferramenta; a extrapolação é plausível, mas o número não a sustenta literalmente.</li><li><strong>Eixo 4 (ressalva)</strong> — "Incerteza larga" do MT@4 é inferência do desenho (26 tarefas, 4 runs, fail-stop com any-run crediting), não intervalo reportado; a Tabela 3 não traz variância para MT@4.</li></ul>
+<p>Emenda com proveniência, aplicada pelo orquestrador; fidelidade numérica integral confirmada pelo verificador.</p>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/09/2026-09-04.html">edição de 2026-09-04</a></footer>
+</body>
+</html>

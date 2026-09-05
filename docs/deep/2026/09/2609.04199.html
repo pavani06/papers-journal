@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — Compile by Training: Turning Natural-Language Specifications into Local Neural Functions</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/09/2026-09-04.html">papers.hf</a><span class="data-topo">Deep dive · sexta-feira, 4 de setembro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/09/2026-09-04.html">&larr; Edição de 2026-09-04</a></p>
+<h1 class="manchete">Compile by Training: Turning Natural-Language Specifications into Local Neural Functions</h1>
+<p><strong>Sumário de ação</strong>: Direção de arquitetura, não receita imediata: o harness consome modelos só por API e não tem estágio de treino local, então nada vira artefato compilado hoje. O aproveitável agora é taxonômico: separar chamadas de deliberação das que são transformação semântica repetida (papers-journal já pratica a divisão fuzzy/exato que o paper valida), e medir recorrência antes de qualquer decisão futura de compilação.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2609.04199">abstract</a> · <a href="https://arxiv.org/html/2609.04199">HTML</a> · 271 upvotes capturados no snapshot da edição em 2026-09-05T07:51:29-03:00 · edição de <a href="../../../2026/09/2026-09-04.html">2026-09-04</a> · avança 21/08 (menção textual)</p></div>
+<h2>Afirmação central</h2>
+<p>Uma especificação em linguagem natural pode ser compilada, num build de ~1 minuto com supervisão sintetizada por teachers, numa pequena função neural (LoRA sobre intérprete Qwen3-0.6B congelado) que roda localmente, sem chamar os teachers, e se armazena, versiona e compõe como software ordinário.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code> (HTML de 146,6 kB recuperado integralmente após truncamento do fetch; fim do documento verificado: Apêndice E encerrado + rodapé LaTeXML; seções 1-9, referências e apêndices A-E lidos)</p>
+<ol><li><strong>Especificação</strong>: desenvolvedor descreve uma função texto-para-texto em linguagem natural. Interface: <code>p_s = Compile(s)</code>, <code>ŷ = Run(p_s, x)</code>.</li><li><strong>Supervisão sintetizada</strong>: teachers (GPT-5.4-mini + GPT-5.5, mistura 2:1) geram pares (x, y) em JSON estruturado; o compilador valida cada resposta e rejeita lotes malformados ou incompletos antes de liberar exemplos para o treino.</li><li><strong>Especialização</strong>: intérprete compartilhado congelado (Qwen3-0.6B quantizado); cada função é uma LoRA rank 64 alpha 16 mais um scaffold (prompt template com placeholder para o input). Warm start do compilador amortizado do PAW (predição em um forward pass, segundos), refinado por 100 steps (batch 48, decaimento cosseno) sobre os pares sintetizados.</li><li><strong>Empacotamento</strong>: o artefato <code>.paw</code> carrega adapter, scaffold, spec original e metadados do intérprete; armazenável, versionável, componível. No runtime, o SDK combina input novo com scaffold + adapter e roda o intérprete; inputs futuros não vão para o serviço nem para os teachers. A compilação, porém, é hospedada: a spec viaja para o serviço PAW e para as APIs de teacher.</li><li><strong>Compilação interativa</strong>: streaming path sobrepõe síntese e treino (o treino começa com o primeiro batch e só bloqueia se alcança a síntese); coordenação por fila persistente de jobs + workers GPU, com cache de saídas de teacher reusado entre jobs; a UI trata compilação como build de fundo que persiste entre navegação e reload.</li><li><strong>Aplicações</strong>: paw-helper (30 programas compilados, 28 em roteamento vivo, um backend servindo 4 sites; funções compiladas decidem o fuzzy, código ordinário faz retrieval BM25, cache e branch); Avatar Director (programa neural emite DSL de ações, o browser valida e executa); tradutor bidirecional English-Claudish (um adapter por direção).</li></ol>
+<h2>Evidência e resultados</h2>
+<ul><li>Comparação principal (Fig. 4): na FuzzyBench-Hard, LEM médio 0.224 (compilador rápido do PAW) para 0.836 (compile by training), +0.612 absoluto, ao custo de 50.9 s contra 3.5 s de compilação. Condição: FuzzyBench-Hard é o subconjunto selecionado de specs em que o compilador rápido produziu zero exact matches; seleção adversarial ao baseline, não amostra do benchmark completo. O 83.6% não descreve acurácia no benchmark inteiro e o ganho não se extrapola para tarefas em que o fast compiler já acerta.</li><li>LEM é a fração de predições que um juiz LLM (GPT-5.5) considera semanticamente corretas, dadas spec, input, referência e predição; juiz validado contra 128 rótulos dos autores: acc 0.977, κ 0.946, FPR 0.025, FNR 0.023 (Tabela 3). A margem de erro do juiz (~2%) é da ordem dos deltas menores da Tabela 1; sem IC ou teste de significância reportados.</li><li>Sweeps em development specs (Tabela 1): mistura 2:1 mini/GPT-5.5 eleva LEM de 0.746 para 0.851 (3600 pares únicos repetidos até 6400 exemplos, batch 64 fixo); scaling de dados 1440/2400/3600/7200 pares únicos: 0.821/0.836/0.836/0.866, isto é, platô entre 2400 e 3600 com ganho retomando só em 7200.</li><li>Latência medida no lançamento do serviço (maio 2026): cold compile de uma spec representativa em 50.9 s (B300), 68.2 s (H200), 99.2 s (RTX); teste de carga com 4 jobs concorrentes, espera média em fila 1.01 s. Amostra pequena, hardware específico, sem curva de carga além de 4 jobs.</li><li>Avatar: 43 de 44 instruções de validação hand-authored produziram a estrutura de ação esperada. Amostra minúscula, escrita pelos próprios autores, sem avaliadores externos: evidência de demonstração, não estimativa robusta de taxa de erro.</li><li>Claudish: 100.747 traduções bem-sucedidas entre 22/08 e 02/09/2026. Métrica de uso do serviço, não de correção; nenhuma acurácia de tradução é reportada para a demo.</li></ul>
+<h2>Limitações e riscos</h2>
+<ul><li>Declaradas (§9): supervisão sintética herda erros dos teachers; aplicações que exigem correção garantida devem validar saídas ou manter caminhos de controle determinísticos; sem user studies sistemáticos.</li><li>Suspeitadas na leitura: (a) o runtime "local" exige o intérprete compartilhado (0.6B quantizado) presente no cliente, a função não é autossuficiente; (b) a compilação é serviço hospedado, então o build depende do serviço PAW e das APIs de teacher, justamente a dependência externa que o método remove do runtime, não do ciclo de vida; (c) a validação de lotes rejeita malformados, mas não há verificação independente da correção semântica dos pares sintetizados; (d) a dificuldade em FuzzyBench-Hard é definida pelo fracasso do baseline, então o ganho é por construção medido onde o baseline é pior.</li><li>Sobre o título: "Local Neural Functions" é preciso quanto ao runtime, mas o compilador não é local; e "specifications" cobre funções texto-para-texto fuzzy, não especificações arbitrárias.</li></ul>
+<h2>Teses transferíveis</h2>
+<ol><li>Taxonomia de chamadas LLM: separar deliberação (curadoria, julgamento contextual) de transformação semântica repetida (classificar, normalizar, extrair, com spec estável). Só a segunda família é candidata a artefato compilado, e a decisão começa por medir recorrência, não por compilar.</li><li>Divisão de trabalho fuzzy/exato: componentes neurais para decisões fuzzy; código ordinário para retrieval, cache, validação e branch de controle. Padrão que o paper valida em produção (paw-helper) e que o ecossistema já pratica.</li><li>Validação como etapa de build: saída de modelo entra no pipeline só depois de validada estruturalmente, e defeito de aquisição (truncamento, lote malformado) é devolvido como fato auditável, nunca escondido atrás de flag de sucesso.</li><li>Reuso de trabalho entre jobs: cache de saída de modelo selado, com proveniência, permite re-render e re-execução sem nova chamada, e alimenta memória entre execuções; a parte cara é a chamada, e é ela que se protege primeiro.</li><li>Economia do build: compilação de ~1 min compensa quando a função roda milhares de vezes (100k+ na demo Claudish); abaixo disso, chamada por API ganha. O ponto de equilíbrio é função da frequência de uso, não da elegância do método.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar como direção de arquitetura, não como receita: o método exige estágio de treino local (GPU, LoRA, intérprete dedicado) inexistente num harness que consome modelos só por API. O que fica hoje: (1) a taxonomia deliberação vs transformação repetida como critério de triagem de skills e chamadas, (2) validação empírica do padrão fuzzy/exato que já governa o jornal de papers, (3) o lembrete de que artefato versionável supera prompt solto quando a função é estável e frequente.</p>
+<h2>Confronto com repos</h2>
+<h3>papers-journal</h3>
+<p>Confronto feito em HEAD <code>0a109b9b0e095c3c8421ffa37a845069ac85ba3b</code> (<code>2026-09-05</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 2 (fuzzy/exato): o pipeline do dia é determinístico de ponta a ponta (gravação, render, índice, cache) e o LLM decide só o veredito fuzzy de destaques/tangenciais, em <code>src/journal.py:679-690</code>; a reconciliação gasta exatamente uma chamada por dia da janela, <code>src/journal.py:716</code>. Tese 4 (reuso de trabalho): o veredito é cacheado com selo de produção assim que passa pela validação, porque a chamada ao modelo é "a parte cara em dinheiro e em tempo", <code>src/journal.py:696-708</code>; o cache <code>.cache/YYYY/MM/*.json</code> existe para re-render sem custo, <code>src/paths.py:20</code> e <code>src/paths.py:58-59</code>; vereditos anteriores alimentam a memória das próximas edições, <code>src/paths.py:154-160</code> usado em <code>src/journal.py:145</code>. Tese 3 (defeito como fato auditável): o deepdive rotula a fonte com tipo/lidos/total e devolve o truncamento como fato, não como flag de sucesso, <code>src/deepdive.py:59-81</code> e <code>src/deepdive.py:103-108</code>.</li><li><strong>Oportunidade de melhoria</strong> — Nenhuma compilação: o veredito diário é 1 chamada/dia na geração mais 1/dia na reconciliação, ordens de magnitude abaixo do volume que justifica build. A oportunidade real da Tese 1 é mensuração: registrar no cache a contagem de chamadas LLM por edição, para que uma futura decisão de compilação (se a triagem um dia for por paper, em volume) tenha dado de recorrência em vez de intuição.</li><li><strong>Como aplicar</strong> — Escopo mínimo: nenhum código hoje; quando houver interesse, um contador por edição no payload de <code>montar_cache</code>, que já carrega quem/quando/com que insumo, <code>src/journal.py:619-623</code>. Ordem: medir primeiro, decidir compilação depois, e só para funções de transformação com spec estável.</li><li><strong>Prós e contras</strong> — Pró: custo zero agora; o dado de recorrência habilita decisão futura informada. Contra: com o volume atual (1-2 chamadas/dia) o dado é quase trivial e pode não justificar nem o contador.</li><li><strong>Veredito</strong> — Não aplicar compilação (volume irrisório); aplicar com ressalvas a tese de mensuração. O repo já encarna as teses 2, 3 e 4 que o paper valida em produção.</li></ol>
+<h3>agent-skills</h3>
+<p>Confronto feito em HEAD <code>df85f65fd0b68a6a9c69c84f09c75258c2c26b58</code> (<code>2026-09-05</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Skills são o análogo local dos artefatos <code>.paw</code>: unidades nomeadas, versionadas em git e componíveis, com contrato declarado em frontmatter, <code>skills/issue-executor-master/SKILL.md:1-8</code>. A validação antes do empacotamento espelha o compiler que rejeita lotes malformados: o harness roda três gates por skill e o gate sem teste é fail-closed (<code>passes: False</code>, <code>executed: False</code>), <code>scripts/run_harness.py:90-97</code> e <code>scripts/run_harness.py:102-115</code>.</li><li><strong>Oportunidade de melhoria</strong> — Nenhuma mudança de código. A tese transferível vira critério de triagem do catálogo: skill que é pura transformação semântica repetida (spec estável, sem deliberação) é candidata conceitual a artefato compilado quando a infraestrutura permitir; skills de orquestração (issue-executor-master, issue-start, issue-review) são deliberação e não migram.</li><li><strong>Como aplicar</strong> — Nada no repo; o critério vive na decisão de arquitetura, quando e se houver runtime de treino local. Ordem: inventário de skills por família (deliberação vs transformação) antes de qualquer piloto.</li><li><strong>Prós e contras</strong> — Pró: taxonomia barata, alinhada ao formato de artefato que o repo já pratica. Contra: sem infra de treino, a candidatura é teórica e vira especulação prematura se formalizada cedo demais.</li><li><strong>Veredito</strong> — Não aplicar: sem runtime de treino local, e as skills atuais são deliberação/orquestração, fora da família compilável.</li></ol>
+<h2>Verificação adversarial</h2>
+<p>Verificação independente em 2026-09-05 (verificador separado, escada <code>html</code>, fim do documento verificado via curl; Tabelas 2-3 e Apêndices A-E conferidos). Veredito: <code>pass-com-ressalvas</code>. Nenhum achado de severidade <code>correcao</code>; nenhum veredito de confronto fica stale.</p>
+<ul><li><strong>Eixo 1 (ressalva)</strong> — A nota apresenta "mistura 2:1" como propriedade geral do método no passo 2 da mecânica; o paper fixa 2:1 apenas na configuração pública (Tabela 2), e §3.1 diz "one or more teacher models".</li><li><strong>Eixo 2 (ressalva)</strong> — O Apêndice C usa batch 64 no sweep de mistura de teachers e batch 48 no sweep de data-scaling; a nota cita apenas "batch 64 fixo" (associado corretamente à mistura, mas sem registrar a troca entre sweeps, relevante para reprodução da Tabela 1).</li><li><strong>Eixo 3 (ressalva)</strong> — Tese 4 extrapola: "proveniência selada" e "alimenta memória entre execuções" não são demonstradas no paper; §4.2 mostra apenas reuso de cache de teacher outputs entre jobs.</li><li><strong>Eixo 3 (ressalva)</strong> — Tese 5 enuncia um break-even ("abaixo disso, chamada por API ganha") não quantificado nem testado no paper; §8 formaliza só o trade-off velocidade-acurácia, e os 100.747 da demo Claudish (§6.3) são métrica de uso, não de economia.</li><li><strong>Eixo 4</strong> — Sem achados; calibragem conferida (seleção adversarial de FuzzyBench-Hard, margem do juiz ~2% contra deltas da Tabela 1, título bem auditado).</li></ul>
+<p>Emenda com proveniência, aplicada pelo orquestrador; conteúdo destilado preservado como gravado pelo destilador.</p>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/09/2026-09-04.html">edição de 2026-09-04</a></footer>
+</body>
+</html>

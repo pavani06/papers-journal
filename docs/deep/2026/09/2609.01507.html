@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — LatentPress: Context Compression Beyond Text and Vision</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/09/2026-09-04.html">papers.hf</a><span class="data-topo">Deep dive · sexta-feira, 4 de setembro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/09/2026-09-04.html">&larr; Edição de 2026-09-04</a></p>
+<h1 class="manchete">LatentPress: Context Compression Beyond Text and Vision</h1>
+<p><strong>Sumário de ação</strong>: Nada para implementar agora: soft tokens exigem injeção via <code>inputs_embeds</code> no decoder, inviável por API de terceiros. Guardar duas teses: separar memória auditável (humano) de memória otimizada para consumo do modelo (quando a plataforma permitir), e nunca comprimir memória por sumarização uniforme — sumário abstrativo foi o pior baseline em todos os readers.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2609.01507">abstract</a> · <a href="https://arxiv.org/html/2609.01507">HTML</a> · 107 upvotes capturados no snapshot da edição em 2026-09-05T07:51:29-03:00 · edição de <a href="../../../2026/09/2026-09-04.html">2026-09-04</a></p></div>
+<h2>Afirmação central</h2>
+<p>Contexto comprimido para consumo de um LLM não precisa ser texto legível nem imagem decodificável: um writer pequeno (~0,1% dos parâmetros do decoder) escreve histórias e documentos como tokens contínuos que o decoder congelado lê diretamente pela interface de embedding de entrada.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code> — HTML integral (355 kB) baixado via <code>curl</code> após truncamento do fetch inicial; texto extraído localmente; seções 1-8 e apêndices A-E lidos; fim do documento verificado (termina no Appendix E.2/Table 16, seguido apenas de rodapé LaTeXML/arXiv). Células de tabelas suplementares (breakdown per-category de C.4, exemplos de C.5, primeiras linhas de E.1) inspecionadas parcialmente; nenhuma seção deixou de ser aberta.</p>
+<ol><li><strong>Write/Read como abstração</strong>: Write mapeia texto → estado compacto; Read fornece esse estado a um decoder congelado. O paper isola a pergunta "que representação cruza a fronteira entre contexto armazenado e modelo consumidor" — explicitamente não substitui retrieval, reflexão, update ou resolução de conflito.</li><li><strong>Writer reader-matched</strong>: reutiliza as 2 camadas inferiores (congeladas, deep-copied) do próprio decoder como encoder + cabeça linear <code>d×d</code> inicializada como identidade (4,2-26,2M parâmetros, ~0,1% do decoder; 12,8M no Qwen2.5-7B). Soft tokens entram por <code>inputs_embeds</code>; o forward do reader não muda. Um writer por reader (acoplamento por espaço de embedding).</li><li><strong>Taxa de compressão hand-specified</strong>: uniforme (documentos) ou por papel (conversa): <code>k_user=1</code> (turnos de usuário ficam verbatim, bypassam o writer), <code>k_assistant ∈ {8,16,32}</code>. A razão conversacional emerge da mistura papel/comprimento (4,62-7,70×), não de um orçamento prefixado.</li><li><strong>Supervisão de gargalo</strong>: <code>L_rec</code> (cross-entropy teacher-forced do contexto comprimido sobre o alvo) + <code>λ·L_fkl</code> (KL forward das distribuições next-token do decoder com contexto completo vs comprimido), λ=1,0; padding mascarado. Treino genérico: 2.000 conversas UltraChat, 400 chunks, 1.000 passos, batch 1 (grad-accum 8), sem rótulos de QA. Para documentos: mesma arquitetura com supervisão QA cross-domain ou in-domain.</li><li><strong>Inferência sem reconstrução</strong>: o decoder lê <code>[soft tokens; emb(pergunta)]</code> e gera a resposta; nunca decodifica os vetores de volta a texto. "Reconstruction-free" descreve a inferência, não o sinal de treino.</li><li><strong>Ablação-chave (C.1)</strong>: o ganho vem do writer aprendido E da alocação por papel — sem aprendizado (pooling direto): 0,476→0,325; só turnos de usuário: 0,217; papel invertido (comprimir usuário, preservar assistente): 0,087.</li></ol>
+<h2>Evidência e resultados</h2>
+<ul><li><strong>LongMemEval, setting oracle</strong> (500 questões, cada uma emparelhada só com a(s) sessão(ões) de evidência ground-truth — retrieval idealizado, sem haystack distrator; juiz Llama-3.1-70B-Instruct; 5 sementes): role-aware LatentPress 0,476/0,478/0,504 (±0,014-0,024) a 4,62/6,27/7,70× vs <strong>0,490 do contexto bruto não-comprimido</strong> no Qwen2.5-7B. Calibragem: 0,504±0,024 vs 0,490 está dentro de 1σ — é empate estatístico, não superação. A relação com o bruto é reader-dependente: excede no Qwen3-1.7B (0,434), fica abaixo no Qwen3-8B (raw mais forte).</li><li><strong>"Preserva ou supera o bruto" vale sob condições</strong>: no LongMemEval oracle (respostas concentradas em fatos de turnos de usuário) e no LongBench-QA <strong>in-domain</strong> a 4-8× (writer treinado nos training splits do próprio domínio: 49,06 vs 43,80 no 7B; 57,99 vs 47,93 no 14B; 39,62 vs 30,80 no 8B). A 16× cai abaixo do bruto nos três readers (perda de detalhe verbatim). Cross-domain (zero-shot): só a 4× empata/supera marginalmente (45,13 vs 43,80), degrada além.</li><li><strong>Uniform pooling colapsa em conversa</strong>: 0,06-0,12 no mesmo intervalo — sem o sinal de papel, a interface conversacional não funciona; em documentos só funciona com supervisão QA.</li><li><strong>Baselines</strong>: sumário textual 0,184 — o pior em todos os readers, mas a ~12× de compressão (comparação não pareada em taxa; o colapso está nas categorias answer-bearing, C.4: sumarização abstrativa descarta fatos precisos; abstention é alta). DeepSeek-OCR (rota visual-reconstrutiva) 0,426→0,312 com compressão. ICAE 0,452@4,12× → 0,174@17,28×. Token-F1 judge-free (C.3) confirma a ordenação.</li><li><strong>Eficiência</strong>: write 43 ms/conversa (batch 8, bf16, 1×H100, Qwen3-8B — comparação só contra rotas reconstrutivas: OCR ~934 ms, sumário 407-645 ms, ICAE 350-700 ms); read 5,0-9,2× mais rápido que bruto (0,43-0,49 s vs 2,44-4,14 s; <strong>30 exemplos</strong>, warm-loaded, excluindo carga de modelo e cache). Esses números não significam desempenho de produção: são específicos aos modelos, comprimentos e batching avaliados.</li><li><strong>"Beyond Vision" excede a evidência no eixo visual</strong>: a comparação visual é só com DeepSeek-OCR em modo reconstrução (texto→imagem→texto lido pelo mesmo decoder); Glyph/AgentOCR (VLM lendo imagem diretamente) não foram comparados.</li></ul>
+<h2>Limitações e riscos</h2>
+<ul><li>Declaradas: só a camada de representação (não integra retrieval/update/conflict — Explicitamente deixado para sistemas de memória completos); taxas hand-specified (alocação dinâmica é future work); LongMemEval-S/M (haystacks distratores) não testados.</li><li>Suspeitadas na leitura: a alocação por papel é específica de LongMemEval, onde a resposta mora nos turnos de usuário — a própria ablação C.1 (role-swapped: 0,087) mede isso; noutro domínio a alocação correta pode inverter. Writer acoplado a um reader (1:1). In-domain exige dados de treino do domínio. Baseline sumário é uma única receita de prompt. Dependência de plataforma: <code>inputs_embeds</code> não existe em API de terceiros — para nós, o método é tese guardada, não ferramenta.</li></ul>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Fronteira Write/Read como decisão de projeto</strong>: distinguir o que armazenar (auditável: texto, provenance, IDs estáveis) de que representação cruza a fronteira para o consumidor; quando a plataforma expõe entrada de embedding, o payload de consumo pode ser contínuo sem perda — memória para máquina não precisa ser legível por humano.</li><li><strong>Fidelidade por papel/valor, nunca uniforme</strong>: preserve verbatim o que carrega fatos portadores de resposta e comprima agressivamente o resto; comprimir o lado errado custa quase tudo (0,476→0,087 na inversão de papéis).</li><li><strong>Sumário abstrativo uniforme é a pior compressão de memória para consumo do modelo</strong> (0,184 vs 0,490 bruto, colapso nas categorias answer-bearing): se precisar reduzir contexto persistente, prefira seleção estruturada e fatos brutos a paráfrase.</li><li><strong>Compressão leve pode superar leitura integral do bruto</strong> (mais tokens ≠ melhor quando há ruído), mas agressiva (16×) perde detalhe verbatim — em memória operacional, o orçamento de compressão deve escalar com o valor informacional do segmento.</li><li><strong>Destilar o comportamento full-context num bottleneck barato</strong> (forward-KL teacher-forced + reconstrução, treinando só ~0,1%) é receita reutilizável para qualquer gargalo de representação supervisionado pela demanda informacional do consumidor.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e guardar as teses (1-3 são direcionadoras de arquitetura de memória); não vale seguir para implementação no nosso contexto: o método exige acesso à interface de embedding do decoder, bloqueado em provedor terceiro. A evidência é honesta (ablações que separam writer de alocação, métrica judge-free de confirmação, failure modes documentados) mas condicionada: setting oracle sem retrieval, readers Qwen-only, destaque numérico 0,504 vs 0,490 dentro do ruído de semente.</p>
+<h2>Confronto com repos</h2>
+<h3>long-running-agents</h3>
+<p>Confronto feito em HEAD <code>034586110161efc6ba81e6e86181974ee659b555</code> (<code>2026-09-05</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 1 (fronteira Write/Read) toca o catálogo endereçável, que já separa "interface de decisão compacta" do "conteúdo exato fora do prompt até a seleção" (<code>docs/canonical/addressable-memory-catalog.md:43</code>), mas assume payload textual no fetch; a tese nomeia essa dimensão ausente — formato do payload de consumo como decisão independente do armazenamento. Tese 2 (fidelidade por autoridade) mapeia ao gradiente de tiers: Tier 1 user-initiated com recuperação determinística (<code>docs/canonical/three-tier-memory-persistence.md:41</code>) vs Tier 3 agent-decided com risco alto (<code>docs/canonical/three-tier-memory-persistence.md:31</code>); a ablação C.1 do paper (0,476→0,087 na inversão) dá base quantitativa à intuição de que fidelidade deve escalar com o valor do que é preservado. O grafo epistêmico retorna rótulos com cada resultado para decisão-a-antes-de-agir (<code>docs/canonical/epistemic-memory-graph.md:49</code>) — auditoria como camada separada do payload, mesma direção da tese.</li><li><strong>Oportunidade de melhoria</strong> — registrar a distinção representação-de-armazenamento vs representação-de-consumo como dimensão explícita nos canonical docs de memória; hoje os gaps listados tratam só de catálogo/schema/retrieval (<code>docs/canonical/addressable-memory-catalog.md:63-67</code>), nunca do formato do que é consumido.</li><li><strong>Como aplicar</strong> — um canonical draft ("machine-facing memory representation") vinculado aos três docs existentes via <code>relates-to</code>, condicionado a plataforma (só quando o consumidor expõe embedding input); sem mudança de código — o repo é de processo/conhecimento.</li><li><strong>Prós e contras</strong> — custo baixo (1 doc, validação Obsidian); risco: canonizar cedo uma tese cuja evidência é oracle-setting, Qwen-only, e bloqueada de adoção imediata por API.</li><li><strong>Veredito</strong> — aplicar com ressalvas: registrar a tese como padrão condicionado, não alterar mecanismo existente.</li></ol>
+<h3>sisyphus-runtime</h3>
+<p>Confronto feito em HEAD <code>3904ff59f01323cf084e28b1a1775e22c277c0e4</code> (<code>2026-09-05</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Tese 1 não derruba as constraints vigentes do epic #88: "sem vector DB, embeddings, ranker aprendido" (<code>.omo/plans/2026-09-03-correcoes-memoria-fase2.md:34</code>) e o non-goal de começar pelo ledger (<code>.omo/plans/2026-09-03-correcoes-memoria-fase2.md:178</code>, <code>.omo/plans/2026-09-03-analise-adversarial-memoria-agentes.md:87</code>) — soft tokens nem são retrieval vetorial, mas a restrição de plataforma os torna moot via API; o confronto confirma a decisão, não a desafia. Tese 3 (anti-sumário) governa a Tarefa 6 em execução: o contrato de handoff tipado com <code>state_observed</code>, <code>evidence</code>, <code>must_verify</code>, <code>omissions</code>, <code>coverage_end</code> (<code>.omo/plans/2026-09-03-correcoes-memoria-fase2.md:110-115</code>) é exatamente seleção estruturada com fatos verbatim — o oposto da paráfrase abstrativa que o paper mediu em 0,184. Tese 2 aplica-se ao warmup: fatos e decisões do operador verbatim, narrativa comprimível.</li><li><strong>Oportunidade de melhoria</strong> — na redação/execução da T6, citar a evidência anti-sumário como justificativa do formato estruturado (campos com fatos brutos em vez de resumo narrativo do handoff); um anexo "payload de consumo alternativo" poderia registrar a tese de soft tokens como direção condicionada a plataforma, sem mecanismo.</li><li><strong>Como aplicar</strong> — nenhuma edição agora: a tese entra como insumo de redação da T6 dentro do plano do epic #88 (execução e emendas são atos do operador/planos existentes).</li><li><strong>Prós e contras</strong> — custo zero imediato; risco: ler o paper como licença para embeddings/infra — negado explicitamente pelas constraints citadas.</li><li><strong>Veredito</strong> — não aplicar mecanismo agora; usar a evidência anti-sumário como reforço argumentativo do contrato tipado da T6.</li></ol>
+<h2>Verificação adversarial</h2>
+<p>Verificação independente em 2026-09-05 (verificador separado, escada <code>html</code>, fim do documento verificado via curl; seções 1-8, referências e apêndices A-E lidos integralmente). Veredito: <code>pass-com-ressalvas</code>. Nenhum achado de severidade <code>correcao</code>; nenhum veredito de confronto fica stale.</p>
+<ul><li><strong>Eixo 2 (ressalva)</strong> — "Em documentos só funciona com supervisão QA" presenta como testado um contrafactual inexistente: o paper nunca avaliou documentos sem supervisão QA (cross-domain treina em QA derivado de LongMemEval, B.1; in-domain nos training splits, B.2); a única condição sem rótulos (UltraChat genérico) foi avaliada só em conversa.</li><li><strong>Eixo 1 (ressalva)</strong> — "Batch 1 (grad-accum 8)" é atribuído ao treino genérico UltraChat, mas a Tabela 6 (config desse treino) lista batch 1 sem grad-accum; "gradient accumulation 8" só está documentado para os jobs in-domain de LongBench (B.2, E.1).</li><li><strong>Eixo 3 (ressalva)</strong> — Tese 3 é categórica ("sumário abstrativo uniforme é a pior compressão de memória"); a evidência sustenta o escopo menor "pior baseline em todos os readers avaliados", com taxa não pareada (12,06× vs 4,62-7,70×) e uma única receita de prompt de sumário (B.3). A nota caveta ambos os pontos em Evidência e Limitações, mas a tese não herda o escopo.</li></ul>
+<p>Emenda com proveniência, aplicada pelo orquestrador; todos os números da nota confirmados contra Tabelas 2-7, 9-10, 12-13 e Apêndices A-E.</p>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/09/2026-09-04.html">edição de 2026-09-04</a></footer>
+</body>
+</html>
