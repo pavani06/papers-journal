@@ -1,7 +1,7 @@
 ---
 id: principio-0010
 title: "Estado de trabalho é artefato endereçável em disco, não contexto de sessão"
-status: candidato
+status: adotado
 camada: a
 sinais:
   - "recorrencia: 9 papers independentes (2608.10450, 2608.10875, 2608.11924, 2608.19861, 2608.21156, 2608.23283, 2608.23552, 2608.24358, 2608.26070)"
@@ -30,7 +30,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-09-06
 ---
 
 # Estado de trabalho é artefato endereçável em disco

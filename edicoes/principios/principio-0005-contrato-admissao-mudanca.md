@@ -1,7 +1,7 @@
 ---
 id: principio-0005
 title: "Contrato de admissão de mudança em skill/prompt/harness — baseline congelado, extensão + preservação, corpus binário"
-status: candidato
+status: adotado
 camada: a
 sinais:
   - "recorrencia: 10 papers independentes (2608.05466, 2608.06301, 2608.06352, 2608.07545, 2608.08722, 2608.09802, 2608.19197, 2608.19880, 2608.23041, 2608.27260)"
@@ -27,7 +27,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-09-06
 ---
 
 # Contrato de admissão de mudança em skill/prompt/harness

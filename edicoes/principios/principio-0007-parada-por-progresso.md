@@ -1,7 +1,7 @@
 ---
 id: principio-0007
 title: "Parada por progresso, não por teto — estado terminal nomeado e anti-futilidade"
-status: candidato
+status: adotado
 camada: a
 sinais:
   - "recorrencia: 9 papers independentes (2607.29211, 2608.06867, 2608.09802, 2608.11924, 2608.12440, 2608.16033, 2608.16425, 2608.18565, 2608.19799)"
@@ -30,7 +30,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-09-06
 ---
 
 # Parada por progresso, não por teto

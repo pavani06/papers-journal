@@ -1,7 +1,7 @@
 ---
 id: principio-0011
 title: "Uma execução não é medida — pass^k, variância e nulos honestos"
-status: candidato
+status: adotado
 camada: a
 sinais:
   - "recorrencia: 6 papers independentes (2607.28609, 2608.13417, 2608.17271, 2608.19741, 2608.20438, 2608.22510)"
@@ -26,7 +26,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-09-06
 ---
 
 # Uma execução não é medida

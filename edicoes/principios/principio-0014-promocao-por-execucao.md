@@ -1,7 +1,7 @@
 ---
 id: principio-0014
 title: "Promoção por execução validada — provisório vs. promovido, não por forma"
-status: candidato
+status: adotado
 camada: a
 sinais:
   - "recorrencia: 6 papers independentes (2608.07545, 2608.14036, 2608.25500, 2608.26005, 2608.26530, 2608.23200)"
@@ -26,7 +26,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-09-06
 ---
 
 # Promoção por execução validada

@@ -1,7 +1,7 @@
 ---
 id: principio-0012
 title: "Fronteira de aquisição — a cerca viaja com o dado; registro do que entrou no contexto"
-status: candidato
+status: adotado
 camada: c
 sinais:
   - "recorrencia: 10 papers independentes (2606.00152, 2608.00677, 2608.03744, 2608.09867, 2608.21500, 2608.10692, 2608.13417, 2608.15008, 2608.24189, 2608.26005)"
@@ -27,7 +27,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-09-06
 ---
 
 # Fronteira de aquisição — a cerca viaja com o dado

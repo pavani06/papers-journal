@@ -53,3 +53,13 @@ da C21; a próxima re-síntese re-valida o glossário.
 | Auto-relato do agente não é evidência de gate | 2608.03744/16002 → agent-skills (1 repo) |
 | Defesa em prompt não é gate | 2606.00152 → agent-skills/scripts (1 paper) |
 | Selo/garantia sobre base não verificada dá garantia falsa | 2608.09819/15888 → papers-journal (extração interrompida) |
+
+## Síntese incremental — 2026-09-06
+
+As 33 notas desde 2026-08-30 foram classificadas no vocabulário existente.
+Nenhuma causa canônica nova foi aberta. As ressalvas repetem principalmente:
+ausência de execução real acumulada; custo da sonda acima do ganho; decisão de
+política reservada ao operador; escala ou regime local incompatível; produtor
+ou campo ausente; e risco de ritual sem gate executável. Vinte e quatro notas
+tinham ateste vencido; elas não sustentaram candidato sem releitura dirigida
+do fato atual.

@@ -1,7 +1,7 @@
 ---
 id: principio-0013
 title: "Injeção de memória tem gate de admissão e política de volume por regime"
-status: candidato
+status: adotado
 camada: a
 sinais:
   - "recorrencia: 5 papers independentes (2608.07169, 2608.15008, 2608.20202, 2608.24189, 2608.26005)"
@@ -26,7 +26,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-09-06
 ---
 
 # Injeção de memória tem gate de admissão e política de volume por regime

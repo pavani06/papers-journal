@@ -1,7 +1,7 @@
 ---
 id: principio-0008
 title: "Falha registrada com genótipo — memória de fracasso consultável e comparação contrastiva"
-status: candidato
+status: adotado
 camada: a
 sinais:
   - "recorrencia: 5 papers independentes (2607.28048, 2608.07645, 2608.22510, 2608.23041, 2608.27454)"
@@ -26,7 +26,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-09-06
 ---
 
 # Falha registrada com genótipo

@@ -1,7 +1,7 @@
 ---
 id: principio-0002
 title: "Auto-relato do executor não é evidência de gate — veredito é computado externamente"
-status: candidato
+status: adotado
 camada: a
 sinais:
   - "recorrencia: 7 papers independentes (2607.28609, 2608.03744, 2608.06270, 2608.11341, 2608.18565, 2608.19861, 2608.24979)"
@@ -26,7 +26,7 @@ evidencias:
 contra_evidencias: []
 criado_em: 2026-08-30
 revalidado_em: null
-adotado_em: null
+adotado_em: 2026-09-06
 ---
 
 # Auto-relato do executor não é evidência de gate
