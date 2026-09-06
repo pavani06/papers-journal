@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — VeriPhy: Agentic Physical Reasoning for World Model Evaluation and Refinement</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/09/2026-09-04.html">papers.hf</a><span class="data-topo">Deep dive · sexta-feira, 4 de setembro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/09/2026-09-04.html">&larr; Edição de 2026-09-04</a></p>
+<h1 class="manchete">VeriPhy: Agentic Physical Reasoning for World Model Evaluation and Refinement</h1>
+<p><strong>Sumário de ação</strong>: Aplicar o contrato de verificação, não a promessa de refinamento: declarar obrigações verificáveis antes da execução, associar evidência a cada uma e publicar <code>supported</code>, <code>contradicted</code> ou <code>unknown</code>. Em <code>papers-journal</code>, isso exige schema e gate real; narrativa de modelo não é validação estática.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2609.03153">abstract</a> · <a href="https://arxiv.org/html/2609.03153">HTML</a> · 12 upvotes capturados no snapshot da edição em 2026-09-06T13:13:38-03:00 · edição de <a href="../../../2026/09/2026-09-04.html">2026-09-04</a></p></div>
+<h2>Afirmação central</h2>
+<p>Um avaliador fica auditável quando compila o prompt, antes de observar o vídeo, em obrigações tipadas e plano validado; executa só especialistas declarados; preserva a proveniência de cada medição; e compõe evidência em vereditos trivalentes.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code></p>
+<ol><li>O planner textual extrai spans do prompt em claims físicos tipados, checagens e ações antes de frames.</li><li>O compilador produz um DAG e valida parse, referências, tipos, aciclicidade e cobertura; linha inválida vira fallback registrado e cobrado.</li><li>Em ordem topológica, observações delimitam chamadas já declaradas a especialistas congelados; subchecks semânticos aprendidos e uma revisão forte sobre claims passadas também produzem evidência registrada. Janela inválida volta ao clipe inteiro.</li><li>Cada ação retorna medição tipada ou estado aprendido marcado, escopo, status (<code>measured</code>, <code>abstained</code>, <code>errored</code>), hashes, custo e trecho de prompt; falha terminal de infraestrutura é <code>⊥infra</code>.</li><li>Resolvers compõem claims em <code>supported</code>, <code>contradicted</code> ou <code>unknown</code>; <code>abstain</code> é o veredito de clipe quando não há contradição, mas nem todas as claims estão suportadas. Falta de medição deve virar <code>unknown</code>, não êxito.</li><li>Lições de misses entram em contexto legível, mas o gate de admissão por proxy previsto não foi exercitado.</li><li>O crítico pode reescrever o prompt e regenerar com a mesma seed e controle; o loop altera texto, não pesos nem controle geométrico.</li></ol>
+<h2>Evidência e resultados</h2>
+<p>No núcleo de desenvolvimento, VeriPhy cobriu 228/304 defeitos em 149 clipes, contra 164/304 do avaliador de decomposição. As listas de claims são idênticas em 148 clipes, mas o baseline foi especificado depois de inspecionar saídas do crítico; além disso, o core original era 150/306 e um clipe com dois defeitos foi excluído. Prompt monolítico no mesmo backbone chegou a 222/304. O resultado distingue a trilha de evidência, não uma vantagem isolada de recall. O núcleo não é held-out, tem um anotador e só mede recall, portanto não mede precisão nem generalização.</p>
+<p>Com 33 lições, encontrou 375/502 defeitos em dados separados do pool de distilação, contra 340/502 sem lições (ganho líquido 35; teste pareado p = 3×10⁻⁴). Isso não demonstra memória segura: o gate foi desligado e claims por clipe cresceram de 9,5 para 16,7, confundindo seleção com maior orçamento.</p>
+<p>No refinamento, a métrica do crítico melhorou em 63/87 clipes acionados e 49/65 <code>implausible</code> viraram <code>plausible</code>; o AutoRater independente não detectou mudança (commonsense físico 3,59 → 3,58; concordância conjunta 22,8% → 23,1%). O título excede a evidência nessa metade.</p>
+<h2>Limitações e riscos</h2>
+<p>O testbed de geração usa controles de simulador; o benchmark do crítico é um corpus de clipes gerados por IA cuja proveniência de gerador não foi registrada. Há falhas de um anotador, categorias parcialmente derivadas por máquina e não há negativos limpos. Ferramentas heterogêneas podem não localizar a mesma instância, e verificadores aprendidos preservam opacidade. Lições são inferências do crítico, não verdade externa; sem o gate previsto, acumular contexto pode poluir o estado.</p>
+<h2>Teses transferíveis</h2>
+<ol><li>Declarar obrigações e evidência aceitável antes de chamar ferramentas.</li><li>Validar referências, tipos, dependências e cobertura; prosa formatada não é plano válido.</li><li>Tratar ausência de evidência como <code>unknown</code> é uma invariante desejada, que exige sinais de estabilidade e cobertura para não mascarar falha intermitente de grounding como contagem confiante.</li><li>Manter ligados obrigação, artefato, escopo, regra de composição e custo.</li><li>Tratar gate de admissão como disciplina ainda não testada para lições; exigir avaliador independente sensível à propriedade-alvo antes de afirmar melhoria por refinement.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale seguir pelo contrato de execução, não pelos números como prova de melhoria geral. A separação entre obrigação, medição, proveniência e veredito é transferível; a vantagem sobre prompting monolítico é mínima no núcleo de desenvolvimento e o refinement não passa na confirmação física independente. O título é suportado como interface e experimento de rewrite, mas não como demonstração de melhoria física generalizável ou independentemente confirmada.</p>
+<h2>Verificação adversarial</h2>
+<p>Verificação independente em 2026-09-06, com leitura HTML integral, abstract e auditoria da nota. A auditoria distinguiu o estado de claim <code>unknown</code> do veredito de clipe <code>abstain</code>, registrou <code>⊥infra</code>, corrigiu a origem do benchmark e as condições da comparação 228/304 versus 164/304, e recalibrou as teses sobre admission gate e refinement. Nenhuma seção de confronto com repos foi usada pelo verificador.</p>
+<h2>Confronto com repos</h2>
+<h3>papers-journal</h3>
+<p>Confronto feito em HEAD <code>e402f691b4c2e05a2783ac865161456c3e87ab5e</code> (<code>2026-09-06</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — A leitura profunda busca texto, delimita conteúdo de terceiro e pede cinco seções narrativas (<code>src/deepdive.py:152-196</code>); registra cobertura completa/truncada/abstract no cabeçalho (<code>src/deepdive.py:202-225</code>). Não produz obrigações tipadas, evidências nem estados trivalentes.</li><li><strong>Oportunidade de melhoria</strong> — Acrescentar, para leituras que sustentam decisão operacional, contrato por claim com evidência requerida, estado e motivo de abstenção.</li><li><strong>Como aplicar</strong> — Definir schema versionado e validador local que rejeite referência faltante, estado inválido ou claim sem evidência antes de mudar o prompt. A separação de conteúdo não confiável já existe (<code>src/deepdive.py:159-196</code>).</li><li><strong>Prós e contras</strong> — Facilita revisão, mas aumenta custo e vira falsa validação sem gate executável; reservar a leituras de alto impacto.</li><li><strong>Veredito</strong> — aplicar com ressalvas: pilotar no deep dive operacional e não chamar de validação estática sem checagem em runtime.</li></ol>
+<h3>agent-workloops</h3>
+<p>Confronto feito em HEAD <code>2f3c64c2f401a31ea2116bd4bf5b4966c3348725</code> (<code>2026-09-06</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — O playbook exige critérios e blockers (<code>playbooks/workloop.md:61-81</code>), pré-voo, verificação e review independente (<code>playbooks/workloop.md:100-112</code>), além de endereços verificáveis (<code>playbooks/workloop.md:225-229</code>). Falta matriz única obrigação → evidência → estado.</li><li><strong>Oportunidade de melhoria</strong> — Na diretiva e no handoff de código, fechar cada critério como <code>supported</code>, <code>contradicted</code> ou <code>unknown</code>, com link para a evidência.</li><li><strong>Como aplicar</strong> — Estender a diretiva com matriz curta; executor liga teste, golden, diff ou review, e revisor a confere. O gate humano antes de merge permanece obrigatório (<code>playbooks/workloop.md:109-112</code>).</li><li><strong>Prós e contras</strong> — Sessões frias distinguem sucesso de pendência, com custo burocrático; limitar a código ou alto risco, como recomenda a proporcionalidade do ciclo (<code>playbooks/workloop.md:284-297</code>).</li><li><strong>Veredito</strong> — aplicar agora como convenção leve para trabalho verificável; a matriz torna o contrato consultável por obrigação.</li></ol>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/09/2026-09-04.html">edição de 2026-09-04</a></footer>
+</body>
+</html>
