@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — FDE-Gym: The Last Mile of AI Delivery</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/10/2026-10-16.html">papers.hf</a><span class="data-topo">Deep dive · sexta-feira, 16 de outubro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/10/2026-10-16.html">&larr; Edição de 2026-10-16</a></p>
+<h1 class="manchete">FDE-Gym: The Last Mile of AI Delivery</h1>
+<p><strong>Sumário de ação</strong>: O gargalo medido não é implementar nem interpretar um pedido vago, é descobrir restrições que não estão no ticket e que só aparecem interagindo com stakeholders e sistemas. Aplicar como gate explícito do harness (listar hipóteses, lacunas e perguntas antes de executar plano) e como desenho de evals internos com informação crítica condicional a perguntar/inspecionar o lugar certo.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2610.22350">abstract</a> · <a href="https://arxiv.org/html/2610.22350">HTML</a> · 284 upvotes capturados no snapshot da edição em 2026-10-18T08:30:34-03:00 · edição de <a href="../../../2026/10/2026-10-16.html">2026-10-16</a></p></div>
+<h2>Afirmação central</h2>
+<p>Em tarefas de entrega end-to-end derivadas de projetos reais de cliente, o desempenho dos melhores modelos cai sobretudo quando as restrições aplicáveis não estão no pedido e precisam ser descobertas; e mesmo recuperando quase todos os fatos, a entrega ainda fica bem aquém da referência.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code> (HTML integral baixado com curl, texto extraído localmente, seções 1-8 lidas, fim do documento verificado — Conclusion seguido do rodapé arXiv).</p>
+<ol><li><strong>Construção</strong>: especialistas adaptam 20 projetos reais de entrega (China, Singapura, EUA, desde 2024) em 20 cenários operacionais de 18 setores; cada cenário gera uma tarefa original mais 2-7 variantes que alteram fatos-chave (qual regra está desatualizada, quem detém a informação, se o pedido do sponsor ataca o problema certo) — 95 tarefas no total; só entram tarefas cujos graders passam nas âncoras de admissão.</li><li><strong>Ambiente</strong>: workspace com a task instruction, cópia do sistema de produção do cliente, documentos e dados históricos, e staff directory; Python e SQLite; sem instalação de pacotes nem rede geral (só o LLM gateway do cliente, cobrado por uso); o conteúdo de <code>system/</code> é deployado sem modificação e a produção continua chamando os entry points originais — funcionalidade nova precisa se integrar a eles.</li><li><strong>Stakeholders</strong>: mais de 130 simulados e scripted (trocar o modelo que faz o usuário desloca taxas em pontos percentuais); conhecimento, equívocos e condições de divulgação fixados a priori; paciência limitada, exigência de evidência, indisponibilidade temporária e restrições de contato; o agente não é informado de que contato custa, de que há pessoas irrelevantes ou de que o pedido pode estar mal direcionado — descobrir isso é objeto da avaliação.</li><li><strong>Níveis de instrução L0-L3</strong>: varia apenas a instrução (L0: problema+regras+critério de score; L1: problema claro sem regras; L2: pedido vago direcional; L3: pedido original do sponsor, possivelmente mal direcionado); ambiente, stakeholders e grader idênticos → diferença de desempenho isola o efeito da informação retida.</li><li><strong>Score</strong>: U = uplift normalizado na métrica de negócio do cliente (do-nothing = 0, referência especialista = 1, medido em held-out production data); U_adj zera uplift positivo se incidente predefinido (ação não autorizada); C = custo de contato (taxa por mensagem por pessoa, agravada acima da paciência ou violando restrição; trial runs e dias de espera também cobrados; mensagem sem resposta não cobrada); S = U_adj − C; tarefa resolvida = S ≥ 0.8 sem incidente; média por tarefa com U_adj com piso em −1.</li><li><strong>Âncoras de admissão</strong>: referência ≥ 0.95; do-nothing = 0; solução literal (fazer exatamente o que o pedido pede) ≤ 0.2 — vale mesmo quando o pedido acerta o problema, porque as restrições omitidas determinam o desfecho (única exceção: pedido correto e completo, em que literal = referência para não recompensar desconfiar sempre); atalhos (overfitar histórico, chutar limiares redondos, deferer tudo a humanos) ≤ 0.8; graders testados contra mais de 270 estratégias de atalho e bypass.</li><li><strong>Protocolo</strong>: 13 configurações de 7 provedores no mesmo framework mínimo de 5 ferramentas (executar, ler, escrever, editar, listar); L3 nas 95 tarefas, L0-L2 nas 20 originais (3 cenários com L2 = L3); 3 runs por combinação, média; limites por run de 200 turnos, 150 minutos ou USD 8.</li></ol>
+<h2>Evidência e resultados</h2>
+<ul><li><strong>Cabeça</strong>: no L3, Claude Opus 5.5 lidera com score médio 0.56 (IC 95% 0.50-0.62) e 14/95 resolvidas; Claude Sonnet 5.5 faz 0.49 com 15 resolvidas; cinco das treze configurações resolvem zero. Selecionando a melhor configuração por tarefa ainda dá 0.70 com 30 resolvidas; em 16 tarefas ninguém chega a 0.5. Em L0 (regras dadas) os líderes atingem 0.73-0.82 — o topo da escala é alcançável sob o mesmo grader.</li><li><strong>Onde cai</strong>: queda pareada L0→L1 (retirar as restrições) de −0.28 nas 20 tarefas originais dos três líderes (IC 0.17-0.39); L1→L3 (vago → mal direcionado) adiciona só −0.04 (IC −0.03 a 0.14) para os líderes. A hipótese inicial dos autores — definição do problema seria o gargalo — não foi sustentada para modelos líderes; para fracos, cada passo custa (GPT-5.5: 0.51/0.15/0.04/0.06 em L0-L3).</li><li><strong>Informação não basta</strong>: líderes obtêm 72-85% dos fatos-chave e entregam 0.60-0.70 do uplift de referência; nos 73 casos tarefa-modelo com todos os fatos obtidos, uplift ≥ 0.8 em apenas 27 (37%); Opus sozinho: 23 tarefas com todos os fatos, ≥ 0.8 em 10.</li><li><strong>Custo de contato</strong>: come 0.14-0.22 do uplift dos líderes; GPT-6 Astra atinge U ≥ 0.8 em 36 tarefas mas só 9 continuam resolvidas após o custo; Opus: 40 → 14. Modelos fracos raramente perguntam (Mistral Small 4: 0.7 perguntas/tarefa, 6% dos fatos).</li><li><strong>Abaixo do baseline</strong>: Haiku 4.5 pontua abaixo do do-nothing em 79/95; Mistral Small 4 em 51 mesmo antes do custo; em 23 tarefas o sistema do Mistral causou mais dano que o benefício da referência. Agente fraco não é versão barata do forte — contribuição esperada negativa.</li><li><strong>Custo não explica</strong>: Gemini 3.8 Flash gasta USD 1.54 e 121 turnos para 0.19; GPT-6.1 Sol USD 0.24 e 25 turnos para 0.37; os líderes submetem em 26-60 turnos em todas as combinações — saber parar é parte da skill.</li><li><strong>Calibração do "14 de 95"</strong>: condição exata = melhor configuração por score médio (Opus 5.5, 0.56), cenário L3, 95 tarefas, média de 3 runs, "resolvida" = S ≥ 0.8 E sem incidente, já líquida de custo de contato. O número NÃO significa taxa de falha funcional (Opus atinge U ≥ 0.8 em 40 tarefas antes do custo), nem taxa universal de entrega real (um benchmark, stakeholders scripted, framework mínimo), nem é o máximo de tarefas resolvidas (Sonnet resolveu 15 com score médio menor). A edição está correta na condição e na localização do gargalo (restrições, não pedido mal direcionado).</li><li><strong>Comparação externa</strong>: modelos que resolvem até 88/90/61% em Terminal-Bench 2.1 / Vibe Code Bench / Finance Agent pontuam 0.19-0.56 no FDE-Gym; taxa de sucesso e uplift normalizado são quantidades diferentes, colocadas lado a lado sem equiparação.</li></ul>
+<h2>Limitações e riscos</h2>
+<ul><li><strong>Declaradas</strong>: stakeholders scripted (pessoas reais mudam de ideia, respondem outra pergunta); L0-L2 só nas 20 tarefas originais (amostra pequena; 3 cenários com L2 = L3); sem baseline humano (coleta em curso na plataforma online); um único framework mínimo de agente (scores descrevem modelos nesse framework, não os produtos); isolamento de execução variável entre hosts; custo de uso medido pela rota de acesso, não preço de tabela; contaminação não excluída (cenários adaptados de entregas reais); amostra enviesada para agentes e workflows em operações reguladas.</li><li><strong>Suspeitadas na leitura</strong>: custos de contato e âncoras fixados pelos mesmos especialistas que escreveram os cenários e as referências (risco de acoplamento grader-referência, mitigado pelos &gt;270 testes de atalho); "resolvida = S ≥ 0.8" é limiar arbitrário (mas ancorado); piso de −1 no uplift para a média recorta caudas negativas extremas; o título promete "the last mile of AI delivery" — a evidência cobrega entrega de agentes em ambientes simulados de operação, não entrega real com pessoas reais.</li></ul>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Gate de descoberta de restrições</strong>: antes de executar um plano, o harness deve forçar o agente a listar hipóteses, lacunas e perguntas cujas respostas mudariam a solução — o que não está no ticket é o insumo mais caro do trabalho real.</li><li><strong>Evals com informação condicional</strong>: avaliação interna em que a informação crítica só aparece se o agente pergunta à pessoa certa ou inspeciona o lugar certo; medir descoberta de restrição como métrica de primeiro classe, não só execução.</li><li><strong>Âncora anti-literal</strong>: em rubrica ou eval, "cumpriu o que foi pedido" deve pontuar baixo quando restrições omitidas determinam o desfecho; pontuar o efeito na métrica de resultado, não a obediência ao ticket.</li><li><strong>Baseline do-nothing e sinal negativo</strong>: todo eval de agente precisa do baseline "não mudar nada" e de permitir score negativo — a conclusão prática do paper é que agente fraco tem contribuição esperada negativa, e o gate de seleção deve olhar contribuição, não custo.</li><li><strong>Pergunta tem custo</strong>: orçamento explícito por interação (stakeholder, trial, espera) no harness; score líquido, não bruto — sem isso, o agente pergunta como se perguntar fosse grátis.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e seguir. Metodologia sólida (âncoras de admissão, variantes de fatos-chave contra memorização, stakeholders scripted, 3 runs, graders auditados contra &gt;270 atalhos) e o achado principal — restrição não escrita é o gargalo, e recuperar informação não fecha a lacuna — é diretamente acionável nos nossos harnesses e evals. Ressalvas: sem baseline humano, framework mínimo único, setores regulados enviesados; tratar os números como condições de um benchmark, não como taxa de mercado.</p>
+<h2>Confronto com repos</h2>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/10/2026-10-16.html">edição de 2026-10-16</a></footer>
+</body>
+</html>

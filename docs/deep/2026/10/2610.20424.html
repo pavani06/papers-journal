@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — BizAgentBench: Unveiling Hidden Challenges in Deploying Long-Horizon Agents for Real-World Business</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/10/2026-10-19.html">papers.hf</a><span class="data-topo">Deep dive · segunda-feira, 19 de outubro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/10/2026-10-19.html">&larr; Edição de 2026-10-19</a></p>
+<h1 class="manchete">BizAgentBench: Unveiling Hidden Challenges in Deploying Long-Horizon Agents for Real-World Business</h1>
+<p><strong>Sumário de ação</strong>: copiar a separação goal × processo × proteção (G∧P∧F sobre a história de execução) para os gates do ecossistema: artefato entregue com violação de restrição operacional é falha. papers-journal e scripts já têm metade do desenho (checks determinísticos sem caminho único); os gaps nomeáveis são checar conteúdo de citação, não só existência, e checar trajetória gravada, não só estado final.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2610.20424">abstract</a> · <a href="https://arxiv.org/html/2610.20424">HTML</a> · 291 upvotes capturados no snapshot da edição em 2026-10-20T08:30:31-03:00 · edição de <a href="../../../2026/10/2026-10-19.html">2026-10-19</a> · avança a edição de 2026-10-06 (nota ainda não destilada)</p></div>
+<h2>Afirmação central</h2>
+<p>Sucesso estrito em tarefas longas de negócio exige satisfazer goal, processo e proteção sobre a história de execução, não apenas o estado final, porque violações intermediárias (execução sem aprovação específica prévia, quebra de reserva contínua) não são reparadas por desfechos posteriores.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code> (HTML v2 baixado por <code>curl -s</code> após truncamento do webfetch; fim do documento verificado: seções 1-6, referências, apêndices A-D e rodapé LaTeXML). Correção de nome: o paper se chama <strong>BizAgentBench</strong> (v2, arXiv 18 out 2026, Ant International + Peking University); a edição usa "BizBench".</p>
+<ol><li>Ambiente executável reconstruído a partir de workflows reais de uma empresa global de pagamentos, com detalhes sensíveis abstraídos: 789 documentos de conhecimento, 601 capacidades de negócio descobríveis via 9 ferramentas always-available, 10 ferramentas do simulador de usuário, 398 coleções / 2.994 registros; cada run usa cópia independente do banco.</li><li>50 tarefas long-horizonte combinando restrições de recurso, dependências temporais entre workflows, compromissos prévios e orientação conflitante ou desatualizada com escopos, versões e vigências explícitos — selecionar a regra aplicável é parte da tarefa.</li><li>Formalização: <code>Success_i(τ) = G_i(τ) ∧ P_i(τ) ∧ F_i(τ)</code> sobre a história de execução τ; G = outcomes pedidos e condições terminais permitidas; P = requisitos que governam a execução (aprovação específica, do aprovador certo, anterior à operação; restrições contínuas testadas a cada mudança de estado relevante); F = objetos protegidos e efeitos colaterais proibidos.</li><li>Avaliador determinístico, executável, sem LLM-judge e sem casar com golden trace: sequências alternativas válidas passam; ações distinguem execução de proposta, aprovação e chamada rejeitada sem efeito.</li><li>Golden traces (uma por tarefa; as 50 passam) provam satisfatibilidade conjunta de G, P e F — inclusive as interações entre workflows ligados por recursos e prazos compartilhados.</li><li>Validação do próprio avaliador com contraexemplos dirigidos: quebra temporária de reserva com saldo final restaurado deve falhar P; alternativas válidas e variações de fatos devem mudar o veredito conforme o esperado; retry idempotente não gera efeito adicional. Revisão por 5 pesquisadores + especialistas de domínio.</li><li>Simulador de usuário LLM com protocolo de turnos: aprovação gravada contra pedido e termos correntes; termos mudaram exige nova aprovação; uma escrita/espera por vez com retorno de controle ao agente.</li></ol>
+<h2>Evidência e resultados</h2>
+<p>Condições: 50 tarefas; modelos com 3 runs/tarefa (média single-run), Claude Opus 5 e Muse Spark 1.3 com 1 run apenas (Claude sem medida de variabilidade).</p>
+<ul><li>Strict success: Claude Opus 5 64.0%, GPT-6 Sol 61.3%, GLM-5.3-Flash/DeepSeek-V4.1-Flash 43.3%, Qwen3.5-9B 0/150. Falha intermediária (IF) de 4.0% (Claude) a 83.3% (Qwen3.5-9B); P &lt; F para todo modelo (18.7-96.0 vs 87.3-100.0).</li><li>Calibração da edição: a "queda entre goal attainment e strict success" <strong>não é fenômeno de fronteira</strong> — Claude Opus 5 tem gap 0.0pp (64.0→64.0), GPT-6 Sol 3.4pp; o gap concentra-se no mid-tier: Qwen3.8-27B 9.3pp (42.0→32.7), GLM-5.3-Flash 4.7pp. Runs com G∧¬(P∧F): 5/150 do DeepSeek-V4.1-Flash (4 quebras de reserva de caixa recuperadas só no fim + 1 execução pré-aprovação rejeitada pelo tool) e 14/150 do Qwen3.8-27B. O "catálogo de violações intermediárias" existe, mas é majoritariamente mid-tier.</li><li>Confiabilidade: pass^3 do GPT-6 Sol = 40.0% (vs 61.3% single-run); Qwen3.5-9B completa 0 de 150.</li><li>Ablações de informação (só DeepSeek-V4.1-Flash, mesmas 50 tarefas): default 43.3% → gold-doc 50.0% → full customer disclosure 70.0%: eliciar restrições do cliente é gargalo maior que achar o documento; mesmo com tudo revelado, 30% falha.</li><li>Orçamento: cap de 1.2×Ri derruba strict para 0.7%; 2.0×Ri para 26.7%. Golden = 111.8 chamadas média vs 191.3 do DeepSeek-V4.1-Flash (1.71×), excedente concentrado em busca de informação (111.1 vs 59.2 queries de DB) com 16.4 releituras idênticas/run.</li><li>Robustez do simulador: trocar o modelo do simulador move o strict do Qwen3.8-27B em ≤3.3pp (30.7-36.0%); fix de prompt 4/50 → 0/50 violações de protocolo, McNemar exato p=0.125 — direção informativa, não significativo em n=50.</li><li>O que os números NÃO significam: 64.0% não é "fronteira falha 1/3 das tarefas de negócio" — são 50 tarefas reconstruídas, anonimizadas, de um domínio (pagamentos) e uma empresa; strict single-run não é pass^k; Claude tem 1 run, então 64.0% não mede consistência.</li></ul>
+<h2>Limitações e riscos</h2>
+<p>Declarados pelo paper: reconstrução/abstração da lógica de negócio sensível (fidelidade ao original não auditável por fora); simulador de usuário é LLM (protocolo auditado em duas variantes de prompt); checks determinísticos codificam a interpretação dos autores, validada por contraexemplos e especialistas.</p>
+<p>Suspeitados na leitura: n=50 e a assimetria 1-run vs 3-run tornam rankings frágeis (diferenças de poucos pp dentro do ruído; o McNemar subpotenciado confirma a escala); domínio único (pagamentos cross-border) limita transferência para "business" genérico; o "Real-World" do título é ambiente reconstruído a partir de workflows reais, não produção; a edição nomeia "BizBench", o paper é BizAgentBench.</p>
+<h2>Teses transferíveis</h2>
+<ol><li>Gates devem separar goal attainment de execution validity: execução que entrega o artefato mas viola restrição operacional (escrita fora de escopo, ordem violada, passo pulado) falha, mesmo com estado final correto.</li><li>Checkers determinísticos por etapa sobre a história de execução, sem prescrever caminho único: aceitar sequências alternativas válidas e validar o próprio avaliador com contraexemplos dirigidos.</li><li>Restrições de processo são temporais: aprovação específica precede execução; restrições contínuas valem a cada mudança de estado; reparo tardio não cura violação anterior.</li><li>Volume de atividade não é progresso: medir redundância (releituras idênticas) e erros, não contagem de chamadas — em telemetria de agentes, sessão longa não é avanço.</li><li>Todo gate precisa de uma golden trace que passe (o gate é passável) e de contraexemplos que falhem (o gate morde).</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e seguir. O valor para o ecossistema está no desenho do avaliador (checks determinísticos + validação por contraexemplo + separação G/P/F), não nos rankings: n pequeno, domínio único e assimetria de runs tornam os números de modelo secundários. A edição acerta a tese mas exagera a extensão da queda goal→strict para "modelos fortes".</p>
+<h2>Confronto com repos</h2>
+<h3>papers-journal</h3>
+<p>Confronto feito em HEAD <code>f201ca45f4cdd600cdc0dfeb77124198fde15720</code> (<code>2026-10-20</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — o fechamento do pipeline já separa goal de validade e já é determinístico sem caminho único: o modo <code>--gate</code> resolve cada citação RAW contra a raiz do repo e sai não-zero nomeando as não resolvidas (<code>src/confrontos.py:201-237</code>), sem prescrever como a nota foi escrita. O rotulo de cobertura do deepdive (<code>completo</code>/<code>truncado</code>/<code>abstract</code> com <code>lidos</code>/<code>total</code>) é exatamente a honestidade de cobertura que BizAgentBench exige do avaliador (<code>src/deepdive.py:59-81</code>). O gap análogo ao do paper está no <code>resolve()</code>: confere existência do arquivo e faixa dentro do tamanho, não o conteúdo da linha (<code>src/confrontos.py:111-126</code>) — citação apontando para arquivo certo em linha errada (dentro do tamanho) passa, como estado final que esconde quebra intermediária.</li><li><strong>Oportunidade de melhoria</strong> — ancoragem de conteúdo opcional no gate (hash/prefixo da linha citada), equivalente ao P-check sobre história de execução; hoje o gate valida estrutura, não semântica da citação.</li><li><strong>Como aplicar</strong> — estender <code>--gate</code> com modo opt-in de âncora de conteúdo antes de torná-lo bloqueante; manter o modo RAW como default.</li><li><strong>Prós e contras</strong> — pró: pega citações plausíveis mas erradas que a checagem de faixa aprova; contra: linhas driftam a cada edição de arquivo e o gate vira frágil (BizAgentBench evita isso checando estado de negócio, não texto da trajetória); o limite atual é documentado como decisão.</li><li><strong>Veredito</strong> — aplicar com ressalvas: a arquitetura já encarna as teses 1, 2 e 5; ancoragem de conteúdo só como opt-in, com medida do falso-positivo antes de bloquear. <code>src/</code> está intocado desde o <code>verified-head</code> do registro (diff vazio), então as citações acima são estáveis no HEAD confrontado.</li></ol>
+<h3>scripts</h3>
+<p>Confronto feito em HEAD <code>3f67f84eee377878c463b1dacb76b8996c416a7a</code> (<code>2026-10-20</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — o <code>preflight.sh</code> já implementa validade pré-ação: gramática do bloco inteiro validada antes de executar qualquer linha (<code>dispatch/preflight.sh:41-69</code>), PIN de proveniência por md5 verificado antes de allowlist/execução (<code>dispatch/preflight.sh:71-96</code>), allowlist por segmento com git read-only como proteção (<code>dispatch/preflight.sh:16-17</code>) — o análogo direto de "aprovação precede execução". O outro lado da tese está ausente: <code>sisyphus/trajectory.py</code> grava a trajetória write-only no fim da sessão (<code>sisyphus/trajectory.py:1-15</code>), mas nenhum checker determinístico consome essa história — é gravação sem P-check.</li><li><strong>Oportunidade de melhoria</strong> — um checker read-only sobre <code>traces/</code> no padrão de <code>papers-deep/varre_registro.py</code>, testando restrições de processo sobre a história gravada (ex.: regra de fronteira de sessão: sessão que já executou outro dispatch), em vez de confiar só no estado final reportado.</li><li><strong>Como aplicar</strong> — escopo mínimo: script de leitura + contraexemplos dirigidos como fixtures (tese 5), sem tocar no gravador.</li><li><strong>Prós e contras</strong> — pró: detecta violações intermediárias que o relatório final esconde (o ponto central do paper); contra: novo código para manter e cobertura parcial — só sessões que chamam <code>write_trajectory</code> produzem história.</li><li><strong>Veredito</strong> — aplicar com ressalvas: o preflight já cobre validade pré-ação; o checker de trajetória só se justifica quando a adoção do gravador crescer. <code>dispatch/</code> e <code>sisyphus/trajectory.py</code> unchanged desde o <code>verified-head</code> (diff do intervalo toca só <code>handoff-path.sh</code> e o novo <code>papers-deep/cron-paper-deep.sh</code>).</li></ol>
+<h3>agent-skills</h3>
+<p>Confronto feito em HEAD <code>f485001e5d27d15d82c9eecaade30c0e990d8afa</code> (<code>2026-10-20</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — o harness roda três gates (contract/modules/integration) por skill via pytest sobre artefatos (<code>scripts/run_harness.py:90-97</code>), fail-closed: gate sem arquivo de teste permanece <code>passes: false</code> (<code>scripts/run_harness.py:102-115</code>) e exit 0 só se todos os gates executados passam (<code>scripts/run_harness.py:8-10</code>). Todos são pós-hoc em relação à execução da skill: checam o artefato final, não passos intermediários.</li><li><strong>Oportunidade de melhoria</strong> — a tese 1 sugeriria P-checks por fase (ex.: fases do issue-executor-master), mas a camada do harness não observa o agente durante a execução — checks intermediários teriam que viver na instrução da skill (gates de fase no texto), não no <code>run_harness.py</code>.</li><li><strong>Como aplicar</strong> — se adotado, como texto normativo dentro das skills com fases, mantendo o harness como avaliador de artefato.</li><li><strong>Prós e contras</strong> — pró do desenho atual: determinístico, barato, fail-closed já codifica "não executado ≠ aprovado" (eco da separação G/P); contra: skill que entrega artefato correto violando ordem de fases passa invisível nesta camada.</li><li><strong>Veredito</strong> — não aplicar nesta camada: camada errada para P-checks de execução; o valor transferível aqui é o vocabulário G/P/F para descrever o que o harness cobre (G do artefato) e o que não cobre (P do processo).</li></ol>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/10/2026-10-19.html">edição de 2026-10-19</a></footer>
+</body>
+</html>

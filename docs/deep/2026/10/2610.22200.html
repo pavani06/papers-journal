@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — OpenGCUA: Toward a Fully Open Stack for Generalist Computer Use</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/10/2026-10-16.html">papers.hf</a><span class="data-topo">Deep dive · sexta-feira, 16 de outubro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/10/2026-10-16.html">&larr; Edição de 2026-10-16</a></p>
+<h1 class="manchete">OpenGCUA: Toward a Fully Open Stack for Generalist Computer Use</h1>
+<p><strong>Sumário de ação</strong>: Definir GCUA pelas três decisões que o modelo toma a cada passo (observar, agir, organizar) e transferir decisões do harness para o modelo com evidência registrada é a tese aproveitável; aplicar como lente em sisyphus-runtime (regras de dispatch), scripts (trajetória/preflight) e long-running-agents (padrões canônicos), sem adotar a pilha em si.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2610.22200">abstract</a> · <a href="https://arxiv.org/html/2610.22200">HTML</a> · 315 upvotes capturados no snapshot da edição em 2026-10-17T08:31:00-03:00 · edição de <a href="../../../2026/10/2026-10-16.html">2026-10-16</a></p></div>
+<h2>Afirmação central</h2>
+<p>Um agente de uso de computador ganha desempenho e eficiência quando o modelo, não o harness, decide a cada passo o que observar, como agir (inclusive escrevendo programas que combinam GUI, shell, accessibility e API com controle de fluxo) e como organizar o próprio trabalho.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code> (HTML baixado por curl após truncamento do fetch; texto extraído localmente; fim do documento verificado — References, Appendices A–D e rodapé LaTeXML lidos).</p>
+<ol><li><strong>Definição por decisões, não por componentes</strong>: um GCUA é caracterizado pelas três decisões que o modelo toma a cada passo — o que observar (screenshot, AX tree, saída de comando, resposta de API, ou nenhuma), como agir (programa sobre quatro famílias de primitivas <code>A_GUI ∪ A_AX ∪ A_CLI ∪ A_API</code>, com loops, ramos e variáveis) e como organizar (plano, registro de progresso, o que fica no contexto). GUI agents, CLI agents, híbridos multi-agente e GUI+CLI batched são casos especiais que congelam antecipadamente algumas dessas decisões.</li><li><strong>Code execution sobre GUI e CLI</strong>: a cada passo o modelo emite UM programa Python num bloco <code>&lt;code&gt;</code>; processo novo por passo (só estado externo persiste); <code>bash()</code> retorna stdout/stderr/returncode como objeto inspecionável; saída impressa volta truncada (3200 chars); timeout de 300s. O ponto estrutural: lote é "programa sem controle de fluxo" — com programa, condição, loop e verificação acontecem dentro de uma chamada de modelo.</li><li><strong>Padrões recorrentes identificados nas trajetórias</strong> (GPT-6 Astra em OSWorld-v2): composição cross-interface (clique GUI + checagem programática de arquivos no mesmo passo), execução por loop (alvos determinados durante a execução, ex.: conteúdo de arquivo), execução dependente de resultado (ramificar sem voltar ao modelo), preparação de observação (programa monta a evidência — contact sheet de 25 views — para a próxima decisão visual do modelo) e verificação executável (asserts checam o que mudou E o que deveria permanecer intacto).</li><li><strong>Harness-to-model decision transfer</strong>: três mecanismos migram decisão da regra fixa para o modelo — observação sob demanda (<code>screenshot()</code> só quando o modelo pede; o ambiente continua gravando todo passo, muda o que o modelo recebe), ledger de estado da tarefa (<code>todo.update</code>/<code>todo.list</code> com status <code>pending/attempted/changed_unverified/claimed_verified/blocked</code>; <code>claimed_verified</code> registra avaliação do modelo, não verificação independente) e anotação de intenção (<code>&lt;intent&gt;</code> antes do código: rótulo pós-decisão, sem autoridade, não serve como evidência ou memória). O harness mantém políticas fixas de retenção (rolling screenshot buffer, micro-compaction de outputs).</li><li><strong>Limite do feedback visual puro</strong>: condições tipo "botão habilitado" não são legíveis por programa a partir de screenshot; AX tree expõe estados como dados estruturais, motivando a combinação no harness real.</li><li><strong>SDK cross-device e harness real-device (preliminares)</strong>: toda operação amarrada a recurso explícito (device/aplicação/janela/tab); captura de observação separada da entrega ao modelo (<code>ui.ax.observe()</code> retorna ao programa; <code>mu.emit</code> entrega ao modelo) — resultados intermediários guiam operações sem chamada de modelo por etapas estruturais; cinco camadas (modelo, runtime com interpretador persistente, SDK, driver, apps/OS); no dispositivo compartilhado, escalada de intrusividade: ação por accessibility → coordenada na janela-alvo → foreground com coordenação do usuário; <code>ask_user</code> para clarificação/autenticação/autorização.</li></ol>
+<h2>Evidência e resultados</h2>
+<p>Condições de validade dos números (o que eles NÃO significam):</p>
+<ul><li><strong>+19.6 pontos de partial score, −53.0% steps</strong>: média cross-modelo com peso igual (reduções relativas calculadas dentro de cada modelo antes de médias) no subset offline de 82 tarefas do OSWorld-v2 v2.1 (exclui as 26 tarefas com internet), 8 modelos de fronteira, baseline GUI-only JÁ com batched actions (não é agent de ação única). É partial score (0–100), não success rate — success também sobe em todos os modelos, mas com outros valores (ex.: Claude Opus 5 29.3→36.6). Não é comparação pareada com humano nem em dispositivo real.</li><li><strong>−27.2% output tokens</strong>: vale para 6 dos 8 modelos; GPT-6 Astra mantém aproximadamente o mesmo orçamento de output apesar de cortar 67.2% dos steps — menos passos não implica menos tokens.</li><li><strong>+6.1 pontos / −14.8% steps vs GUI+CLI batched (mesmas interfaces)</strong>: só nos 3 modelos da ablação (Qwen3.8-Max, DeepSeek-V4.1-Flash, GLM-5.3-Flash); é a evidência de que o ganho vem do controle de fluxo, não do acesso à interface.</li><li><strong>Cache hit +10.5pp/+14.4pp com observação sob demanda</strong>: 2 modelos apenas (75.6→86.1; 61.9→76.3), scores mantidos ou maiores nesse par. Ablação de decision transfer inteira cobre só 2 modelos.</li><li><strong><code>intent</code> derruba score levemente</strong> (62.4→61.5; 56.7→53.3): o paper é honesto — o objetivo do intent é interpretabilidade para o usuário em dispositivo real, não benchmark.</li><li><strong>19.4× reasoning tokens (Qwen3.8-Max vs GPT-6 Astra)</strong>: 4 tarefas macOS, uma run selecionada por tarefa, tokens de raciocínio conforme reportados pelo provedor, harness fixado. Não é ranking geral de modelos — o próprio paper diz que caracteriza as configurações avaliadas; e Qwen completa 3/4 vs 4/4 do GPT, custando $1.49 vs $18.29 por tarefa: dinheiro e tempo favorecem modelos diferentes.</li><li><strong>Curvas de tempo</strong>: explicitamente exploratórias (wall-clock não controlado: banda, rate limits, fila do provedor).</li><li>Seleção de tentativas: retém a ÚLTIMA tentativa com resultado de avaliator por tarefa, não a de maior score — escolha que reduz viés de cherry-picking.</li></ul>
+<h2>Limitações e riscos</h2>
+<ul><li>Declaradas: sem modelo treinado neste release (validação de design com modelos existentes); harness e SDK preliminais; benchmark real-device em construção (4 tarefas); comparações de tempo não controladas; <code>claimed_verified</code> não é verificação independente; entrega de email não verificada no exemplo do Send.</li><li>Suspeitadas pela leitura: o título promete "Fully Open Stack" mas o entregável central é validação empírica de prompts/harness com 8 modelos fechados — a parte "fully open" é roadmap (modelo treinado é próxima release), não estado; ganhos vêm de um harness otimizado por quem também define o baseline (risco de favoritismo de scaffold, mitigado por prompts publicados); eficiência em steps favorece por construção o design que empacota mais trabalho por chamada; n pequeno nas ablações (2–3 modelos) e no real-device (4 tarefas) não sustenta generalização; nenhum erro estatístico ou intervalo reportado.</li><li>Risco de生态 transplant: as condições do paper (GUI, screenshot por passo) não existem no nosso ecossistema — só as teses de governança de decisão são transferíveis, não os números.</li></ul>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Classificar agentes por quem decide, não por quais componentes têm</strong>: a pergunta de auditoria é "quais decisões deste workflow são fixadas por regra do harness vs. escolhidas pelo modelo com evidência registrada" — aplicável a qualquer pipeline orquestrado (dispatch, skills, cron).</li><li><strong>Decisão no modelo, mecanismo no harness</strong>: quando o modelo melhora, migrar decisões seletivas da regra fixa para escolha auditável do modelo (observação sob demanda, estado da tarefa) rende eficiência sem perder score; o harness fornece o mecanismo confiável e retém o que é de segurança.</li><li><strong>Taxonomia de status que separa trabalho feito de resultado verificado</strong> (<code>changed_unverified</code> ≠ <code>claimed_verified</code>, e este ≠ verificação independente): impede que "marquei como feito" vire evidência.</li><li><strong>Rótulo de intenção é pós-decisão e sem autoridade</strong>: <code>&lt;intent&gt;</code> documenta por que o código seguinte foi escolhido, mas não é plano, memória nem afirmação de conclusão — padrão direto para anotar passos de execução de agentes com custo de score pequeno e declarado.</li><li><strong>Verificação executável com preservação explícita</strong>: asserts que checam simultaneamente o que deveria mudar e o que deveria permanecer intacto, com resultado "PASS" condicionando o avanço — mais forte que checagem só-do-efeito-posotivo.</li><li><strong>Eficiência como métrica de primeira classe com condições</strong>: reportar steps, output tokens, reasoning tokens e custo por tarefa (com preço assumptions) junto ao score — e declarar sempre sob que subset/seleção/baseline o número vale.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e seguir: é relatório de sistema com prompts completos e trajetórias inspecionáveis (o ativo mais útil), definição formal limpa (3 decisões) e calibração honesta (intent derruba score e está dito; limitações de n declaradas). Não vale adotar a pilha (não temos caso de GUI automation) nem citar os números sem as condições acima; o título excede o entregável ("fully open" é promessa; modelo treinado não existe no release).</p>
+<h2>Confronto com repos</h2>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/10/2026-10-16.html">edição de 2026-10-16</a></footer>
+</body>
+</html>

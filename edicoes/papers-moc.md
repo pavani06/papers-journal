@@ -230,6 +230,19 @@ Execução de 2026-09-04 sobre a edição de [[papers/2026/09/2026-09-04|2026-09
 - [[papers/deep/2026/09/2609.03153|VeriPhy: Agentic Physical Reasoning for World Model Evaluation and Refinement]]
 - [[papers/deep/2026/09/2608.30391|Using Grounded Theory for Agent Behavior Analysis at Scale]] (destaque no snapshot inicial, deslocado depois)
 
+### 2026/10
+
+Execução de 2026-10-21 sobre a edição de [[papers/2026/10/2026-10-20|2026-10-20]]:
+
+- [[papers/deep/2026/10/2610.17724|Evidence-First Agentic Verification]]
+- [[papers/deep/2026/10/2610.19264|Beyond Maliciousness: Static and Runtime Attack-Surface Profiling of Agent Skills]]
+- [[papers/deep/2026/10/2610.22466|Harness-Delta Attribution: Dissecting Gains From Harness Evolution]]
+- [[papers/deep/2026/10/2610.24087|OR-License: Evaluating LLM Agents as Real-World Operations Research Practitioners]]
+- [[papers/deep/2026/10/2610.25950|AdaExploreBench: Benchmarking LLM Agents for Proactive Exploration and Test-time Adaptation in Evolving Environments]]
+- [[papers/deep/2026/10/2610.26860|OpenVLHarness: Real World Visual Agentic Tool-Use with Multimodal Memory]]
+
+As notas das edições de 2026-09-24, 2026-10-09, 2026-10-14, 2026-10-16 e 2026-10-19 existem em `papers/deep/` mas nunca foram reconciliadas aqui nem publicadas em HTML pelas execuções de cron que as criaram; backfill é invocação repetida de `/papers-deep AAAA-MM-DD`, fora do snapshot desta execução.
+
 ## Execuções
 
 | Data | Edição | Notas criadas | Registro atualizado? |
@@ -256,3 +269,4 @@ Execução de 2026-09-04 sobre a edição de [[papers/2026/09/2026-09-04|2026-09
 | 2026-09-02 | [[papers/2026/09/2026-09-02\|2026-09-02]] | 6 (todos os destaques do snapshot; edição sem mudança pós-snapshot, zero deslocados) | Sim — refresh profundo de `papers-journal`, `llm-council` e `mhc-knowledge-base`; `sisyphus-runtime`, `scripts` e `long-running-agents` sem escrita por conflito nominal de `scanned_head` (HEADs em movimento durante a execução); demais entradas frescas ou reporte |
 | 2026-09-03 | [[papers/2026/09/2026-09-03\|2026-09-03]] | 6 (todos os destaques do snapshot; edição sem mudança pós-snapshot, zero deslocados) | Sim — refresh profundo de `papers-journal`, `sisyphus-runtime`, `scripts` e `long-running-agents`; `agent-skills`, `agent-workloops` e `koda-desafio` frescos (HEADs conferem) |
 | 2026-09-04 | [[papers/2026/09/2026-09-04\|2026-09-04]] | Execução de 2026-09-06: 5 destaques destilados (inclui VeriPhy; RealSWE já destilado na edição de 2026-09-02) + 1 destaque de snapshot anterior deslocado. Execução de 2026-09-07: zero notas novas (todos os 6 destaques do snapshot já destilados); a edição trocou VeriPhy por Grounded Theory nos destaques — VeriPhy deslocado para Tangenciais com nota mantida, Grounded Theory promovido à lista principal | Sim — refresh profundo de `papers-journal` em 2026-09-06; execução de 2026-09-07 sem escrita no registro (zero refreshes de subagente), varredura com avisos nominais |
+| 2026-10-21 | [[papers/2026/10/2026-10-20\|2026-10-20]] | 6 (todos os destaques do snapshot; edição sem mudança pós-snapshot, zero deslocados); todas com verificação adversarial — 2 achados materiais e 9 menores emendados, nenhuma tese refutada | Sim — refresh profundo de `papers-journal`, `agent-workloops`, `scripts`, `agent-skills` e `long-running-agents`; `sisyphus-runtime` sem escrita por conflito nominal (HEAD corrente `e06a552f` divergiu do `scanned_head` `5fa9ec25` durante a execução); demais entradas em reporte |

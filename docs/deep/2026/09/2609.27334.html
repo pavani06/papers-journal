@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — Just-in-Time Memory: Learning to Curate Task-Adaptive Memory for LLM Agents</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/09/2026-09-24.html">papers.hf</a><span class="data-topo">Deep dive · quinta-feira, 24 de setembro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/09/2026-09-24.html">&larr; Edição de 2026-09-24</a></p>
+<h1 class="manchete">Just-in-Time Memory: Learning to Curate Task-Adaptive Memory for LLM Agents</h1>
+<p><strong>Sumário de ação</strong>: Aplicar a inversão JIT em dois contratos do ecossistema: guardar evidência bruta como cidadã de primeira classe (a destilação vira passo de leitura, não de escrita) e exigir que todo payload sintetizado cite os trechos brutos que o sustentam. Onde a tarefa consumidora é fact-retrieval simples, a evidência diz que memória nenhuma ajuda — não generalizar para lá.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2609.27334">abstract</a> · <a href="https://arxiv.org/html/2609.27334">HTML</a> · 34 upvotes capturados no snapshot da edição em 2026-09-25T08:30:32-03:00 · edição de <a href="../../../2026/09/2026-09-24.html">2026-09-24</a></p></div>
+<h2>Afirmação central</h2>
+<p>Memória de agente deve ser curada no read time, com a tarefa corrente conhecida, e não no write time, porque destilar cedo descarta informação de forma irreversível e força um artefato query-independente a servir todas as futuras consultas.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code> (HTML integral baixado com curl e extraído localmente; fim do documento verificado — Appendix B com curvas de treino, seguido do rodapé arXiv).</p>
+<ol><li><strong>Banco de memória = trajetórias cruas.</strong> Cada entrada é a trajetória completa (tarefa + sequência observação-ação), sem sumarização, reflexão ou abstração no armazenamento. Gate de qualidade no Update: o próprio executor, como LLM-as-judge, decide se a tarefa foi resolvida; só sucessos entram no banco.</li><li><strong>Retrieve.</strong> BM25 sobre descrições de tarefa (não sobre conteúdo da trajetória), top-k com k=3 nos resultados principais; ablação k=3 vs k=5 mostra diferença menor que 2 pontos de SR.</li><li><strong>Curate (read time).</strong> O curator recebe a tarefa corrente + as k trajetórias cruas e sintetiza um payload compacto em linguagem natural: experiências relevantes, estratégias que funcionaram, orientação específica para ESTA tarefa. O payload é efêmero — nunca é armazenado.</li><li><strong>Execute.</strong> Executor congelado resolve a tarefa com o payload prependado ao prompt; ele não consome as trajetórias cruas diretamente.</li><li><strong>Update.</strong> A trajetória resultante é candidata ao banco (se o judge aceitar). O ciclo repete a cada tarefa do stream.</li><li><strong>Treino do curator (GRPO).</strong> Para cada tarefa amostrada, o curator gera G=8 payloads candidatos; o executor congelado tenta a tarefa com cada um; a recompensa nativa do benchmark vira vantagem de grupo (sem normalização por desvio, sem value network). O gap temporal entre ação do curator e recompensa é zero — credit assignment de um passo. Banco de treino fixo (sucessos do executor base rotulados por ground-truth); executor de treino Qwen3-8B; o curator treinado transfere para executores mais fortes sem retreino (gap de 1,4 SR no ALFWorld vs treinar direto com GPT-5.4).</li></ol>
+<p>Conceitos destilados: separação entre <strong>armazenar</strong> (sem perda) e <strong>curar</strong> (com perda, porém task-adaptive); <strong>credit assignment imediato</strong> (payload consumido na mesma tarefa que o produziu) contra o regime write-time, em que a recompensa de uma decisão de armazenamento só chega quando uma consulta futura recupera o artefato; <strong>juiz = executor</strong> como gate de armazenamento; a leitura da memória como reconstrução guiada por objetivo (episódica reconstructiva), não replay.</p>
+<h2>Evidência e resultados</h2>
+<p>Benchmarks: ALFWorld (140 tarefas de teste), WebShop (500), τ²-bench (airline/retail/telecom). Executors congelados: Qwen3-8B, Gemini-2.5-Pro, GPT-5.4. Baselines: no-memory, ReasoningBank, MemP e SkillOS (RL-treinado, o mais próximo). Média ± desvio sobre 3 runs (ALFWorld/WebShop) e 4 runs (τ²-bench) com ordenações aleatórias de tarefas; protocolo em lotes que compartilha o estado do banco dentro do lote e atualiza após.</p>
+<p>Os números do abstract — +16,2, +16,3 e +3,9 pontos absolutos de SR sobre o baseline mais forte — valem sob condições específicas:</p>
+<ul><li><strong>+16,2 (ALFWorld) e +16,3 (WebShop)</strong> comparam JitMem treinado vs SkillOS treinado, ambos com curator Qwen3-8B, no bloco do executor mais fraco (Qwen3-8B). Com Gemini-2.5-Pro a margem cai para +6,0 (ALFWorld) e +9,2 (WebShop SR); com GPT-5.4, +8,8 e +10,9. O ganho existe em todos os blocos, mas o número grande é do bloco fraco.</li><li><strong>+3,9 (τ²-bench, micro-average)</strong> é do JitMem-gpt (curator prompted GPT-5.4, sem treino) sobre ReasoningBank-gpt (75,6 vs 71,7). No τ²-bench só há variantes sem treino (não há split de treino padrão). O ganho se concentra em Telecom (+11,0, verificação procedural multi-passo de política); em Airline e Retail nenhum método de memória supera o no-memory além da variância — nulo informativo: onde a tarefa é fact-retrieval simples, curadoria nenhuma ajudou neste paper.</li><li><strong>Curator não treinado já compete.</strong> Mesmo curator e mesmo executor, read-time vs write-time sem treino: WebShop/Gemini, JitMem-gemini 61,0 SR vs 41,0 do SkillOS-gemini; ALFWorld/Qwen, JitMem-base 60,5 vs 55,7 (ReasoningBank) e 53,1 (SkillOS-base). Com curator mais fraco o read-time ainda vence write-time com curator mais forte (79,3 vs 77,9/70,0 no ALFWorld/GPT-5.4). Parte substantiva do ganho é a curadoria task-adaptive em si, não o RL.</li><li><strong>Eficiência (ALFWorld, GPT-5.4, Table 4):</strong> o payload do JitMem-base adiciona 1,9K tokens de entrada sobre o no-memory, contra 10,7K (ReasoningBank) e 13,4K (SkillOS-base); o JitMem treinado fica em 9,8K in / 11,6 passos — redução de 50,3-56,3% em tokens de entrada e 28,4-31,4% em passos relativo aos write-time, apenas neste benchmark/executor.</li><li><strong>Ablações (a evidência mais forte para a tese):</strong> trocar trajetórias cruas por destilação write-time no banco derruba o JitMem-base 1,7-2,9 (ALFWorld) e 6,8-8,2 (WebShop); remover a tarefa corrente do curator derruba o treinado em até 11,4/10,4; armazenar tudo com rótulo de correção em vez de filtrar sucessos derruba 1,5-2,9 / 2,3-3,4; zerar o retriever derruba o treinado em até 14,8/15,2 — o RL aprende a destilar experiência recuperada, não a gerar dicas paramétricas.</li><li>Baselines reproduzidos de forma conservadora (reproduzido ≤ reportado, Table 6). Warm-start do banco de teste: efeito nulo (≤1,3, dentro do desvio); staged bank refresh: +2,8 SR no melhor caso, a custo de treino adicional.</li></ul>
+<p>O que os números NÃO significam: não é lei geral "read-time sempre vence" — os domínios de fact-retrieval do τ²-bench não mostraram ganho de memória alguma; o protocolo em lotes acopla tarefas do mesmo lote ao mesmo estado de banco (mitigado por múltiplos runs, não eliminado); ambientes de horizonte curto (30 turnos; 200 no τ²-bench); k=3 fixo; um único setup de treino (100 passos GRPO).</p>
+<h2>Limitações e riscos</h2>
+<p>Declaradas pelo paper: retriever BM25 simples pode virar gargalo com banco grande e diverso; o curator adiciona uma chamada de LLM por tarefa; formato de payload fixo e desenhado à mão por benchmark.</p>
+<p>Suspeitadas na leitura: o juiz do gate de armazenamento é o próprio executor (auto-avaliação viesada; falso positivo entra no banco como exemplar positivo e a ablação mostra que ruído no banco não é suprimido por rótulo); banco de treino estático cria shift leve treino/teste (o refresh por estágios devolve pouco, sugerindo sinal já suficiente — mas também que o paper não mediu o regime de banco crescendo com trajetórias do curator por muito tempo); MemHarness (concorrente) também cura no read time — a contribuição específica daqui é desacoplar curator de executor e a transferência resultante, não a ideia de curar na leitura isolada; nenhum teste de custo total (a chamada extra do curator por tarefa é contabilizada só em eficiência do executor).</p>
+<p>O título promete "Learning to Curate", mas boa parte do ganho existe sem aprendizado — o próprio paper reconhece que o curator prompted já é competitivo; o aprendizado agrega principalmente no bloco de executor fraco e em eficiência. O nome não engana sobre o mecanismo, mas o peso da palavra "Learning" excede o que a evidência sustenta como fonte dominante do ganho.</p>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Adiar a síntese até conhecer a tarefa.</strong> Guardar evidência bruta (trajetória, transcript, saída de ferramenta, output de sessão) como cidadã de primeira classe e sintetizar o payload só no momento do consumo (warmup/dispatch) — nunca como passo obrigatório pós-execução. Decide-se tarde o que será útil.</li><li><strong>Gate de citação no payload.</strong> Toda compactação sintetizada cita quais trechos brutos a sustentam; sem rastreio ao bruto, payload é opinião não verificável. O gate file:line do papers-journal é a instância existente desse padrão.</li><li><strong>Um bruto, muitos payloads.</strong> Condicionar a síntese à tarefa corrente em vez de buscar "a lição" de uma sessão: a mesma evidência bruta rende briefings diferentes por consumidor (estado vs estratégia de colocação no mesmo episódio doméstico).</li><li><strong>Crédito imediato &gt; crédito defasado.</strong> Artefato consumido na mesma tarefa que o produziu tem avaliação direta; promoção baseada em utilidade futura estimada (contagem, agrupamento) é sinal atrasado e ruidoso. Ao promover artefatos write-time, exigir evidência de consumo, não só de produção.</li><li><strong>Filtrar por sucesso no armazenamento.</strong> Guardar só o que passou por gate de sucesso (juiz humano ou mecânico): rótulo de correção anexado não suprime o ruído da trajetória fracassada (ablação: queda de 1,5 a 3,4 pontos).</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e seguir. A tese central é implementável sem RL — o próprio paper mostra que o curator prompted colhe a maior parte do ganho —, o que a torna barata de experimentar no ecossistema. Riscos de adoção: custo da chamada extra de síntese por consumo, e a tentação de aplicá-la onde a tarefa é fact-retrieval simples, onde a evidência deste paper diz que memória nenhuma ajudou.</p>
+<h2>Confronto com repos</h2>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/09/2026-09-24.html">edição de 2026-09-24</a></footer>
+</body>
+</html>

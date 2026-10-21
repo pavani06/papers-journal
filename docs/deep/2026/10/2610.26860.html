@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — OpenVLHarness: Real World Visual Agentic Tool-Use with Multimodal Memory</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/10/2026-10-20.html">papers.hf</a><span class="data-topo">Deep dive · terça-feira, 20 de outubro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/10/2026-10-20.html">&larr; Edição de 2026-10-20</a></p>
+<h1 class="manchete">OpenVLHarness: Real World Visual Agentic Tool-Use with Multimodal Memory</h1>
+<p><strong>Sumário de ação</strong>: O mecanismo transferível é o registro de artefatos com handle estável e payload retido fora do transcript — não "ferramentas ajudam VLMs". Aplicar onde nossa trilha de evidência já endereça por caminho mas não sela conteúdo: o gate de citações do papers-journal e a promoção de princípios do sisyphus-runtime validam endereço, não payload.</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2610.26860">abstract</a> · <a href="https://arxiv.org/html/2610.26860">HTML</a> · 98 upvotes capturados no snapshot da edição em 2026-10-21T08:31:07-03:00 · edição de <a href="../../../2026/10/2026-10-20.html">2026-10-20</a></p></div>
+<h2>Afirmação central</h2>
+<p>Um harness que converte saídas heterogêneas de ferramentas em evidência renderizada e registra os artefatos subjacentes (imagem, dado estruturado, referência web) como handles endereçáveis e reutilizáveis ao longo da consulta supera tanto raciocínio escalado quanto tool-use sem memória, medido em 22 benchmarks pareados.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code> — HTML baixado por inteiro (2,9 MB, 418.495 chars extraídos localmente após truncagem do fetch inicial), fim do documento verificado (rodapé arXiv). Corpo (seções 1-5 + acknowledgments) lido integralmente; apêndices A.3, C.4 e H lidos por inteiro; D, E, G, I consultados via sumário e leitura pontual — nenhum claim abaixo deriva de seção não lida.</p>
+<ol><li><strong>Capability layer</strong> = interfaces de tarefa + renderização de evidência. Cada capacidade é definida pela operação (entradas tipadas, evidência e dados reutilizáveis que expõe), não pelo backend: Grounding aceita SAM 3 ou Grounding DINO sem mudar o vocabulário do orquestrador. Cada saída bruta (máscara RLE, array de profundidade) é renderizada em observação model-facing: anexo visual + descrição curta + estruturado compacto + handles.</li><li><strong>Registro explícito de artefatos por consulta</strong>, com payload separado do handle. Três categorias: imagens (<code>input_image_3</code>, <code>tool_generated_image_6</code>), bindings de dados estruturados (boxes, máscaras, arrays de profundidade, poses de câmera, OCR — cada binding com descritor de campos e shapes), referências web (<code>webpage_url_N</code>). Imagens duplicadas reutilizam entrada existente.</li><li><strong>Environment Update</strong> após cada turno de ferramenta: re-anuncia o namespace vivo (handles + descritores) sem repetir payloads — o transcript carrega o índice, não o conteúdo.</li><li><strong>Resolução de handle</strong>: chamada posterior cita o handle; o harness resolve para a entrada que a ferramenta receptora exige (imagem, URL, valores para código). O modelo nunca re-serializa conteúdo anterior.</li><li><strong>Memory-grounded computation</strong>: o orquestrador delega objetivo em linguagem natural ao Python Coding Agent; uma sessão de geração de código do mesmo backbone recebe os descritores dos bindings e executa sobre os valores reais como variáveis nomeadas. Resultados e artefatos emitidos são registrados para reuso.</li><li><strong>Especialização sem treino</strong>: harness search (edita prompts/descrições/templates via avaliação repetida) e tool generation (compõe capacidades existentes em ferramentas novas), roteadas por canais de remédio do diagnóstico de falhas.</li></ol>
+<h2>Evidência e resultados</h2>
+<p>Todos os números abaixo têm condição explícita; nada vale "em geral".</p>
+<ul><li><strong>+9,7 a +12,6 pontos sobre baseline sem ferramenta</strong>: média de 22 benchmarks, mesmo backbone, comparadores pareados por questão. Qwen3-VL-8B/32B: média de 3 runs com seeds distintas (sd da média de 22 datasets ≤ 0,35; o ganho de +11,2/+12,6 é ~29/44x o sd combinado — não é ruído de run). GPT-5 e GPT-6 Luna/Sol/Astra: <strong>single run</strong> por custo de API; Kimi K3: nº de runs não declarado no paper.</li><li><strong>Análise pareada (A.3, ~24k questões/modelo)</strong>: o líquido +6,2 (Astra) a +10,1 (8B) é saldo de fluxos brutos maiores — 2.336-4.649 questões resgatadas contra 700-2.146 quebradas por modelo. O ganho não é uniforme; tool-use corrige mais do que degrada, mas degrada.</li><li><strong>Null control</strong>: em questões sem nenhuma chamada de ferramenta, diferença pareada esperada zero; medido -0,2 a -1,8 (pior nos Qwen) e +1,8 (Astra, base frágil: só 614 questões sem call). Informativo: o ganho vem do uso da ferramenta, não do prompt; e carregar toolbox sem usar tem custo pequeno mas real nos modelos menores.</li><li><strong>Raciocínio não substitui harness (3.3)</strong>: GPT-6 Luna, 26.229 questões por setting, single run. Base de xhigh→max multiplica custo de tokens por 2,7 para +0,7 ponto. Harness em esforço médio (56,5) supera Base/Codex/Visual Sketchpad em max (48,0-48,8) gastando ≤37% do custo em model tokens — custo exclui execução de ferramenta e julgamento.</li><li><strong>Nul informativo</strong>: Codex com Luna pontua 43.8, abaixo do baseline sem ferramenta (45.8), ambos em medium effort (a max, Codex sobe a 48,58 e passa o baseline) — harness de código genérico não melhora raciocínio multimodal por si; a renderização de evidência é o que diferencia. Não é subpotenciado (26k questões).</li><li><strong>Ablação (3 runs)</strong>: ferramentas cruas +3,8/+4,3; capability layer +3,4/+3.2 (o paper admite que não separa interface de renderização); memória textual +0,7/+0,3 (da ordem do ruído entre runs, Appendix H); completar com handles de imagem e anexos visuais +3,1/+4,5, maior ganho em busca visual e deep research (+6,2/+3,5). É a evidência direta da tese do destaque: descrever artefato em texto retém quase nada; artefato endereçável reutilizável retém muito.</li></ul>
+<p>O que os números NÃO significam: média de 22 benchmarks heterogêneos não é promessa por tarefa — FREAK-VQA cai no Qwen-8B (44,7→37,1); ganhos concentram-se em percepção grounded e busca visual; VQA geral e raciocínio espacial dependem do backbone.</p>
+<h2>Limitações e riscos</h2>
+<p>Declaradas: resultados proprietários são single run; busca na web viva não é seedável (variação entre runs reflete conteúdo recuperado); a crítica de falhas cobre só trajetórias falhas (recomendações de remédio não preveem acurácia recuperável); percepção grounded segue falhando em cenas com &gt;25 objetos (saída de ferramenta incorreta = 75% das falhas do domínio).</p>
+<p>Suspeitadas na leitura: "Real World" no título é benchmarks + busca viva, não deployment; juiz LLM para respostas abertas é estocástico por design (decodificação greedy mitiga, não elimina); o null control de +1,8 da Astra repousa em 614 questões (2,6%) — fraco como controle; a comparação de custo omite execução de ferramenta e julgamento, que é onde o harness gasta além de tokens.</p>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Toda observação de ferramenta que sustenta uma decisão vira artefato nomeado, não texto no transcript</strong> — com handle estável e payload retido fora do contexto; a ablação quantifica a diferença (textual +0,7/+0,3 vs. endereçável +3,1/+4,5).</li><li><strong>Endereço sem selo de conteúdo é evidência mutável</strong> (extrapolação de desenho: o paper só evidencia reuso intra-consulta): validar que o handle resolve (arquivo existe, linha cabe) não garante que o payload ainda é o que sustentou a decisão; reuso a longo prazo exige reter/selar o payload, não só o caminho.</li><li><strong>Re-anunciar o namespace é barato; carregar payload é caro</strong>: o índice de handles viaja no transcript, o conteúdo só é resolvido no ponto de uso — padrão direto para gates que fecham sobre evidência citada.</li><li><strong>Diagnóstico de falha por canal de remédio determina a alavanca</strong>: mudança de texto vs. ferramenta nova — antes de especializar um harness (ou pipeline), classificar as falhas por qual caminho as remediaria.</li><li><strong>Interface de tarefa desacopla orquestrador de backend</strong>: definir a operação (entradas tipadas, evidência exposta) permite trocar backend sem mudar o consumidor — análogo ao gate consumir citações estáveis independentemente do repo mudar.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e seguir. O ganho agregado é pareado, com controle nulo e ablação que isola exatamente o mecanismo de memória que nos interessa — rigor acima da média do domínio. O jornal não marca "avança" e a leitura confirma: como resultado multimodal é mais um harness forte entre vários; como desenho de evidência endereçável é a referência limpa da padrão. Reserva: single runs proprietários e a métrica de custo parcial.</p>
+<h2>Confronto com repos</h2>
+<h3>papers-journal</h3>
+<p>Confronto feito em HEAD <code>f6abc67a06f7cfd93625da386d96a95784ea53d0</code> (<code>2026-10-21</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Teses 2 e 3: a citação <code>file:line</code> das notas deep é o handle; o gate valida endereço, não payload. <code>src/confrontos.py:111-126</code> — <code>resolve()</code> confere que o arquivo existe e que a linha final cabe no tamanho (<code>int(fim) &lt;= n</code>), lê o arquivo só para contar linhas, nunca o conteúdo citado. <code>src/confrontos.py:201-237</code> — modo <code>--gate</code> resolve RAW, sem normalização e sem escrita, falha alto nomeando não resolvidas. <code>src/deepdive.py:59-81</code> — <code>Fonte</code> registra <code>tipo</code>/<code>lidos</code>/<code>total</code>, tornando o corte auditável. O registro do repo dizia que o gate confere existência e faixa, não conteúdo — confirmado por leitura direta. <code>src/</code> está intocado nos 84 commits desde o <code>verified-head</code> (log vazio para <code>src/</code>), então as citações do registro permanecem válidas.</li><li><strong>Oportunidade de melhoria</strong> — o gate fecha verde mesmo se o arquivo citado mudou de conteúdo desde a destilação: handle válido, payload driftado. O padrão do paper seria selar a faixa citada (hash do trecho) no ato da destilação e conferir o selo no fechamento — o que o sisyphus-runtime já faz pontualmente em <code>evidence/bridge-contrato/baseline-md5sum.txt</code>.</li><li><strong>Como aplicar</strong> — extensão do modo <code>--gate</code> de <code>src/confrontos.py</code>: aceitar campo opcional de hash por citação no bloco de confronto e conferi-lo; captura do hash no fluxo do subagente (template da nota). Escopo: um arquivo de código + template; ordem: captura antes de verificação.</li><li><strong>Prós e contras</strong> — prós: detecta drift de evidência entre destilação e fechamento, fecha o ciclo handle→payload da tese 2. Contras: custo de mudar o fluxo do subagente; hash quebra em reformato inofensivo (precisa de ruído tolerado nomeado, como a regra de emendas do dispatch já pratica); <code>.txt</code> e extensões fora do regex <code>CITACAO</code> (<code>src/confrontos.py:37</code>) ficam de fora.</li><li><strong>Veredito</strong> — aplicar com ressalvas: ganho de integridade real e escopo pequeno, mas só vale se o ruído tolerado for nomeado no gate desde o início.</li></ol>
+<h3>sisyphus-runtime</h3>
+<p>Confronto feito em HEAD <code>5fa9ec2559249bf03e9c2ab5f99c2f234acb5113</code> (<code>2026-10-21</code>).</p>
+<ol><li><strong>Teses aplicáveis</strong> — Teses 1 e 2. O vault já opera a separação transcript/artefato: <code>state/loop-ledger.jsonl:1</code> registra entrada com <code>evidence_paths</code> (handles para payload externo — o Environment Update do paper), e <code>evidence/</code> guarda payloads nomeados (<code>c1-trajetorias/</code> com jsonl por sessão; <code>c1-spec/</code> e <code>c1-recon-plano-declarado/</code> com exports JSON; <code>bridge-contrato/</code> com <code>baseline-md5sum.txt</code> selando telemetria por md5 — payload selado por hash, o padrão completo do paper). O gap está na promoção de princípios: <code>facts/_global/principles.md:17-22</code> carrega evidência como contagem agregada ("evidence: 2 handoffs") com caminhos para artefatos, e <code>facts/_global/principles.md:23-32</code> como "evidence: N papers" com wikilink — handles sem selo de conteúdo; nada impede que o artefato citado drift e o princípio continue "apoiado".</li><li><strong>Oportunidade de melhoria</strong> — tornar sistemático o que <code>evidence/bridge-contrato/baseline-md5sum.txt</code> faz pontualmente: na promoção de princípio (reflection-runner), registrar hash do trecho citado do handoff/paper junto ao caminho, transformando a contagem agregada em evidência re-verificável por endereço.</li><li><strong>Como aplicar</strong> — escopo: o pipeline de reflexão/promoção (não editado aqui); ordem: primeiro em promoções novas, sem retro-selar as existentes (drift legítimo de artefatos vivos é esperado).</li><li><strong>Prós e contras</strong> — prós: princípio deixa de ser sustentado por caminho não verificado; custo marginal por promoção. Contras: handoffs e notas são artefatos vivos que mudam por razões legítimas — o selo precisa distinguir drift inofensivo de mutação que quebra o suporte, senão vira alarme falso crônico.</li><li><strong>Veredito</strong> — aplicar com ressalvas: a direção é a da tese 2 e o caso bridge-contrato prova viabilidade; exige política de ruído tolerado antes de ligar.</li></ol>
+<h2>Verificação adversarial</h2>
+<p>Verificador independente em 2026-10-21 (leitura própria do paper, <code>html-complete</code>, sem acesso ao prompt do destilador nem às seções de confronto). Veredito: <strong>fiel-com-emendas</strong>. Quatro achados menores, todos emendados acima.</p>
+<p>| Eixo | Severidade | Achado | Correção aplicada | Fonte no paper | |---|---|---|---|---| | 2 (evidência) | menor | A nota colocava Kimi K3 na lista de single run por custo de API. O paper declara single run só para GPT-5 e GPT-6 Luna/Sol/Astra, e 3 runs só para Qwen3-VL; Kimi K3 não aparece em nenhuma das duas listas. | "GPT-5 e GPT-6 Luna/Sol/Astra: single run por custo de API; Kimi K3: nº de runs não declarado no paper." | Appendix H, "Protocol"; caption da Table 7. | | 2 (evidência) | menor | "Codex com Luna pontua 43.8, abaixo do baseline (45.8)" sem a condição de esforço: o par é medium; a max effort o Codex sobe a 48,58 e passa o baseline. | Acrescentado "ambos em medium effort (a max, Codex sobe a 48,58 e passa o baseline)". | Table 13 e §B.6, "Results". | | 3 (teses) | menor | A tese 2 estendia o argumento a reuso de longo prazo e selo de payload; o paper só evidencia retenção e reuso dentro da consulta. | Prefixada com "(extrapolação de desenho: o paper só evidencia reuso intra-consulta)". | Abstract ("throughout each query") e §2.2, "Persistent Multimodal Memory". | | 4 (calibragem) | menor | O degrau de memória textual (+0,7/+0,3) era apresentado como efeito pequeno porém real; o paper o classifica como comparável à variação entre runs — o que reforça, não enfraquece, a leitura "texto retém quase nada". | Acrescentado "(da ordem do ruído entre runs, Appendix H)". | Appendix H, "Ablation". |</p>
+<p>Sem achados nos eixos 1 (mecânica confere a §2.1, §2.2, §3.6, C.2, C.4/Table 19, B.2, A.1) e 2 fora dos dois itens acima: o verificador reconferiu +9,7–12,6, o fator 29/44x do desvio-padrão, os fluxos pareados de A.3, o null control, 26.229 questões por setting, o custo ≤37% e a ablação completa. Nenhuma tese foi refutada; os vereditos de confronto permanecem válidos.</p>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/10/2026-10-20.html">edição de 2026-10-20</a></footer>
+</body>
+</html>

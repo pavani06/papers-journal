@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>papers.hf — Pack Light, CarryOn: Building Object-Oriented Context for Long-Horizon Agents</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Globotipo UI",Inter,-apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Helvetica Neue",Helvetica,Ubuntu,Roboto,Noto,"Segoe UI",Arial,sans-serif;color:#2F3134;background:#fff}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.faixa{height:6px;background:#F5F5F5}
+.topo-fixo{position:sticky;top:0;z-index:20;background:#fff}
+.topo{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;border-bottom:1px solid #F0F0F0}
+.logo{color:#0669DE;font-weight:700;font-size:24px;letter-spacing:-.5px;text-decoration:none}
+.data-topo{font-size:12px;color:#757575}
+.marcas{display:flex;gap:28px;align-items:center;height:44px;padding:0 16px;overflow-x:auto;white-space:nowrap;border-bottom:1px solid #F0F0F0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.marcas::-webkit-scrollbar{display:none}
+.marcas a{font-size:16px;font-weight:700;text-decoration:none}
+.c-vermelho{color:#C4170C}.c-verde{color:#06AA48}.c-laranja{color:#FF6700}
+.sec-vermelho{--cor:#C4170C}.sec-verde{--cor:#06AA48}.sec-laranja{--cor:#FF6700}
+section{scroll-margin-top:112px}
+.manchete{font-size:32px;line-height:38px;font-weight:700;color:#C4170C;letter-spacing:-.3px;overflow-wrap:break-word;margin:20px 0 18px}
+.foto{background:#EDEDED;border-radius:10px;overflow:hidden}
+.foto--lead{aspect-ratio:16/9;border-radius:11px;margin-bottom:4px}
+.foto--card{width:132px;aspect-ratio:1/1;flex-shrink:0}
+.abertura p,.analise p{font-size:16px;line-height:24px;margin:16px 0 0}
+.kicker{font-size:24px;font-weight:700;margin:18px 0 2px}
+.destaque{padding:16px 0 20px}
+.linha{display:flex;gap:12px;align-items:flex-start}
+.titulo{display:block;font-size:18px;line-height:22px;font-weight:700;text-decoration:none;overflow-wrap:break-word;color:var(--cor,#2F3134)}
+.analise .titulo{margin-bottom:2px}
+.pull{background:#F5F5F5;border-left:4px solid var(--cor);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+.pull b{display:block;font-size:13px;font-weight:700;color:var(--cor);margin-bottom:4px}
+.pull span{font-size:15px;line-height:22px}
+.meta{font-size:13px;line-height:18px;color:#757575;margin-top:12px}
+.card{padding:17px 0 19px}
+.card + .card{border-top:1px solid #F0F0F0}
+.card .titulo{margin-top:1px}
+.chamada{display:flex;gap:10px;margin-top:16px}
+.chamada::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cor);flex-shrink:0;margin-top:7px}
+.chamada p{font-size:16px;line-height:22px}
+.sem-destaques{font-size:16px;line-height:24px;color:#757575;padding:8px 0 20px}
+.chapeu{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:var(--cor);padding:3px 8px;border-radius:3px;text-decoration:none;margin-bottom:8px}
+.chapeu-tese{font-size:13px;line-height:19px;color:#757575;margin:0 0 10px}
+.eco{font-size:13px;line-height:19px;color:#757575;font-style:italic;margin-top:5px}
+.rodape{padding:20px 0 36px;font-size:13px;line-height:20px;color:#757575}
+.rodape a{color:#0669DE}
+
+.artigo p{font-size:17px;line-height:27px;margin:14px 0 0}
+.artigo h2{font-size:22px;line-height:27px;font-weight:700;color:var(--cor,#C4170C);margin:28px 0 2px;padding-top:14px;border-top:1px solid #F0F0F0}
+.artigo h3{font-size:18px;line-height:23px;font-weight:700;margin:20px 0 2px}
+.artigo ul,.artigo ol{margin:12px 0 0 22px}
+.artigo li{font-size:16px;line-height:24px;margin:8px 0}
+.artigo code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:#F5F5F5;border-radius:3px;padding:1px 5px}
+.fonte{background:#F5F5F5;border-left:4px solid #0669DE;border-radius:0 8px 8px 0;padding:12px 14px;margin:16px 0 0}
+.fonte b{display:block;font-size:13px;font-weight:700;color:#0669DE;margin-bottom:4px}
+.fonte p{font-size:14px;line-height:21px;margin:0}
+.crumb{font-size:13px;margin:18px 0 0}
+.crumb a{color:#0669DE;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="topo-fixo"><header class="topo"><a class="logo" href="../../../2026/10/2026-10-19.html">papers.hf</a><span class="data-topo">Deep dive · segunda-feira, 19 de outubro de 2026</span></header></div>
+<div class="wrap sec-vermelho artigo">
+<p class="crumb"><a href="../../../2026/10/2026-10-19.html">&larr; Edição de 2026-10-19</a></p>
+<h1 class="manchete">Pack Light, CarryOn: Building Object-Oriented Context for Long-Horizon Agents</h1>
+<p><strong>Sumário de ação</strong>: Aplicar o padrão de carriers no ecossistema: transformar handoffs e fatos duráveis em registros versionados com evidência vinculada e condições de uso, mantendo obrigações abertas em contexto de execução separado — em vez de compactar conversa. Alvos: sisyphus-runtime (handoffs/facts) e agent-skills (skill handoff).</p>
+<div class="fonte"><b>Fonte</b><p><a href="https://arxiv.org/abs/2610.18784">abstract</a> · <a href="https://arxiv.org/html/2610.18784">HTML</a> · 103 upvotes capturados no snapshot da edição em 2026-10-20T08:30:31-03:00 · edição de <a href="../../../2026/10/2026-10-19.html">2026-10-19</a> · avança a edição de 2026-10-12 (nota ainda não destilada)</p></div>
+<h2>Afirmação central</h2>
+<p>Continuação de agentes de horizonte longo deve ser organizada em torno de objetos de tarefa reutilizáveis (continuation carriers) mantidos versionados contra evidência vinculada e checks de ambiente, com contexto de execução complementar e live tail curta — não em torno de histórias comprimidas ou recontadas.</p>
+<h2>Mecânica passo a passo</h2>
+<p><code>Cobertura: html-complete</code> — HTML v2 lido por inteiro via fetch + recuperação local (curl + extração stdlib): seções 1-5, referências e apêndices A-D; término do documento verificado (rodapé LaTeXML + fim do Appendix D).</p>
+<ol><li><strong>Context view em três componentes</strong>: continuation carriers <code>A_k</code> (progresso reutilizável), execution context <code>E_k</code> (foco, restrições, obrigações não resolvidas) e live tail <code>L_t</code> (interações desde o último fold). O contexto ativo é <code>V_t = (A_k, E_k, L_t)</code>; um <em>fold</em> validado substitui a live tail coberta pela view atualizada.</li><li><strong>Três formas de carrier</strong>, classificadas por onde vive o valor reutilizável: <em>external objects</em> (arquivos, documentos — o carrier referencia o objeto e registra condições de reuso), <em>information products</em> (achados sintetizados, armazenados como claims com fontes), <em>situated state</em> (progresso que só existe dentro de uma sessão/aplicação — o carrier registra o anchor de ambiente e o escopo de validade).</li><li><strong>Fold em quatro estágios</strong>: (i) <em>Tracker</em> mantém registro de candidatos e emite <code>compile_request</code> só quando uma versão coerente do carrier é construível; (ii) preparação de evidência — binding do candidato a fontes autorizadas e checks read-only do <em>Grounder</em> (existência de arquivo, hash vs snapshot inicial, tamanho, estrutura de documento, diferenças de conteúdo); (iii) <em>Compiler</em> propõe edits de carrier apenas para os candidatos selecionados e revisa a execution context contra a live tail inteira (o que não vira carrier precisa permanecer explícito); (iv) validação e commit atômico — consistência de identidade/versões, exigência de ao menos uma mudança de carrier; rejeição deixa view e live tail inalteradas.</li><li><strong>Versionamento incremental</strong>: carriers têm identidade estável; revisão cria registro sucessor sob a mesma identidade; carriers não afetados pelo fold são carregados adiante sem reescrita. O log de interações é append-only (o fold retira do contexto ativo, não apaga a história).</li><li><strong>Gatilho de execução pragmático</strong>: scan quando a projeção textual acumulada desde o último scan/fold excede ~6.000 tokens estimados (caracteres/4) no OSWorld; scans consecutivos sem fold dobram os thresholds (backoff), fold bem-sucedido reseta.</li><li><strong>Fronteira honesta da validação</strong>: os checks do runtime guardam contra updates inconsistentes ou sem suporte; eles NÃO verificam corretude da tarefa.</li></ol>
+<h2>Evidência e resultados</h2>
+<ul><li><strong>OSWorld 2.0 (conjunto completo)</strong>, mesmo host Claude Opus 4.7 (max), 500 passos, baseline reproduzido pelos autores com benchmark/API oficiais: partial score 43,9% → 49,7% (+5,8 pontos percentuais), binary 15,7% → 19,4% (+3,7 pp); tokens totais por tarefa 40,10M → 19,30M (-51,9%, já incluindo 0,69M do runtime); custo US$ 36,83 → 23,62 (-35,9%, incluindo custo do runtime). São <strong>pontos percentuais na métrica</strong>, não ganho relativo; comparação é pareada por host/orçamento, mas o paper não relata variância, IC ou teste de significância.</li><li><strong>BrowseComp-Plus</strong>: subconjunto aleatório de 100 questões, acerto 49% → 56% (+7 pp) com correção por Qwen3-32B (prompt oficial); tokens -22,9%, custo -7,1%. As comparações com GPT-5 (52%), o3 (50%) e GPT-OSS-120B (41%) vêm de runs públicas re-gradadas pelas mesmas regras — hosts diferentes, portanto descritivas, não pareadas.</li><li><strong>Compressar sozinho piora</strong> (4.4, 40 tarefas compartilhadas, mesmo host/gatilho/orçamento): Sliding Window e Generic Summary retêm menos texto mas caem abaixo do baseline; CarryOn-Guided Summary (mesmos princípios em resumo textual) recupera até 50,93% partial; o runtime completo atinge 55,93% partial com ~10% menos texto pós-fold que o CGS. No subset, o binary do CarryOn (22,50%) apenas empata o baseline — o ganho binary do conjunto completo não se replica na subamostra.</li><li><strong>Ablações (subset de 40)</strong>: remover execution context derruba partial para 44,00% (o agente perde obrigações e restrições mesmo com progresso preservado); remover carriers derruba partial para 44,62% com +23,8% chamadas e +22,3% custo (o agente readquire informação já estabelecida — caso concreto na Tabela 10: re-extração de PDF de preços). Detalhe: sem carriers o binary sobe para 25,00% vs 22,50% do completo — n=40, granularidade grosseira, não comentado pelos autores.</li><li><strong>Continuidade de registros</strong>: 80% das observações de carrier são retidas ou atualizadas (não recriadas) — 813 observações agregadas em 494 folds; medida descritiva de continuidade de registro, não de desempenho.</li><li><strong>O que os números NÃO significam</strong>: não mostram que compressão abstrata é boa (SW/GS mostram o contrário); não comprovam generalização para outros hosts ou domínios (um único host, dois benchmarks); o custo é nominal API-equivalente com tabela fixa de preços, não faturamento real.</li></ul>
+<h2>Limitações e riscos</h2>
+<ul><li>Declaradas pelo paper: validação do runtime verifica consistência, não corretude; o fold cobre a live tail inteira (sem granularidade parcial); resultados de outros modelos são de execuções públicas re-gradadas.</li><li>Suspeitadas pela leitura: um único host (Claude Opus 4.7) também para Tracker/Compiler, sem replicação em modelo menor; subset de 40 tarefas para comparações e ablações é pequeno para os deltas de binary; checks do Grounder são específicos de ambiente desktop (docx/pptx/xlsx, hashes de arquivo) — adaptação por domínio tem custo; identidade de external object derivada de path normalizado é frágil a renomeação/movimentação; o runtime consome 0,69M tokens e US$ 3,11 por tarefa no OSWorld — a economia líquida é grande, mas o overhead não é trivial.</li><li>O título ("Pack Light") promete leveza: a economia é real e medida, porém em dois benchmarks com o mesmo host; "melhora de tarefa" é +5,8/+3,7 pp em uma métrica parcial e +7 pp num subset de 100 questões — ganho sólido, magnitude modesta e sem variância relatada.</li></ul>
+<h2>Teses transferíveis</h2>
+<ol><li><strong>Handoff como carrier versionado, não resumo cronológico</strong>: registro com identidade estável, conteúdo reutilizável ou referência ao objeto, condições de uso e evidência vinculada; revisar cria versão sucessora e o não-afetado é carregado adiante — nunca reescrever o estado inteiro a cada sessão.</li><li><strong>Separar progresso de obrigação</strong>: a execution context (foco, restrições, obrigações abertas) é complemento distinto dos carriers; a ablação mostra que preservar só o progresso derruba desempenho — um handoff que só lista artefatos sem obrigações abertas reproduz exatamente essa falha.</li><li><strong>Live tail curta + fold atômico</strong>: interações recentes permanecem intactas até que uma atualização validada as substitua por completo; validação que falha não muda nada — mapeia para gates de fechamento fail-closed.</li><li><strong>Revisar só o afetado quando as dependências são conhecidas</strong>: os 80% de carriers retidos-or-atualizados sustentam atualização incremental seletiva por dependência, em vez de revalidação total a cada mudança.</li><li><strong>Checks de consistência não são corretude</strong>: gates mecânicos (resolver citação, conferir versão) garantem sanidade do registro, não verdade do conteúdo — não confundir os papéis ao projetar verificação.</li></ol>
+<h2>Veredito do paper</h2>
+<p>Vale destilar e seguir: é evidência pareada (mesmo host, mesmo orçamento, baseline reproduzido) combinando ganho de tarefa com economia medida de tokens e custo, e o mecanismo — carriers versionados com evidência vinculada — é transferível como convenção de registro para o nosso harness de handoffs e fatos. Ressalvas: magnitude em pontos percentuais sem variância relatada; adoção aqui é como convenção de governança documental, não como runtime com Tracker/Compiler dedicados.</p>
+<h2>Confronto com repos</h2>
+</div>
+<div class="faixa"></div><footer class="wrap rodape">Deep dive do pipeline papers-deep · <a href="../../../2026/10/2026-10-19.html">edição de 2026-10-19</a></footer>
+</body>
+</html>
